@@ -15,7 +15,7 @@
 </li>
 {{-- conges --}}
 <li class="nav-item">
-    <a href="{{ route('conges.index') }}" class="nav-link {{ Request::is('conges*') ? 'active' : '' }}">
+    <a href="" class="nav-link {{ Request::is('conges*') ? 'active' : '' }}">
         <i class="fa-solid fa-person-walking-luggage"></i>
         <p>Conges</p>
     </a>
@@ -32,7 +32,7 @@
     </a>
     <ul class="nav nav-treeview" style="display: none;">
         <li class="nav-item">
-            <a href="{{ route('motifs.index') }}" class="nav-link {{ Request::is('motifs*') ? 'active' : '' }}">
+            <a href="" class="nav-link {{ Request::is('motifs*') ? 'active' : '' }}">
                 <i class="far fa-chart-bar nav-icon"></i>
                 <p>Motif</p>
             </a>
