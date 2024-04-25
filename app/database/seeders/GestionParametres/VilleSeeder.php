@@ -11,6 +11,7 @@ class VilleSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
     public function run(): void
     {
         $villeData = [
