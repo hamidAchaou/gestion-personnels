@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories\GestionParametre;
+namespace Database\Factories\GestionParametres;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionParametre\Fonction>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionParametres\Fonction>
  */
 class FonctionFactory extends Factory
 {

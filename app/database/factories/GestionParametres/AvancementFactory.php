@@ -5,7 +5,7 @@ namespace Database\Factories\GestionParametres;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionPersonnels\Avancement>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionParametres\Avancement>
  */
 class AvancementFactory extends Factory
 {

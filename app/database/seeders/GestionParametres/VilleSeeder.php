@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders\GestionPersonnels;
+namespace Database\Seeders\GestionParametres;
 
-use App\Models\GestionPersonnels\Ville;
+use App\Models\GestionParametres\Ville;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

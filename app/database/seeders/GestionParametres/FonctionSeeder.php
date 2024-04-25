@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders\GestionParametre;
+namespace Database\Seeders\GestionParametres;
 
-use App\Models\GestionParametre\Fonction;
+use App\Models\GestionParametres\Fonction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
