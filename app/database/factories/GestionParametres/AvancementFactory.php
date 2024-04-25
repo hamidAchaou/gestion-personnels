@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\GestionPersonnels;
+namespace Database\Factories\GestionParametres;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
