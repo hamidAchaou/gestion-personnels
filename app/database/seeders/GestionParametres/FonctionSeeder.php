@@ -3,7 +3,6 @@
 namespace Database\Seeders\GestionParametres;
 
 use App\Models\GestionParametres\Fonction;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class FonctionSeeder extends Seeder

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders\GestionParametres;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\GestionParametres\Avancement;
 use Illuminate\Database\Seeder;
 

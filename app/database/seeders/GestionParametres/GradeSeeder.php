@@ -3,7 +3,6 @@
 namespace Database\Seeders\GestionParametres;
 
 use App\Models\GestionParametres\Grade;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GradeSeeder extends Seeder

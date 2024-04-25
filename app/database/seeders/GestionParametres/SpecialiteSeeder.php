@@ -3,7 +3,6 @@
 namespace Database\Seeders\GestionParametres;
 
 use App\Models\GestionParametres\Specialite;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SpecialiteSeeder extends Seeder
