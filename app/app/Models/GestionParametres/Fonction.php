@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\GestionParametre;
+namespace App\Models\GestionParametres;
 
 use App\Models\GestionPersonnels\Personnel;
 use App\Models\User;

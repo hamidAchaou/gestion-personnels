@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories\GestionPersonnels;
+namespace Database\Factories\GestionParametres;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionPersonnels\Specialite>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionParametres\Specialite>
  */
 class SpecialiteFactory extends Factory
 {

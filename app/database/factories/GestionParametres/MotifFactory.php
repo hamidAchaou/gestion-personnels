@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories\GestionParametre;
+namespace Database\Factories\GestionParametres;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionParametre\Motif>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionParametres\Motif>
  */
 class MotifFactory extends Factory
 {

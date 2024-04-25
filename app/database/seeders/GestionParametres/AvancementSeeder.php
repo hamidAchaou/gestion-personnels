@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders\GestionPersonnels;
+namespace Database\Seeders\GestionParametres;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\GestionPersonnels\Avancement;
+use App\Models\GestionParametres\Avancement;
 use Illuminate\Database\Seeder;
 
 class AvancementSeeder extends Seeder

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\GestionPersonnels;
+namespace App\Models\GestionParametres;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
