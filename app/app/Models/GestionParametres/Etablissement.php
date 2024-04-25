@@ -13,5 +13,4 @@ class Etablissement extends Model
         'nom',
         'description'
     ];
-
 }
