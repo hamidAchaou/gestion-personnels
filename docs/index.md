@@ -3,9 +3,9 @@ layout: default
 order: 1
 ---
 
-{% assign pages = site.pages | sort: "order" %}
-{% for page in pages %}
- {% if page.chapitre %}
-    {{- page.content | markdownify -}}
-  {% endif %}
-{% endfor %}
+
+- [Rapport](https://solicoders.github.io/gestion-personnels/documentation/) 
+- [Présentation](https://solicoders.github.io/gestion-personnels/documentation/presentation.html#/) 
+- Prise de service
+    - [Rapport Prise de service](https://solicoders.github.io/gestion-personnels/documentation/gestionProjects/)
+    - [Présentation Prise de service](https://solicoders.github.io/gestion-personnels/documentation/gestionProjects/presentation.html#/)
