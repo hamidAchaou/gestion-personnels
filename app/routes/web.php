@@ -17,5 +17,5 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth')->name('home');
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
 
