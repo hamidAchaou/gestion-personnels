@@ -14,7 +14,5 @@ class Fonction extends Model
         'nom',
         'description'
     ];
-    public function personnel(){
-        return $this->hasMany(Personnel::class,'fonction_id');
-    }
+
 }

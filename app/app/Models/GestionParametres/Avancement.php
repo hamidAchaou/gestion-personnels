@@ -14,8 +14,4 @@ class Avancement extends Model
         'date_fin',
         'echell'
     ];
-
-    public function personnel(){
-        return $this->hasMany(User::class,'avancement_id');
-    }
 }

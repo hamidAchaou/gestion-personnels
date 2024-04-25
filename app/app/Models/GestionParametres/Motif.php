@@ -15,8 +15,4 @@ class Motif extends Model
         'description',
     ];
 
-    public function conge()
-    {
-        return $this->hasMany(Conge::class, 'motif_id');
-    }
 }

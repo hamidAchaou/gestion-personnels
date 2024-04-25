@@ -12,7 +12,4 @@ class Ville extends Model
     protected $fillable = [
         'nom',
     ];
-    public function personnel(){
-        return $this->hasMany(User::class,'ville_id');
-    }
 }

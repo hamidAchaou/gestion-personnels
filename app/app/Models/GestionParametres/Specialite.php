@@ -14,7 +14,4 @@ class Specialite extends Model
         'nom',
         'description',
     ];
-    public function personnel(){
-        return $this->hasMany(User::class,'specialite_id');
-    }
 }

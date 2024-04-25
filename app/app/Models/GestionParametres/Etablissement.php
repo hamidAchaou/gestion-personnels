@@ -13,7 +13,5 @@ class Etablissement extends Model
         'nom',
         'description'
     ];
-    public function personnel(){
-        return $this->hasMany(User::class,'etablissement_id');
-    }
+
 }
