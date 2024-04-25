@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\GestionParametre;
+namespace App\Repositories\GestionParametres;
 
-use App\Exceptions\GestionParametre\MotifAlreadyExistException;
+use App\Exceptions\GestionParametres\MotifAlreadyExistException;
 use App\Models\GestionParametres\Motif;
 use App\Repositories\BaseRepositorie;
 

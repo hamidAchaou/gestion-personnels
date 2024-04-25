@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Exceptions\GestionParametre;
+namespace App\Exceptions\GestionParametres;
 
-use App\Exceptions\BusinessException;
+use Exception;
 
-class MotifAlreadyExistException extends BusinessException
+class MotifAlreadyExistException extends Exception
 {
-    public static function createMotif()
-    {
-        return new self(__('GestionParametre/motif/message.createMotifException'));
-    }
+    //
 }

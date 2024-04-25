@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\GestionParametre;
+namespace Tests\Feature\GestionParametres;
 
-use App\Exceptions\GestionParametre\MotifAlreadyExistException;
+use App\Exceptions\GestionParametres\MotifAlreadyExistException;
 use App\Models\GestionParametres\Motif;
 use App\Models\User;
-use App\Repositories\GestionParametre\MotifsRepository;
+use App\Repositories\GestionParametres\MotifsRepository;
 use Exception;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
