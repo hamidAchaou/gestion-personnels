@@ -1,11 +1,18 @@
 ---
 layout: default
-chapitre: diagramme-paquetages
+chapitre: diagrammePaquetages
+presentation: diagrammePaquetages
 order: 8
 ---
 
 # Diagramme de paquetages
 
-![diagramme-paquetages](./images/diagramme-des-paquetages.png){:width="700px"}
+![diagramme-paquetages](./images/Diagramme-des-paquetages.png){:width="700px"}
 *figure: Diagramme de paquetages*
+
+<!-- note -->
+
+download file Diagramme de packages :
+ - [Diagramme de packages](./images/Diagramme-des-paquetages.fig "download")
+
 <!-- new slide -->
