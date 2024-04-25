@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('/');
+    return view('home');
 })->middleware('auth')->name('home');
 
 Auth::routes(['register' => true]);
