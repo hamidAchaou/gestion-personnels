@@ -8,7 +8,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('personnels.index') }}" class="nav-link {{ Request::is('personnels*') ? 'active' : '' }}">
+    <a href="" class="nav-link {{ Request::is('personnels*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Personnels</p>
     </a>
