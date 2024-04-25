@@ -32,8 +32,6 @@ class EtablissementTest extends TestCase
         $this->assertNotNull($etablissement);
     }
 
-
-
     public function test_create_etablissement()
     {
         $Data = [
@@ -63,8 +61,6 @@ class EtablissementTest extends TestCase
             $this->fail('Unexpected exception was thrown: ' . $e->getMessage());
         }
     }
-
-
 
 
     public function test_update_etablissement()
