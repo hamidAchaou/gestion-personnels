@@ -1,63 +1,12 @@
-
-/* section{
-    top:0px !important
-} */
-
-
-/* h1 {
-    background-color: #00838F;
-    color: #fff !important;
-    padding: 40px;
-    font-size: 1.0em !important;
-    padding: 10px; 
-} */
-
-/* h2 {
-    background-color: #00838F;
-    color: #fff !important;
-    padding: 40px;
-    position: absolute;
-    top: -20px;
-    font-size: 0.8em !important;
-    background-color: #00838F;
-    color: #fff !important;
-    width: 100vw; 
-    margin-left: -170px !important;
-    margin-top: 0;
-    text-align: start;
-} */
-
-img + em {
-    display:none;
+.min_titre {
+    font-size: 30px !important;
 }
 
-/* 
-img[alt="SOLICODE"] {
-    position: absolute;
-    top: -140px;
-    left: -220px;
-    width: 40vw;
-    height: 40vh;
+/* Ne pas afficher les noms des figures */
+img+em {
+    display: none;
 }
 
-img[alt="OFPPT"] {
-    position: absolute;
-    top: -140px;
-    right: -220px;
-    width: 40vw;
-    height: 40vh;
+section {
+    top: 0px !important
 }
-
-
-img[alt="CNMH"] {
-    width: 30vw;
-    height: 40vh;
-    margin-left: 30%;
-    margin-top: -220px;
-} */
-
-/* section p{
-    text-align: start;
-    font-size: 20px;
-    margin-top: 180px !important;
-}  */
