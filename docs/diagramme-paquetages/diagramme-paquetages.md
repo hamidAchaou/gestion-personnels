@@ -2,12 +2,16 @@
 layout: default
 chapitre: diagrammePaquetages
 presentation: diagrammePaquetages
-order: 8
+order: 27
 ---
 
-# Diagramme de paquetages
+# Base de données
 
-![diagramme-paquetages](./images/Diagramme-des-paquetages.png){:width="700px"}
+<!-- new slide -->
+
+## Diagramme de paquetages
+
+![diagramme paquetages](./images/Diagramme-des-paquetages.png){:width="700px"}
 *figure: Diagramme de paquetages*
 
 <!-- note -->
