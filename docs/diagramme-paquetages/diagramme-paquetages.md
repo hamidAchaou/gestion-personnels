@@ -17,6 +17,6 @@ order: 27
 <!-- note -->
 
 download file Diagramme de packages :
- - [Diagramme de packages](./images/Diagramme-des-paquetages.fig "download")
+ - [Diagramme de packages](./Diagramme-des-paquetages.fig "download")
 
 <!-- new slide -->
