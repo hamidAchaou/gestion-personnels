@@ -5,6 +5,10 @@ namespace Database\Seeders\GestionParametres;
 use App\Models\GestionParametres\Etablissement;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class EtablissementSeeder extends Seeder
 {
@@ -40,5 +44,32 @@ class EtablissementSeeder extends Seeder
                 Etablissement::create($data);
             }
         }
+
+        // ==========================================================
+        // ============== Permission Etablissement Seder ===============
+        // ==========================================================
+
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        foreach ($actions as $action) {
+            $permissionName = $action . '-' . "EtablissementController";
+            Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
+        }
+
+        // ==========================================================
+        // ================== Role Etablissement Seder =================
+        // ==========================================================
+
+        $adminRolePermissions = [
+            "index-EtablissementController",
+            "show-EtablissementController",
+            "create-EtablissementController",
+            "store-EtablissementController",
+            "edit-EtablissementController",
+            "update-EtablissementController",
+            "destroy-EtablissementController",
+        ];
+
+        $adminRole = Role::findByName(User::ADMIN);
+        $adminRole->givePermissionTo($adminRolePermissions);
     }
 }

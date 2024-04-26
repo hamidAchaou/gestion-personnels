@@ -4,6 +4,10 @@ namespace Database\Seeders\GestionParametres;
 
 use App\Models\GestionParametres\Specialite;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class SpecialiteSeeder extends Seeder
 {
@@ -28,5 +32,33 @@ class SpecialiteSeeder extends Seeder
                 Specialite::create($data);
             }
         }
+
+
+        // ==========================================================
+        // ============== Permission Specialite Seder ===============
+        // ==========================================================
+
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        foreach ($actions as $action) {
+            $permissionName = $action . '-' . "SpecialiteController";
+            Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
+        }
+
+        // ==========================================================
+        // ================== Role Specialite Seder =================
+        // ==========================================================
+
+        $adminRolePermissions = [
+            "index-SpecialiteController",
+            "show-SpecialiteController",
+            "create-SpecialiteController",
+            "store-SpecialiteController",
+            "edit-SpecialiteController",
+            "update-SpecialiteController",
+            "destroy-SpecialiteController",
+        ];
+
+        $adminRole = Role::findByName(User::ADMIN);
+        $adminRole->givePermissionTo($adminRolePermissions);
     }
 }

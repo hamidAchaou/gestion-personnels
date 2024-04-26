@@ -2,8 +2,12 @@
 
 namespace Database\Seeders\GestionParametres;
 
-use App\Models\GestionParametres\Avancement;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use App\Models\GestionParametres\Avancement;
 
 class AvancementSeeder extends Seeder
 {
@@ -121,5 +125,32 @@ class AvancementSeeder extends Seeder
                 Avancement::create($data);
             }
         }
+
+        // ==========================================================
+        // ============== Permission Avancement Seder ===============
+        // ==========================================================
+
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        foreach ($actions as $action) {
+            $permissionName = $action . '-' . "AvancementController";
+            Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
+        }
+
+        // ==========================================================
+        // ================== Role Avancement Seder =================
+        // ==========================================================
+
+        $adminRolePermissions = [
+            "index-AvancementController",
+            "show-AvancementController",
+            "create-AvancementController",
+            "store-AvancementController",
+            "edit-AvancementController",
+            "update-AvancementController",
+            "destroy-AvancementController",
+        ];
+
+        $adminRole = Role::findByName(User::ADMIN);
+        $adminRole->givePermissionTo($adminRolePermissions);
     }
 }

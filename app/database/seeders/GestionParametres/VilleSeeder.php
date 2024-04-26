@@ -5,6 +5,10 @@ namespace Database\Seeders\GestionParametres;
 use App\Models\GestionParametres\Ville;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class VilleSeeder extends Seeder
 {
@@ -82,5 +86,33 @@ class VilleSeeder extends Seeder
                 Ville::create($data);
             }
         }
+
+
+        // ==========================================================
+        // ============== Permission Ville Seder ===============
+        // ==========================================================
+
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        foreach ($actions as $action) {
+            $permissionName = $action . '-' . "VilleController";
+            Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
+        }
+
+        // ==========================================================
+        // ================== Role Ville Seder =================
+        // ==========================================================
+
+        $adminRolePermissions = [
+            "index-VilleController",
+            "show-VilleController",
+            "create-VilleController",
+            "store-VilleController",
+            "edit-VilleController",
+            "update-VilleController",
+            "destroy-VilleController",
+        ];
+
+        $adminRole = Role::findByName(User::ADMIN);
+        $adminRole->givePermissionTo($adminRolePermissions);
     }
 }
