@@ -5,7 +5,11 @@ presentation: diagrammePaquetages
 order: 27
 ---
 
-# Diagramme de paquetages
+# Base de 
+
+<!-- new slide -->
+
+## Diagramme de paquetages
 
 ![diagramme paquetages](./images/Diagramme-des-paquetages.png){:width="700px"}
 *figure: Diagramme de paquetages*
