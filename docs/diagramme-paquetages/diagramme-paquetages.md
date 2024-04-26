@@ -5,7 +5,7 @@ presentation: diagrammePaquetages
 order: 27
 ---
 
-# Base de 
+# Base de données
 
 <!-- new slide -->
 
