@@ -14,9 +14,10 @@ order: 27
 ![diagramme paquetages](./images/Diagramme-des-paquetages.png){:width="700px"}
 *figure: Diagramme de paquetages*
 
+
 <!-- note -->
 
 download file Diagramme de packages :
- - [Diagramme de packages](./images/Diagramme-des-paquetages.fig "download")
+ - [Diagramme de packages](./Diagramme-des-paquetages.fig "download")
 
 <!-- new slide -->
