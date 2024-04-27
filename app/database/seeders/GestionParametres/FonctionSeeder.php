@@ -4,6 +4,10 @@ namespace Database\Seeders\GestionParametres;
 
 use App\Models\GestionParametres\Fonction;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class FonctionSeeder extends Seeder
 {
@@ -28,5 +32,32 @@ class FonctionSeeder extends Seeder
                 Fonction::create($data);
             }
         }
+
+        // ==========================================================
+        // ============== Permission Fonction Seder ===============
+        // ==========================================================
+
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        foreach ($actions as $action) {
+            $permissionName = $action . '-' . "FonctionController";
+            Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
+        }
+
+        // ==========================================================
+        // ================== Role Fonction Seder =================
+        // ==========================================================
+
+        $adminRolePermissions = [
+            "index-FonctionController",
+            "show-FonctionController",
+            "create-FonctionController",
+            "store-FonctionController",
+            "edit-FonctionController",
+            "update-FonctionController",
+            "destroy-FonctionController",
+        ];
+
+        $adminRole = Role::findByName(User::ADMIN);
+        $adminRole->givePermissionTo($adminRolePermissions);
     }
 }

@@ -4,6 +4,10 @@ namespace Database\Seeders\GestionParametres;
 
 use App\Models\GestionParametres\Grade;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class GradeSeeder extends Seeder
 {
@@ -55,5 +59,32 @@ class GradeSeeder extends Seeder
                 Grade::create($data);
             }
         }
+
+        // ==========================================================
+        // ============== Permission Grade Seder ===============
+        // ==========================================================
+
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        foreach ($actions as $action) {
+            $permissionName = $action . '-' . "GradeController";
+            Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
+        }
+
+        // ==========================================================
+        // ================== Role Grade Seder =================
+        // ==========================================================
+
+        $adminRolePermissions = [
+            "index-GradeController",
+            "show-GradeController",
+            "create-GradeController",
+            "store-GradeController",
+            "edit-GradeController",
+            "update-GradeController",
+            "destroy-GradeController",
+        ];
+
+        $adminRole = Role::findByName(User::ADMIN);
+        $adminRole->givePermissionTo($adminRolePermissions);
     }
 }
