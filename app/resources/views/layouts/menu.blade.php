@@ -8,21 +8,21 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('personnels.index') }}" class="nav-link {{ Request::is('personnels*') ? 'active' : '' }}">
+    <a href="" class="nav-link {{ Request::is('personnels*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Personnels</p>
     </a>
 </li>
 {{-- conges --}}
 <li class="nav-item">
-    <a href="{{ route('conges.index') }}" class="nav-link {{ Request::is('conges*') ? 'active' : '' }}">
+    <a href="" class="nav-link {{ Request::is('conges*') ? 'active' : '' }}">
         <i class="fa-solid fa-person-walking-luggage"></i>
         <p>Conges</p>
     </a>
 </li>
 {{-- parameter --}}
-@can('index-Fonction')
-    <li class="nav-item">
+{{-- @can('index-Fonction') --}}
+<li class="nav-item">
     <a href="#" class="nav-link">
         <i class="nav-icon fas fa-cogs"></i>
         <p>
@@ -32,20 +32,20 @@
     </a>
     <ul class="nav nav-treeview" style="display: none;">
         <li class="nav-item">
-            <a href="{{ route('motifs.index') }}" class="nav-link {{ Request::is('motifs*') ? 'active' : '' }}">
+            <a href="" class="nav-link {{ Request::is('motifs*') ? 'active' : '' }}">
                 <i class="far fa-chart-bar nav-icon"></i>
                 <p>Motif</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('fonctions.index') }}" class="nav-link {{ Request::is('fonctions*') ? 'active' : '' }}">
-                <i class="far fa-cogs nav-icon"></i> 
+            <a href="" class="nav-link {{ Request::is('fonctions*') ? 'active' : '' }}">
+                <i class="far fa-cogs nav-icon"></i>
                 <p>Fonction</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="pages/charts/inline.html" class="nav-link">
-                <i class="fas fa-city nav-icon"></i> 
+                <i class="fas fa-city nav-icon"></i>
                 <p>Ville</p>
             </a>
         </li>
@@ -55,8 +55,12 @@
                 <p>Grad</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('etablissement.index') }}" class="nav-link">
+                <i class="fas fa-leaf nav-icon"></i>
+                <p>Etablissement</p>
+            </a>
+        </li>
     </ul>
 </li>
-@endcan
-
-
+{{-- @endcan --}}

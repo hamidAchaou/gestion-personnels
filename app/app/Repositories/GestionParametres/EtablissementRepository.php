@@ -36,4 +36,10 @@ class EtablissementRepository extends BaseRepositorie
     }
 
 
+    public function getAll()
+    {
+        return $this->model->all();
+    }
+
+
 }
