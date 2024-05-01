@@ -74,7 +74,7 @@ class MotifSeeder extends Seeder
         // ============== Permission Motif Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "MotifController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -92,6 +92,8 @@ class MotifSeeder extends Seeder
             "edit-MotifController",
             "update-MotifController",
             "destroy-MotifController",
+            "export-MotifController",
+            "import-MotifController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);

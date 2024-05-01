@@ -130,7 +130,7 @@ class AvancementSeeder extends Seeder
         // ============== Permission Avancement Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "AvancementController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -148,6 +148,8 @@ class AvancementSeeder extends Seeder
             "edit-AvancementController",
             "update-AvancementController",
             "destroy-AvancementController",
+            "export-AvancementController",
+            "import-AvancementController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);
