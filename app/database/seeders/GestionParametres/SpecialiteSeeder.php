@@ -38,7 +38,7 @@ class SpecialiteSeeder extends Seeder
         // ============== Permission Specialite Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "SpecialiteController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -56,6 +56,8 @@ class SpecialiteSeeder extends Seeder
             "edit-SpecialiteController",
             "update-SpecialiteController",
             "destroy-SpecialiteController",
+            "export-SpecialiteController",
+            "import-SpecialiteController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);
