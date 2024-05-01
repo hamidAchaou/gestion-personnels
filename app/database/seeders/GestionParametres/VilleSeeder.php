@@ -92,7 +92,7 @@ class VilleSeeder extends Seeder
         // ============== Permission Ville Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "VilleController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -110,6 +110,8 @@ class VilleSeeder extends Seeder
             "edit-VilleController",
             "update-VilleController",
             "destroy-VilleController",
+            "export-VilleController",
+            "import-VilleController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);

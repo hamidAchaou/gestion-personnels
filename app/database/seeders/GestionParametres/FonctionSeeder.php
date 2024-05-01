@@ -37,7 +37,7 @@ class FonctionSeeder extends Seeder
         // ============== Permission Fonction Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "FonctionController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -55,6 +55,8 @@ class FonctionSeeder extends Seeder
             "edit-FonctionController",
             "update-FonctionController",
             "destroy-FonctionController",
+            "export-FonctionController",
+            "import-FonctionController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);

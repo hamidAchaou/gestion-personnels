@@ -64,7 +64,7 @@ class GradeSeeder extends Seeder
         // ============== Permission Grade Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "GradeController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -82,6 +82,8 @@ class GradeSeeder extends Seeder
             "edit-GradeController",
             "update-GradeController",
             "destroy-GradeController",
+            "export-GradeController",
+            "import-GradeController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);

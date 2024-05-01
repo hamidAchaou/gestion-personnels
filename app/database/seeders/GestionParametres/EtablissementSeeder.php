@@ -49,7 +49,7 @@ class EtablissementSeeder extends Seeder
         // ============== Permission Etablissement Seder ===============
         // ==========================================================
 
-        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy'];
+        $actions = ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'export', 'import'];
         foreach ($actions as $action) {
             $permissionName = $action . '-' . "EtablissementController";
             Permission::create(['name' => $permissionName, 'guard_name' => 'web']);
@@ -67,6 +67,8 @@ class EtablissementSeeder extends Seeder
             "edit-EtablissementController",
             "update-EtablissementController",
             "destroy-EtablissementController",
+            "export-EtablissementController",
+            "import-EtablissementController",
         ];
 
         $adminRole = Role::findByName(User::ADMIN);
