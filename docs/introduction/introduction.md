@@ -9,6 +9,8 @@ order: 2
 
 ![Introduction](./images/introduction.png)
 
+<!-- note -->
+
 Le projet `Gestion Personnels` a été initié sous la direction de `M. Mechrafi`, Directeur Général de l'école. Ce projet, divisé en quatre parties, consiste en la création d'un site web regroupant chacune de ces composantes. Son objectif principal est d'améliorer la gestion des quatre aspects clés de la gestion des ressources humaines et de fournir des statistiques pertinentes pour éclairer les décisions stratégiques de l'organisation.
 
 - La première partie, intitulée `Personnels`, vise à gérer l'ensemble du personnel travaillant sous la supervision du responsable. Elle permet l'ajout, la suppression et la modification des informations des employés, offrant ainsi une vision claire de la structure hiérarchique et des rôles de chacun.
@@ -22,4 +24,4 @@ Le projet `Gestion Personnels` a été initié sous la direction de `M. Mechrafi
 
 En somme, le projet `Gestion Personnels` vise à optimiser la gestion du personnel de manière efficace et transparente, en fournissant des outils adaptés aux besoins spécifiques de l'organisation.
 
-
+<!-- new slide -->
