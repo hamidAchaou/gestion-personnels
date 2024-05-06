@@ -1,10 +1,10 @@
 ---
 layout: default
-chapitre: Maquettes
-order: 30
+chapitre: maquettes
+presentation: maquettes
+order: 41
 ---
 
 # Maquettes
-
 
 <!-- new slide -->
