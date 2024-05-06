@@ -9,6 +9,7 @@ order: 2
 # Introduction
 
 ![Introduction](./images/introduction.png)
+*figure: Introduction*
 
 <!-- note -->
 
