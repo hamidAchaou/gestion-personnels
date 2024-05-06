@@ -8,8 +8,7 @@ order: 2
 
 # Introduction
 
-![Introduction](./images/introduction.png)
-*figure: Introduction*
+![Introduction](./images/introduction.png){:width="800px"}*figure: Introduction*
 
 <!-- note -->
 
