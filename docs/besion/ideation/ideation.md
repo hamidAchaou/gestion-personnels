@@ -1,12 +1,12 @@
 ---
 layout: default
 chapitre: ideation
-order: 6
+order: 19
 ---
 
 ## Idéation
 
-![Idéation](./images/ideation.jpg){:width="700px"}*figure: Ideation*
+![Idéation](./images/ideation.jpg){:width="500px"}*figure: Ideation*
 
 <!-- note -->
 

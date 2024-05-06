@@ -1,12 +1,12 @@
 ---
 layout: default
 chapitre: definir-probleme
-order: 5
+order: 18
 ---
 
 ## Définir de problème 
 
-![Définir le problème](./images/problem.jpg){:width="700px"}*figure: Définir le problème*
+![Définir le problème](./images/problem.jpg){:width="500px"}*figure: Définir le problème*
 
 <!-- note -->
 

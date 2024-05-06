@@ -1,20 +1,20 @@
 ---
 layout: default
 empathy: empathie-directeur
-order: 6
+order: 16
 ---
 
 
 
-# Carte empathie avec directeur
+## Carte empathie avec directeur
 
-![Empathy](./images/card-empathy.png){:width="85%"}*figure: Empathie avec Directeur*
+![Empathy](./images/card-empathy.png){:width="700"}*figure: Empathie avec Directeur*
 
 <!-- note -->
 
 Une séance d'empathie a été réalisée avec M. Mechrafi, en tant que directeur, le 29 Février 2024.
 
-## Persona
+### Persona
 (M. Mechrafi)
 
 **Dite**
