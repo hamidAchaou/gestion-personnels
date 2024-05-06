@@ -1,7 +1,6 @@
 ---
 layout: default
 chapitre: References
-presentation: References
 order: 90
 ---
 
