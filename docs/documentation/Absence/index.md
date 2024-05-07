@@ -5,7 +5,7 @@ order: 1
 
 {% assign pages = site.pages | sort: "order" %}
 {% for page in pages %}
-  {% if page.chapitre or page.package == "Absence" %}
+  {% if page.chapitre or page.package == "GestionAbsences" %}
     {{- page.content | markdownify -}}
   {% endif %}
 {% endfor %}
