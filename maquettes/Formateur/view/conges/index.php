@@ -49,11 +49,10 @@
                                             <b>Jours restant</b> <a class="float-right text-purple">6</a>
                                         </li>
                                     </ul>
-                                    <a href="/view/personnels/show.php" class="btn bg-purple btn-block"
-                                        style="margin-top: 2rem"><b>Plus
-                                            d'informations</b></a>
+                                    <a href="/Formateur/view/personnels/index.php" class="btn bg-purple btn-block"
+                                        style="margin-top: 2rem"><b>
+                                            Plus d'informations</b></a>
                                 </div>
-
                             </div>
 
                         </div>
@@ -148,7 +147,6 @@
                                                                 <td>2024-02-27</td>
                                                                 <td>2024-03-2</td>
                                                                 <td class="text-center">10</td>
-
                                                             </tr>
 
                                                         </tbody>

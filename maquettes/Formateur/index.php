@@ -36,9 +36,9 @@
 
                     </div>
 
-                    <div class=" ">
+                    <div class="">
                         <div class="">
-                            <a href="Formateur/view/categorie" type="submit"
+                            <a href="/Formateur/view/categorie" type="submit"
                                 class="btn btn-info btn-block">Connecter</a>
                         </div>
 

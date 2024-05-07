@@ -25,7 +25,7 @@
                 </li>
                 <!-- Pied de page du menu -->
                 <li class="user-footer">
-                    <a href="/Formateur/view/personnels/show.php" class="btn btn-default btn-flat">Profil</a>
+                    <a href="/Formateur/view/personnels/index.php" class="btn btn-default btn-flat">Profil</a>
                     <a href="/Formateur/index.php" class="btn btn-default btn-flat float-right">
                         Se déconnecter
                     </a>

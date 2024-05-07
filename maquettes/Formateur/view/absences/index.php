@@ -49,7 +49,7 @@
                                             <b>Jours restant</b> <a class="float-right text-purple">6</a>
                                         </li>
                                     </ul>
-                                    <a href="/view/personnels/show.php" class="btn bg-purple btn-block"
+                                    <a href="/Formateur/view/personnels/index.php" class="btn bg-purple btn-block"
                                         style="margin-top: 2rem"><b>Plus
                                             d'informations</b></a>
                                 </div>

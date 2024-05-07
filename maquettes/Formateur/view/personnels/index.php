@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<!-- Inclure l'en-tête -->
+<!-- Include the header -->
 <?php include_once "../layouts/heade.php" ?>
+
+<style>
+    .info-personnel .active {
+        background-color: #17a2b8 !important;
+        border-color: #17a2b8 !important;
+    }
+</style>
 
 <body class="sidebar-mini" style="height: auto;">
 
@@ -11,90 +18,190 @@
         <?php include_once "../layouts/nav.php" ?>
         <!-- Barre latérale -->
         <?php include_once "../layouts/aside.php" ?>
+        <div class="content-wrapper" style="min-height: 1604.71px;">
 
-
-        <div class="content-wrapper" style="min-height: 1302.4px;">
-            <div class="content-header">
+            <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Liste des personnels</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="float-sm-right">
-                                <a href="./create.php" class="btn btn-info">
-                                    <i class="fas fa-plus"></i> Nouveau personnel
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header col-md-12">
-                                    <div class="d-flex justify-content-end">
-                                        <div class=" p-0">
-                                            <div class="input-group input-group-sm">
-                                                <input type="text" name="table_search" class="form-control"
-                                                    placeholder="Recherche">
-                                                <div class="input-group-append">
-                                                    <button type="submit" class="btn btn-default">
-                                                        <i class="fas fa-search"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card-body table-responsive p-0">
-                                    <!-- get table -->
-                                    <?php include_once "./table-index.php" ?>
-                                </div>
-
-                                <div class="row justify-content-between p-2">
-                                    <div class="col-6 align-self-end">
-                                        <button type="button" class="btn btn-default btn-sm">
-                                            <i class="fa-solid fa-file-arrow-down"></i>
-                                            IMPORTER</button>
-                                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
-                                            class="btn  btn-default btn-sm mt-0 mx-2">
-                                            <i class="fa-solid fa-file-export"></i>
-                                            EXPORTER</button>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="pagination  m-0 float-right">
-                                            <li class="page-item"><a class="page-link text-secondary" href="#">«</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link text-secondary active"
-                                                    href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link text-secondary" href="#">2</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link text-secondary" href="#">3</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link text-secondary" href="#">»</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <h1>Plus d'une formation</h1>
                         </div>
                     </div>
                 </div>
             </section>
-        </div>
 
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="card card-purple card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="../assets/images/user.png" alt="Photo de profil">
+                                    </div>
+                                    <h3 class="profile-username text-center">Mohamed alami</h3>
+                                    <p class="text-muted text-center">Formateur</p>
+                                    <ul class="list-group list-group-unbordered ">
+                                        <li class="list-group-item">
+                                            <b>Établissement</b>
+                                            <h6 class="float-right text-purple">Solicode</h6>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Fonction</b>
+                                            <h6 class="float-right text-purple">développement</h6>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Type :</b>
+                                            <h6 class="float-right text-purple">Formateur</h6>
+                                        </li>
+                                    </ul>
+
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <a href="./attestation.php" type="button" class="btn btn-default bg-purple">
+                                            <i class="fa-solid fa-print"></i>
+                                            IMPRIMER ATTESTATION</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="card card-purple card-outline">
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills info-personnel">
+                                        <li class="nav-item"><a class="nav-link active" href="#personnelles"
+                                                data-toggle="tab">Personnelles</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#professionnelles"
+                                                data-toggle="tab">Professionnelles</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#contact"
+                                                data-toggle="tab">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="personnelles">
+
+                                            <div class="col-lg-12 d-flex px-0">
+                                                <!-- Prénom (français) -->
+                                                <div class="form-group col-lg-6">
+                                                    <label for="prenom" class="form-label">Nom :</label>
+                                                    <p id="prenom" name="prenom">Alami</p>
+                                                </div>
+                                                <!-- Prénom (arabe) -->
+                                                <div class="form-group col-lg-6">
+                                                    <label for="prenomArab"
+                                                        class="form-label text-start d-flex flex-row-reverse"> :
+                                                        النسب </label>
+                                                    <p type="text" class="text-end d-flex flex-row-reverse"
+                                                        id="prenomArab">العلمي</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 d-flex px-0">
+                                                <!-- Prénom (français) -->
+                                                <div class="form-group col-lg-6">
+                                                    <label for="prenom" class="form-label">Prénom :</label>
+                                                    <p id="prenom" name="prenom">Mohamed</p>
+                                                </div>
+                                                <!-- Prénom (arabe) -->
+                                                <div class="form-group col-lg-6">
+                                                    <label for="prenomArab"
+                                                        class="form-label text-start d-flex flex-row-reverse"> :
+                                                        الاسم</label>
+                                                    <p type="text" class="text-end d-flex flex-row-reverse"
+                                                        id="prenomArab">العلمي</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">CIN :</label>
+                                                <p>KB78293982</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Date de naissance :</label>
+                                                <p>02/03/1980</p>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Contact -->
+                                        <div class="tab-pane" id="contact">
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Numéro de téléphone :</label>
+                                                <p>+21278438905</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Email :</label>
+                                                <p>mohamedAlami@gmail.com</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Adresse :</label>
+                                                <p>Complexe Hassani</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Ville :</label>
+                                                <p>Tanger</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane" id="professionnelles">
+                                            <div class="col-sm-12">
+                                                <label for="nom">Matricule :</label>
+                                                <p>21278438905</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Affectation :</label>
+                                                <p>Solicode</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">AFP de Travail :</label>
+                                                <p>Solicode</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Fonction :</label>
+                                                <p>Développement</p>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <label for="nom">Type :</label>
+                                                <p>Formateur</p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+            </section>
+
+        </div>
         <!-- Inclure le pied de page -->
         <?php include_once "../layouts/footer.php" ?>
 
     </div>
 
     <!-- Inclure le script -->
+    <?php include_once "../layouts/script-link.php" ?>
+
+
+    <!-- Include the script -->
     <?php include_once "../layouts/script-link.php" ?>
 </body>
 

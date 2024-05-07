@@ -48,7 +48,7 @@
                                             <b>Type</b> <a class="float-right text-purple">Directeur</a>
                                         </li>
                                     </ul>
-                                    <a href="/view/personnels/more-info.php" class="btn bg-purple btn-block"
+                                    <a href="/Formateur/view/personnels/index.php" class="btn bg-purple btn-block"
                                         style="margin-top: 2rem"><b>Plus
                                             d'informations</b></a>
                                 </div>
