@@ -5,6 +5,10 @@ presentationPackage: Formateur
 order: 150
 ---
 
-# Cart empathie formateur
+# Formateur
 
-![Cart empathie formateur](./images/Carte_dempathie-Formateur.png)
+## Cart empathie formateur
+
+![Cart empathie formateur](./images/Carte_dempathie-Formateur.png){:width="700"}*figure: Empathie avec formateur* 
+
+<!-- new slide -->
