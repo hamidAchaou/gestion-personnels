@@ -1,6 +1,6 @@
 ---
 layout: default
-package:    
+package: Formateur  
 presentationPackage: Formateur
 order: 153
 ---
