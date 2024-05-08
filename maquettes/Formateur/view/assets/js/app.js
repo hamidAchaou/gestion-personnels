@@ -1,1 +1,0 @@
-// compact all scripts
