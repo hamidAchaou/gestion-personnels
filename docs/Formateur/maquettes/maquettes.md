@@ -33,7 +33,7 @@ order: 155
 <!-- new slide -->
 
 **Document d'absentéisme**
-![Document d'absentéisme](./images/select_dabsentéisme){:width="700"}*figure: Document d'absentéisme* 
+![Document d'absentéisme](./images/select_dabsentéisme.png){:width="700"}*figure: Document d'absentéisme* 
 
 <!-- new slide -->
 
