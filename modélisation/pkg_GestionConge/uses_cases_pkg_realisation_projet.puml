@@ -1,0 +1,15 @@
+@startuml uses_cases_pkg_realisation_projet
+left to right direction
+
+actor Directeur as directeur
+actor ResponsableFormation as responsableFormation
+
+package Gestion_congés {
+
+  directeur -- (Gestion congés)
+  responsableFormation -- (Consultez congés)
+  (Consultez congés) <.. (imprimer décision de congés) : extend
+
+}
+
+@enduml
