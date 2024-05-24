@@ -1,7 +1,7 @@
 ---
 layout: presentation
 chapitre: false
-package: pk_global
+package: pkg_global
 order: 1
 ---
  

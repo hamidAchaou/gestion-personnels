@@ -5,7 +5,7 @@ order: 1
 
 # Rapports
 
-<a href="/gestion-personnels/pk_global/rapport"> Rapport globale </a> 
+<a href="/gestion-personnels/pkg_global/rapport"> Rapport globale </a> 
 
 ## Par packages
 

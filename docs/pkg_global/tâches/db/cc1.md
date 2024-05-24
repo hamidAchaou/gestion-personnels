@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: true
-package : pk_global
+package : pkg_global
 controle: cc1
 competence: db
 order: 601

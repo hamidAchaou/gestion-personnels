@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: true
-package : global
+package : pkg_global
 order: 2
 ---
 
@@ -14,7 +14,7 @@ order: 2
 
 <!-- TODO Ali : Insertion d'une #image qui représent les deux objectifs de prototype -->
 
-![Introduction](/prototype/pk_global/images/introduction.jpg){:width="50%"}*Figure: Introduction*
+![Introduction](/gestion-personnels/pkg_global/images/introduction.jpg){:width="50%"}*Figure: Introduction*
 
 
 Ce prototype vise à atteindre deux objectifs principaux :
