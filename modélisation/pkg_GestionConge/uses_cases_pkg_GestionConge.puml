@@ -1,4 +1,4 @@
-@startuml uses_cases_pkg_realisation_projet
+@startuml uses_cases_pkg_GestionConge
 left to right direction
 
 actor Directeur as directeur
