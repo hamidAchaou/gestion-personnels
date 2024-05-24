@@ -6,6 +6,9 @@
 img+em {
     display: none;
 }
+img+em {
+    display: none;
+}
 
 section {
     top: 0px !important

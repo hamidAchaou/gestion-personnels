@@ -1,3 +1,4 @@
+/* TODO Ali : Il faut télécharger le font en local */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
 * {
@@ -69,6 +70,9 @@ hr {
 
 @media print {
 
+	#menu_rapports{
+		display: none;
+	}
 	#presentation-icon,
 	hr {
 		display: none;
@@ -87,7 +91,7 @@ hr {
 	}
 }
 
-code {
+code:not(.language-mermaid) {
 	border: 1px solid #666;
 	border-radius: 2px;
 }
@@ -106,7 +110,8 @@ img {
 
 /* Nom de figure d'image */
 /* Par conception : le titre de figure est l'élément em situé aprés l'image */
-img+em {
+/* Il s'applique aussi sur un bloc de code  */
+img+em, pre+p>em  {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -197,7 +202,7 @@ h5 {
 
 /* Table de matière */
 
-#table-de-matière+ul li a {
+#table-de-matiere+ul li a {
 	font-weight: bold;
 	display: block;
 	padding: 5px 10px;
@@ -207,11 +212,30 @@ h5 {
 	transition: background-color 0.3s, color 0.3s;
 }
 
-#table-de-matière+ul {
+#table-de-matiere+ul {
 	list-style-type: none;
 }
 
-#table-de-matière+ul li a:hover {
+#table-de-matiere+ul li a:hover {
 	color: #777;
 	/* Change text color on hover */
+}
+
+#menu_rapports{
+	text-align: center;
+	margin: 5px;
+}
+
+#menu_rapports i {
+	color: #2E74B5;
+	font-size: 30px;
+	padding-right: 3px;
+}
+
+#menu_rapports i:hover {
+	color: #388bd7;
+}
+
+#menu_rapports i:visited {
+	color: #0c5294;
 }
