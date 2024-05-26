@@ -1,0 +1,47 @@
+classDiagram
+    direction LR
+
+    class Personnel {
+        +id: BigInt
+        +prenom: String
+        +nom: String
+        +email: String
+        +password: String
+        +nom_arabe: String
+        +prenom_arabe: String
+        +cin: String
+        +date_naissance: Date
+        +telephone: String
+        +adresse: String
+        +images: String
+        +matricule: String
+        +ville_id: BigInt
+        +fonction_id: BigInt
+        +etp_affectation_id: BigInt
+        +grade_id: BigInt
+        +specialite_id: BigInt
+        +etablissement_id: BigInt
+        +avancement_id: BigInt
+        +created_at: Timestamp
+        +updated_at: Timestamp
+    }
+
+    class Conge {
+        +id: BigInt
+        +date_debut: Date
+        +date_fin: Date
+        +motif_id: BigInt
+        +personnel_id: BigInt
+        +created_at: Timestamp
+        +updated_at: Timestamp
+    }
+
+    class Motif {
+        +id: BigInt
+        +description: String
+        +created_at: Timestamp
+        +updated_at: Timestamp
+    }
+
+    Personnel "1" --> "0..*" Conge : personnel_id
+    Conge "1" --> "1" Motif : motif_id
