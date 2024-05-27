@@ -11,6 +11,6 @@ order: 320
 
 <!-- note -->
 
-Le directeur des établissements rencontre des difficultés à gérer et calculer les congés des employés de manière efficace. 
+Le directeur rencontre des difficultés à gérer et calculer les congés des employés de manière efficace. 
 
 <!-- new slide -->
