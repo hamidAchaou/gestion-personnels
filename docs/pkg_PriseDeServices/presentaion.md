@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: presentation
 chapitre: false
 package: pkg_PriseDeServices
 order: 4
