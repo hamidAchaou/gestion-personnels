@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: true
-package: pkg_GestionConges
+package: pkg_Conges
 order: 320
 ---
 
@@ -9,7 +9,7 @@ order: 320
 
 ## Idéation
 
-![Idéation](/gestion-personnels/pkg_GestionConges/analyse/images/ideation.jpg){:width="80%"}_figure: Ideation_
+![Idéation](/gestion-personnels/pkg_Conges/analyse/images/ideation.jpg){:width="80%"}_figure: Ideation_
 
 <!-- note -->
 
@@ -30,4 +30,4 @@ Il est utilisé pour identifier les besoins fonctionnels d'un système et pour d
 
 ### Gestion Conges
 
-![Diagamme de cas d'utilisation](/gestion-personnels/diagrammes/pkg_GestionConges/uses_cases_pkg_GestionConge-detail.svg){:width="100%"}_figure: Diagamme de cas d'utilisation_
+![Diagamme de cas d'utilisation](/gestion-personnels/diagrammes/pkg_Conges/uses_cases_pkg_GestionConge-detail.svg){:width="100%"}_figure: Diagamme de cas d'utilisation_
