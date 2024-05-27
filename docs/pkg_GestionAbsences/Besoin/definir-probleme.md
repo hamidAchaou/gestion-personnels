@@ -11,6 +11,6 @@ order: 320
 
 <!-- note -->
 
-Le directeur passe énormément de temps à gérer les données des employés dans des feuilles Excel.
+Le directeur des établissements rencontre des difficultés à gérer et calculer les congés des employés de manière efficace. 
 
 <!-- new slide -->
