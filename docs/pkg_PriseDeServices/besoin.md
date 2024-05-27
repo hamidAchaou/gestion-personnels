@@ -1,12 +1,14 @@
 ---
 layout: default
-empathie: Empathie de responsable de formation et driecteur
-order: 200
+chapitre: true
+package: pkg_PriseDeServices
+order: 220
 ---
+
 <!-- new slide -->
 # Empathie de directeur
 
-![empathie directeur](/gestion-personnels/diagrammes/pkg_PriseDesServices/empathy-directeur.svg){:width="23%"}
+![empathie directeur](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-directeur.svg){:width="23%"}
 
 <!-- note -->
 ## Persona
@@ -30,7 +32,7 @@ Le 05/03/2024
 <!-- new slide -->
 # Empathie de chef de formation
 
-![empathie responsable de formation](/gestion-personnels/diagrammes/pkg_PriseDesServices/empathy-responsable.svg){:width="23%"}
+![empathie responsable de formation](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-responsable.svg){:width="23%"}
 
 <!-- note -->
 ## Persona

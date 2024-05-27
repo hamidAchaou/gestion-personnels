@@ -1,9 +1,9 @@
 ---
 layout: default
 chapitre: false
-package: pkg_PriseDesServices
+package: pkg_PriseDeServices
 order: 4
 ---
 
-{% assign package_name = "pkg_PriseDesServices" %}
+{% assign package_name = "pkg_PriseDeServices" %}
 {% include rapport_par_package.md %}
