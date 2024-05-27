@@ -1,4 +1,4 @@
-- pkg_GestionAbsence
-- pkg_GestionConges
-- pkg_GestionPriseDeService
-- pkg_GestionOrderDeMission
+- pkg_PriseDeServices
+- pkg_Absences
+- pkg_Conges
+- pkg_OrderDesMissions
