@@ -1,5 +1,5 @@
 classDiagram
-    direction LR
+    direction TB
 
 namespace pkg_PriseDesServices {
     class Personnel {
@@ -17,23 +17,48 @@ namespace pkg_PriseDesServices {
         +adresse: String
         +images: String
     }
-}
-namespace pkg_conges {
-    class Conge {
-        +id: BigInt
+
+    class Etablissement {
+        +id: int
+        +nom: String
+        +description: String
+    }
+
+    class Grade {
+        +id: int
+        +nom: String
+        +echell_debut: int
+        +echell_fin: int
+    }
+
+    class Fonction {
+        +id: int
+        +nom: String
+        +description: String
+    }
+
+    class Avancement {
+        +id: int
         +date_debut: Date
         +date_fin: Date
-        +created_at: Timestamp
-        +updated_at: Timestamp
+        +echell: int
     }
 
-    class Motif {
-        +id: BigInt
+    class Specialite {
+        +id: int
+        +nom: String
         +description: String
-        +created_at: Timestamp
-        +updated_at: Timestamp
+    }
+
+    class Villes {
+        +id: int
+        +nom: String
     }
 }
 
-    Personnel "1..*" <-- "0..*" Conge 
-    Conge "0..*" <-- "1..1" Motif
+Personnel "1" -- "0..*" Etablissement: works_at
+Personnel "1" -- "0..*" Grade: holds
+Personnel "1" -- "0..*" Fonction: has
+Personnel "1" -- "0..*" Avancement: advances
+Personnel "1" -- "0..*" Specialite: specializes_in
+Personnel "1" -- "0..*" Villes: lives_in
