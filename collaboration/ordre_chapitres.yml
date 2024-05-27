@@ -7,7 +7,8 @@
     - 600: Réalisation
 
 - Ordre des packages:
-    - 0: pkg_PriseDesServices
-    - 20: pkg_Absences
-    - 40: pkg_Conges
-    - 60: pkg_OrderDesMissions
+    - 0: pk_rapport
+    - 20: pkg_PriseDesServices
+    - 40: pkg_Absences
+    - 60: pkg_Conges
+    - 80: pkg_OrderDesMissions
