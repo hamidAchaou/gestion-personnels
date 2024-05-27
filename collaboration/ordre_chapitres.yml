@@ -1,0 +1,13 @@
+- Ordre des phases:
+    - 100: Introduction
+    - 200: Besoin
+    - 300: Analyse
+    - 400: Analyse Techniques
+    - 500: Conception
+    - 600: Réalisation
+
+- Ordre des packages:
+    - 0: pkg_Absences
+    - 20: pkg_Conges
+    - 40: pkg_OrderDesMissions
+    - 60: pkg_PriseDesServices
