@@ -4,11 +4,12 @@ left to right direction
 actor Directeur as directeur
 actor ResponsableFormation as responsableFormation
 
-package Gestion_congés {
+package pkg_gestion_personnel.gestion_congés {
 
+  directeur -- (Naviguer par établissement )
   directeur -- (Gestion congés)
-  responsableFormation -- (Consultez congés)
-  (Consultez congés) <.. (imprimer décision de congés) : extend
+  responsableFormation -- (Gestion congés)
+  (Gestion congés) <.. (imprimer décision de congés) : extend
 
 }
 
