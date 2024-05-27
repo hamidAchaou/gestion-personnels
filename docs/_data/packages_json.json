@@ -1,59 +1,18 @@
 [
     {
-        "name":"pkg_authentification",
-        "titre":"Gestion d'authentification"
-        
+        "name": "pkg_GestionAbsence",
+        "titre": "Gestion des Absences"
     },
     {
-        "name":"pkg_competences",
-        "titre":"Gestion des compétences"
-        
+        "name": "pkg_GestionConges",
+        "titre": "Gestion des Congés"
     },
     {
-        "name":"pkg_autorisations",
-        "titre":"Gestion d'autorisations"
-        
+        "name": "pkg_GestionPriseDeService",
+        "titre": "Gestion Prise de Service"
     },
     {
-        "name":"pkg_rh",
-        "titre":"Gestion RH"
-        
-    },
-    {
-        "name":"pkg_projets",
-        "titre":"Gestion des projets"
-        
-    },
-    {
-        "name":"pkg_sous_taches",
-        "titre":"Gestion des sous tâches"
-        
-    },
-    {
-        "name":"pkg_notifications",
-        "titre":"Gestion des notifications"
-        
-    },
-    {
-        "name":"pkg_realisation_projet",
-        "titre":"Gestion réalisations"
-        
-    },
-    {
-        "name":"pkg_suivi",
-        "titre":"Suivi des projets"
-        
-    },
-    {
-        "name":"controle",
-        "titre":"contrôle"
+        "name": "pkg_GestionOrderDeMission",
+        "titre": "Gestion d'Ordre de Mission"
     }
-    ,
-    {
-        "name":"pkg_posts",
-        "titre":"Gestion des articles"
-    }
-    
-
-    
-  ]
+]
