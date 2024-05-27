@@ -68,6 +68,6 @@ Le 05/03/2024
 
 ## Définir le problème
 
-![Définir le problème](/gestion-personnels/pkg_GestionConges/images/problem.jpg){:width="500px"}_figure: Définir le problème_
+![Définir le problème](/gestion-personnels/pkg_GestionConges/besoin/images/problem.jpg){:width="500px"}_figure: Définir le problème_
 
 L'organisation rencontre des inefficacités et des erreurs dans la gestion des congés des employés dues à la validation manuelle des demandes, au calcul non automatisé des soldes de congés, et à l'absence de visualisation centralisée des calendriers de congés, entraînant des chevauchements et des perturbations opérationnelles.
