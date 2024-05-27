@@ -91,13 +91,10 @@ npm run dev
 login : admin@solicode.co
 password : admin
 
-### apprenant
+### responsable
 
-login : 
-password : 
+login : responsable@solicode.co
+password : responsable
 
-### formateur
 
-login : 
-password : 
 
