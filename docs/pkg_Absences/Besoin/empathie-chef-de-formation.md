@@ -1,14 +1,14 @@
 ---
 layout: default
 chapitre: true
-package: pkg_GestionAbsences
-order: 320
+package: pkg_Absences
+order: 242
 ---
 
 
 ## Carte d'Empathie - Chef de formation
 
-![Empathie Chef de formation](/gestion-personnels/diagrammes/pkg_GestionAbsences/empathie-chef_de_formation.svg){:width="100%" height="500px"}**Carte d'empathie - Chef de formation: pkg_GestionAbsences**
+![Empathie Chef de formation](/gestion-personnels/diagrammes/pkg_Absences/empathie-chef_de_formation.svg){:width="100%" height="500px"}*figure: Carte d'empathie - Chef de formation: pkg_Absences*
 
 <!-- note -->
 
