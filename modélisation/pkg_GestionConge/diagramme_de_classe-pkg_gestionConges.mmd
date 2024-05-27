@@ -1,8 +1,10 @@
 classDiagram
     direction LR
 
+namespace pkg_PriseDesServices {
     class Personnel {
         +id: BigInt
+        +matricule: String
         +prenom: String
         +nom: String
         +email: String
@@ -14,24 +16,13 @@ classDiagram
         +telephone: String
         +adresse: String
         +images: String
-        +matricule: String
-        +ville_id: BigInt
-        +fonction_id: BigInt
-        +etp_affectation_id: BigInt
-        +grade_id: BigInt
-        +specialite_id: BigInt
-        +etablissement_id: BigInt
-        +avancement_id: BigInt
-        +created_at: Timestamp
-        +updated_at: Timestamp
     }
-
+}
+namespace pkg_conges {
     class Conge {
         +id: BigInt
         +date_debut: Date
         +date_fin: Date
-        +motif_id: BigInt
-        +personnel_id: BigInt
         +created_at: Timestamp
         +updated_at: Timestamp
     }
@@ -42,6 +33,7 @@ classDiagram
         +created_at: Timestamp
         +updated_at: Timestamp
     }
+}
 
-    Personnel "1" --> "0..*" Conge : personnel_id
-    Conge "1" --> "1" Motif : motif_id
+    Personnel "1..*" <-- "0..*" Conge 
+    Conge "0..*" <-- "1..1" Motif
