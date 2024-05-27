@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: true
-package: pkg_congesonges
+package: pkg_GestionConges
 order: 540
 ---
 
@@ -23,7 +23,7 @@ Dans le processus de conception d'une interface utilisateur, il est important de
 <!-- note -->
 ## Les maquettes :
 
-![Maquettage de page Accuelle](/gestion-personnels/pkg_GestionConges/conception/images/page-index.png){:width="100%"}
+![Maquettage de page Accuelle](/gestion-personnels/pkg_GestionConges/conception/images/page-index.png){:width="80%"}
 *figure: Maquettage de page Accuelle*
 
 ![Maquettage de page Ajouter](/gestion-personnels/pkg_GestionConges/conception/images/page-create.png){:width="80%"}
