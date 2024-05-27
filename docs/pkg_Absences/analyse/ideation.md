@@ -1,8 +1,8 @@
 ---
 layout: default
 chapitre: true
-package: pkg_GestionAbsences
-order: 320
+package: pkg_Absences
+order: 341
 ---
 
 ## Idéation

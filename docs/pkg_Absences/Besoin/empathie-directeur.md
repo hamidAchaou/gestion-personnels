@@ -1,14 +1,14 @@
 ---
 layout: default
 chapitre: true
-package: pkg_GestionAbsences
-order: 320
+package: pkg_Absences
+order: 241
 ---
 
 
 ## Carte d'Empathie - Directeur
 
-![Empathie Directeur](/gestion-personnels/diagrammes/pkg_GestionAbsences/empathie-directeur.svg){:width="100%" height="500px"}**Carte d'empathie - Directeur : pkg_GestionAbsences**
+![Empathie Directeur](/gestion-personnels/diagrammes/pkg_Absences/empathie-directeur.svg){:width="100%" height="500px"}*figure: Carte d'empathie - Directeur : pkg_Absences*
 
 
 <!-- note -->
@@ -41,3 +41,5 @@ Une séance d'empathie a été réalisée avec M. Mechrafi, en tant que directeu
   - Fonction
   - Date de recrutement 
   - Date decision
+
+<!-- new slide -->

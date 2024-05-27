@@ -6,7 +6,7 @@ left to right direction
 actor Directeur as directeur
 actor ResponsableFormation as responsableFormation
 
-package gestion_personnel.pkg_GestionAbsences {
+package gestion_personnel.pkg_Absences {
 
   directeur -- (Naviguer par établissement)
   directeur -- (List des absences)
