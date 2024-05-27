@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: true
-package: pkg_GestionAbsences
+package: pkg_Absences
 order:  140
 ---
 
