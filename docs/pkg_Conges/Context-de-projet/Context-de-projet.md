@@ -7,7 +7,7 @@ order: 145
 
 <!-- new slide -->
 
-## Context de projet
+# Context de projet
 
 <!-- note -->
 
@@ -19,3 +19,7 @@ La première partie du cahier de charge est un document élaboré lors du cadrag
 ![Context de projet](/gestion-personnels/pkg_Conges/Context-de-projet/images/Context-de-projet.jpg){:width="80%"}_figure: Context de projet_
 
 Créer une application web gére des congées
+
+## Objectifs de formation 
+
+Le principal objectif de ce projet est de créer une application web qui utilise le framework Laravel pour la gestion des congés. La version web de l'application sera développée à l'aide de ce framework, qui suit l'architecture MVC (Modèle-Vue-Contrôleur) afin d'organiser le code et de faciliter la gestion des différentes parties de l'application.
