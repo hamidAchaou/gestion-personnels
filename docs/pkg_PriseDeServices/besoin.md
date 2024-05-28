@@ -56,3 +56,9 @@ Le 05/03/2024
 ![empathie chef de formation](/gestion-personnels/pkg_PriseDeServices/images/problem.jpg){:width="63%"}
 <!-- note -->
 perdre beaucoup de temps à récupérer les données de chaque employé et à chercher des fichiers mal organisés.
+
+<!-- new slide -->
+## Ideation
+![empathie chef de formation](/gestion-personnels/empathie-chef-de-formation/images/ideation.jpg){:width="73%"}
+<!-- note -->
+Réaliser une application web pour gérer les employés et imprimer les fichiers nécessaires avec une récupération automatique des données.
