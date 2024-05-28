@@ -4,7 +4,7 @@ namespace App\Models\pkg_Absences;
 
 
 use App\Models\User;
-use App\Models\GestionParametres\Motif;
+use App\Models\pkg_Parametres\Motif;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -27,6 +27,6 @@ class Absence extends Model
 
     public function motif()
     {
-        return $this->hasOne(Motif::class, 'id', 'motif_id');
+        return $this->belongsTo(Motif::class, 'motif_id');
     }
 }
