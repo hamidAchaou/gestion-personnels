@@ -1,0 +1,4 @@
+annee_juridique_id,nom,date_debut,date_fin,is_formateur,is_administrateur,created_at,updated_at
+1,New Year's Day,2024-01-01,2024-01-01,1,1,2024-01-01 00:00:00,2024-01-01 00:00:00
+1,Independence Day,2024-07-04,2024-07-04,1,0,2024-07-04 00:00:00,2024-07-04 00:00:00
+2,Labor Day,2024-09-02,2024-09-02,0,1,2024-09-02 00:00:00,2024-09-02 00:00:00
