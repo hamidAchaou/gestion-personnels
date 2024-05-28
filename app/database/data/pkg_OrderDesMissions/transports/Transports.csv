@@ -1,0 +1,6 @@
+transport_utiliser,marque,numiro_plaque,puissance_fiscal,moyens_transports_id,mission_id
+Transport public,,,1,1
+Voiture de mission,XYZ,DEF456,,2,2
+Voiture de mission,XYZ,DEF456,,2,1
+Voiture de personnel,Toyota,DER456,4,3,1
+Voiture de personnel,Toyota,DER456,4,3,2
