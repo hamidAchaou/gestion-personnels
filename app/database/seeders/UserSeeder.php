@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $csvFile = fopen(base_path("database/data/pkg_autorisations/Users.csv"), "r");
+        $csvFile = fopen(base_path("database/data/Users.csv"), "r");
         $firstline = true;
 
         while (($data = fgetcsv($csvFile)) !== FALSE) {
