@@ -26,8 +26,8 @@ class AnneeJuridiqueSeerder extends Seeder
                 AnneeJuridique::create([
                     'annee' => $data[0],
                     'remarques' => $data[1],
-                    'created_at' => $data[3],
-                    'updated_at' => $data[4],
+                    'created_at' => $data[2],
+                    'updated_at' => $data[3],
                 ]);
             }
             $firstline = false;
