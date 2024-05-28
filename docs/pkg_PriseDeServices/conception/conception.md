@@ -23,17 +23,51 @@ Dans le processus de conception d'une interface utilisateur, il est important de
 <!-- note -->
 ## Les maquettes :
 
-![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/page-index.png){:width="80%"}
-*figure: Maquettage de page Accuelle*
+### Personnels
 
-![Maquettage de page Ajouter](/gestion-personnels/pkg_PriseDeServices/conception/images/page-create.png){:width="80%"}
-*figure: Maquettage de page Ajouter*
+#### Accueil
 
-![Maquettage de page create details de calculer](/gestion-personnels/pkg_PriseDeServices/conception/images/page-create-details-de-calculer.png){:width="80%"}
-*figure: Maquettage de page create details de calculer*
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/personnelIndex.png){:width="80%"}
+*figure: Maquettage de page Accueil - personnels*
 
-![Maquettage de page historique des conges](/gestion-personnels/pkg_PriseDeServices/conception/images/page-index.png){:width="80%"}
-*figure: Maquettage de page historique des conges*
+#### Create
 
-![Maquettage de page decision des conges](/gestion-personnels/pkg_PriseDeServices/conception/images/page-decision-des-conges.png){:width="80%"}
-*figure: Maquettage de page decision des conges*
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/personnelCreate.png){:width="80%"}
+*figure: ajouter un personnels*
+
+#### Afficher
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/personnelShow.png){:width="80%"}
+*figure: afficher un personnels*
+
+#### Modifier
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/personnelCreate.png){:width="80%"}
+*figure: modifier un personnels*
+
+#### Attestation de travail
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/personnelPrint.png){:width="80%"}
+*figure: imprimer attestation de travail*
+
+### Categories
+
+### Accueil
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/categoryIndex.png){:width="80%"}
+*figure: Maquettage de page Accueil - categories*
+
+### Ajouter
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/categoryCreate.png){:width="80%"}
+*figure: ajouter un categorie*
+
+### Afficher
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/categoryShow.png){:width="80%"}
+*figure: afficher un categorie*
+
+### Modifier
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/categoryEdit.png){:width="80%"}
+*figure: modifier un categorie*
