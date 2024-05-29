@@ -10,7 +10,7 @@ order: 1
 ## Par packages
 
 <ul>
-  {% for package in site.data.pkg.packages %}
+  {% for package in site.data.packages %}
     <li> <a href="/gestion-personnels/{{ package }}/rapport"> {{ package }} </a> </li>
   {% endfor %}
 </ul>
@@ -19,12 +19,12 @@ order: 1
 
 ## Maquettages
 <ul>
-  {% for evaluation in site.data.evaluations.evaluations.evaluations %}
+  {% for evaluation in site.data.evaluations.evaluations %}
     <li>
       {{ evaluation.name }}
       <ul>
         {% for item in evaluation.items %}
-              <li> <a href="/gestion-personnels/{{ evaluation.name }}/{{ item }}/rapport"> {{ item }} </a> </li>
+              <li> <a href="/gestion-personnels/Evaluations/{{ evaluation.name }}/{{ item }}/rapport"> {{ item }} </a> </li>
         {% endfor %}
       </ul>
     </li>
