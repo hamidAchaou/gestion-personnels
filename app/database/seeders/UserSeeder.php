@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Autorisation\Role;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -28,23 +30,6 @@ class UserSeeder extends Seeder
                     'nom' => $data[1],
                     'email' => $data[2],
                     'password' => $data[3],
-                    'nom_arab' => $data[4],
-                    'prenom_arab' => $data[5],
-                    'cin' => $data[6],
-                    'date_naissance' => $data[7],
-                    'telephone' => $data[8],
-                    'address' => $data[9],
-                    'images' => $data[10],
-                    'matricule' => $data[11],
-                    'ville_id' => $data[12],
-                    'fonction_id' => $data[13],
-                    'ETPAffectation_id' => $data[14],
-                    'grade_id' => $data[15],
-                    'specialite_id' => $data[16],
-                    'etablissement_id' => $data[17],
-                    'avancement_id' => $data[18],
-                    'created_at' => $data[19],
-                    'updated_at' => $data[20],
                 ]);
             }
             $firstline = false;
@@ -52,30 +37,54 @@ class UserSeeder extends Seeder
 
         fclose($csvFile);
 
-        // User::create([
-        // User::create([
-        //     'name' => 'admin',
-        //     'nom' => User::ADMIN,
-        //     'email' => 'admin@gmail.com',
-        //     'prenom' => User::ADMIN,
-        //     'password' => Hash::make('admin'),
-        //     'email' => User::ADMIN . '@gmail.com',
-        //     'password' => Hash::make(User::ADMIN),
-        //     'created_at' => Carbon::now(),
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        // ]);
-        // ])->assignRole(User::ADMIN);
+        // ==========================================================
+        // =========== Add Seeder Permission Assign Role ============
+        // ==========================================================
+        // $adminRole = User::ADMIN;
+        // $responsableRole = User::RESPONSABLE;
+        // $roleAdmin = Role::where('name', $adminRole)->first();
+        // $roleResponsable = Role::where('name', $responsableRole)->first();
 
-        // User::create([
-        //     'nom' => User::RESPOSABLE,
-        //     'prenom' => User::RESPOSABLE,
-        //     'email' => User::RESPOSABLE . '@gmail.com',
-        //     'password' => Hash::make(User::RESPOSABLE),
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        // ])->assignRole(User::RESPOSABLE);
+        Schema::disableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
+
+        $csvFile = fopen(base_path("database/data/pkg_PriseDeServices/personnels/PersonnelsPermissions.csv"), "r");
+        $firstline = true;
+        while (($data = fgetcsv($csvFile)) !== FALSE) {
+            if (!$firstline) {
+                Permission::create([
+                    "name" => $data['0'],
+                    "guard_name" => $data['1'],
+                ]);
+
+                // if ($roleAdmin) {
+                //     // If the role exists, update its permissions
+                //     $roleAdmin->givePermissionTo($data['0']);
+                // } else {
+                //     // If the role doesn't exist, create it and give permissions
+                //     $roleAdmin = Role::create([
+                //         'name' => $adminRole,
+                //         'guard_name' => 'web',
+                //     ]);
+                //     $roleAdmin->givePermissionTo($data['0']);
+                // }
+                // Only give specific permissions to the 'responsable' role
+                // if (in_array($data['0'], ['index-PersonnelController', 'show-PersonnelController', 'export-PersonnelController'])) {
+                //     if ($roleResponsable) {
+                //         $roleResponsable->givePermissionTo($data['0']);
+                //     } else {
+                //         $roleResponsable = Role::create([
+                //             'name' => $responsableRole,
+                //             'guard_name' => 'web',
+                //         ]);
+                //         $roleResponsable->givePermissionTo($data['0']);
+                //     }
+                // }
+
+            }
+            $firstline = false;
+        }
+        fclose($csvFile);
     }
 }
 
