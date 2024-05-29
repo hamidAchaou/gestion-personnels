@@ -1,18 +1,19 @@
 [
     {
-        "name": "pkg_GestionAbsence",
-        "titre": "Gestion des Absences"
+        "name": "pkg_PriseDeServices",
+        "titre": " Prise de Services"
     },
     {
-        "name": "pkg_GestionConges",
-        "titre": "Gestion des Congés"
+        "name": "pkg_Absences",
+        "titre": "Absences"
     },
     {
-        "name": "pkg_GestionPriseDeService",
-        "titre": "Gestion Prise de Service"
+        "name": "pkg_Conges",
+        "titre": "Congés"
     },
+
     {
-        "name": "pkg_GestionOrderDeMission",
-        "titre": "Gestion d'Ordre de Mission"
+        "name": "pkg_OrderDeMission",
+        "titre": "Ordre des Missions"
     }
 ]
