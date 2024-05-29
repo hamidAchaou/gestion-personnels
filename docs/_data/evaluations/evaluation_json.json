@@ -1,10 +1,25 @@
-[
-    {
-        "name": "Formateur",
-        "titre": "Formateur Formateur"
-    },
-    {
-        "name": "Directeur",
-        "titre": "Directeur Directeur"
-    }
-]
+{
+    "evaluations": [
+        {
+            "name": "CC1",
+            "items": [
+                "Formateur_1",
+                "Directeur_1"
+            ]
+        },
+        {
+            "name": "CC2",
+            "items": [
+                "Formateur_2",
+                "Directeur_2"
+            ]
+        },
+        {
+            "name": "CC3",
+            "items": [
+                "Formateur_3",
+                "Directeur_3"
+            ]
+        }
+    ]
+}
