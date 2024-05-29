@@ -18,7 +18,7 @@ Il aide à identifier les attentes et les frustrations des utilisateurs, ainsi q
 
 ### Empathie Directeur générale
 
-![Empathie Directeur générale](/gestion-personnels/diagrammes/pkg_Conges/empathie-Directeur_pkg_Conge.svg){:width="100%" height="500px"}
+![Empathie Directeur générale](/gestion-personnels/diagrammes/pkg_Conges/empathie-Directeur_pkg_GestionConge.svg){:width="100%" height="500px"}
 _Figure : Cart d'empathie : Empathie Directeur générale_
 
 <!-- note -->
@@ -45,7 +45,7 @@ Le 05/03/2024
 
 ### Empathie chef de formation
 
-![Empathie chef de formation](/gestion-personnels/diagrammes/pkg_Conges/empathie-chef_de_formation_pkg_Conge.svg){:width="100%" height="500px"}
+![Empathie chef de formation](/gestion-personnels/diagrammes/pkg_Conges/empathie-chef_de_formation_pkg_GestionConge.svg){:width="100%" height="500px"}
 _Figure : Cart d'empathie : Empathie chef de formation_
 
 <!-- note -->
@@ -76,7 +76,7 @@ L'organisation rencontre des inefficacités et des erreurs dans la gestion des c
 
 ## Idéation
 
-![Idéation](/gestion-personnels/pkg_Conges/analyse/images/ideation.jpg){:width="80%"}_figure: Ideation_
+![Idéation](/gestion-personnels/pkg_GestionConges/analyse/images/ideation.jpg){:width="80%"}_figure: Ideation_
 
 <!-- note -->
 
