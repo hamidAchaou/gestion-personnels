@@ -4,6 +4,7 @@ namespace App\Models\pkg_Conges;
 
 use App\Models\pkg_Parametres\Motif;
 use App\Models\pkg_PriseDeServices\Personnel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,7 @@ class Conge extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Personnel::class, 'personnels_conges', 'conges_id', 'user_id');
+        return $this->belongsToMany(User::class, 'personnels_conges', 'conges_id', 'user_id');
     }
 
     public function motifs()
