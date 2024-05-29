@@ -10,7 +10,23 @@ order: 1
 ## Par packages
 
 <ul>
-  {% for package in site.data.packages %}
+  {% for package in site.data.pkg.packages %}
     <li> <a href="/gestion-personnels/{{ package }}/rapport"> {{ package }} </a> </li>
+  {% endfor %}
+</ul>
+
+# Evaluation
+
+## Maquettages
+<ul>
+  {% for evaluation in site.data.evaluations.evaluations.evaluations %}
+    <li>
+      {{ evaluation.name }}
+      <ul>
+        {% for item in evaluation.items %}
+              <li> <a href="/gestion-personnels/{{ evaluation.name }}/{{ item }}/rapport"> {{ item }} </a> </li>
+        {% endfor %}
+      </ul>
+    </li>
   {% endfor %}
 </ul>
