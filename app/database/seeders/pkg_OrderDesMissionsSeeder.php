@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use Database\Seeders\pkg_OrderDesMissions\{
     MissionsSeeder,
+    MissionPersonnelSeeder,
     TransportsSeeder,
     MoyensTransportsSeeder,
 };
@@ -23,8 +24,9 @@ class Pkg_OrderDesMissionsSeeder extends Seeder
     {
         return [
             MissionsSeeder::class,
-            TransportsSeeder::class,
+            MissionPersonnelSeeder::class,
             MoyensTransportsSeeder::class,
+            TransportsSeeder::class,
         ];
     }
 }

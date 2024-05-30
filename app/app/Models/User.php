@@ -15,7 +15,7 @@ use App\Models\pkg_Parametres\Avancement;
 use App\Models\pkg_Parametres\Specialite;
 use App\Models\pkg_Parametres\Etablissement;
 // use models of packages
-use App\Models\pkg_OrderDesMission\Mission;
+use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_Absences\Absence;
 use App\Models\pkg_Conges\Conge;
 

@@ -32,21 +32,20 @@ class MissionsSeeder extends Seeder
         while (($data = fgetcsv($csvFile)) !== FALSE) {
             if (!$firstline) {
                 // Convert dates from DD/MM/YYYY to YYYY-MM-DD
-                $data_ordre_mission = DateTime::createFromFormat('d/m/Y', $data[6])->format('Y-m-d');
-                $date_debut = DateTime::createFromFormat('d/m/Y', $data[7])->format('Y-m-d');
-                $date_fin = DateTime::createFromFormat('d/m/Y', $data[8])->format('Y-m-d');
-                $date_depart = DateTime::createFromFormat('d/m/Y', $data[9])->format('Y-m-d');
-                $date_return = DateTime::createFromFormat('d/m/Y', $data[11])->format('Y-m-d');
-                $heure_de_depart = $data[10];
-                $heure_de_return = $data[12];
+                $data_ordre_mission = DateTime::createFromFormat('d/m/Y', $data[5])->format('Y-m-d');
+                $date_debut = DateTime::createFromFormat('d/m/Y', $data[6])->format('Y-m-d');
+                $date_fin = DateTime::createFromFormat('d/m/Y', $data[7])->format('Y-m-d');
+                $date_depart = DateTime::createFromFormat('d/m/Y', $data[8])->format('Y-m-d');
+                $date_return = DateTime::createFromFormat('d/m/Y', $data[10])->format('Y-m-d');
+                $heure_de_depart = $data[9];
+                $heure_de_return = $data[11];
 
                 Mission::create([
-                    "nom" => $data[0],
-                    "numero_mission" => $data[1],
-                    "nature" => $data[2],
-                    "lieu" => $data[3],
-                    "type_de_mission" => $data[4],
-                    "numero_ordre_mission" => $data[5],
+                    "numero_mission" => $data[0],
+                    "nature" => $data[1],
+                    "lieu" => $data[2],
+                    "type_de_mission" => $data[3],
+                    "numero_ordre_mission" => $data[4],
                     "data_ordre_mission" => $data_ordre_mission,
                     "date_debut" => $date_debut,
                     "date_fin" => $date_fin,

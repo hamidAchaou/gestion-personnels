@@ -12,7 +12,6 @@ class Mission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom',
         'numero_mission',
         'nature',
         'lieu',
