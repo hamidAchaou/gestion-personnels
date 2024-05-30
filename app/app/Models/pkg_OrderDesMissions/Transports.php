@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\GestionOrderDesMissions;
+namespace App\Models\pkg_OrderDesMissions;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
