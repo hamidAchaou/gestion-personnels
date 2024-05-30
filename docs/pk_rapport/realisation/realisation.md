@@ -1,9 +1,7 @@
 ---
 layout: default
 chapitre: true
-presentation: Réalisation
-package: pkg_global
-presentationPackage: gestion_projects
+package : pkg_rapport
 order: 600
 
 ---

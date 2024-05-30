@@ -1,6 +1,7 @@
 ---
 layout: default
 chapitre: true
+package : pkg_rapport
 order: 200
 ---
 
