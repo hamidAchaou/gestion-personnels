@@ -15,10 +15,9 @@ class PersonnelsSeeder extends Seeder
     {
 
         Schema::disableForeignKeyConstraints();
-        Personnel::truncate();
         Schema::enableForeignKeyConstraints();
 
-        $csvFile = fopen(base_path("database/data/Personnels.csv"), "r");
+        $csvFile = fopen(base_path("database/data/pkg_PriseDeServices/personnels/Personnels.csv"), "r");
         $firstline = true;
 
         while (($data = fgetcsv($csvFile)) !== FALSE) {
