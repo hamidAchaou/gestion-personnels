@@ -1,7 +1,7 @@
 ---
 layout: default
 chapitre: true
-package: pkg_global
+package : pkg_rapport
 order: 100
 ---
 
