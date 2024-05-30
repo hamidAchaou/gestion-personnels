@@ -14,7 +14,7 @@ class AbenceTest extends TestCase
 {
     use DatabaseTransactions;
     /**
-     * Le référentiel de projets utilisé pour les tests.
+     * Le référentiel de absences utilisé pour les tests.
      *
      * @var AbsenceRepository
      */
@@ -34,14 +34,13 @@ class AbenceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->absenceRepository = new AbsenceRepository(new Absence());
+        $this->absenceRepository = new AbsenceRepository();
         $this->user = User::factory()->create();
         $this->motif = Motif::factory()->create();
     }
 
     public function test_paginate()
     {
-        $this->actingAs($this->user);
         $absence = [
             'date_debut' => '2024-05-02',
             'date_fin' => '2024-05-03',
@@ -50,16 +49,16 @@ class AbenceTest extends TestCase
             'motif_id' => $this->motif->id,
         ];
         $this->absenceRepository->create($absence);
+        $this->assertDatabaseHas('absences', $absence);
         $absences = $this->absenceRepository->paginate();
         $this->assertNotNull($absences);
     }
 
     /**
-     * Teste la création d'un projet.
+     * Teste la création d'un absence.
      */
     public function test_create()
     {
-        $this->actingAs($this->user);
         $data = [
             'date_debut' => '2024-05-02',
             'date_fin' => '2024-05-03',
@@ -73,11 +72,10 @@ class AbenceTest extends TestCase
     }
 
     /**
-     * Teste la mise à jour d'un projet.
+     * Teste la mise à jour d'un absence.
      */
     public function test_update()
     {
-        $this->actingAs($this->user);
         $absence = Absence::factory()->create();
         $data = [
             'date_debut' => '2024-05-02',
@@ -91,11 +89,10 @@ class AbenceTest extends TestCase
     }
 
     /**
-     * Teste la suppression d'un projet.
+     * Teste la suppression d'un absence.
      */
     public function test_delete_project()
     {
-        $this->actingAs($this->user);
         $project = Absence::factory()->create();
         $this->absenceRepository->destroy($project->id);
         $this->assertDatabaseMissing('absences', ['id' => $project->id]);
@@ -153,4 +150,3 @@ class AbenceTest extends TestCase
         }
     }
 }
-    
