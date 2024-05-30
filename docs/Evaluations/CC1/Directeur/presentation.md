@@ -7,7 +7,7 @@ order: 1
 
 {% assign pages = site.pages | sort: "order" %}
 {% for page in pages %}
-  {% if page.evaluation == "Directeur" %}
+  {% if page.presentationEvaluation == "Directeur" %}
     {{- page.content | markdownify -}}
   {% endif %}
 {% endfor %}

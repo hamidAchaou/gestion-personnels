@@ -1,7 +1,6 @@
 ---
 layout: default
-chapitre: true
-presentation: false
+presentationEvaluation: true
 evaluation : directeur
 order: 1
 ---
