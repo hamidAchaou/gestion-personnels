@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\GestionPersonnels;
+namespace App\Models\pkg_PriseDeServices;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\pkg_Parametres\Etablissement;

@@ -1,13 +1,12 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\pkg_PriseDeServices;
 
-use App\Models\Autorisation\Role;
-use App\Models\GestionPersonnels\Personnel;
+use App\Models\pkg_PriseDeServices\Personnel;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class PersonnelSeeder extends Seeder
+class PersonnelsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
