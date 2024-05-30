@@ -18,7 +18,7 @@ Dans cette phase de la méthode 2TUP en va savoir les aspects techniques. Parmi 
 ## Architecture mvc :
 
 <!-- note -->
-![Architecture mvc](/gestion-personnels/pkg_Conges/branche-technique/images/Architecture-mvc.png){:width="100%" height="500px"}
+![Architecture mvc](/gestion-personnels/pkg_Conges/branche-technique/images/Architecture-mvc.jpg){:width="100%" height="500px"}
 _Figure : Cart d'empathie : Architecture mvc_
 
 L'architecture MVC (Modèle-Vue-Contrôleur) est un modèle de conception qui permet de séparer les différentes parties d'une application pour faciliter la maintenance et l'évolutivité du code. Le Modèle gère les données, la Vue présente les données à l'utilisateur et le Contrôleur gère les interactions de l'utilisateur avec l'application. L'architecture MVC est 
