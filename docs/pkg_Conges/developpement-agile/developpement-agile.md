@@ -16,4 +16,4 @@ Dans ce chapitre, nous allons d'abord expliquer les principes fondamentaux de l'
 
 En ingénierie logicielle, les pratiques agiles mettent en avant la collaboration entre des équipes auto-organisées et pluridisciplinaires et leurs clients. Elles s'appuient sur l'utilisation d'un cadre méthodologique léger mais suffisant centré sur l'humain et la communication.
 
-![Méthode agile](/gestion-personnels/pkg_Conges/developpement-agile/images/Methode-agile.jpg){:width="80%"}_figure: Méthode agile
+![Méthode agile](/gestion-personnels/pkg_Conges/developpement-agile/images/Methode-agile.jpg){:width="80%"}*figure: Méthode agile*

@@ -2,7 +2,7 @@
 layout: default
 chapitre: true
 package: pkg_Conges
-order: 320
+order: 326
 ---
 
 <!-- new slide -->
@@ -18,7 +18,7 @@ Il aide à identifier les attentes et les frustrations des utilisateurs, ainsi q
 
 ### Empathie Directeur générale
 
-![Empathie Directeur générale](/gestion-personnels/diagrammes/pkg_Conges/empathie-Directeur_pkg_GestionConge.svg){:width="100%" height="500px"}
+![Empathie Directeur générale](/gestion-personnels/diagrammes/pkg_Conges/empathie-Directeur_pkg_Conge.svg){:width="100%" height="500px"}
 _Figure : Cart d'empathie : Empathie Directeur générale_
 
 <!-- note -->
@@ -45,7 +45,7 @@ Le 05/03/2024
 
 ### Empathie chef de formation
 
-![Empathie chef de formation](/gestion-personnels/diagrammes/pkg_Conges/empathie-chef_de_formation_pkg_GestionConge.svg){:width="100%" height="500px"}
+![Empathie chef de formation](/gestion-personnels/diagrammes/pkg_Conges/empathie-chef_de_formation_pkg_Conge.svg){:width="100%" height="500px"}
 _Figure : Cart d'empathie : Empathie chef de formation_
 
 <!-- note -->
@@ -71,3 +71,15 @@ Le 05/03/2024
 ![Définir le problème](/gestion-personnels/pkg_Conges/besoin/images/problem.jpg){:width="500px"}_figure: Définir le problème_
 
 L'organisation rencontre des inefficacités et des erreurs dans la gestion des congés des employés dues à la validation manuelle des demandes, au calcul non automatisé des soldes de congés, et à l'absence de visualisation centralisée des calendriers de congés, entraînant des chevauchements et des perturbations opérationnelles.
+
+<!-- new slide -->
+
+## Idéation
+
+![Idéation](/gestion-personnels/pkg_Conges/analyse/images/ideation.jpg){:width="80%"}_figure: Ideation_
+
+<!-- note -->
+
+- Validation des congés par les supérieurs hiérarchiques.
+- Calcul automatique des soldes de congés restants.
+- Visualisation des calendriers de congés pour éviter les chevauchements.

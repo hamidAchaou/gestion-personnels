@@ -2,20 +2,8 @@
 layout: default
 chapitre: true
 package: pkg_Conges
-order: 320
+order: 327
 ---
-
-<!-- new slide -->
-
-## Idéation
-
-![Idéation](/gestion-personnels/pkg_Conges/analyse/images/ideation.jpg){:width="80%"}_figure: Ideation_
-
-<!-- note -->
-
-- Validation des congés par les supérieurs hiérarchiques.
-- Calcul automatique des soldes de congés restants.
-- Visualisation des calendriers de congés pour éviter les chevauchements.
 
 <!-- new slide -->
 
