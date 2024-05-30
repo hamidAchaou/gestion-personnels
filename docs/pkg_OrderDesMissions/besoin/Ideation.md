@@ -6,7 +6,7 @@ package: pkg_OrderDesMissions
 order: 284
 ---
 
-## Idéation
+### Idéation : Order des missions
 
 ![Idéation](./images/ideation.jpg){:width="500px"}_figure: Idéation_
 

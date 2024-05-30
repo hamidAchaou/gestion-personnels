@@ -7,7 +7,7 @@ order: 282
 ---
 
 
-### Empathie chef de formation
+### Empathie chef de formation 
 
 ![Empathie chef de formation](/gestion-personnels/diagrammes/pkg_OrderDesMissions/empathie-chef_de_formation_pkg_OrdreDesMissions.svg){:width="100%" height="500px"}
 *Figure : Cart d'empathie : Empathie chef de formation*

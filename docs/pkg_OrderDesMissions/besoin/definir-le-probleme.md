@@ -6,7 +6,7 @@ package: pkg_OrderDesMissions
 order: 283
 ---
 
-## Définir le problème
+## Définir le problème : Order des missions
 
 ![Définir le problème](./images/problem.jpg){:width="500px"}_figure: Définir le problème_
 

@@ -4,13 +4,14 @@
         <div class="row">
             <div class="form-group col-lg-6 col-12">
                 <label for="inputEndDate">Personnel <span class="text-danger">*</span></label>
-                <select class="form-control js-example-basic-single">
-                    <option value="madani-ali">madani ali</option>
-                    <option value="chami-wld-lhani">chami wld lhani</option>
-                    <option value="madani-mohamed">madani mohamed</option>
-                    <!-- Add more options as needed -->
+                <select class="js-example-basic-multiple" style="width: 100%;" name="states[]" multiple="multiple">
+                    <option value="AL">Alabama</option>
+                    <option value="WY">sdsd</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="WY">dsfryrt</option>
                 </select>
             </div>
+
             <div class="form-group col-lg-6 col-12">
                 <label for="inputEndDate">Numéro de mission <span class="text-danger">*</span></label>
                 <input name="endDate" type="" class="form-control" id="inputEndDate"
@@ -22,11 +23,6 @@
                     placeholder="Sélectionnez la nature" value="">
             </div>
             <div class="form-group col-lg-6 col-12">
-                <label for="inputCatégorie">Catégorie <span class="text-danger">*</span></label>
-                <input name="endDate" type="" class="form-control" id="inputCatégorie"
-                    placeholder="Sélectionnez la Catégorie" value="">
-            </div>
-            <div class="form-group col-lg-6 col-12">
                 <label for="inputDescription">Type de mission <span class="text-danger">*</span></label>
                 <input name="nombreDuJour" type="text" class="form-control" id="nombreDuJour"
                     placeholder="Sélectionnez Type de mission" value="Voyage d'affaires">
@@ -36,7 +32,14 @@
                 <input name="nombreDuJour" type="text" class="form-control" id="nombreDuJour"
                     placeholder="Sélectionnez Numéro d'ordre de mission" value="12">
             </div>
-            <div class="form-group col-12 col-lg-6 moyens-de-transport">
+
+        </div>
+
+    </fieldset>
+    <fieldset class="border col-lg-12 mb-5 p-3">
+        <legend>Moyens de transport</legend>
+        <div class="row">
+            <div class="form-group col-lg-6 col-12 moyens-de-transport">
                 <label for="date-de-fin">Moyens de transport <span class="text-danger">*</span></label>
                 <select class="form-control select-moyens-de-transport">
                     <option value="transport-public" class="transport-public">Transport public</option>
@@ -59,6 +62,14 @@
                 <input name="nombreDuJour" type="text" class="form-control" id="nombreDuJour"
                     placeholder="Sélectionnez Puissance fiscale" value="4cv">
             </div>
+        </div>
+        <div class="Moyens_transport">
+
+        </div>
+        <div class="row justify-content-center">
+            <span class="btn btn-info">
+                <i class="fa-solid fa-plus"></i>
+            </span>
         </div>
     </fieldset>
     <fieldset class="border col-lg-12 mb-5 p-3">
@@ -113,3 +124,9 @@
         <button type="submit" class="btn btn-info ml-2">Ajouter</button>
     </div>
 </form>
+
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
