@@ -2,10 +2,14 @@
 layout: default
 chapitre: true
 presentation: true
-evaluation : Directeur
+evaluation : directeur
 order: 5
 ---
 
+# Analyse
+{:class="sectionHeader"}
+
+<!-- new slide -->  
 
 ## Idéation
 
