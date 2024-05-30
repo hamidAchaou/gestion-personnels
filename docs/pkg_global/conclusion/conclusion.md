@@ -5,7 +5,6 @@ presentation: conclusion
 package: pkg_global
 presentationPackage: gestion_projects
 order: 1000
-
 ---
 
 # Conclusion
@@ -14,4 +13,3 @@ order: 1000
 *Figure: Conclusion*
 
 <!-- note -->
-w

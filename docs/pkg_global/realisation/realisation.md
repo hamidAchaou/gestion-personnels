@@ -1,10 +1,14 @@
 ---
 layout: default
 chapitre: true
+presentation: Réalisation
 package: pkg_global
-presentationPackage: pkg_global
-order: 800
+presentationPackage: gestion_projects
+order: 600
+
 ---
+
+# Réalisation
 
 ## Installation des packages
 
