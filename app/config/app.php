@@ -181,7 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -195,6 +195,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        //spatie
+        Spatie\Permission\PermissionServiceProvider::class,
+        // matewebsite Excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -210,6 +214,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        // 'ExampleClass' => App\Example\ExampleClass::class,
+        // matewebsite Excel
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 

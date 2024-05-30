@@ -33,7 +33,8 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Load routes dynamically from the routes directory.
+     * TODO : Organisation des routes par packages 
+     *        Load routes dynamically from the routes directory.
      */
     protected function loadRoutes()
     {
