@@ -1,13 +1,13 @@
 ---
 layout: default
+presentation: true
 chapitre: true
 package : pkg_rapport
 order: 321
 ---
 
-<!-- new slide -->
-
 # Planification
+{:class="sectionHeader"}
 
 <!-- note -->
 
@@ -22,3 +22,5 @@ Au deuxième sprint, notre travail s'est concentré sur la version mobile de l'a
 ## Diagramme de Gantt  
 
 Un diagramme de Gantt est un outil de gestion de projet qui montre la planification de toutes les tâches d'un projet sur une ligne de temps. 
+
+<!-- new slide -->

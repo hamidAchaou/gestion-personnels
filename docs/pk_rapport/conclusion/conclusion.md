@@ -1,11 +1,13 @@
 ---
 layout: default
+presentation: true
 chapitre: true
 package : pkg_rapport
 order: 1000
 ---
 
 # Conclusion
+{:class="sectionHeader"}
 
 ![Conclusion](./images/conclusion.jpg){:width="500px"}
 *Figure: Conclusion*
