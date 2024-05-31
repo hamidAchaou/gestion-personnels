@@ -12,7 +12,7 @@ Dans cette phase de capture des besoins fonctionnels de la méthode 2TUP, en uti
 <!-- new slide -->
 ## Empathie de directeur
 
-![empathie directeur](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-directeur.svg){:width="23%"}
+![empathie directeur](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-directeur.svg){:width="23%"}*figure: empathie directeur* 
 
 <!-- note -->
 ## Persona
@@ -36,7 +36,7 @@ Le 05/03/2024
 <!-- new slide -->
 ## Empathie de chef de formation
 
-![empathie responsable de formation](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-responsable.svg){:width="23%"}
+![empathie responsable de formation](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-responsable.svg){:width="23%"}*figure: Responsable de formation*
 
 <!-- note -->
 ## Persona
