@@ -37,8 +37,8 @@
 
     </fieldset>
     <fieldset class="border col-lg-12 mb-5 p-3">
-        <legend>Moyens de transport</legend>
-        <div class="row">
+        <legend>Moyens des transports</legend>
+        <div class="row border MoyensTransportsForm p-2">
             <div class="form-group col-lg-6 col-12 moyens-de-transport">
                 <label for="date-de-fin">Moyens de transport <span class="text-danger">*</span></label>
                 <select class="form-control select-moyens-de-transport">
@@ -67,15 +67,16 @@
 
         </div>
         <div class="row justify-content-center">
-            <span class="btn btn-info">
+            <span class="btn btn-info mt-3">
                 <i class="fa-solid fa-plus"></i>
             </span>
         </div>
     </fieldset>
     <fieldset class="border col-lg-12 mb-5 p-3">
-        <legend>Planification de mission
+        <legend>
+            Planification de mission
         </legend>
-        <div class="row">
+        <div class="row template">
             <div class="form-group col-lg-6 col-12">
                 <label for="Lieu">Lieu <span class="text-danger">*</span></label>
                 <input name="Lieu" type="text" class="form-control" id="Lieu" placeholder="Sélectionnez " value="Rabat">
