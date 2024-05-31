@@ -42,14 +42,6 @@ class FonctionSeeder extends Seeder
         // ==========================================================
         // =========== Add Seeder Permission Assign Role ============
         // ==========================================================
-        $adminRoleName = User::ADMIN; // Change this to match the role name in your database
-
-        // Find or create the admin role
-        $adminRole = Role::firstOrCreate([
-            'name' => $adminRoleName,
-            'guard_name' => 'web',
-        ]);
-
         $csvFile = fopen(base_path("database/data/pkg_Parametres/fonctions/FonctionsPermissions.csv"), "r");
         $firstLine = true;
 
@@ -59,13 +51,10 @@ class FonctionSeeder extends Seeder
                 $permissionGuardName = $data[1];
 
                 // Find or create the permission
-                $permission = Permission::firstOrCreate([
+                Permission::firstOrCreate([
                     "name" => $permissionName,
                     "guard_name" => $permissionGuardName,
                 ]);
-
-                // Assign the permission to the admin role
-                $adminRole->givePermissionTo($permission);
             }
             $firstLine = false;
         }

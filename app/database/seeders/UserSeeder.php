@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
@@ -27,7 +28,7 @@ class UserSeeder extends Seeder
                     'prenom' => $data[0],
                     'nom' => $data[1],
                     'email' => $data[2],
-                    'password' => $data[3],
+                    'password' => Hash::make($data[3]),
                     'nom_arab' => $data[4],
                     'prenom_arab' => $data[5],
                     'cin' => $data[6],
@@ -78,4 +79,3 @@ class UserSeeder extends Seeder
         // ])->assignRole(User::RESPOSABLE);
     }
 }
-

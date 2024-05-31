@@ -1,0 +1,9 @@
+evaluations:
+  - name: CC1
+    items:
+      - Directeur
+  - name: CC2
+    items:
+      - Formateur
+      - Directeur
+      - ResponsableDeFormation

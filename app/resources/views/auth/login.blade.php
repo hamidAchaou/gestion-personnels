@@ -17,19 +17,20 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body>
     <div class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
 
-                <!-- TODO css-2 : 
-                - remplacer style par class dans le fichier de package : authentification.css 
+                <!-- TODO css-2 :
+                - remplacer style par class dans le fichier de package : authentification.css
                 - ajouter la configuration de l'icon de l'application dans le fichier de configuration .env
                 -->
                 <i class="fas fa-home" style="font-size: 50px;"></i>
 
                 <!-- TODO config-2 : à lire depuis le fichier de configuration de Laravel-->
-                <h4>Prototype</h4>
+                <h4>Gestion personels</h4>
             </div>
             <div class="card">
                 <div class="card-body login-card-body">
@@ -64,14 +65,7 @@
                             @enderror
                         </div>
                         <div class="row">
-                            <div class="col-7">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">Se souvenir de moi</label>
-                                </div>
-                            </div>
-
-                            <div class="col-5">
+                            <div class="col">
                                 <button type="submit" class="btn btn-info btn-block">Se connecter</button>
                             </div>
                         </div>
@@ -82,4 +76,5 @@
         </div>
     </div>
 </body>
+
 </html>
