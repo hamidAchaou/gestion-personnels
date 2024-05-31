@@ -7,9 +7,8 @@ order: 1000
 ---
 
 # Conclusion
-{:class="sectionHeader"}
 
-![Conclusion](./images/conclusion.jpg){:width="500px"}
+![Conclusion](./images/conclusion.jpg){:width="700px"}
 *Figure: Conclusion*
 
 <!-- note -->
