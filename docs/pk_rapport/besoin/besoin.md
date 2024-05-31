@@ -1,5 +1,6 @@
 ---
 layout: default
+presentation: true
 chapitre: true
 package : pkg_rapport
 order: 200
@@ -8,7 +9,7 @@ order: 200
 # Besoin 
 {:class="sectionHeader"}
 
-<!-- new slide -->
+<!-- note -->
 
 ## Nécessité d'une application de démonstration :
 
@@ -47,3 +48,5 @@ En résumé, le prototype vise à illustrer la capacité à implémenter des int
 Le prototype mettra également en œuvre un système d'authentification et d'autorisation adaptable à n'importe quelle application Laravel. Ce système permettra de gérer les utilisateurs, les rôles et les permissions, garantissant un accès sécurisé aux ressources de l'application.
 
 En résumé, le prototype servira de preuve de concept pour les fonctionnalités techniques clés requises pour le projet, tout en fournissant un système d'authentification et d'autorisation réutilisable pour les futures applications Laravel.
+
+<!-- new slide -->
