@@ -7,6 +7,7 @@ order: 280
 ---
 
 ## Cart d'empathie : Order des missions
+{:class="sectionHeader"}
 
 <!-- note -->
 

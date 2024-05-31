@@ -8,6 +8,6 @@ order: 285
 
 ## Diagramme de cas d'utilisation : Order des missions
 
-![Diagramme de cas d'utilisation order des missions](/gestion-personnels/diagrammes/pkg_OrderDesMissions/cas_dutilisation_pkg_OrderDesMissions.svg){:width="500px"}_figure: Diagramme de cas d'utilisation order des missions_
+![Diagramme de cas d'utilisation order des missions](/gestion-personnels/diagrammes/pkg_OrderDesMissions/cas_dutilisation_pkg_OrderDesMissions.svg){:width="850px"}_figure: Diagramme de cas d'utilisation order des missions_
 
 <!-- new slide -->
