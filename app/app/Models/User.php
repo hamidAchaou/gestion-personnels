@@ -92,7 +92,7 @@ class User extends Authenticatable
 
     public function missions()
     {
-        return $this->belongsToMany(Mission::class, 'mission_personnel', 'user_id', 'mission_id')->withTimestamps();
+        return $this->belongsToMany(Mission::class, 'mission_personnels', 'user_id', 'mission_id')->withTimestamps();
     }
 
 }

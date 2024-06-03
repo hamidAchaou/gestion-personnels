@@ -29,7 +29,7 @@ class Mission extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'mission_personnel', 'mission_id', 'user_id');
+        return $this->belongsToMany(User::class, 'mission_personnels', 'mission_id', 'user_id');
     }
 
     public function moyensTransport()

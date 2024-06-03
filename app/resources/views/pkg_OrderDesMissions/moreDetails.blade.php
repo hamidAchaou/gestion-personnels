@@ -40,7 +40,7 @@
                                                     <td>{{ $user->nom }}</td>
                                                     <td>{{ $user->avancement->echell }}</td>
                                                     <td class="text-center">
-                                                        <a href="{{ route('missions.show', $mission) }}"
+                                                        <a href="{{ route('missions.show', $user->id) }}"
                                                             class='btn btn-default btn-sm'>
                                                             <i class="far fa-eye"></i>
                                                         </a>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Pkg_OrderDesMissions;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_OrderDesMissions\Transports;
+use App\Models\pkg_OrderDesMissions\MissionPersonnel;
 use App\Repositories\Pkg_OrderDesMissions\MissionsRepositories;
 
 class MissionsController extends Controller
@@ -31,9 +33,14 @@ class MissionsController extends Controller
     }
 
 
-    public function show(Mission $mission)
+    public function show(User $mission)
     {
-        return view('pkg_OrderDesMissions.show', compact('mission'));
+        // Eager load the related data
+        $missions = $mission->missions()->paginate(5);
+
+        // $missions = MissionPersonnel::where('user_id', $mission->id)->paginate(5);
+        // dd($missions);
+        return view('pkg_OrderDesMissions.show', compact('mission', 'missions'));
     }
 
 

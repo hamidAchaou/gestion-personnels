@@ -7,6 +7,11 @@
                 <div class="col-sm-6">
                     <h1>Historique des missions</h1>
                 </div>
+                <div class="col-sm-6">
+                    <a href="{{ route('missions.index') }}" class="btn btn-default float-right"><i
+                            class="fas fa-arrow-left"></i>
+                        Retoure</a>
+                </div>
             </div>
         </div>
     </div>
@@ -17,20 +22,20 @@
                     <div class="card card-purple card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="../assets/images/user.png"
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/man.png') }}"
                                     alt="User profile picture">
                             </div>
-                            <h3 class="profile-username text-center">Mohamed Ali</h3>
-                            <p class="text-muted text-center">143322</p>
+                            <h3 class="profile-username text-center">{{ $mission->nom }}</h3>
+                            <p class="text-muted text-center">{{ $mission->matricule }}</p>
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Fonction</b> <a class="float-right text-purple">Developper</a>
+                                    <b>Fonction</b> <a class="float-right text-purple">{{ $mission->specialite->nom }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Phone</b> <a class="float-right text-purple">+212798763543</a>
+                                    <b>Phone</b> <a class="float-right text-purple">{{ $mission->telephone }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Type</b> <a class="float-right text-purple">Directeur</a>
+                                    <b>Type</b> <a class="float-right text-purple">{{ $mission->fonction->nom }}</a>
                                 </li>
                             </ul>
                             <a href="/view/personnels/more-info.php" class="btn bg-purple btn-block"
