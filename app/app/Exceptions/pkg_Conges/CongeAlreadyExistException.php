@@ -8,6 +8,6 @@ class CongeAlreadyExistException extends Exception
 {
     public static function existConge()
     {
-        return new self(__('Conges already exist'));
+        return new self(__('Les congés existent déjà'));
     }
 }

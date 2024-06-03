@@ -48,13 +48,13 @@ class CongesRepository extends BaseRepository
 
     public function create(array $data)
     {
-        $user_id = $data['user_id'];
+        $personnel_id = $data['personnel_id'];
         $date_debut = $data['date_debut'];
         $date_fin = $data['date_fin'];
 
         // Check if the user already has the conge associated with them
-        $existingConge = Conge::whereHas('personnels', function ($query) use ($user_id, $date_debut, $date_fin) {
-            $query->where('user_id', $user_id)
+        $existingConge = Conge::whereHas('personnels', function ($query) use ($personnel_id, $date_debut, $date_fin) {
+            $query->where('personnel_id', $personnel_id)
                 ->where('date_debut', '<=', $date_fin)
                 ->where('date_fin', '>=', $date_debut);
         })->exists();
@@ -63,14 +63,14 @@ class CongesRepository extends BaseRepository
             throw new CongeAlreadyExistException();
         } else {
             $conge = parent::create($data);
-            $conge->personnels()->attach($data['user_id']);
+            $conge->personnels()->attach($data['personnel_id']);
             return $conge;
         }
     }
 
     public function update($id, array $data)
     {
-        $user_id = $data['user_id'];
+        // $personnel_id = $data['personnel_id'];
 
         // Find the Conge instance by ID
         $conge = $this->model->find($id);
@@ -81,9 +81,9 @@ class CongesRepository extends BaseRepository
 
         $conge->update($data);
 
-        // if ($user_id != $conge->personnels()->first()->pivot->user_id) {
+        // if ($personnel_id != $conge->personnels()->first()->pivot->personnel_id) {
         //     $conge->personnels()->detach(); // Detach current user
-        //     $conge->personnels()->attach($data['user_id']); // Attach new user
+        //     $conge->personnels()->attach($data['personnel_id']); // Attach new user
         // }
 
         return $conge;
