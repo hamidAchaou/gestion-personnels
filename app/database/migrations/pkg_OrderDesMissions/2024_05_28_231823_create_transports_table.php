@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('marque')->nullable();
             $table->string('puissance_fiscal')->nullable();
             $table->string('numiro_plaque')->nullable();
+            $table->integer('user');
             $table->unsignedBigInteger('moyens_transports_id');
             $table->foreign('moyens_transports_id')->references('id')->on('moyens_transports')->onDelete('cascade');
             $table->unsignedBigInteger('mission_id');

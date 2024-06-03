@@ -14,6 +14,7 @@ class Transports extends Model
         'marque',
         'puissance_fiscal',
         'numiro_plaque',
+        'user',
         'moyens_transports_id',
         'mission_id',
     ];

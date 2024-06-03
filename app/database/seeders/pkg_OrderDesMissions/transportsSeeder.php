@@ -31,8 +31,9 @@ class TransportsSeeder extends Seeder
                     "marque" => $data[1],
                     "numiro_plaque" => $data[2],
                     "puissance_fiscal" => $data[3],
-                    "moyens_transports_id" => $data[4],
-                    "mission_id" => $data[5],
+                    "user" => $data[4],
+                    "moyens_transports_id" => $data[5],
+                    "mission_id" => $data[6],
                 ]);
             }
             $firstline = false;

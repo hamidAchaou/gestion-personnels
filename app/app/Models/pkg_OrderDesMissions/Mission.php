@@ -2,6 +2,7 @@
 
 namespace App\Models\pkg_OrderDesMissions;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,11 +29,20 @@ class Mission extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'mission_personnel', 'user_id', 'mission_id');
+        return $this->belongsToMany(User::class, 'mission_personnel', 'mission_id', 'user_id');
     }
 
     public function moyensTransport()
     {
         return $this->belongsToMany(MoyensTransport::class, 'transports', 'mission_id', 'moyens_transports_id')->withTimestamps();
+    }
+
+    // Accessor to calculate the duration of the mission
+    public function getDurationAttribute()
+    {
+        $dateDebut = Carbon::parse($this->date_debut);
+        $dateReturn = Carbon::parse($this->date_return);
+
+        return $dateDebut->diffForHumans($dateReturn, true); // Get a human-readable difference
     }
 }
