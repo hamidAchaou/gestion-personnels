@@ -2,8 +2,7 @@
 
 namespace Database\Seeders\pkg_Conges;
 
-use App\Models\GestionPersonnels\Personnel;
-use App\Models\User;
+use App\Models\pkg_PriseDeServices\Personnel;
 use Illuminate\Database\Seeder;
 
 class PersonnelsCongesSeeder extends Seeder
@@ -13,7 +12,7 @@ class PersonnelsCongesSeeder extends Seeder
      */
     public function run()
     {        
-        User::find(1)->conges()->attach(1);
-        User::find(2)->conges()->attach(2);
+        Personnel::find(1)->conges()->attach(1);
+        Personnel::find(2)->conges()->attach(2);
     }
 }

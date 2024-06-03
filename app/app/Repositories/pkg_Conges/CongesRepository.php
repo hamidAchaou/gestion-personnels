@@ -81,10 +81,10 @@ class CongesRepository extends BaseRepository
 
         $conge->update($data);
 
-        if ($user_id != $conge->personnels()->first()->pivot->user_id) {
-            $conge->personnels()->detach(); // Detach current user
-            $conge->personnels()->attach($data['user_id']); // Attach new user
-        }
+        // if ($user_id != $conge->personnels()->first()->pivot->user_id) {
+        //     $conge->personnels()->detach(); // Detach current user
+        //     $conge->personnels()->attach($data['user_id']); // Attach new user
+        // }
 
         return $conge;
     }
