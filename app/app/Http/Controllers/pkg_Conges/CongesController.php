@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers\GestionConges;
 
-use App\Exceptions\GestionConges\CongeAlreadyExistException;
-use App\Exports\GestionConges\CongeExport;
+use App\Exceptions\pkg_Conges\CongeAlreadyExistException;
+use App\Exports\pkg_Conges\CongeExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateCongeRequest;
-use App\Http\Requests\GestionConges\UpdateCongeRequest;
-use App\Models\GestionParametre\Motif;
-use App\Models\GestionPersonnels\Personnel;
-use App\Repositories\GestionConges\CongesRepository;
-use App\Repositories\GestionPersonnels\PersonnelRepository;
-use App\Repositories\pkg_Conges\CongesRepository as Pkg_CongesCongesRepository;
+use App\Http\Requests\GestionConges\CreateCongeRequest;
+use App\Models\pkg_Parametres\Motif;
+use App\Repositories\pkg_Conges\CongesRepository;
+use App\Repositories\pkg_PriseDeServices\Personnel\PersonnelRepository;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,7 +17,7 @@ class CongesController extends Controller
     protected $congesRepository;
     protected $personnels;
 
-    public function __construct(Pkg_CongesCongesRepository $congesRepository, PersonnelRepository $personnelRepository)
+    public function __construct(CongesRepository $congesRepository, PersonnelRepository $personnelRepository)
     {
         $this->congesRepository = $congesRepository;
         $this->personnels = $personnelRepository;
@@ -81,7 +78,7 @@ class CongesController extends Controller
     public function edit(string $id)
     {
         $conge = $this->congesRepository->find($id);
-        $personnels = Personnel::all();
+        $personnels = $this->personnels->all();
         $motifs = Motif::all();
         return view('GestionConges.conges.edit', compact('conge', 'personnels', 'motifs'));
     }
