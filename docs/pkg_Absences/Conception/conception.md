@@ -5,10 +5,6 @@ package: pkg_Absences
 order: 540
 ---
 
-# Conception
-{:class="sectionHeader"}
-
-<!-- new slide -->
 
 ## Diagramme de classes
 
