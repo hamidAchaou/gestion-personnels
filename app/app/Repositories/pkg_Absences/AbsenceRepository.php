@@ -77,4 +77,11 @@ class AbsenceRepository extends BaseRepository
             throw new \RuntimeException('Error filtering by date range: ' . $e->getMessage(), 0, $e);
         }
     }
+
+
+    public function create(array $data)
+    {
+        return parent::create($data);
+    }
+
 }
