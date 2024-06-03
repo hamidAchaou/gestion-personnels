@@ -10,6 +10,8 @@ order: 328
 # Branche technique 
 {:class="sectionHeader"}
 
+<!-- new slide -->
+
 ## Analyse technique
 
 ![Analyse technique](./images/analyse-technique.png){:width="900px"}
