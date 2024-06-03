@@ -3,7 +3,7 @@
 namespace Database\Factories\pkg_Absences;
 
 use App\Models\User;
-use App\Models\Absence;
+use App\Models\pkg_Absences\Absence;
 use App\Models\pkg_Parametres\Motif;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
