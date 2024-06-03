@@ -3,6 +3,9 @@
 namespace App\Repositories\pkg_Absences;
 
 use App\Models\pkg_Absences\Absence;
+use App\Models\pkg_Absences\AnneeJuridique;
+use App\Models\pkg_Absences\JourFerie;
+use App\Models\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -81,7 +84,46 @@ class AbsenceRepository extends BaseRepository
 
     public function create(array $data)
     {
+
+
+        $AbsenceUserId = $this->allQuery(['user_id' => $data["user_id"]])->get();
+        $personnel = User::where('id', $data["user_id"])->pluck('id')->first();
+
+        // Check if the personnel ID exists
+        if (!$personnel) {
+            throw new \Exception("No personnel found.");
+        }
+        dd($personnel);
+
+
+        $anneeJuridique = $this->convertToAnneeJuridique($data["date_debut"]);
+        $anneeJuridiqueId = AnneeJuridique::where("annee", $anneeJuridique)->pluck('id')->first();
+        // Check if the AnneeJuridique ID exists
+        if (!$anneeJuridiqueId) {
+            throw new \Exception("No matching AnneeJuridique found.");
+        }
+        $jour_feries = JourFerie::where("annee_juridique_id", $anneeJuridiqueId)->get();
+        dd($jour_feries);
+
+
         return parent::create($data);
+    }
+
+    private function convertToAnneeJuridique($date)
+    {
+        $carbonDate = Carbon::parse($date);
+        $year = $carbonDate->year;
+        $month = $carbonDate->month;
+
+        if ($month > 6) {
+            // If the month is after June, the legal year is current year to next year
+            $anneeJuridique = $year . '-' . ($year + 1);
+        } else {
+            // If the month is before or in June, the legal year is previous year to current year
+            $anneeJuridique = ($year - 1) . '-' . $year;
+        }
+
+        return $anneeJuridique;
     }
 
 }
