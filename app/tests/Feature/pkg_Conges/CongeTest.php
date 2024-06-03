@@ -101,11 +101,16 @@ class CongeTest extends TestCase
             'motif_id' => $this->motif->id,
         ];
 
-        $user_id = $this->personnel->id;
+        $personnel_id = $this->personnel->id;
 
-        $this->congeRepository->update($conge->id, $updateData);
-        $conge->personnels()->detach(); // Detach current user
-        $conge->personnels()->attach($data['user_id']);
+        $congeUpdate = $this->congeRepository->update($conge->id, $updateData);
+
+        if ($personnel_id != $congeUpdate->personnels()->first()->pivot->user_id) {
+            $conge->personnels()->detach(); // Detach current user
+            $conge->personnels()->attach($personnel_id); // Attac
+        }
+
+
         $this->assertDatabaseHas('conges', $updateData);
     }
 

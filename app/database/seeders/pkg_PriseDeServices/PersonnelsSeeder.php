@@ -14,9 +14,7 @@ class PersonnelsSeeder extends Seeder
      */
     public function run(): void
     {
-
         Schema::disableForeignKeyConstraints();
-        Schema::enableForeignKeyConstraints();
 
         $csvFile = fopen(base_path("database/data/pkg_PriseDeServices/personnels/Personnels.csv"), "r");
         $firstline = true;
@@ -51,6 +49,6 @@ class PersonnelsSeeder extends Seeder
 
         fclose($csvFile);
 
+        Schema::enableForeignKeyConstraints();
     }
 }
-

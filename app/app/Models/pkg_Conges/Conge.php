@@ -20,7 +20,7 @@ class Conge extends Model
 
     public function personnels()
     {
-        return $this->belongsToMany(User::class, 'personnels_conges', 'conges_id', 'user_id');
+        return $this->belongsToMany(User::class, 'personnels_conges', 'conges_id', 'personnel_id');
     }
 
     public function motif()
