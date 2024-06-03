@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\pkg_Conges;
 
+use App\Exceptions\pkg_conges\CongeAlreadyExistException;
 use Tests\TestCase;
 use App\Models\pkg_Conges\Conge;
 use App\Models\pkg_Parametres\Motif;
 use App\Models\pkg_PriseDeServices\Personnel;
 use App\Repositories\pkg_Conges\CongesRepository;
+use Exception;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CongeTest extends TestCase
@@ -27,22 +29,16 @@ class CongeTest extends TestCase
 
     public function test_paginate_conges()
     {
-        $congeData = [
-            'date_debut' => '2024-05-14',
-            'date_fin' => "2024-05-15",
-            'motif_id' => $this->motif->id,
-        ];
+        $conges = Conge::factory()->count(15)->create();
+        foreach ($conges as $conge) {
+            $conge->personnels()->attach($this->personnel->id);
+        }
 
-        $conge = Conge::create($congeData)->users()->attach($this->personnel->id);
-        $conges = $this->congeRepository->paginate();
-        $this->assertDatabaseHas('conges', $congeData);
+        $paginatedConges = $this->congeRepository->paginate();
 
-        // $this->assertDatabaseHas('personnels_conges', [
-        //     'conges_id' => $conge->id,
-        //     'user_id' => $this->user->id,
-        // ]);
+        $this->assertInstanceOf(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class, $paginatedConges);
+        $this->assertCount(10, $paginatedConges->items());
     }
-
 
     public function test_create_conge()
     {
@@ -52,37 +48,41 @@ class CongeTest extends TestCase
             'motif_id' => $this->motif->id,
         ];
 
-        $conge = Conge::create($congeData)->users()->attach($this->user->id);
+        $conge = Conge::create($congeData)->personnels()->attach($this->personnel->id);
         $this->assertDatabaseHas('conges', $congeData);
     }
+
 
     public function test_prevent_create_conge_already_exists()
     {
         $congeData = [
             'date_debut' => '2024-05-14',
             'date_fin' => "2024-05-15",
-            'motif_id' => $this->motif->id, // Corrected to use motif_id instead of the entire $this->motif object
+            'motif_id' => $this->motif->id,
         ];
-    
-        $existingConge = Conge::create($congeData)->users()->attach($this->user->id);
+
+        $existingConge = Conge::create($congeData);
+        $existingConge->personnels()->attach($this->personnel->id);
+
         $congeData = [
-            'user_id' => $this->user->id,
+            'user_id' => $this->personnel->id,
             'date_debut' => $congeData['date_debut'],
-            'date_fin' => $congeData['date_fin'], 
-            'motif_id' => $this->motif->id, // Corrected to use motif_id instead of the entire $this->motif object
+            'date_fin' => $congeData['date_fin'],
+            'motif_id' => $this->motif->id,
         ];
-    
+
         try {
             $this->congeRepository->create($congeData); // Attempt to create a conge with duplicated date_debut and date_fin
-            $this->fail('Expected Exceptions was not thrown');
+            $this->fail('Expected exception was not thrown');
         } catch (CongeAlreadyExistException $e) {
-            $this->assertEquals(__('Autorisation/conges/message.createcongeException'), $e->getMessage());
-            // $this->fail('Unexpected exception was thrown: ' . $e->getMessage());
+            $expectedMessage = __('GestionConges/Conges/message.existCongeException');
+            $this->assertEquals($expectedMessage, $e->getMessage());
         } catch (Exception $e) {
             $this->fail('Unexpected exception was thrown: ' . $e->getMessage());
         }
     }
-    
+
+
 
     public function test_update_conge()
     {
@@ -92,13 +92,20 @@ class CongeTest extends TestCase
             'motif_id' => $this->motif->id,
         ];
 
-        $conge = Conge::create($congeData)->users()->attach($this->user->id);
+        $conge = Conge::create($congeData);
+        $conge->personnels()->attach($this->personnel->id);
+
         $updateData = [
             'date_debut' => '2024-05-16',
             'date_fin' => '2024-05-17',
             'motif_id' => $this->motif->id,
         ];
+
+        $user_id = $this->personnel->id;
+
         $this->congeRepository->update($conge->id, $updateData);
+        $conge->personnels()->detach(); // Detach current user
+        $conge->personnels()->attach($data['user_id']);
         $this->assertDatabaseHas('conges', $updateData);
     }
 
@@ -117,7 +124,7 @@ class CongeTest extends TestCase
             'motif_id' => $this->motif->id,
         ];
 
-        $conge = Conge::create($congeData)->users()->attach($this->user->id);
+        $conge = Conge::create($congeData)->personnels()->attach($this->personnel->id);
         $searchValue = '2024-05-14';
         $searchResults = $this->congeRepository->searchData($searchValue);
         $this->assertTrue($searchResults->contains('date_debut', $searchValue));
