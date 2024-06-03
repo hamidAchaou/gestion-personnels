@@ -3,10 +3,10 @@
 namespace Tests\Feature\pkg_Conges;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Repositories\CongesRepository;
 use App\Models\pkg_Conges\Conge;
-use App\Models\User;
+use App\Models\pkg_Parametres\Motif;
+use App\Models\pkg_PriseDeServices\Personnel;
+use App\Repositories\pkg_Conges\CongesRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CongeTest extends TestCase
@@ -14,14 +14,14 @@ class CongeTest extends TestCase
     use DatabaseTransactions;
 
     protected $congeRepository;
-    protected $user;
+    protected $personnel;
     protected $motif;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->congeRepository = new CongesRepository(new Conge());
-        $this->user = User::factory()->create();
+        $this->personnel = Personnel::factory()->create();
         $this->motif = Motif::factory()->create();
     }
 
@@ -33,7 +33,7 @@ class CongeTest extends TestCase
             'motif_id' => $this->motif->id,
         ];
 
-        $conge = Conge::create($congeData)->users()->attach($this->user->id);
+        $conge = Conge::create($congeData)->users()->attach($this->personnel->id);
         $conges = $this->congeRepository->paginate();
         $this->assertDatabaseHas('conges', $congeData);
 

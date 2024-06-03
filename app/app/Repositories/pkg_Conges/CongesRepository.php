@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\pkg_Conges;
 
 use App\Models\Conges;
 use App\Models\pkg_Conges\Conge;
+use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class CongesRepository extends BaseRepository

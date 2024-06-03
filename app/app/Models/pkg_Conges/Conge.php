@@ -18,7 +18,7 @@ class Conge extends Model
         'motif_id',
     ];
 
-    public function users()
+    public function personnels()
     {
         return $this->belongsToMany(User::class, 'personnels_conges', 'conges_id', 'user_id');
     }
