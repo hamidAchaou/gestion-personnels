@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GestionConges\CongesController;
+use App\Http\Controllers\pkg_Conges\CongesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
