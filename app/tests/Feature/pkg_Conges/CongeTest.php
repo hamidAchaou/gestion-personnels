@@ -65,17 +65,17 @@ class CongeTest extends TestCase
         $existingConge->personnels()->attach($this->personnel->id);
 
         $congeData = [
-            'user_id' => $this->personnel->id,
+            'personnel_id' => $this->personnel->id,
             'date_debut' => $congeData['date_debut'],
             'date_fin' => $congeData['date_fin'],
             'motif_id' => $this->motif->id,
         ];
 
         try {
-            $this->congeRepository->create($congeData); // Attempt to create a conge with duplicated date_debut and date_fin
+            $this->congeRepository->create($congeData);
             $this->fail('Expected exception was not thrown');
         } catch (CongeAlreadyExistException $e) {
-            $expectedMessage = __('GestionConges/Conges/message.existCongeException');
+            $expectedMessage = __('Les congés existent déjà');
             $this->assertEquals($expectedMessage, $e->getMessage());
         } catch (Exception $e) {
             $this->fail('Unexpected exception was thrown: ' . $e->getMessage());
@@ -105,9 +105,9 @@ class CongeTest extends TestCase
 
         $congeUpdate = $this->congeRepository->update($conge->id, $updateData);
 
-        if ($personnel_id != $congeUpdate->personnels()->first()->pivot->user_id) {
-            $conge->personnels()->detach(); // Detach current user
-            $conge->personnels()->attach($personnel_id); // Attac
+        if ($personnel_id != $congeUpdate->personnels()->first()->pivot->personnel_id) {
+            $conge->personnels()->detach();
+            $conge->personnels()->attach($personnel_id);
         }
 
 
