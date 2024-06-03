@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Personnel extends User
 {
     use HasFactory;
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
