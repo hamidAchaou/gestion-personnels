@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\GestionConges;
+namespace App\Http\Controllers\pkg_Conges;
 
 use App\Exceptions\pkg_Conges\CongeAlreadyExistException;
 use App\Exports\pkg_Conges\CongeExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GestionConges\CreateCongeRequest;
+use App\Http\Requests\pkg_Conges\CreateCongeRequest;
+use App\Http\Requests\pkg_Conges\UpdateCongeRequest;
 use App\Models\pkg_Parametres\Motif;
 use App\Repositories\pkg_Conges\CongesRepository;
 use App\Repositories\pkg_PriseDeServices\Personnel\PersonnelRepository;
@@ -33,26 +34,30 @@ class CongesController extends Controller
             if ($searchValue !== '' || ($startDate && $endDate)) {
                 $searchQuery = $searchValue !== '' ? str_replace(' ', '%', $searchValue) : null;
                 $conges = $this->congesRepository->filterByDate($startDate, $endDate, $searchQuery);
-                return view('GestionConges.conges.index', compact('conges'))->render();
+                return view('pkg_Conges.conges.index', compact('conges'))->render();
             }
         }
 
         $conges = $this->congesRepository->paginate();
-        return view('GestionConges.conges.index', compact('conges'));
+        // foreach($conges as $conge) {
+        //    dd($conge->personnels);
+        // }
+        return view('pkg_Conges.conges.index', compact('conges'));
     }
 
     public function decision($id)
     {
         $personnel = $this->personnels->find($id);
         $currentDate = now()->format('d/m/Y');
-        return view('GestionConges.conges.decision', compact('personnel', 'currentDate'));
+        return view('pkg_Conges.conges.decision', compact('personnel', 'currentDate'));
     }
+    
 
     public function create()
     {
         $personnels = $this->personnels->paginate()->all();
         $motifs = Motif::all();
-        return view('GestionConges.conges.create', compact('personnels', 'motifs'));
+        return view('pkg_Conges.conges.create', compact('personnels', 'motifs'));
     }
 
     public function store(CreateCongeRequest $createCongeRequest)
@@ -62,9 +67,9 @@ class CongesController extends Controller
             $conge = $this->congesRepository->create($validatedData);
             return to_route('conges.index')->with('success', 'Congés ajouté avec succès');
         } catch (CongeAlreadyExistException $e) {
-            return back()->withInput()->withErrors(['conge_exists' => __('GestionConges/Conges/message.existCongeException')]);
+            return back()->withInput()->withErrors(['conge_exists' => __('pkg_Conges/Conges/message.existCongeException')]);
         } catch (\Exception $e) {
-            return back()->withInput()->withErrors(['unexpected_error' => __('GestionConges/Conges/message.unexpectedError')]);
+            return back()->withInput()->withErrors(['unexpected_error' => __('pkg_Conges/Conges/message.unexpectedError')]);
         }
     }
 
@@ -72,7 +77,7 @@ class CongesController extends Controller
     {
         $personnel = $this->personnels->find($id);
         $conges = $personnel->conges()->paginate(4);
-        return view('GestionConges.conges.show', compact('personnel', 'conges'));
+        return view('pkg_Conges.conges.show', compact('personnel', 'conges'));
     }
 
     public function edit(string $id)
@@ -80,7 +85,7 @@ class CongesController extends Controller
         $conge = $this->congesRepository->find($id);
         $personnels = $this->personnels->all();
         $motifs = Motif::all();
-        return view('GestionConges.conges.edit', compact('conge', 'personnels', 'motifs'));
+        return view('pkg_Conges.conges.edit', compact('conge', 'personnels', 'motifs'));
     }
 
     public function update(UpdateCongeRequest $updateCongeRequest, string $id)

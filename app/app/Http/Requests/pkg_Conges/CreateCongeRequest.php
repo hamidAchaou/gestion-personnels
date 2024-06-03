@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\GestionConges;
+namespace App\Http\Requests\pkg_Conges;
 
 use Illuminate\Foundation\Http\FormRequest;
 
