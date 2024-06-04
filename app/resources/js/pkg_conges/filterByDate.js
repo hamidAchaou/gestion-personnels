@@ -75,6 +75,17 @@ $(document).ready(function () {
                 console.log('Error: ' + xhr.status + ' ' + xhr.statusText);
             }
         });
+        if (page !== null && startDate !== null && endDate !== null) {
+            updateURLParameter("page", page);
+            updateURLParameter("startDate", startDate);
+            updateURLParameter("endDate", endDate);
+        } else {
+            window.history.replaceState(
+                {},
+                document.title,
+                window.location.pathname
+            );
+        }
     }
     
     console.log(557);
