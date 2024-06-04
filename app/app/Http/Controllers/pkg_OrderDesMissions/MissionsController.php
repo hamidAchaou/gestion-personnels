@@ -16,22 +16,23 @@ use App\Repositories\Pkg_OrderDesMissions\MissionsRepositories;
 
 class MissionsController extends Controller
 {
-    // protected $MissionsRepository;
-    // protected $CategorieMissions;
-    // protected $Competence;
-    // public function __construct(MissionsRepositories $MissionsRepository, CategorieMissions $categorieMissions, Competence $competence)
-    // {
-
-    //     $this->MissionsRepository = $MissionsRepository;
-    //     $this->CategorieMissions = $categorieMissions;
-    //     $this->Competence = $competence;
-    // }
+    protected $MissionsRepository;
+    protected $MoyensTransport;
+    protected $Transports;
+    protected $Users;
+    public function __construct(MissionsRepositories $missionsRepository, MoyensTransport $moyensTransport, Transports $transports, User $user)
+    {
+        $this->MissionsRepository = $missionsRepository;
+        $this->MoyensTransport = $moyensTransport;
+        $this->Transports = $transports;
+        $this->Users = $user;
+    }
 
     public function index(Request $request)
     {
         // Fetch all missions with their related users and moyensTransport
-        $missions = Mission::with('users', 'moyensTransport')->paginate(8);
-        // dd($missions);
+        $missions = $this->MissionsRepository->paginate();
+        // ::with('users', 'moyensTransport')
         return view('pkg_OrderDesMissions.index', compact('missions'));
 
     }
@@ -40,6 +41,7 @@ class MissionsController extends Controller
     public function show(User $mission)
     {
         // Eager load the related data
+        // $missions = $this->MissionsRepository->paginate();
         $missions = $mission->missions()->paginate(5);
         return view('pkg_OrderDesMissions.show', compact('mission', 'missions'));
     }

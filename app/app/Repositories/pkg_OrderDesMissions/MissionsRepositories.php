@@ -40,11 +40,11 @@ class MissionsRepositories extends BaseRepository
      */
     public function create(array $data)
     {
-        $nom = $data['nom'];
+        $numero_mission = $data['numero_mission'];
 
-        $existingProject = $this->model->where('nom', $nom)->exists();
+        $existingMission = $this->model->where('numero_mission', $numero_mission)->exists();
 
-        if ($existingProject) {
+        if ($existingMission) {
             throw MissionAlreadyExistException::createMission();
         } else {
             return parent::create($data);
