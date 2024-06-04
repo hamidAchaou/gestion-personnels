@@ -18,62 +18,35 @@ class CongesController extends Controller
     protected $congesRepository;
     protected $personnels;
 
+    // Constructor to initialize repositories
     public function __construct(CongesRepository $congesRepository, PersonnelRepository $personnelRepository)
     {
         $this->congesRepository = $congesRepository;
         $this->personnels = $personnelRepository;
     }
 
-    // public function index(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         $searchValue = $request->get('searchValue');
-    //         $startDate = $request->get('startDate');
-    //         $endDate = $request->get('endDate');
-
-    //         if ($searchValue !== null) {
-    //             dd($searchValue);
-    //             $searchQuery = str_replace(" ", "%", $searchValue);
-    //             $conges = $this->congesRepository->searchData($searchQuery);
-    //             return view('pkg_Conges.conges.index', compact('conges'))->render();
-    //         } elseif ($startDate !== null && $endDate !== null) {
-    //         // dd($endDate);
-    //             // $searchQuery = $searchValue !== '' ? str_replace(' ', '%', $searchValue) : null;
-    //             $conges = $this->congesRepository->filterByDate($startDate, $endDate);
-    //             dd($conges);
-    //             return view('pkg_Conges.conges.index', compact('conges'))->render();
-    //         }
-    //     }
-
-    //     $conges = $this->congesRepository->paginate();
-    //     // foreach($conges as $conge) {
-    //     //    dd($conge->personnels);
-    //     // }
-    //     return view('pkg_Conges.conges.index', compact('conges'));
-    // }
-
+    // Index method to display the list of congés
     public function index(Request $request)
     {
+        // Handle AJAX requests for searching and filtering
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             $startDate = $request->get('startDate');
             $endDate = $request->get('endDate');
 
-            if ($searchValue !== null) {
-                $searchQuery = str_replace(" ", "%", $searchValue);
-                $conges = $this->congesRepository->searchData($searchQuery);
-                return view('pkg_Conges.conges.index', compact('conges'))->render();
-            } elseif ($startDate !== null && $endDate !== null) {
-                $conges = $this->congesRepository->filterByDate($startDate, $endDate);
-                return view('pkg_Conges.conges.index', compact('conges'))->render();
-            }
+            // Fetch filtered or searched data
+            $conges = $this->congesRepository->searchData($searchValue, $startDate, $endDate);
+
+            // Return the filtered data view
+            return view('pkg_Conges.conges.index', compact('conges'))->render();
         }
 
+        // Fetch paginated data for initial page load
         $conges = $this->congesRepository->paginate();
         return view('pkg_Conges.conges.index', compact('conges'));
     }
 
-
+    // Method to show the decision page for a specific personnel
     public function decision($id)
     {
         $personnel = $this->personnels->find($id);
@@ -81,7 +54,7 @@ class CongesController extends Controller
         return view('pkg_Conges.conges.decision', compact('personnel', 'currentDate'));
     }
 
-
+    // Method to show the create conge form
     public function create()
     {
         $personnels = $this->personnels->paginate()->all();
@@ -89,19 +62,24 @@ class CongesController extends Controller
         return view('pkg_Conges.conges.create', compact('personnels', 'motifs'));
     }
 
+    // Method to store a new conge
     public function store(CreateCongeRequest $createCongeRequest)
     {
         $validatedData = $createCongeRequest->validated();
         try {
+            // Attempt to create a new conge
             $conge = $this->congesRepository->create($validatedData);
             return to_route('conges.index')->with('success', 'Congés ajouté avec succès');
         } catch (CongeAlreadyExistException $e) {
+            // Handle conge already exists exception
             return back()->withInput()->withErrors(['conge_exists' => __('pkg_Conges/Conges/message.existCongeException')]);
         } catch (\Exception $e) {
+            // Handle any unexpected errors
             return back()->withInput()->withErrors(['unexpected_error' => __('pkg_Conges/Conges/message.unexpectedError')]);
         }
     }
 
+    // Method to show a specific conge details
     public function show(string $id)
     {
         $personnel = $this->personnels->find($id);
@@ -109,6 +87,7 @@ class CongesController extends Controller
         return view('pkg_Conges.conges.show', compact('personnel', 'conges'));
     }
 
+    // Method to show the edit conge form
     public function edit(string $id)
     {
         $conge = $this->congesRepository->find($id);
@@ -117,6 +96,7 @@ class CongesController extends Controller
         return view('pkg_Conges.conges.edit', compact('conge', 'personnels', 'motifs'));
     }
 
+    // Method to update an existing conge
     public function update(UpdateCongeRequest $updateCongeRequest, string $id)
     {
         $validatedData = $updateCongeRequest->validated();
@@ -124,6 +104,7 @@ class CongesController extends Controller
         return to_route('conges.show', ['conge' => $id])->with('success', 'Congés mis à jour avec succès');
     }
 
+    // Method to delete a conge
     public function destroy(Request $request, $id)
     {
         $inpUserId = $request->inpUserId;
@@ -131,6 +112,7 @@ class CongesController extends Controller
         return to_route('conges.show', ['conge' => $inpUserId])->with('success', 'Congés supprimé avec succès');
     }
 
+    // Method to export conges data to an Excel file
     public function export(Request $request)
     {
         $date_debut = $request->input('date_debut');
