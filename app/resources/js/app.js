@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 error
             );
         });
+        ClassicEditor
+        .create(document.querySelector('#Remarques'))
+        .catch(error => {
+            console.error(error);
+        });
 });
 
 $(document).ready(function () {
