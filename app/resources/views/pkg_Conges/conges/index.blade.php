@@ -61,6 +61,7 @@
 
                                 <div class=" p-0">
                                     <div class="input-group input-group-sm">
+                                        <input type="hidden" name="page" id="page" value="1">
                                         <input type="text" name="table_search" id="table_search" class="form-control"
                                             placeholder="Recherche">
                                         <div class="input-group-append">
@@ -106,75 +107,40 @@
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    {{-- <script src="../../../js/pkg_conges/filterByDate.js"></script> --}}
 
     <script>
         // search
-        $(document).ready(function() {
-            function fetchData(page, searchValue) {
-                $.ajax({
-                    url: '/conges?page=' + page + '&searchValue=' + searchValue,
-                    success: function(data) {
-                        var newData = $(data);
-    
-                        $('tbody').html(newData.find('tbody').html());
-                        $('#card-footer').html(newData.find('#card-footer').html());
-                        var paginationHtml = newData.find('.pagination').html();
-                        if (paginationHtml) {
-                            $('.pagination').html(paginationHtml);
-                        } else {
-                            $('.pagination').html('');
-                        }
-                    }
-                });
-                console.log(searchValue);
-            }
-    
-            $('body').on('click', '.pagination a', function(param) {
-    
-                param.preventDefault();
-    
-                var page = $(this).attr('href').split('page=')[1];
-                console.log(page);
-                var searchValue = $('#table_search').val();
-    
-                fetchData(page, searchValue);
-    
-            });
-    
-            $('body').on('keyup', '#table_search', function() {
-                var page = 1; // Reset to first page when searching
-                var searchValue = $('#table_search').val();
-    
-                fetchData(page, searchValue);
-            });
-    
-    
+        // $(document).ready(function() {
             // filter
-            function filterByDate(page, startDate, endDate) {
-                $.ajax({
-                    url: '/conges?page=' + page + '&startDate=' + startDate.trim() + '&endDate=' + endDate.trim(),
-                    success: function(data) {
-                        var newData = $(data).find('#conjeTable').html();
-                        $('#conjeTable').html(newData); // Update the content of the table
-                    }
-                });
-            }
+            // function filterByDate(page, startDate, endDate) {
+            //     $.ajax({
+            //         console.log(startDate);
+            //         console.log(endDate);
+            //         url: '/conges?page=' + page + '&startDate=' + startDate.trim() + '&endDate=' + endDate.trim(),
+            //         success: function(data) {
+            //             var newData = $(data).find('#conjeTable').html();
+            //             $('#conjeTable').html(newData); // Update the content of the table
+            //         }
+            //     });
+            // }
     
             // Event listener for filter button
-            $('body').on('click', '#filter_button', function() {
-                var page = 1; // Reset to first page when filtering
-                var startDate = $('#startDate').val();
-                var endDate = $('#endDate').val();
+            // $('body').on('click', '#filter_button', function() {
+            //     var page = 1; 
+            //     var startDate = $('#startDate').val();
+            //     var endDate = $('#endDate').val();
     
-                filterByDate(page, startDate, endDate);
-            });
-        });
+            //     filterByDate(page, startDate, endDate);
+            // });
+        // });
     
-        function submitForm() {
-            document.getElementById("importForm").submit();
-        }
+        // function submitForm() {
+        //     document.getElementById("importForm").submit();
+        // }
     </script>
     
 
 @endsection
+

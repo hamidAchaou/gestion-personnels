@@ -120,8 +120,8 @@ class CongesRepository extends BaseRepository
     {
         return $this->model
             ->where(function ($query) use ($date_debut, $date_fin) {
-                $query->whereBetween('date_debut', [$date_debut, $date_fin])
-                    ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+                $query->whereBetween('date_debut', [$date_debut, $date_fin]);
+                    // ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
             })
             ->get();
     }
