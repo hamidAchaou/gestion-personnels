@@ -5,6 +5,8 @@ namespace App\Http\Controllers\pkg_Absences;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\pkg_Absences\AbsenceRepository;
 use Illuminate\Http\Request;
+use App\Helpers\pkg_Absences\AbsenceHelper;
+
 
 class AbsenceController extends AppBaseController
 {
@@ -25,7 +27,10 @@ class AbsenceController extends AppBaseController
                 return view('pkg_Absences.index', compact('absences'))->render();
             }
         }
+
         $absences = $this->absenceRepository->getAbsencesWithRelations(2);
+
+        // dd(AbsenceHelper::calculateAbsenceDurationForPersonnel($absences[1]));
         return view('pkg_Absences.index', compact('absences'))->render();
     }
 
@@ -45,7 +50,7 @@ class AbsenceController extends AppBaseController
             $validatedData = $request->validated();
             $this->absenceRepository->create($validatedData);
 
-            return redirect()->route('absence.index')->with('success',__('pkg_Absences/absence.singular').' '.__('app.addSucées'));
+            return redirect()->route('absence.index')->with('success', __('pkg_Absences/absence.singular') . ' ' . __('app.addSucées'));
 
         } catch (\Exception $e) {
             // return abort(500);

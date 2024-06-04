@@ -2,6 +2,9 @@
 
 namespace App\Repositories\pkg_Absences;
 
+use DateTime;
+use DatePeriod;
+use DateInterval;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\pkg_Absences\Absence;
@@ -11,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Models\pkg_Absences\AnneeJuridique;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
 /**
  * Classe ProjetRepository qui gère la persistance des projets dans la base de données.
  */
@@ -106,27 +110,13 @@ class AbsenceRepository extends BaseRepository
         return parent::create($data);
     }
 
-    private function convertToAnneeJuridique($date)
-    {
-        $carbonDate = Carbon::parse($date);
-        $year = $carbonDate->year;
-        $month = $carbonDate->month;
-
-        if ($month > 6) {
-            // If the month is after June, the legal year is current year to next year
-            $anneeJuridique = $year . '-' . ($year + 1);
-        } else {
-            // If the month is before or in June, the legal year is previous year to current year
-            $anneeJuridique = $year - 1 . '-' . $year;
-        }
-
-        return $anneeJuridique;
-    }
+    
 
     public function getAbsencesWithRelations($perPage = 4)
     {
         return $this->model->with('personnel')->with('motif')->paginate($perPage);
     }
+
 
     public function searchData($search = null, $perPage = 4): LengthAwarePaginator
     {
