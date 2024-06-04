@@ -58,7 +58,7 @@
                     </div>
                     <div>
                         <ul class="pagination m-0 float-right">
-                            {{ $conges->links() }}
+                            {{-- {{ $conges->links() }} --}}
                         </ul>
                     </div>
                 </div>

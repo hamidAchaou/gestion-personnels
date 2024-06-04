@@ -24,6 +24,34 @@ class CongesController extends Controller
         $this->personnels = $personnelRepository;
     }
 
+    // public function index(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $searchValue = $request->get('searchValue');
+    //         $startDate = $request->get('startDate');
+    //         $endDate = $request->get('endDate');
+
+    //         if ($searchValue !== null) {
+    //             dd($searchValue);
+    //             $searchQuery = str_replace(" ", "%", $searchValue);
+    //             $conges = $this->congesRepository->searchData($searchQuery);
+    //             return view('pkg_Conges.conges.index', compact('conges'))->render();
+    //         } elseif ($startDate !== null && $endDate !== null) {
+    //         // dd($endDate);
+    //             // $searchQuery = $searchValue !== '' ? str_replace(' ', '%', $searchValue) : null;
+    //             $conges = $this->congesRepository->filterByDate($startDate, $endDate);
+    //             dd($conges);
+    //             return view('pkg_Conges.conges.index', compact('conges'))->render();
+    //         }
+    //     }
+
+    //     $conges = $this->congesRepository->paginate();
+    //     // foreach($conges as $conge) {
+    //     //    dd($conge->personnels);
+    //     // }
+    //     return view('pkg_Conges.conges.index', compact('conges'));
+    // }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -31,19 +59,20 @@ class CongesController extends Controller
             $startDate = $request->get('startDate');
             $endDate = $request->get('endDate');
 
-            if ($searchValue !== '' || ($startDate && $endDate)) {
-                $searchQuery = $searchValue !== '' ? str_replace(' ', '%', $searchValue) : null;
-                $conges = $this->congesRepository->filterByDate($startDate, $endDate, $searchQuery);
+            if ($searchValue !== null) {
+                $searchQuery = str_replace(" ", "%", $searchValue);
+                $conges = $this->congesRepository->searchData($searchQuery);
+                return view('pkg_Conges.conges.index', compact('conges'))->render();
+            } elseif ($startDate !== null && $endDate !== null) {
+                $conges = $this->congesRepository->filterByDate($startDate, $endDate);
                 return view('pkg_Conges.conges.index', compact('conges'))->render();
             }
         }
 
         $conges = $this->congesRepository->paginate();
-        // foreach($conges as $conge) {
-        //    dd($conge->personnels);
-        // }
         return view('pkg_Conges.conges.index', compact('conges'));
     }
+
 
     public function decision($id)
     {
@@ -51,7 +80,7 @@ class CongesController extends Controller
         $currentDate = now()->format('d/m/Y');
         return view('pkg_Conges.conges.decision', compact('personnel', 'currentDate'));
     }
-    
+
 
     public function create()
     {
