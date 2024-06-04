@@ -87,7 +87,7 @@ class PersonnelTest extends TestCase
             $personnel = $this->personnelRepository->create($personnelData);
             $this->fail('Expected personnelException was not thrown');
         } catch (PersonnelAlreadyExistException $e) {
-            $this->assertEquals(__('GestionPriseDeService/Personnel/message.createpersonnelException'), $e->getMessage());
+            $this->assertEquals(__('Le personnel existe déjà'), $e->getMessage());
         } catch (\Exception $e) {
             $this->fail('Unexpected exception was thrown: ' . $e->getMessage());
         }
