@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -24,11 +25,12 @@ class UserSeeder extends Seeder
 
         while (($data = fgetcsv($csvFile)) !== FALSE) {
             if (!$firstline) {
+                $password = Hash::make($data[3]);
                 User::create([
                     'prenom' => $data[0],
                     'nom' => $data[1],
                     'email' => $data[2],
-                    'password' => Hash::make($data[3]),
+                    'password' => $password,
                     'nom_arab' => $data[4],
                     'prenom_arab' => $data[5],
                     'cin' => $data[6],
@@ -53,29 +55,15 @@ class UserSeeder extends Seeder
 
         fclose($csvFile);
 
-        // User::create([
-        // User::create([
-        //     'name' => 'admin',
-        //     'nom' => User::ADMIN,
-        //     'email' => 'admin@gmail.com',
-        //     'prenom' => User::ADMIN,
-        //     'password' => Hash::make('admin'),
-        //     'email' => User::ADMIN . '@gmail.com',
-        //     'password' => Hash::make(User::ADMIN),
-        //     'created_at' => Carbon::now(),
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        // ]);
-        // ])->assignRole(User::ADMIN);
+        $adminUser = User::where("email", "admin@solicode.co")->first();
+        if ($adminUser) {
+            $adminUser->assignRole(User::ADMIN);
+        }
 
-        // User::create([
-        //     'nom' => User::RESPOSABLE,
-        //     'prenom' => User::RESPOSABLE,
-        //     'email' => User::RESPOSABLE . '@gmail.com',
-        //     'password' => Hash::make(User::RESPOSABLE),
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now(),
-        // ])->assignRole(User::RESPOSABLE);
+        $responsableUser = User::where("email", "responsable@solicode.co")->first();
+        if ($responsableUser) {
+            $responsableUser->assignRole(User::RESPONSABLE);
+        }
+
     }
 }
