@@ -1,6 +1,8 @@
-<form>
+<form action="{{ isset($absence) ? route('absence.update', $absence->id) : route('absence.store') }}" method="POST">
     @csrf
-
+    @if (isset($absence))
+        @method('PUT')
+    @endif
     <div class="card-body">
 
         <div class="form-group">

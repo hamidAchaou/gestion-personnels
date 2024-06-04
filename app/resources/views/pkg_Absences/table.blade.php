@@ -20,8 +20,8 @@
                     <td class="text-center">{{ $absence->date_debut }}</td>
                     <td class="text-center">{{ $absence->date_fin }}</td>
                     <td class="text-center">
-                        {{ \Carbon\Carbon::parse($absence->date_debut)->diffInDays(\Carbon\Carbon::parse($absence->date_fin)) }}
-                        jours</td>
+                        {{ App\Helpers\pkg_Absences\AbsenceHelper::calculateAbsenceDurationForPersonnel($absence) }}
+                    </td>
                     <td class="text-center">
                         <a href="./show.php" class='btn btn-default btn-sm'>
                             <i class="far fa-eye"></i>
