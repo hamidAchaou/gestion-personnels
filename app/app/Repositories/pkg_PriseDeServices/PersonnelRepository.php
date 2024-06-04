@@ -62,12 +62,20 @@ class PersonnelRepository extends BaseRepository
             return parent::create($data);
         }
     }
-    // public function searchData($searchableData, $perPage = 4)
-    // {
-    //     return $this->model->where(function ($query) use ($searchableData) {
-    //         $query->where('nom', 'like', '%' . $searchableData . '%');
-    //     })->paginate($perPage);
-    // }
+     /**
+     * Recherche les projets correspondants aux critères spécifiés.
+     *
+     * @param mixed $searchableData Données de recherche.
+     * @param int $perPage Nombre d'éléments par page.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function searchData($searchableData, $perPage = 4)
+    {
+        return $this->model->where(function ($query) use ($searchableData) {
+            $query->where('nom', 'like', '%' . $searchableData . '%')
+                ->orWhere('prenom', 'like', '%' . $searchableData . '%');
+        })->paginate($perPage);
+    }
     // public function paginate($perPage = 6)
     // {
     //     $query = $this->model->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
