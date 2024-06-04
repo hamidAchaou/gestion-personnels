@@ -95,4 +95,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Mission::class, 'mission_personnels', 'user_id', 'mission_id')->withTimestamps();
     }
 
+
+
+
+    //
+    public function getFullNameAttribute()
+    {
+        return $this->nom . " " . $this->prenom; // Get a human-readable difference
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pkg_OrderDesMissions;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,9 +38,6 @@ class MissionsController extends Controller
     {
         // Eager load the related data
         $missions = $mission->missions()->paginate(5);
-
-        // $missions = MissionPersonnel::where('user_id', $mission->id)->paginate(5);
-        // dd($missions);
         return view('pkg_OrderDesMissions.show', compact('mission', 'missions'));
     }
 
@@ -48,10 +46,18 @@ class MissionsController extends Controller
     {
         // Eager load the related data
         $mission->load(['users', 'moyensTransport']);
-
+        //
         $transports = Transports::where('mission_id', $mission->id)->get();
         // Now you can access the transports data
         return view('pkg_OrderDesMissions.moreDetails', compact('mission', 'transports'));
+    }
+
+    public function certificate(Mission $mission, User $user)
+    {
+        $presentDate = Carbon::now()->toDateString();
+        $transports = Transports::where('mission_id', $mission->id)->where('user', $user->id)->get();
+        // dd($transports);
+        return view('pkg_OrderDesMissions.attestation', compact('mission', 'user', 'presentDate', 'transports'));
     }
 
 }

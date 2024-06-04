@@ -44,7 +44,8 @@
                         <ol>
                             @foreach ($mission->users as $user)
                                 <li>
-                                    <a class="btn btn-default btn-sm">
+                                    <a href="{{ route('missions.certificate', [$mission->id, $user->id]) }}"
+                                        class="btn btn-default btn-sm">
                                         <i class="fa-regular fa-file"></i>
                                     </a>
                                 </li>

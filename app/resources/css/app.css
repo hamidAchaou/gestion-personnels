@@ -12,6 +12,10 @@
 /* font awesome */
 @import "node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
+/* pkg_OrderDesMissions */
+@import url("./pkg_OrderDesMissions/missions.css");
+
+
 * {
     font-family: "Nunito", sans-serif;
     scroll-behavior: smooth;
@@ -29,4 +33,10 @@
 .page-link {
     color: #000000 !important;
 
+}
+
+/* Logo attestation */
+.logoOfppt {
+    height: 130px;
+    width: auto;
 }

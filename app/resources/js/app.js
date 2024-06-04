@@ -49,6 +49,24 @@ $(document).ready(function () {
 })
 
 // select2
-$(document).ready(function() {
+$(document).ready(function () {
     $('.select2').select2();
+});
+
+// Attestation
+document.getElementById("printButton").addEventListener("click", function () {
+    var printContents = document.getElementById("Attestation").innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    // Temporarily replace the body's HTML with the printable content
+    document.body.innerHTML = printContents;
+
+    // Print the content
+    window.print();
+
+    // Restore the original content
+    document.body.innerHTML = originalContents;
+
+    // Reload the original scripts to restore the original state of the page
+    window.location.reload();
 });
