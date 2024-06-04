@@ -96,24 +96,24 @@ class CongesRepository extends BaseRepository
         return $conge->delete();
     }
 
-    public function searchData($searchableData, $perPage = 0)
-    {
-        if ($perPage == 0) {
-            $perPage = $this->paginationLimit;
-        }
+    // public function searchData($searchableData, $perPage = 0)
+    // {
+    //     if ($perPage == 0) {
+    //         $perPage = $this->paginationLimit;
+    //     }
 
-        return $this->model
-            ->where(function ($query) use ($searchableData) {
-                $query->whereHas('personnels', function ($q) use ($searchableData) {
-                    $q->where('nom', 'like', '%' . $searchableData . '%')
-                        ->orWhere('prenom', 'like', '%' . $searchableData . '%')
-                        ->orWhere('matricule', 'like', '%' . $searchableData . '%');
-                })
-                ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
-                ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
-            })
-            ->paginate($perPage);
-    }
+    //     return $this->model
+    //         ->where(function ($query) use ($searchableData) {
+    //             $query->whereHas('personnels', function ($q) use ($searchableData) {
+    //                 $q->where('nom', 'like', '%' . $searchableData . '%')
+    //                     ->orWhere('prenom', 'like', '%' . $searchableData . '%')
+    //                     ->orWhere('matricule', 'like', '%' . $searchableData . '%');
+    //             })
+    //             ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
+    //             ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
+    //         })
+    //         ->paginate($perPage);
+    // }
 
     // Filter By date 
     public function filterByDate($date_debut, $date_fin)
@@ -124,5 +124,30 @@ class CongesRepository extends BaseRepository
                     // ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
             })
             ->get();
+    }
+
+    public function searchData($searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0)
+    {
+        if ($perPage == 0) {
+            $perPage = $this->paginationLimit;
+        }
+
+        return $this->model
+            ->where(function ($query) use ($searchableData, $date_debut, $date_fin) {
+                if ($searchableData !== null) {
+                    $query->whereHas('personnels', function ($q) use ($searchableData) {
+                        $q->where('nom', 'like', '%' . $searchableData . '%')
+                            ->orWhere('prenom', 'like', '%' . $searchableData . '%')
+                            ->orWhere('matricule', 'like', '%' . $searchableData . '%');
+                    })
+                        ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
+                        ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
+                }
+
+                if ($date_debut !== null && $date_fin !== null) {
+                    $query->whereBetween('date_debut', [$date_debut, $date_fin]);
+                }
+            })
+            ->paginate($perPage);
     }
 }

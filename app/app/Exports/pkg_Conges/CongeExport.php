@@ -31,9 +31,9 @@ class CongeExport implements FromCollection, WithHeadings
     {
         return $this->data->map(function ($conge) {
             return [
-                'Matricule' => $conge->users->first()->matricule, 
-                'Nom' => $conge->users->first()->nom,
-                'Prenom' => $conge->users->first()->prenom,
+                'Matricule' => $conge->personnels->first()->matricule ?? '', 
+                'Nom' => $conge->personnels->first()->nom ?? '',
+                'Prenom' => $conge->personnels->first()->prenom ?? '',
                 'Date_debut' => $conge->date_debut,
                 'Date_fin' => $conge->date_fin,
             ];
