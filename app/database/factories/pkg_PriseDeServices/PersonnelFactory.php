@@ -5,11 +5,11 @@ namespace Database\Factories\pkg_PriseDeServices;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\GestionParametres\Ville;
-use App\Models\GestionParametres\Fonction;
-use App\Models\GestionParametres\Specialite;
-use App\Models\GestionParametres\Etablissement;
-use App\Models\GestionParametres\Avancement;
+use App\Models\pkg_Parametres\Ville;
+use App\Models\pkg_Parametres\Fonction;
+use App\Models\pkg_Parametres\Specialite;
+use App\Models\pkg_Parametres\Etablissement;
+use App\Models\pkg_Parametres\Avancement;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\pkg_PriseDeServices\Personnel>
