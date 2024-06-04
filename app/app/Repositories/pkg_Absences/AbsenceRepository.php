@@ -21,9 +21,7 @@ class AbsenceRepository extends BaseRepository
      *
      * @var array
      */
-    protected $fieldsSearchable = [
-        'name'
-    ];
+    protected $fieldsSearchable = ['name'];
 
     /**
      * Renvoie les champs de recherche disponibles.
@@ -52,9 +50,11 @@ class AbsenceRepository extends BaseRepository
     public function filterByMotif(string $motifNom): Collection
     {
         try {
-            return $this->model->whereHas('motif', function (Builder $query) use ($motifNom) {
-                $query->where('nom', 'LIKE', '%' . $motifNom . '%');
-            })->get();
+            return $this->model
+                ->whereHas('motif', function (Builder $query) use ($motifNom) {
+                    $query->where('nom', 'LIKE', '%' . $motifNom . '%');
+                })
+                ->get();
         } catch (\Exception $e) {
             throw new \RuntimeException('Error filtering by motif: ' . $e->getMessage(), 0, $e);
         }
@@ -74,7 +74,8 @@ class AbsenceRepository extends BaseRepository
             $start = Carbon::parse($startDate);
             $end = Carbon::parse($endDate);
 
-            return $this->model->whereBetween('date_debut', [$start, $end])
+            return $this->model
+                ->whereBetween('date_debut', [$start, $end])
                 ->orWhereBetween('date_fin', [$start, $end])
                 ->get();
         } catch (\Exception $e) {
@@ -82,11 +83,8 @@ class AbsenceRepository extends BaseRepository
         }
     }
 
-
     public function create(array $data)
     {
-
-
         // $AbsenceUserId = $this->allQuery(['user_id' => $data["user_id"]])->get();
         // $personnel = User::where('id', $data["user_id"])->pluck('id')->first();
 
@@ -96,7 +94,6 @@ class AbsenceRepository extends BaseRepository
         // }
         // dd($personnel);
 
-
         // $anneeJuridique = $this->convertToAnneeJuridique($data["date_debut"]);
         // $anneeJuridiqueId = AnneeJuridique::where("annee", $anneeJuridique)->pluck('id')->first();
         // // Check if the AnneeJuridique ID exists
@@ -105,7 +102,6 @@ class AbsenceRepository extends BaseRepository
         // }
         // $jour_feries = JourFerie::where("annee_juridique_id", $anneeJuridiqueId)->get();
         // dd($jour_feries);
-
 
         return parent::create($data);
     }
@@ -121,26 +117,31 @@ class AbsenceRepository extends BaseRepository
             $anneeJuridique = $year . '-' . ($year + 1);
         } else {
             // If the month is before or in June, the legal year is previous year to current year
-            $anneeJuridique = ($year - 1) . '-' . $year;
+            $anneeJuridique = $year - 1 . '-' . $year;
         }
 
         return $anneeJuridique;
     }
 
-
-    // public function searchData($searchableData, $perPage = 4)
-    // {
-    //     return $this->model->where(function ($query) use ($searchableData) {
-    //         $query->where('nom', 'like', '%' . $searchableData . '%')
-    //             ->orWhere('description', 'like', '%' . $searchableData . '%');
-    //     })->paginate($perPage);
-    // }
-
-    public function searchData($searchableData, $perPage = 4): LengthAwarePaginator
+    public function getAbsencesWithRelations($perPage = 4)
     {
-        return $this->model->where(function ($query) use ($searchableData) {
-            $query->where('nom', 'like', '%' . $searchableData . '%')
-                ->orWhere('description', 'like', '%' . $searchableData . '%');
-        })->paginate($perPage);
+        return $this->model->with('personnel')->with('motif')->paginate($perPage);
+    }
+
+    public function searchData($search = null, $perPage = 4): LengthAwarePaginator
+    {
+        $query = $this->model->with('personnel')->with('motif');
+
+        // If search criteria is provided, apply it to the query
+        if ($search !== null) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nom', 'like', "%$search%");
+            });
+        }
+
+        return $query->paginate($perPage);
+        // return $this->model->where(function ($query) use ($searchableData) {
+        //     $query->where('nom', 'like', '%' . $searchableData . '%');
+        // })->paginate($perPage);
     }
 }

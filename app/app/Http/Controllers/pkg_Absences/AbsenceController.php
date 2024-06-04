@@ -19,20 +19,20 @@ class AbsenceController extends AppBaseController
     {
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
-            if ($searchValue !== '') {
+            if ($searchValue !== '' && $searchValue !== 'undefined') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
                 $absences = $this->absenceRepository->searchData($searchQuery);
                 return view('pkg_Absences.index', compact('absences'))->render();
             }
         }
-        $absences = $this->absenceRepository->paginate();
+        $absences = $this->absenceRepository->getAbsencesWithRelations(2);
         return view('pkg_Absences.index', compact('absences'))->render();
     }
 
 
     public function create()
     {
-        //
+        return view('pkg_Absences.create');
     }
 
     /**
@@ -40,7 +40,16 @@ class AbsenceController extends AppBaseController
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        try {
+            $validatedData = $request->validated();
+            $this->absenceRepository->create($validatedData);
+
+            return redirect()->route('absence.index')->with('success',__('pkg_Absences/absence.singular').' '.__('app.addSucées'));
+
+        } catch (\Exception $e) {
+            // return abort(500);
+        }
     }
 
     /**
