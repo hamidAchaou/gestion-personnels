@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserSeeder extends Seeder
@@ -26,11 +27,12 @@ class UserSeeder extends Seeder
 
         while (($data = fgetcsv($csvFile)) !== FALSE) {
             if (!$firstline) {
+                $password = Hash::make($data[3]);
                 User::create([
                     'prenom' => $data[0],
                     'nom' => $data[1],
                     'email' => $data[2],
-                    'password' => $data[3],
+                    'password' => $password,
                     'nom_arab' => $data[4],
                     'prenom_arab' => $data[5],
                     'cin' => $data[6],
