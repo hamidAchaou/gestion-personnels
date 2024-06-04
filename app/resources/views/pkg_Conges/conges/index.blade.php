@@ -106,41 +106,5 @@
             </div>
         </div>
     </section>
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-    {{-- <script src="../../../js/pkg_conges/filterByDate.js"></script> --}}
-
-    <script>
-        // search
-        // $(document).ready(function() {
-            // filter
-            // function filterByDate(page, startDate, endDate) {
-            //     $.ajax({
-            //         console.log(startDate);
-            //         console.log(endDate);
-            //         url: '/conges?page=' + page + '&startDate=' + startDate.trim() + '&endDate=' + endDate.trim(),
-            //         success: function(data) {
-            //             var newData = $(data).find('#conjeTable').html();
-            //             $('#conjeTable').html(newData); // Update the content of the table
-            //         }
-            //     });
-            // }
-    
-            // Event listener for filter button
-            // $('body').on('click', '#filter_button', function() {
-            //     var page = 1; 
-            //     var startDate = $('#startDate').val();
-            //     var endDate = $('#endDate').val();
-    
-            //     filterByDate(page, startDate, endDate);
-            // });
-        // });
-    
-        // function submitForm() {
-        //     document.getElementById("importForm").submit();
-        // }
-    </script>
-    
-
 @endsection
 

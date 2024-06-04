@@ -75,19 +75,19 @@
                             <div class="row justify-content-between">
                                 <!-- Filter Dropdown -->
                                 <div class="col-md-4">
-                                    <form method="GET" action="{{ route('conges.index') }}">
+                                    {{-- <form method="GET" action="{{ route('conges.index') }}"> --}}
                                         <div class="input-group input-group-sm">
+                                            <div class="input-group-append">
+                                                <div class="btn btn-default">
+                                                    <i class="fas fa-filter"></i>
+                                                </div>
+                                            </div>
                                             <select class="form-select form-control" name="year">
                                                 <option value="" selected>Sélectionner une année</option>
                                                 @foreach (range(date('Y'), date('Y') - 5) as $year)
                                                     <option value="{{ $year }}">{{ $year }}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fas fa-filter"></i>
-                                                </button>
-                                            </div>
                                         </div>
                                     </form>
                                 </div>

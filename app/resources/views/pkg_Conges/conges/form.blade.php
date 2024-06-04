@@ -9,17 +9,17 @@
             <!-- Personnel -->
             <div class="form-group">
                 <label for="exampleInputPersonnel">Personnel: <span class="text-danger">*</span></label>
-                <select name="user_id" class="form-control js-example-basic-single" id="exampleInputPersonnel">
+                <select name="personnel_id" class="form-control js-example-basic-single" id="exampleInputPersonnel">
                     @foreach ($personnels as $personnel)
                         @php
-                            $selected = old('user_id', isset($conge) ? $conge->users->contains($personnel->id) : '') == $personnel->id ? 'selected' : '';
+                            $selected = old('personnel_id', isset($conge) ? $conge->personnels->contains($personnel->id) : '') == $personnel->id ? 'selected' : '';
                         @endphp
                         <option value="{{ $personnel->id }}" {{ $selected }}>
                             {{ $personnel->nom }} {{ $personnel->prenom }}
                         </option>
                     @endforeach
                 </select>
-                @error('user_id')
+                @error('personnel_id')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
