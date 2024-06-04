@@ -2,14 +2,15 @@
 
 namespace App\Repositories\pkg_Absences;
 
-use App\Models\pkg_Absences\Absence;
-use App\Models\pkg_Absences\AnneeJuridique;
-use App\Models\pkg_Absences\JourFerie;
-use App\Models\User;
-use App\Repositories\BaseRepository;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\pkg_Absences\Absence;
+use App\Repositories\BaseRepository;
+use App\Models\pkg_Absences\JourFerie;
+use Illuminate\Database\Eloquent\Builder;
+use App\Models\pkg_Absences\AnneeJuridique;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 /**
  * Classe ProjetRepository qui gère la persistance des projets dans la base de données.
  */
@@ -86,24 +87,24 @@ class AbsenceRepository extends BaseRepository
     {
 
 
-        $AbsenceUserId = $this->allQuery(['user_id' => $data["user_id"]])->get();
-        $personnel = User::where('id', $data["user_id"])->pluck('id')->first();
+        // $AbsenceUserId = $this->allQuery(['user_id' => $data["user_id"]])->get();
+        // $personnel = User::where('id', $data["user_id"])->pluck('id')->first();
 
-        // Check if the personnel ID exists
-        if (!$personnel) {
-            throw new \Exception("No personnel found.");
-        }
-        dd($personnel);
+        // // Check if the personnel ID exists
+        // if (!$personnel) {
+        //     throw new \Exception("No personnel found.");
+        // }
+        // dd($personnel);
 
 
-        $anneeJuridique = $this->convertToAnneeJuridique($data["date_debut"]);
-        $anneeJuridiqueId = AnneeJuridique::where("annee", $anneeJuridique)->pluck('id')->first();
-        // Check if the AnneeJuridique ID exists
-        if (!$anneeJuridiqueId) {
-            throw new \Exception("No matching AnneeJuridique found.");
-        }
-        $jour_feries = JourFerie::where("annee_juridique_id", $anneeJuridiqueId)->get();
-        dd($jour_feries);
+        // $anneeJuridique = $this->convertToAnneeJuridique($data["date_debut"]);
+        // $anneeJuridiqueId = AnneeJuridique::where("annee", $anneeJuridique)->pluck('id')->first();
+        // // Check if the AnneeJuridique ID exists
+        // if (!$anneeJuridiqueId) {
+        //     throw new \Exception("No matching AnneeJuridique found.");
+        // }
+        // $jour_feries = JourFerie::where("annee_juridique_id", $anneeJuridiqueId)->get();
+        // dd($jour_feries);
 
 
         return parent::create($data);
@@ -126,4 +127,20 @@ class AbsenceRepository extends BaseRepository
         return $anneeJuridique;
     }
 
+
+    // public function searchData($searchableData, $perPage = 4)
+    // {
+    //     return $this->model->where(function ($query) use ($searchableData) {
+    //         $query->where('nom', 'like', '%' . $searchableData . '%')
+    //             ->orWhere('description', 'like', '%' . $searchableData . '%');
+    //     })->paginate($perPage);
+    // }
+
+    public function searchData($searchableData, $perPage = 4): LengthAwarePaginator
+    {
+        return $this->model->where(function ($query) use ($searchableData) {
+            $query->where('nom', 'like', '%' . $searchableData . '%')
+                ->orWhere('description', 'like', '%' . $searchableData . '%');
+        })->paginate($perPage);
+    }
 }
