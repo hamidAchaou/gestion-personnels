@@ -10,7 +10,10 @@
 @import 'select2/dist/css/select2.min.css';
 
 /* font awesome */
-@import "node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+
+
 
 /* pkg_OrderDesMissions */
 @import url("./pkg_OrderDesMissions/missions.css");
