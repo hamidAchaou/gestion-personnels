@@ -21,11 +21,29 @@ class MissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required|max:40',
-            'description' => 'nullable|max:255',
-            'categorie_technologies_id' => 'required|not_in:null',
-            'competence_id' => 'required|not_in:null',
+            'numero_mission' => 'required|max:10|unique:missions,numero_mission',
+            'nature' => 'nullable|max:40',
+            'lieu' => 'required|max:100',
+            'type_de_mission' => 'required|max:100',
+            'numero_ordre_mission' => 'required|max:10|unique:missions,numero_ordre_mission',
+            'data_ordre_mission' => 'required|date',
+            'date_debut' => 'required|date', // |before:date_fin
+            'date_fin' => 'required|date', // |after:date_debut
+            'date_depart' => 'required|date',
+            'heure_de_depart' => 'required',
+            'date_return' => 'required|date',  //|after:date_depart
+            'heure_de_return' => 'required',
+            //
+            'users' => 'required|array',
+            'moyens_transports' => 'required|array',
+            // 'transport_utiliser' => 'required',
+            'marque' => 'required',
+            'puissance_fiscal' => 'required',
+            'numiro_plaque' => 'required',
+
+
         ];
+
     }
 
 

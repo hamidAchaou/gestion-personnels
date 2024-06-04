@@ -11,7 +11,7 @@ return new class extends Migration {
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->integer('numero_mission');
-            $table->string('nature');
+            $table->string('nature')->nullable();
             $table->string('lieu');
             $table->string('type_de_mission');
             $table->integer('numero_ordre_mission');

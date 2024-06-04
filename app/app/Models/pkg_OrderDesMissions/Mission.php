@@ -37,6 +37,7 @@ class Mission extends Model
         return $this->belongsToMany(MoyensTransport::class, 'transports', 'mission_id', 'moyens_transports_id')->withTimestamps();
     }
 
+
     // Accessor to calculate the duration of the mission
     public function getDurationAttribute()
     {

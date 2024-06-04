@@ -8,8 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_OrderDesMissions\Transports;
+use App\Models\pkg_OrderDesMissions\MoyensTransport;
 use App\Models\pkg_OrderDesMissions\MissionPersonnel;
+use App\Http\Requests\pkg_OrderDesMissions\MissionRequest;
 use App\Repositories\Pkg_OrderDesMissions\MissionsRepositories;
+
 
 class MissionsController extends Controller
 {
@@ -58,6 +61,46 @@ class MissionsController extends Controller
         $transports = Transports::where('mission_id', $mission->id)->where('user', $user->id)->get();
         // dd($transports);
         return view('pkg_OrderDesMissions.attestation', compact('mission', 'user', 'presentDate', 'transports'));
+    }
+
+
+
+    public function create()
+    {
+        $dataToEdit = null;
+        $personnels = User::all();
+        $moyensTransport = MoyensTransport::all();
+        return view('pkg_OrderDesMissions.create', compact('dataToEdit', 'personnels', 'moyensTransport'));
+    }
+
+
+    public function store(MissionRequest $request)
+    {
+        // dd($request);
+        $validatedData = $request->validated();
+        // dd($validatedData);
+        $mission = Mission::create($validatedData);
+
+        foreach ($request->users as $userId) {
+            MissionPersonnel::create([
+                'user_id' => $userId,
+                'mission_id' => $mission->id,
+            ]);
+        }
+
+        foreach ($request->moyens_transports as $moyensTransportId) {
+            Transports::create([
+                'moyens_transports_id' => $moyensTransportId,
+                'mission_id' => $mission->id,
+                'user' => '1',
+                'transport_utiliser' => $moyensTransportId,
+                'marque' => $request->marque,
+                'puissance_fiscal' => $request->puissance_fiscal,
+                'numiro_plaque' => $request->numiro_plaque,
+            ]);
+        }
+
+        return redirect()->route('missions.index')->with('success', 'Mission created successfully.');
     }
 
 }
