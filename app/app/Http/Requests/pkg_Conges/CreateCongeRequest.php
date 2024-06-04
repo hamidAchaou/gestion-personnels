@@ -30,7 +30,7 @@ class CreateCongeRequest extends FormRequest
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date', 'after_or_equal:date_debut'],
             'motif_id' => ['required', 'exists:motifs,id'],
-            'user_id' => ['required', 'exists:users,id'],
+            'personnel_id' => ['required', 'exists:users,id'],
         ];
     }
 

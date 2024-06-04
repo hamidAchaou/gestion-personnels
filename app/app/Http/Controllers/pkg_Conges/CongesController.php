@@ -42,7 +42,7 @@ class CongesController extends Controller
         }
 
         // Fetch paginated data for initial page load
-        $conges = $this->congesRepository->paginate();
+        $conges = $this->congesRepository->paginate($perPage = 6);
         return view('pkg_Conges.conges.index', compact('conges'));
     }
 
@@ -72,12 +72,13 @@ class CongesController extends Controller
             return to_route('conges.index')->with('success', 'Congés ajouté avec succès');
         } catch (CongeAlreadyExistException $e) {
             // Handle conge already exists exception
-            return back()->withInput()->withErrors(['conge_exists' => __('pkg_Conges/Conges/message.existCongeException')]);
-        } catch (\Exception $e) {
-            // Handle any unexpected errors
-            return back()->withInput()->withErrors(['unexpected_error' => __('pkg_Conges/Conges/message.unexpectedError')]);
+            return back()->withInput()->withErrors(['conge_exists' => __('Les congés existent déjà')]);
         }
-    }
+        // } catch (\Exception $e) {
+        //     // Handle any unexpected errors
+        //     return back()->withInput()->withErrors(['unexpected_error' => __('Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.')]);
+        // }
+        }
 
     // Method to show a specific conge details
     public function show(string $id)
