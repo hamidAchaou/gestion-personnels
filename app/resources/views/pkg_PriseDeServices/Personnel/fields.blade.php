@@ -1,4 +1,4 @@
-<form action="{{ $dataToEdit ? route('personnels.update', $dataToEdit->id) : route('personnels.store') }}" method="POST">
+<form action="{{ $dataToEdit ? route('personnels.update', $dataToEdit->id) : route('personnels.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @if ($dataToEdit)
         @method('PUT')
@@ -134,9 +134,9 @@
                 <div class="col-lg-12 d-flex">
                     <div class="form-group pt-3 col-lg-6">
                         <label for="images">Photo :</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="images" name="images">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="">
+                            <input type="file" class="" id="images" name="images">
+                            {{-- <label class="custom-file-label" for="customFile">Choose file</label> --}}
                         </div>
                         @error('images')
                             <div class="alert alert-danger">{{ $message }}</div>

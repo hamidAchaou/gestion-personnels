@@ -73,7 +73,7 @@ class PersonnelExport implements FromCollection, WithHeadings, ShouldAutoSize, W
     {
         $lastRow = $sheet->getHighestRow();
 
-        $sheet->getStyle("A1:E{$lastRow}")->applyFromArray([
+        $sheet->getStyle("A1:R{$lastRow}")->applyFromArray([
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                 'startColor' => [
@@ -88,7 +88,7 @@ class PersonnelExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             ],
         ]);
 
-        $sheet->getStyle("A1:E1")->applyFromArray([
+        $sheet->getStyle("A1:R1")->applyFromArray([
             'font' => [
                 'bold' => true,
             ],

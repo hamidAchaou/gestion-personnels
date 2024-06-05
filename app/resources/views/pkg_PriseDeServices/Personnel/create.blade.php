@@ -22,7 +22,7 @@
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{ __('pkg_PriseDeServices/User/message.add') }}
+                                {{ __('app.add') }}  {{ __('pkg_PriseDeServices/personnels.singular') }}
                             </h3>
                         </div>
                         <!-- Obtenir le formulaire -->

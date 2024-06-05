@@ -22,4 +22,5 @@ return [
     'certificate' => 'Certificate',
     'school' => 'Etapplissement',
     'phoneNumber' => 'Numèro téléphone',
+    'matricule' => 'Matricule',
 ];
