@@ -90,7 +90,7 @@ class CongesController extends Controller
     
             // Fetch filtered or searched data
             $personnel = $this->personnels->find($id);
-            $conges = $this->congesRepository->searchDataOnePersonnel($searchValue, $personnel_id);
+            $conges = $this->congesRepository->getCongesByPersonnelId($searchValue, $personnel_id);
     
             // Return the filtered data view
             return view('pkg_Conges.conges.show', compact('personnel', 'conges'))->render();
