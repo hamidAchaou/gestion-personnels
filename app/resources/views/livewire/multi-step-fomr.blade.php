@@ -7,13 +7,11 @@
                 <div class="row" id="stepOne">
                     <div class="form-group col-lg-6 col-12">
                         <label for="Personnel">Personnel <span class="text-danger">*</span></label>
-                        <select class="form-control" wire:model="users" multiple id="">
+                        <select class="js-example-basic-multiple" wire:model="users" style="width: 100%;"
+                            multiple="multiple">
                             @foreach ($personnels as $personnel)
                                 <option value="{{ $personnel->id }}">{{ $personnel->nom }}</option>
                             @endforeach
-                            {{-- @foreach ($personnels as $personnel)
-                            <option value="{{ $personnel->id }}">{{ $personnel->nom }}</option>
-                        @endforeach --}}
                         </select>
                         @error('users')
                             <div class="text-danger">{{ $message }}</div>
@@ -196,3 +194,10 @@
 
     </div>
 </form>
+<script>
+    // Multi-select boxes   
+    $(document).ready(function() {
+        alert('aaaa')
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
