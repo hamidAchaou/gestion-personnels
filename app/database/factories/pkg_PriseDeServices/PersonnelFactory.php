@@ -12,7 +12,7 @@ use App\Models\pkg_Parametres\Etablissement;
 use App\Models\pkg_Parametres\Avancement;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GestionPriseDeService\Personnel\Personnel>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\pkg_PriseDeServices\Personnel>
  */
 class PersonnelFactory extends Factory
 {
@@ -34,6 +34,7 @@ class PersonnelFactory extends Factory
             'prenom' => $this->faker->lastName(),
             'nom_arab' => $this->faker->firstName(),
             'prenom_arab' => $this->faker->lastName(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'cin' => $this->faker->unique()->randomNumber(8),
             'date_naissance' => $this->faker->date(),
             'telephone' => $phoneNumber,
