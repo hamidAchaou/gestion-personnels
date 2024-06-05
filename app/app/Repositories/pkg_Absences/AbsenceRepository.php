@@ -45,26 +45,17 @@ class AbsenceRepository extends BaseRepository
         parent::__construct(new Absence());
     }
 
-    /**
-     * Filtre les absences par le nom du motif.
-     *
-     * @param string $motifNom Le nom du motif pour filtrer les absences.
-     * @return Collection La collection des absences filtrées par le motif.
-     */
-    public function filterByMotif(string $motifNom): Collection
+    public function filterByMotif(string $motifNom, $perPage = 2)
     {
-        try {
-            return $this->model
-                ->whereHas('motif', function (Builder $query) use ($motifNom) {
-                    $query->where('nom', 'LIKE', '%' . $motifNom . '%');
-                })
-                ->get();
-        } catch (\Exception $e) {
-            throw new \RuntimeException('Error filtering by motif: ' . $e->getMessage(), 0, $e);
-        }
+        return $this->model
+            ->with(['personnel', 'motif'])
+            ->whereHas('motif', function (Builder $query) use ($motifNom) {
+                $query->where('nom', 'LIKE', '%' . $motifNom . '%');
+            })
+            ->paginate($perPage);
     }
 
-    public function filterByDateRange(string $startDate, string $endDate)
+    public function filterByDateRange(string $startDate, string $endDate, $perPage = 2)
     {
         // Convert the date strings to Carbon instances for comparison
         $start = Carbon::parse($startDate);
@@ -74,7 +65,7 @@ class AbsenceRepository extends BaseRepository
             ->with(['personnel', 'motif'])
             ->whereBetween('date_debut', [$start, $end])
             ->orWhereBetween('date_fin', [$start, $end])
-            ->paginate(4);
+            ->paginate($perPage);
     }
 
     public function create(array $data)
@@ -128,6 +119,22 @@ class AbsenceRepository extends BaseRepository
             ->with('personnel', 'motif')
             ->paginate($perPage);
     }
+
+    public function filterForDocument(string $startDate, string $endDate, array $motifs)
+    {
+        $start = Carbon::parse($startDate);
+        $end = Carbon::parse($endDate);
+
+        return $this->model
+            ->with(['personnel', 'motif'])
+            ->where(function ($query) use ($start, $end) {
+                $query->whereBetween('date_debut', [$start, $end])
+                    ->orWhereBetween('date_fin', [$start, $end]);
+            })
+            ->whereIn('motif_id', $motifs)
+            ->get();
+    }
+
 
     /**
      * Recherche les projets correspondants aux critères spécifiés.
