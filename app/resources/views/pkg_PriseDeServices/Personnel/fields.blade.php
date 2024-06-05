@@ -1,16 +1,17 @@
-<form action="{{ $dataToEdit ? route('personnels.update', $dataToEdit->id) : route('personnels.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ $dataToEdit ? route('personnels.update', $dataToEdit->id) : route('personnels.store') }}" method="POST"
+    enctype="multipart/form-data">
     @csrf
     @if ($dataToEdit)
         @method('PUT')
     @endif
     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
     <div class="card-body ">
@@ -131,12 +132,11 @@
                     </div>
                 </div>
                 <!-- Photo -->
-                <div class="col-lg-12 d-flex">
-                    <div class="form-group pt-3 col-lg-6">
-                        <label for="images">Photo :</label>
-                        <div class="">
-                            <input type="file" class="" id="images" name="images">
-                            {{-- <label class="custom-file-label" for="customFile">Choose file</label> --}}
+                <div class="col-lg-12 d-flex mb-3">
+                    <div class="input-group pt-3 col-lg-6">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="images" name="images"  onchange="updateFileName()">
+                            <label class="custom-file-label" for="images">Choose file</label>
                         </div>
                         @error('images')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -257,3 +257,14 @@
 
     </div>
 </form>
+<script>
+    function updateFileName() {
+        var input = document.getElementById('images');
+        var label = document.querySelector('label[for="images"]');
+        if (input.files && input.files.length > 0) {
+            label.textContent = input.files[0].name;
+        } else {
+            label.textContent = 'Choose file';
+        }
+    }
+</script>

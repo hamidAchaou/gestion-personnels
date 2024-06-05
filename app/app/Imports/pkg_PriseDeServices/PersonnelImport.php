@@ -1,17 +1,11 @@
 <?php
 
-namespace App\Imports\GestionParametres;
+namespace App\Imports\pkg_PriseDeServices;
 
 use App\Models\pkg_PriseDeServices\Personnel;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use App\Models\GestionParametres\Etablissement;
-use App\Repositories\GestionParametres\EtablissementRepository;
-use App\Exceptions\GestionParametres\EtablissementAlreadyExistException;
 
 class PersonnelImport implements ToModel, WithHeadingRow
 {
@@ -64,8 +58,23 @@ class PersonnelImport implements ToModel, WithHeadingRow
     private function validate(array $row)
     {
         $validator = Validator::make($row, [
-            'nom' => 'required|string|max:200|unique:etablissements',
-            'description' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'nom_arab' => 'required|string|max:255',
+            'prenom_arab' => 'required|string|max:255',
+            'cin' => 'required|string|max:255',
+            'date_naissance' => 'required|date',
+            'telephone' => 'required|string|max:255',
+            'email' => 'required|email|unique:users|max:255',
+            'address' => 'required|string|max:255',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ville_id' => 'required|numeric|max:255',
+            'etablissement_id' => 'required|numeric|max:255',
+            'ETPAffectation_id' => 'required|numeric',
+            'specialite_id' => 'required|numeric|max:255',
+            'fonction_id' => 'required|numeric|max:255',
+            'matricule' => 'required|numeric',
+            'avancement_id' => 'required|numeric'
         ]);
 
         if ($validator->fails()) {
