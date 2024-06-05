@@ -115,18 +115,41 @@ class CongesRepository extends BaseRepository
     //         ->paginate($perPage);
     // }
 
-    // Filter By date 
-    public function filterByDate($date_debut, $date_fin)
+
+    /**
+     * Filter Conges by date or year.
+     *
+     * @param string|null $date_debut Start date for filtering conges.
+     * @param string|null $date_fin End date for filtering conges.
+     * @param int|null $year Year for filtering conges.
+     * @return \Illuminate\Database\Eloquent\Collection Collection of filtered conges.
+     */
+    public function filterByDate(string $date_debut = null, string $date_fin = null, int $year = null)
     {
         return $this->model
-            ->where(function ($query) use ($date_debut, $date_fin) {
-                $query->whereBetween('date_debut', [$date_debut, $date_fin]);
-                // ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+            ->where(function ($query) use ($date_debut, $date_fin, $year) {
+                if ($date_debut && $date_fin) {
+                    $query->whereBetween('date_debut', [$date_debut, $date_fin])
+                        ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+                } elseif ($year) {
+                    $query->whereYear('date_debut', $year)
+                        ->orWhereYear('date_fin', $year);
+                }
             })
             ->get();
     }
 
 
+    /**
+     * Get all Conges for a given Personnel ID with optional search.
+     *
+     * @param string|null $searchValue Search term for personnel name, surname, or matricule.
+     * @param int|null $personnelId ID of the personnel to filter the conges.
+     * @param string|null $date_debut Start date for filtering conges.
+     * @param string|null $date_fin End date for filtering conges.
+     * @param int $perPage Number of results per page.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator Paginated list of conges.
+     */
     public function searchData($searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0, $personnel_id = null)
     {
         if ($perPage == 0) {
@@ -181,5 +204,4 @@ class CongesRepository extends BaseRepository
 
         return $query->paginate(6);
     }
-
 }

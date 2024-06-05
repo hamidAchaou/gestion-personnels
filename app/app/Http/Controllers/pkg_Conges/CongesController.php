@@ -60,13 +60,17 @@ class CongesController extends Controller
         // First year
         $firstYear = now()->format('Y');
         // Last year
-        $lastYear = now()->addYears(-1)->format('Y');
-        
-        dd($lastYear);
+        $lastYear = now()->subYear()->format('Y');
+    
+        $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear);
+        $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear);
+    
         $personnels = $this->personnels->all();
         $motifs = Motif::all();
-        return view('pkg_Conges.conges.create', compact('personnels', 'motifs'));
+    
+        return view('pkg_Conges.conges.create', compact('personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear'));
     }
+    
 
     // Method to store a new conge
     public function store(CreateCongeRequest $createCongeRequest)
