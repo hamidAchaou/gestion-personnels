@@ -87,7 +87,7 @@ hr {
 		width: initial;
 		min-height: initial;
 		box-shadow: initial;
-		background: red;
+		background: #fff;
 		page-break-after: auto;
 	}
 }
