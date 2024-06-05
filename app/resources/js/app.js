@@ -46,7 +46,8 @@ $(document).ready(function () {
         }
         window.history.replaceState({ path: url }, "", url + hash);
     }
-});
+
+})
 
 // select2
 $(document).ready(function () {

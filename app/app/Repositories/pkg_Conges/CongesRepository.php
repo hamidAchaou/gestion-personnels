@@ -121,19 +121,24 @@ class CongesRepository extends BaseRepository
         return $this->model
             ->where(function ($query) use ($date_debut, $date_fin) {
                 $query->whereBetween('date_debut', [$date_debut, $date_fin]);
-                    // ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+                // ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
             })
             ->get();
     }
 
-    public function searchData($searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0)
+
+    public function searchData($searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0, $personnel_id = null)
     {
         if ($perPage == 0) {
             $perPage = $this->paginationLimit;
         }
 
         return $this->model
-            ->where(function ($query) use ($searchableData, $date_debut, $date_fin) {
+            ->where(function ($query) use ($searchableData, $date_debut, $date_fin, $personnel_id) {
+                if ($personnel_id !== null) {
+                    $query->where('personnel_id', $personnel_id);
+                }
+
                 if ($searchableData !== null) {
                     $query->whereHas('personnels', function ($q) use ($searchableData) {
                         $q->where('nom', 'like', '%' . $searchableData . '%')
@@ -150,4 +155,60 @@ class CongesRepository extends BaseRepository
             })
             ->paginate($perPage);
     }
+
+    public function searchDataOnePersonnel($searchableData = null, $personnel_id = null, $perPage = 0)
+{
+    if ($perPage == 0) {
+        $perPage = $this->paginationLimit;
+    }
+
+    return $this->model
+        ->whereHas('personnels', function ($query) use ($searchableData, $personnel_id) {
+            if ($personnel_id !== null) {
+                $query->where('personnel_id', $personnel_id);
+            }
+
+            if ($searchableData !== null) {
+                $query->where(function ($q) use ($searchableData) {
+                    $q->where('nom', 'like', '%' . $searchableData . '%')
+                      ->orWhere('prenom', 'like', '%' . $searchableData . '%')
+                      ->orWhere('matricule', 'like', '%' . $searchableData . '%');
+                });
+            }
+        })
+        ->when($searchableData, function ($query) use ($searchableData) {
+            $query->orWhere('date_debut', 'like', '%' . $searchableData . '%')
+                  ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
+        })
+        ->paginate($perPage);
+}
+
+    
+
+
+
+    // public function searchData($searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0)
+    // {
+    //     if ($perPage == 0) {
+    //         $perPage = $this->paginationLimit;
+    //     }
+
+    //     return $this->model
+    //         ->where(function ($query) use ($searchableData, $date_debut, $date_fin) {
+    //             if ($searchableData !== null) {
+    //                 $query->whereHas('personnels', function ($q) use ($searchableData) {
+    //                     $q->where('nom', 'like', '%' . $searchableData . '%')
+    //                         ->orWhere('prenom', 'like', '%' . $searchableData . '%')
+    //                         ->orWhere('matricule', 'like', '%' . $searchableData . '%');
+    //                 })
+    //                     ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
+    //                     ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
+    //             }
+
+    //             if ($date_debut !== null && $date_fin !== null) {
+    //                 $query->whereBetween('date_debut', [$date_debut, $date_fin]);
+    //             }
+    //         })
+    //         ->paginate($perPage);
+    // }
 }

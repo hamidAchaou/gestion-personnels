@@ -78,15 +78,34 @@ class CongesController extends Controller
         //     // Handle any unexpected errors
         //     return back()->withInput()->withErrors(['unexpected_error' => __('Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.')]);
         // }
-        }
+    }
 
     // Method to show a specific conge details
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
+        // Handle AJAX requests for searching and filtering
+        if ($request->has('searchValue')) {
+            $searchValue = $request->get('searchValue');
+            $personnel_id = $id;
+    
+            // Fetch filtered or searched data
+            $personnel = $this->personnels->find($id);
+            $conges = $this->congesRepository->searchDataOnePersonnel($searchValue, $personnel_id);
+    
+            // Return the filtered data view
+            return view('pkg_Conges.conges.show', compact('personnel', 'conges'))->render();
+        }
+    
+        // Fetch personnel and related conges data
         $personnel = $this->personnels->find($id);
         $conges = $personnel->conges()->paginate(4);
+    
+        // Return the view with personnel and conges data
         return view('pkg_Conges.conges.show', compact('personnel', 'conges'));
     }
+    
+    
+
 
     // Method to show the edit conge form
     public function edit(string $id)
