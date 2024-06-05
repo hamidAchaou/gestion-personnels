@@ -12,6 +12,6 @@ order: 4
 
 <!-- note -->
 
-Le directeur de l'établissement passe énormément de temps à gérer les données des employés dans des feuilles Excel, ce qui entraîne des retards dans la prise de décisions critiques et limite la productivité globale de l'équipe en raison de la lenteur du traitement des informations, notamment en raison de l'absence de fonctionnalités de mise à jour en temps réel et de collaboration simultanée.
+Le directeur rencontre des difficultés à gérer et calculer les congés des employés de manière efficace.
 
 <!-- new slide -->

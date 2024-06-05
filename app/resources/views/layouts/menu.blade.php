@@ -11,45 +11,14 @@
     </a>
 </li>
 
-<!-- Personnels -->
-<li class="nav-item">
-    <a href="{{-- route('personnels.index') --}}" class="nav-link {{ Request::is('personnels*') ? 'active' : '' }}">
-        <i class="fa-solid fa-users mr-2"></i>
-        <p>{{ __('Layouts/Menu.staff') }}</p>
-    </a>
-</li>
-
-<!-- Categories -->
-<li class="nav-item">
-    <a href="{{-- route('categories.index') --}}" class="nav-link {{ Request::is('categories*') ? 'active' : '' }}">
-        <i class="fa-solid fa-list mr-2"></i>
-        <p>{{ __('Layouts/Menu.categories') }}</p>
-    </a>
-</li>
-
-<!-- Absences -->
-<li class="nav-item">
-    <a href="{{-- route('absences.index') --}}" class="nav-link {{ Request::is('absences*') ? 'active' : '' }}">
-        <i class="fa-regular fa-calendar-minus mr-2"></i>
-        <p>{{ __('Layouts/Menu.absences') }}</p>
-    </a>
-</li>
-
-<!-- Conges -->
-<li class="nav-item">
-    <a href="{{ route('conges.index') }}" class="nav-link {{ Request::is('conges*') ? 'active' : '' }}">
-        <i class="fa-solid fa-person-walking-luggage mr-2"></i>
-        <p>{{ __('Layouts/Menu.leave') }}</p>
-    </a>
-</li>
-
-<!-- Missions -->
-<li class="nav-item">
-    <a href="{{-- route('missions.index') --}}" class="nav-link {{ Request::is('missions*') ? 'active' : '' }}">
-        <i class="fa-solid fa-business-time mr-2"></i>
-        <p>{{ __('Layouts/Menu.missions') }}</p>
-    </a>
-</li>
+{{-- include menu personnels --}}
+@include('layouts.pkg_PriseDeServices.personnelMenu')
+{{-- include menu Categories --}}
+@include('layouts.pkg_PriseDeServices.categorieMenu')
+{{-- include menu Congés --}}
+@include('layouts.pkg_Absences.absenceMenu')
+{{-- include menu missions --}}
+@include('layouts.pkg_OrderDesMissions.missionMenu')
 
 
 <!-- Parameter -->
