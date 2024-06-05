@@ -8,7 +8,7 @@
     <!-- TODO Madani : à expliquer dans /docs/réalisation/layout.md -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.jpg') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
