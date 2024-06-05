@@ -4,6 +4,7 @@ namespace App\Repositories\pkg_Absences;
 
 use App\Repositories\BaseRepository;
 use App\Models\pkg_Absences\JourFerie;
+use App\Exceptions\pkg_Absences\JourFerieAlreadyExistException;
 
 /**
  * Classe ProjetRepository qui gère la persistance des projets dans la base de données.
@@ -35,6 +36,29 @@ class JourFerieRespository extends BaseRepository
     public function __construct()
     {
         parent::__construct(new JourFerie());
+    }
+
+
+    public function create(array $data)
+    {
+        $date_debut = $data['date_debut'];
+        $date_fin = $data['date_fin'];
+
+        $existingJourFerie = $this->model
+            ->where('date_debut', $date_debut)
+            ->where('date_fin', $date_fin)
+            ->exists();
+
+        if ($existingJourFerie) {
+            throw JourFerieAlreadyExistException::create();
+        }
+        return parent::create($data);
+    }
+
+
+    public function getJourFerieWithRelations($perPage = 2)
+    {
+        return $this->model->with('anneeJuridique')->paginate($perPage);
     }
 
 }

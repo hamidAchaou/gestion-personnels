@@ -13,6 +13,9 @@ class JourFerie extends Model
         'nom',
         'date_debut',
         'date_fin',
+        'is_formateur',
+        'is_administrateur',
+        'annee_juridique_id',
     ];
 
 
