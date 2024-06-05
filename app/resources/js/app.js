@@ -25,6 +25,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+$(document).ready(function () {
+    // Fonction pour mettre à jour un paramètre dans l'URL
+    function updateURLParameter(param, paramVal) {
+        var url = window.location.href;
+        var hash = location.hash;
+        url = url.replace(hash, "");
+        if (url.indexOf(param + "=") >= 0) {
+            var prefix = url.substring(0, url.indexOf(param + "="));
+            var suffix = url.substring(url.indexOf(param + "="));
+            suffix = suffix.substring(suffix.indexOf("=") + 1);
+            suffix =
+                suffix.indexOf("&") >= 0
+                    ? suffix.substring(suffix.indexOf("&"))
+                    : "";
+            url = prefix + param + "=" + paramVal + suffix;
+        } else {
+            if (url.indexOf("?") < 0) url += "?" + param + "=" + paramVal;
+            else url += "&" + param + "=" + paramVal;
+        }
+        window.history.replaceState({ path: url }, "", url + hash);
+    }
+
+})
+
 // select2
 $(document).ready(function() {
     $('.select2').select2();

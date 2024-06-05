@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('telephone')->nullable();
             $table->string('address')->nullable();
             $table->string('images')->nullable();
-            $table->string('matricule')->nullable();
+            $table->string('matricule')->nullable()->unique();
             $table->unsignedBigInteger('ville_id')->nullable();
             $table->unsignedBigInteger('fonction_id')->nullable();
             $table->unsignedBigInteger('ETPAffectation_id')->nullable();

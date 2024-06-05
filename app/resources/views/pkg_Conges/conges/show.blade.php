@@ -76,19 +76,19 @@
                                 <!-- Filter Dropdown -->
                                 <div class="col-md-4">
                                     {{-- <form method="GET" action="{{ route('conges.index') }}"> --}}
-                                        <div class="input-group input-group-sm">
-                                            <div class="input-group-append">
-                                                <div class="btn btn-default">
-                                                    <i class="fas fa-filter"></i>
-                                                </div>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-append">
+                                            <div class="btn btn-default">
+                                                <i class="fas fa-filter"></i>
                                             </div>
-                                            <select class="form-select form-control" name="year">
-                                                <option value="" selected>Sélectionner une année</option>
-                                                @foreach (range(date('Y'), date('Y') - 5) as $year)
-                                                    <option value="{{ $year }}">{{ $year }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
+                                        <select class="form-select form-control" name="year">
+                                            <option value="" selected>Sélectionner une année</option>
+                                            @foreach (range(date('Y'), date('Y') - 5) as $year)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     </form>
                                 </div>
 
@@ -96,7 +96,8 @@
                                 <div class="col-md-4">
                                     <form method="GET" action="{{ route('conges.index') }}">
                                         <div class="input-group input-group-sm">
-                                            <input type="text" name="search" class="form-control"
+                                            <input type="hidden" name="page" id="page" value="1">
+                                            <input type="text" name="table_search" id="table_search" class="form-control"
                                                 placeholder="Recherche">
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">
