@@ -26,26 +26,39 @@ class AbsenceController extends AppBaseController
 
     public function index(Request $request)
     {
+        $motifs = Motif::all();
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '' && $searchValue !== 'undefined') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
                 $absences = $this->absenceRepository->search($searchQuery);
-                return view('pkg_Absences.index', compact('absences'))->render();
+                return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
             }
         }
 
-        // $searchQuery = 'Mohammed';
-        $startDate = '2024-04-01';
-        $endDate = '2024-06-01';
-
-        $aa = $this->absenceRepository->filterByDateRange($startDate, $endDate);
-
-        dd($aa);
-
         $absences = $this->absenceRepository->getAbsencesWithRelations(2);
+        return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
+    }
 
-        return view('pkg_Absences.index', compact('absences'))->render();
+    public function filterByMotif(Request $request)
+    {
+        $motifNom = $request->input('motif');
+        $motifs = Motif::all();
+
+        $absences = $this->absenceRepository->filterByMotif($motifNom);
+
+        return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
+    }
+
+    public function filterByDate(Request $request)
+    {
+        $date_debut = $request->input('date_debut');
+        $date_fin = $request->input('date_fin');
+        $motifs = Motif::all();
+
+        $absences = $this->absenceRepository->filterByDateRange($date_debut, $date_fin);
+
+        return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
     }
 
     public function create()
@@ -176,4 +189,58 @@ class AbsenceController extends AppBaseController
             ->route('absence.index')
             ->with('success', __('pkg_Absences/absence.plural') . ' ' . __('app.ImportSucées'));
     }
+
+    public function document_absenteisme()
+    {
+        $motifs = Motif::all();
+        return view('pkg_Absences.document-absenteisme', compact('motifs'));
+    }
+
+
+    // public function filterAndPrint(Request $request)
+    // {
+    //     if ($request->has('date_debut') && $request->has('date_fin') && $request->has('motifs')) {
+    //         $date_debut = $request->input('date_debut');
+    //         $date_fin = $request->input('date_fin');
+    //         $motifs = $request->input('motifs');
+    //         $absences = $this->absenceRepository->filterForDocument($date_debut, $date_fin, $motifs);
+    //         return view('pkg_Absences.imprimer', compact('absences'));
+    //     }
+    // }
+
+    public function filterAndPrint(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'motifs' => 'required|array',
+            'motifs.*' => 'exists:motifs,id', // Validate each motif ID in the array
+        ]);
+
+        // Extract validated inputs
+        $date_debut = $validatedData['date_debut'];
+        $date_fin = $validatedData['date_fin'];
+        $motifs = $validatedData['motifs'];
+
+        try {
+            // Filter absences based on validated inputs
+            $absences = $this->absenceRepository->filterForDocument($date_debut, $date_fin, $motifs);
+
+            // Check if absences are found
+            if ($absences->isEmpty()) {
+                return redirect()->route('absence.index')->with('error', 'No absences found for the selected criteria.');
+            }
+
+            // Return the view to print
+            return view('pkg_Absences.imprimer', compact('absences'));
+        } catch (\Exception $e) {
+            // Log or handle the exception appropriately
+            return redirect()->route('absence.index')->with('error', 'An error occurred while processing the request.');
+        }
+    }
+
+
+
+
 }

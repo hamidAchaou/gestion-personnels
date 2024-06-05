@@ -55,14 +55,14 @@
                                                 <i class="fas fa-filter "></i>
                                             </button>
                                         </div>
-                                        <select class="form-select form-control" id="filterSelectProjrctValue"
-                                            aria-label="Filter Select">
-                                            <option value="précédent">Motif</option>
-                                            <option value="précédent">Congés</option>
-                                            <option value="précédent">Vacances</option>
-                                            <option value="précédent">Mission</option>
-                                            <option value="précédent">Malade</option>
-                                            <option value="précédent">Non justifier</option>
+                                        <select class="form-select form-control" id="filterSelectMotif"
+                                            aria-label="Filter Select" name="motif">
+                                            <option value="" selected disabled>--Motif--</option>
+                                            @foreach ($motifs as $motif)
+                                                <option value="{{ $motif->nom }}">
+                                                    {{ $motif->nom }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <!-- filter by start date / end date -->
@@ -73,11 +73,11 @@
                                                     <i class="fas fa-filter"></i>
                                                 </button>
                                             </div>
-                                            <label for="startDate" class="sr-only">Date debut</label>
-                                            <input type="date" class="form-control" id="startDate"
+                                            <label for="date_debut" class="sr-only">Date debut</label>
+                                            <input type="date" class="form-control" id="date_debut"
                                                 aria-label="Start Date">
-                                            <label for="endDate" class="sr-only">Date fin</label>
-                                            <input type="date" class="form-control" id="endDate" aria-label="End Date">
+                                            <label for="date_fin" class="sr-only">Date fin</label>
+                                            <input type="date" class="form-control" id="date_fin" aria-label="End Date">
                                         </div>
                                     </div>
 
@@ -87,8 +87,8 @@
 
                                         <div class="p-0">
                                             <div class="input-group-sm input-group">
-                                                <input id="table_search" type="text" name="table_search" class="form-control"
-                                                    placeholder="Recherche">
+                                                <input id="table_search" type="text" name="table_search"
+                                                    class="form-control" placeholder="Recherche">
                                                 <div class="input-group-append">
                                                     <button type="submit" class="btn btn-default">
                                                         <i class="fas fa-search"></i>
