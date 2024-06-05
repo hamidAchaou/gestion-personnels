@@ -9,7 +9,7 @@ order: 281
 ### Empathie Directeur générale
 
 ![Empathie Directeur générale](/gestion-personnels/diagrammes/pkg_OrderDesMissions/empathie-Directeur_pkg_OrdreDesMissions.svg){:width="700px"}
-*Figure : Cart d'empathie : Empathie Directeur générale*
+*Figure 2: Cart d'empathie : Empathie Directeur générale*
 
 <!-- note -->
 
