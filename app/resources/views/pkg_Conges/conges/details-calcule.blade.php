@@ -3,7 +3,7 @@
     <div class="card collapsed-card">
         <div class="card-header border-0">
             <h3 class="card-title">
-                <i class="fa-solid fa-calendar-days"></i> {{ $lastYear }} (jours restant = {{ $CongesLastYear->sum('jours_restants') }})
+                <i class="fa-solid fa-calendar-days"></i> {{ $lastYear }} (jours restant = {{ $joursRestantsLastYear }})
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-teal btn-sm" data-card-widget="collapse" title="Collapse">
@@ -38,7 +38,7 @@
                     <tr>
                         <td>Jours restants</td>
                         <td></td>
-                        <td class="text-center">{{ $CongesLastYear->sum('jours_restants') }}</td>
+                        <td class="text-center">{{ $joursRestantsLastYear }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -49,7 +49,7 @@
     <div class="card">
         <div class="card-header border-0">
             <h3 class="card-title">
-                <i class="fa-solid fa-calendar-days"></i> {{ $firstYear }} (jours restant = {{ $CongesFirstYear->sum('jours_restants') }})
+                <i class="fa-solid fa-calendar-days"></i> {{ $firstYear }} (jours restant = {{ $joursRestantsFirstYear }})
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-teal btn-sm" data-card-widget="collapse" title="Collapse">
@@ -84,7 +84,7 @@
                     <tr>
                         <td>Jours restants</td>
                         <td></td>
-                        <td class="text-center">{{ $CongesFirstYear->sum('jours_restants') }}</td>
+                        <td class="text-center">{{ $joursRestantsFirstYear }}</td>
                     </tr>
                 </tfoot>
             </table>
