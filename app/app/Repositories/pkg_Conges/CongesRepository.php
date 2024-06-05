@@ -107,31 +107,31 @@ class CongesRepository extends BaseRepository
      * @return \Illuminate\Database\Eloquent\Collection Collection of filtered conges.
      */
     public function filterByDate(string $date_debut = null, string $date_fin = null, int $year = null, $personnel_id = null)
-{
-    if ($personnel_id !== null) {
-        return Conge::whereHas('personnels', function ($query) use ($personnel_id, $year) {
-            $query->where('personnel_id', $personnel_id);
-            if ($year) {
-                $query->where(function ($query) use ($year) {
-                    $query->where('date_debut', 'LIKE', "%{$year}%")
-                        ->orWhere('date_fin', 'LIKE', "%{$year}%");
-                });
-            }
-        })->get();
-    } else {
-        return $this->model
-            ->where(function ($query) use ($date_debut, $date_fin, $year) {
-                if ($date_debut && $date_fin) {
-                    $query->whereBetween('date_debut', [$date_debut, $date_fin])
-                        ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
-                } elseif ($year) {
-                    $query->whereYear('date_debut', $year)
-                        ->orWhereYear('date_fin', $year);
+    {
+        if ($personnel_id !== null) {
+            return Conge::whereHas('personnels', function ($query) use ($personnel_id, $year) {
+                $query->where('personnel_id', $personnel_id);
+                if ($year) {
+                    $query->where(function ($query) use ($year) {
+                        $query->where('date_debut', 'LIKE', "%{$year}%")
+                            ->orWhere('date_fin', 'LIKE', "%{$year}%");
+                    });
                 }
-            })
-            ->get();
+            })->get();
+        } else {
+            return $this->model
+                ->where(function ($query) use ($date_debut, $date_fin, $year) {
+                    if ($date_debut && $date_fin) {
+                        $query->whereBetween('date_debut', [$date_debut, $date_fin])
+                            ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+                    } elseif ($year) {
+                        $query->whereYear('date_debut', $year)
+                            ->orWhereYear('date_fin', $year);
+                    }
+                })
+                ->get();
+        }
     }
-}
 
 
 
@@ -237,5 +237,11 @@ class CongesRepository extends BaseRepository
         }
 
         return $totalDays - $joursFeriesDays;
+    }
+
+    public function calculateJoursRestants($nombreJoursCongesFirstYear = 0, $joursRestantsLastYear = 0)
+    {
+        $jours_restants = ((22 + $joursRestantsLastYear) - $nombreJoursCongesFirstYear);
+        return $jours_restants;
     }
 }
