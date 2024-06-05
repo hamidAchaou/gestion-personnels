@@ -156,34 +156,60 @@ class CongesRepository extends BaseRepository
             ->paginate($perPage);
     }
 
-    public function searchDataOnePersonnel($searchableData = null, $personnel_id = null, $perPage = 0)
-{
-    if ($perPage == 0) {
-        $perPage = $this->paginationLimit;
+    // public function searchDataOnePersonnel($searchableData = null, $personnel_id = null, $perPage = 0)
+    // {
+    //     if ($perPage == 0) {
+    //         $perPage = $this->paginationLimit;
+    //     }
+
+    //     return $this->model
+    //         ->whereHas('personnels', function ($query) use ($searchableData, $personnel_id) {
+    //             if ($personnel_id !== null) {
+    //                 $query->where('personnel_id', $personnel_id);
+    //             }
+
+    //             if ($searchableData !== null) {
+    //                 $query->where(function ($q) use ($searchableData) {
+    //                     $q->where('nom', 'like', '%' . $searchableData . '%')
+    //                         ->orWhere('prenom', 'like', '%' . $searchableData . '%')
+    //                         ->orWhere('matricule', 'like', '%' . $searchableData . '%');
+    //                 });
+    //             }
+    //         })
+    //         ->when($searchableData, function ($query) use ($searchableData) {
+    //             $query->orWhere('date_debut', 'like', '%' . $searchableData . '%')
+    //                 ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
+    //         })
+    //         ->paginate($perPage);
+    // }
+
+    /**
+     * Get all Conges for a given Personnel ID with optional search
+     *
+     * @param string|null $searchValue
+     * @param int $personnelId
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCongesByPersonnelId(?string $searchValue, int $personnelId, $perPage = 0)
+    {
+        $query = Conge::whereHas('personnels', function ($query) use ($personnelId) {
+            $query->where('personnel_id', $personnelId);
+        });
+
+        if ($searchValue) {
+            $query->where(function ($query) use ($searchValue) {
+                $query->where('date_debut', 'LIKE', "%{$searchValue}%")
+                    ->orWhere('date_fin', 'LIKE', "%{$searchValue}%")
+                    ->orWhereHas('motif', function ($query) use ($searchValue) {
+                        $query->where('nom', 'LIKE', "%{$searchValue}%");
+                    });
+            });
+        }
+
+        return $query->paginate(6);
     }
 
-    return $this->model
-        ->whereHas('personnels', function ($query) use ($searchableData, $personnel_id) {
-            if ($personnel_id !== null) {
-                $query->where('personnel_id', $personnel_id);
-            }
 
-            if ($searchableData !== null) {
-                $query->where(function ($q) use ($searchableData) {
-                    $q->where('nom', 'like', '%' . $searchableData . '%')
-                      ->orWhere('prenom', 'like', '%' . $searchableData . '%')
-                      ->orWhere('matricule', 'like', '%' . $searchableData . '%');
-                });
-            }
-        })
-        ->when($searchableData, function ($query) use ($searchableData) {
-            $query->orWhere('date_debut', 'like', '%' . $searchableData . '%')
-                  ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
-        })
-        ->paginate($perPage);
-}
-
-    
 
 
 
