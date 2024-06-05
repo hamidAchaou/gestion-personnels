@@ -63,7 +63,7 @@
 
             <!-- Nombre des jours -->
             <div class="form-group">
-                <label for="nobreJours">Nombre des jours:</label>
+                <label for="nobreJours">Nombre des jours reaston:</label>
                 <input type="number" name="nobreJours" class="form-control" id="nobreJours"
                     value="{{ old('nobreJours', isset($conge) ? $conge->nobreJours : '3') }}" readonly>
             </div>
