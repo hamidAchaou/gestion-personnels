@@ -10,6 +10,7 @@ return [
     'import' => 'IMPORTER',
     'back' => 'Retour',
     'name' => 'Nom',
+    'lastName' => 'Prénom',
     'action' => 'Action',
     'detail' => 'Détail',
     'description' => 'Description',
@@ -18,4 +19,7 @@ return [
     'addSucées' => 'a été ajouté avec succès.',
     'updateSucées' => 'a été mis à jour avec succès.',
     'deleteSucées' => 'a été supprimé avec succès.',
+    'certificate' => 'Certificate',
+    'school' => 'Etapplissement',
+    'phoneNumber' => 'Numèro téléphone',
 ];
