@@ -9,7 +9,7 @@
             <!-- Personnel -->
             <div class="form-group">
                 <label for="exampleInputPersonnel">Personnel: <span class="text-danger">*</span></label>
-                <select name="personnel_id" class="form-control js-example-basic-single" id="exampleInputPersonnel">
+                <select name="personnel_id" class="form-control js-example-basic-single" id="personnel_id">
                     @foreach ($personnels as $personnel)
                         @php
                             $selected = old('personnel_id', isset($conge) ? $conge->personnels->contains($personnel->id) : '') == $personnel->id ? 'selected' : '';
@@ -77,3 +77,20 @@
         </div>
     </form>
 </div>
+
+
+<script>
+    // $(document).ready(function() {
+    //     // Initialize Select2
+    //     $('.js-example-basic-single').select2();
+
+    //     // Attach change event listener to the select dropdown
+    //     $('#exampleInputPersonnel').on('change', function() {
+    //         // Get the selected value
+    //         var selectedPersonnel = $(this).val();
+            
+    //         // Log the selected value to the console
+    //         console.log('Selected Personnel:', selectedPersonnel);
+    //     });
+    // });
+</script>

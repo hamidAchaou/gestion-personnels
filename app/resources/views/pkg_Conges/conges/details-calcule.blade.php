@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="card-body" style="display: none;">
-            <table class="table table-striped text-nowrap">
+            <table class="table table-striped text-nowrap" id="CongesLastYear">
                 <thead>
                     <tr>
                         <th>Date départ</th>
@@ -20,7 +20,7 @@
                         <th class="text-center">Nombre de jours</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbodyCongesLastYear">
                     @foreach($CongesLastYear as $conge)
                         <tr>
                             <td>{{ $conge->date_debut }}</td>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="card-body" style="display: block;">
-            <table class="table table-striped text-nowrap">
+            <table class="table table-striped text-nowrap" id="CongesFirstYear">
                 <thead>
                     <tr>
                         <th>Date départ</th>
@@ -66,7 +66,7 @@
                         <th class="text-center">Nombre de jours</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbodyCongesFirstYear">
                     @foreach($CongesFirstYear as $conge)
                         <tr>
                             <td>{{ $conge->date_debut }}</td>
