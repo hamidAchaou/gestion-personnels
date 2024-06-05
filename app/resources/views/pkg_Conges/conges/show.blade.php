@@ -36,11 +36,11 @@
             <div class="row">
                 <!-- Profile Section -->
                 <div class="col-md-3">
-                    <div class="card card-purple card-outline">
+                    <div class="card card-purple card-outline" style="min-height: 401px;">
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img class="profile-personnel-img img-fluid img-circle"
-                                    src="{{ $personnel->images ? asset('storage/' . $personnel->images) : asset('assets/images/user.png') }}"
+                                    src="{{ ($personnel->images == null) ? asset('storage/' . $personnel->images) :asset('images/man.png')  }}"
                                     width="130px" height="130px" alt="Profile picture of personnel">
                             </div>
 
@@ -69,7 +69,7 @@
 
                 <!-- Conges Listing Section -->
                 <div class="col-md-9">
-                    <div class="card card-purple card-outline">
+                    <div class="card card-purple card-outline" style="min-height: 401px;">
                         <!-- Filter and Search Bar -->
                         <div class="card-header">
                             <div class="row justify-content-between">
@@ -134,7 +134,7 @@
                                             <td class="text-center">
                                                 <!-- Edit button -->
                                                 <a href="{{ route('conges.edit', ['conge' => $conge->id]) }}"
-                                                    class="btn btn-primary btn-sm">
+                                                    class="btn btn-secondary btn-sm">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
 
@@ -159,24 +159,7 @@
                         </div>
 
                         <!-- Pagination -->
-                        <div class="d-flex justify-content-between align-items-center p-2">
-                            <!-- Import/Export Buttons -->
-                            <div class="d-flex align-items-center mb-2 ml-2 mt-2">
-                                <form action="{{ route('conges.import') }}" method="POST" class="mt-2"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <label for="upload" class="btn btn-default btn-sm">
-                                        <i class="fa-solid fa-file-arrow-down"></i>
-                                        IMPORTER
-                                    </label>
-                                    <input type="file" id="upload" name="file" style="display: none;"
-                                        onchange="this.form.submit()" />
-                                </form>
-                                <a href="{{ route('conges.export') }}" class="btn btn-default btn-sm mt-0 mx-2">
-                                    <i class="fa-solid fa-file-export"></i> EXPORTER
-                                </a>
-                            </div>
-
+                        <div class="d-flex justify-content-end align-items-center p-2">
                             <!-- Pagination Links -->
                             <div class="">
                                 <ul class="pagination m-0 float-right">
