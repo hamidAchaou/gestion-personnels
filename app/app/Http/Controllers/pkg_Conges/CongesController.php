@@ -57,7 +57,13 @@ class CongesController extends Controller
     // Method to show the create conge form
     public function create()
     {
-        $personnels = $this->personnels->paginate()->all();
+        // First year
+        $firstYear = now()->format('Y');
+        // Last year
+        $lastYear = now()->addYears(-1)->format('Y');
+        
+        dd($lastYear);
+        $personnels = $this->personnels->all();
         $motifs = Motif::all();
         return view('pkg_Conges.conges.create', compact('personnels', 'motifs'));
     }
