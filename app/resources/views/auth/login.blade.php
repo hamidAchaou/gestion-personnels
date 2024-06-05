@@ -29,7 +29,7 @@
                 - remplacer style par class dans le fichier de package : authentification.css
                 - ajouter la configuration de l'icon de l'application dans le fichier de configuration .env
                 -->
-                <i class="fas fa-home" style="font-size: 50px;"></i>
+                <img src="{{ asset('./images/logo.png') }}" width="100px" alt="">
 
                 <!-- TODO config-2 : à lire depuis le fichier de configuration de Laravel-->
                 <h4>Gestion personels</h4>
