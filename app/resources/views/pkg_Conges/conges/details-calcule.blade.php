@@ -3,7 +3,7 @@
     <div class="card collapsed-card">
         <div class="card-header border-0">
             <h3 class="card-title">
-                <i class="fa-solid fa-calendar-days"></i> {{ $lastYear }} (jours restant = {{ $joursRestantsLastYear }})
+                <i class="fa-solid fa-calendar-days"></i> {{ $lastYear }} <span class="{{ $joursRestantsLastYear < 0 ? 'text-danger' : '' }}">(jours restant = {{ $joursRestantsLastYear }})</span>
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-teal btn-sm" data-card-widget="collapse" title="Collapse">
@@ -35,7 +35,7 @@
                         <td></td>
                         <td class="text-center">{{ $CongesLastYear->sum('nombre_jours') }}</td>
                     </tr>
-                    <tr>
+                    <tr class="{{ $joursRestantsLastYear < 0 ? 'bg-danger' : '' }}">
                         <td>Jours restants</td>
                         <td></td>
                         <td class="text-center">{{ $joursRestantsLastYear }}</td>
@@ -49,7 +49,7 @@
     <div class="card">
         <div class="card-header border-0">
             <h3 class="card-title">
-                <i class="fa-solid fa-calendar-days"></i> {{ $firstYear }} (jours restant = {{ $joursRestantsFirstYear }})
+                <i class="fa-solid fa-calendar-days"></i> {{ $firstYear }} <span class="{{ $joursRestantsFirstYear < 0 ? 'text-danger' : '' }}">(jours restant = {{ $joursRestantsFirstYear }})</span>
             </h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-teal btn-sm" data-card-widget="collapse" title="Collapse">
@@ -81,7 +81,7 @@
                         <td></td>
                         <td class="text-center">{{ $CongesFirstYear->sum('nombre_jours') }}</td>
                     </tr>
-                    <tr>
+                    <tr class="{{ $joursRestantsFirstYear < 0 ? 'bg-danger' : '' }}">
                         <td>Jours restants</td>
                         <td></td>
                         <td class="text-center">{{ $joursRestantsFirstYear }}</td>
