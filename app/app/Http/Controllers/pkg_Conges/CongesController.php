@@ -73,11 +73,10 @@ class CongesController extends Controller
         } catch (CongeAlreadyExistException $e) {
             // Handle conge already exists exception
             return back()->withInput()->withErrors(['conge_exists' => __('Les congés existent déjà')]);
+        } catch (\Exception $e) {
+            // Handle any unexpected errors
+            return back()->withInput()->withErrors(['unexpected_error' => __('Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.')]);
         }
-        // } catch (\Exception $e) {
-        //     // Handle any unexpected errors
-        //     return back()->withInput()->withErrors(['unexpected_error' => __('Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.')]);
-        // }
     }
 
     // Method to show a specific conge details
