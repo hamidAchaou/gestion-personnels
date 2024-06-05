@@ -90,3 +90,12 @@ li {
 }
 
 /*** End Style foter ***/
+
+
+/* select 2 */
+
+.select2-selection__choice {
+    border: 1px solid black !important;
+    color: black !important;
+    padding-left: 30px !important;
+}
