@@ -26,5 +26,7 @@ return [
     'dateDebut' => 'Date début',
     'dateFin' => 'Date de fin',
     'echell' => 'Echell',
-    'grade' => 'Grade'
+    'grade' => 'Grade',
+    'ExportSucées' => 'a été exporté avec succès.',
+    'ImportSucées' => 'ont été importées avec succès.',
 ];

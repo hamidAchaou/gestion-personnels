@@ -64,27 +64,17 @@ class AbsenceRepository extends BaseRepository
         }
     }
 
-    /**
-     * Filtre les absences par une plage de dates.
-     *
-     * @param string $startDate Date de début au format 'Y-m-d'.
-     * @param string $endDate Date de fin au format 'Y-m-d'.
-     * @return Collection La collection des absences filtrées par la plage de dates.
-     */
-    public function filterByDateRange(string $startDate, string $endDate): Collection
+    public function filterByDateRange(string $startDate, string $endDate)
     {
-        try {
-            // Convert the date strings to Carbon instances for comparison
-            $start = Carbon::parse($startDate);
-            $end = Carbon::parse($endDate);
+        // Convert the date strings to Carbon instances for comparison
+        $start = Carbon::parse($startDate);
+        $end = Carbon::parse($endDate);
 
-            return $this->model
-                ->whereBetween('date_debut', [$start, $end])
-                ->orWhereBetween('date_fin', [$start, $end])
-                ->get();
-        } catch (\Exception $e) {
-            throw new \RuntimeException('Error filtering by date range: ' . $e->getMessage(), 0, $e);
-        }
+        return $this->model
+            ->with(['personnel', 'motif'])
+            ->whereBetween('date_debut', [$start, $end])
+            ->orWhereBetween('date_fin', [$start, $end])
+            ->paginate(4);
     }
 
     public function create(array $data)
@@ -110,28 +100,57 @@ class AbsenceRepository extends BaseRepository
         return parent::create($data);
     }
 
-    
-
     public function getAbsencesWithRelations($perPage = 4)
     {
-        return $this->model->with('personnel')->with('motif')->paginate($perPage);
+        // Subquery to get the IDs of the last absences for each personnel
+        $subquery = $this->model->selectRaw('MAX(id) as max_id')->groupBy('user_id');
+
+        // Main query to fetch the absences with relations using the subquery
+        return $this->model
+            ->whereIn('id', function ($query) use ($subquery) {
+                $query->fromSub($subquery, 'subquery');
+            })
+            ->with('personnel', 'motif')
+            ->paginate($perPage);
     }
 
-
-    public function searchData($search = null, $perPage = 4): LengthAwarePaginator
+    public function exportAbsenceWithRelations()
     {
-        $query = $this->model->with('personnel')->with('motif');
+        return $this->model->with('personnel', 'motif')->get();
+    }
 
-        // If search criteria is provided, apply it to the query
-        if ($search !== null) {
-            $query->where(function ($q) use ($search) {
-                $q->where('nom', 'like', "%$search%");
-            });
-        }
+    public function getAbsencesPersonnel($matricule, $perPage = 4)
+    {
+        return $this->model
+            ->whereHas('personnel', function ($query) use ($matricule) {
+                $query->where('matricule', $matricule);
+            })
+            ->with('personnel', 'motif')
+            ->paginate($perPage);
+    }
+
+    /**
+     * Recherche les projets correspondants aux critères spécifiés.
+     *
+     * @param mixed $searchableData Données de recherche.
+     * @param int $perPage Nombre d'éléments par page.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function search(string $searchableData, int $perPage = 4)
+    {
+        // Subquery to get the IDs of the last absences for each personnel
+        $subquery = $this->model->selectRaw('MAX(id) as max_id')->groupBy('user_id');
+
+        // Main query to fetch the absences with relations using the subquery and applying search
+        $query = $this->model
+            ->whereIn('id', function ($query) use ($subquery) {
+                $query->fromSub($subquery, 'subquery');
+            })
+            ->whereHas('personnel', function ($q) use ($searchableData) {
+                $q->where('nom', 'like', "%$searchableData%");
+            })
+            ->with(['personnel', 'motif']);
 
         return $query->paginate($perPage);
-        // return $this->model->where(function ($query) use ($searchableData) {
-        //     $query->where('nom', 'like', '%' . $searchableData . '%');
-        // })->paginate($perPage);
     }
 }

@@ -10,6 +10,12 @@
                 {{ session('success') }}.
             </div>
         @endif
+        @if (session('error'))
+            <div class="alert alert-warning alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{ session('error') }}.
+            </div>
+        @endif
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -81,7 +87,7 @@
 
                                         <div class="p-0">
                                             <div class="input-group-sm input-group">
-                                                <input type="text" name="table_search" class="form-control"
+                                                <input id="table_search" type="text" name="table_search" class="form-control"
                                                     placeholder="Recherche">
                                                 <div class="input-group-append">
                                                     <button type="submit" class="btn btn-default">
