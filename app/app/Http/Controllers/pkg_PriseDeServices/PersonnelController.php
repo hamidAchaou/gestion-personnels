@@ -99,14 +99,16 @@ class PersonnelController extends AppBaseController
     public function import(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv'
+            'file' => 'required|mimes:xlsx,xls,csv',
         ]);
+
         try {
             Excel::import(new PersonnelImport, $request->file('file'));
-        } catch (\InvalidArgumentException $e) {
-            return redirect()->route('personnels.index')->withErrors('Le symbol de séparation est introuvable, pas assez de données disponibles pour satisfaire au format.');
+        } 
+        catch (\InvalidArgumentException $e) {
+            return redirect()->route('personnels.index')->withError('Le symbole de séparation est introuvable. Pas assez de données disponibles pour satisfaire au format.');
         }
-        return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.addSucées'));
+        return redirect()->route('personnels.index')->with('success',__('pkg_PriseDeServices/personnels.singular').' '.__('app.addSucées'));
     }
     public function destroy(int $id)
     {
