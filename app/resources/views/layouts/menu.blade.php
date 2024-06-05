@@ -17,6 +17,8 @@
 @include('layouts.pkg_PriseDeServices.categorieMenu')
 {{-- include menu Congés --}}
 @include('layouts.pkg_Absences.absenceMenu')
+{{-- include menu Congés --}}
+@include('layouts.pkg_Conges.congeMenu')
 {{-- include menu missions --}}
 @include('layouts.pkg_OrderDesMissions.missionMenu')
 
