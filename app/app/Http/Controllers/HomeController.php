@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pkg_Parametres\Etablissement;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($etablissement)
     {
-        return view('home');
+        $etablissement = Etablissement::where('nom', $etablissement)->firstOrFail();
+
+        return view('home', compact('etablissement'));
     }
 }
