@@ -23,23 +23,26 @@ $(document).ready(function () {
     }
 
     function filterByDate(page, personnel_id) {
+        var url = window.location.href;
+        var requestUrl;
+    
+        if (url.includes("conges/create")) {
+            requestUrl = "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
+        } else if (url.includes("/edit")) {
+            requestUrl = "/conges/" + personnel_id + "?page=" + page + "&personnel_id=" + personnel_id;
+        }
+    
         $.ajax({
-            url:
-                "/conges/create?page=" + page + "&personnel_id=" + personnel_id,
+            url: requestUrl,
             success: function (data) {
                 var newData = $(data);
-                // console.log(newData.find("tbody").html());
                 var tbodyLastYear = newData.find('#CongesLastYear').html();
                 var tbodyFirstYear = newData.find('#CongesFirstYear').html();
                 console.log(tbodyLastYear);
                 console.log(tbodyFirstYear);
-                // console.log(newData.find('#CongesLastYear'));
                 $("#CongesLastYear").html(newData.find('#CongesLastYear').html());
                 $("#CongesFirstYear").html(newData.find('#CongesFirstYear').html());
-
-
-                // $("tbody").html(newData.find("tbody").html());
-                // $("#card-footer").html(newData.find("#card-footer").html());
+    
                 var paginationHtml = newData.find(".pagination").html();
                 if (paginationHtml) {
                     $(".pagination").html(paginationHtml);
@@ -51,6 +54,7 @@ $(document).ready(function () {
                 console.log("Error: " + xhr.status + " " + xhr.statusText);
             },
         });
+    
         if (page !== null && personnel_id !== null) {
             updateURLParameter("page", page);
             updateURLParameter("personnel_id", personnel_id);
@@ -62,6 +66,7 @@ $(document).ready(function () {
             );
         }
     }
+    
 
     console.log(557);
     // Event listener for filter button
