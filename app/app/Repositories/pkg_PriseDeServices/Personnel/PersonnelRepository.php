@@ -42,4 +42,17 @@ class PersonnelRepository extends BaseRepository
             'avancement_id',
         ];
     }
+
+    public function PersonnelsOneEtablissement($etablissement = null, array $search = [], int $skip = null, int $limit = null, array $columns = ['*'])
+    {
+        $query = $this->allQuery($search, $skip, $limit);
+    
+        if ($etablissement !== null) {
+            $query->whereHas('etablissement', function ($q) use ($etablissement) {
+                $q->where('nom', $etablissement);
+            });
+        }
+    
+        return $query->get($columns);
+    }
 }

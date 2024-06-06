@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     function filterByDate(page, startDate, endDate) {
         $.ajax({
-            url: '/conges?page=' + page + '&startDate=' + startDate + '&endDate=' + endDate,
+            url: '/?page=' + page + '&startDate=' + startDate + '&endDate=' + endDate,
             success: function (data) {
                 var newData = $(data);
                 console.log(newData.find("tbody").html());
