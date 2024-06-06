@@ -37,16 +37,26 @@ class CongesRepository extends BaseRepository
         ];
     }
 
-    public function paginate($search = [], $perPage = 0, array $columns = ['*']): LengthAwarePaginator
+    public function paginate($etablissement = "", $search = [], $perPage = 0, array $columns = ['*']): LengthAwarePaginator
     {
         if ($perPage == 0) {
             $perPage = $this->paginationLimit;
         }
 
-        return $this->model
-            ->with(['motif', 'personnels'])
-            ->paginate($perPage, $columns);
+        if ($etablissement !== null) {
+            return $this->model
+                ->with(['motif', 'personnels'])
+                ->whereHas('personnels.etablissement', function ($query) use ($etablissement) {
+                    $query->where('nom', $etablissement);
+                })
+                ->paginate($perPage, $columns);
+        } else {
+            return $this->model
+                ->with(['motif', 'personnels'])
+                ->paginate($perPage, $columns);
+        }
     }
+
 
     public function create(array $data)
     {
@@ -145,18 +155,23 @@ class CongesRepository extends BaseRepository
      * @param int $perPage Number of results per page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator Paginated list of conges.
      */
-    public function searchData($searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0, $personnel_id = null)
+    public function searchData($etablissement = null, $searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0, $personnel_id = null)
     {
         if ($perPage == 0) {
             $perPage = $this->paginationLimit;
         }
-
+    
         return $this->model
+            ->whereHas('personnels.etablissement', function ($query) use ($etablissement) {
+                if ($etablissement !== null) {
+                    $query->where('nom', $etablissement);
+                }
+            })
             ->where(function ($query) use ($searchableData, $date_debut, $date_fin, $personnel_id) {
                 if ($personnel_id !== null) {
                     $query->where('personnel_id', $personnel_id);
                 }
-
+    
                 if ($searchableData !== null) {
                     $query->whereHas('personnels', function ($q) use ($searchableData) {
                         $q->where('nom', 'like', '%' . $searchableData . '%')
@@ -166,13 +181,14 @@ class CongesRepository extends BaseRepository
                         ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
                         ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
                 }
-
+    
                 if ($date_debut !== null && $date_fin !== null) {
                     $query->whereBetween('date_debut', [$date_debut, $date_fin]);
                 }
             })
             ->paginate($perPage);
     }
+    
 
     /**
      * Get all Conges for a given Personnel ID with optional search

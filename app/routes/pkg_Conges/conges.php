@@ -4,7 +4,8 @@ use App\Http\Controllers\pkg_Conges\CongesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth']], function () {
+Route::prefix('{etablissement}/')->middleware(['auth'])->group(function () {    
+
     // Routes for managing Conges
     Route::resource('/conges', CongesController::class);
     // Route::get('/conges/{id}', [CongesController::class, 'show'])->name('conges.show');
