@@ -77,8 +77,6 @@ class CongesController extends Controller
             $CongesFirstYear = $this->congesRepository->filterByDate($etablissement, null, null, $firstYear, $personnel_id);
             $CongesLastYear = $this->congesRepository->filterByDate($etablissement, null, null, $lastYear, $personnel_id);
 
-            dd($CongesLastYear);
-
             foreach ($CongesFirstYear as $conge) {
                 $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
                 $nombreJoursCongesFirstYear += $conge->nombre_jours;
@@ -97,8 +95,8 @@ class CongesController extends Controller
         } else {
             if ($personnels->isNotEmpty()) {
                 $personnel_id = $personnels->first()->id;
-                $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
-                $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+                $CongesFirstYear = $this->congesRepository->filterByDate($etablissement, null, null, $firstYear, $personnel_id);
+                $CongesLastYear = $this->congesRepository->filterByDate($etablissement, null, null, $lastYear, $personnel_id);
 
                 foreach ($CongesFirstYear as $conge) {
                     $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
