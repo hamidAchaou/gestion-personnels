@@ -99,17 +99,20 @@ class MultiStepFomr extends Component
             $this->date_return = $this->setMissions->date_return;
             $this->heure_de_return = $this->setMissions->heure_de_return;
             // users
+            $UsersID = [];
             foreach ($this->setMissions->users as $user) {
+                $UsersID[] = $user->id;
                 $this->users[] = $user->id;
             }
 
             //! transports
             // dd($this->setTransports);
-            foreach ($this->setTransports as $transport) {
-                $this->moyens_transports[$transport->user] = $this->getTransportUtiliserByName($transport->transport_utiliser);
-                $this->marque[$transport->user] = $transport->marque;
-                $this->puissance_fiscal[$transport->user] = $transport->puissance_fiscal;
-                $this->numiro_plaque[$transport->user] = $transport->numiro_plaque;
+            foreach ($this->setTransports as $index => $transport) {
+                $userId = $UsersID[$index];
+                $this->moyens_transports[$userId] = $this->getTransportUtiliserByName($transport->transport_utiliser);
+                $this->marque[$userId] = $transport->marque;
+                $this->puissance_fiscal[$userId] = $transport->puissance_fiscal;
+                $this->numiro_plaque[$userId] = $transport->numiro_plaque;
             }
             // dd($this->numiro_plaque);
         }
