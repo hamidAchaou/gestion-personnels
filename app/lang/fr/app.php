@@ -10,6 +10,7 @@ return [
     'import' => 'IMPORTER',
     'back' => 'Retour',
     'name' => 'Nom',
+    'lastName' => 'Prénom',
     'action' => 'Action',
     'detail' => 'Détail',
     'description' => 'Description',

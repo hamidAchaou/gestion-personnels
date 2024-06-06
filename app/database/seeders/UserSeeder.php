@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
+
 class UserSeeder extends Seeder
 {
     public function run(): void
@@ -62,10 +63,6 @@ class UserSeeder extends Seeder
         $responsableRole = User::RESPONSABLE;
         $roleAdmin = Role::where('name', $adminRole)->first();
         $roleResponsable = Role::where('name', $responsableRole)->first();
-        $adminUser = User::where('nom', $adminRole)->first();
-        $responsableUser = User::where('nom', $responsableRole)->first();
-        $adminUser->assignRole($adminRole);
-        $responsableUser->assignRole($adminRole);
 
         Schema::disableForeignKeyConstraints();
         Schema::enableForeignKeyConstraints();

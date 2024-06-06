@@ -10,11 +10,8 @@
 @import 'select2/dist/css/select2.min.css';
 
 /* font awesome */
-@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-/* import Absence css */
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 @import './pkg_Absences/absence.css';
-
-
 
 * {
     font-family: "Nunito", sans-serif;
