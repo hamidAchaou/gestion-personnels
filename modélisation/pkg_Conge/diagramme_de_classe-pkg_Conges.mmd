@@ -35,5 +35,22 @@ namespace pkg_conges {
     }
 }
 
+namespace pkg_Absences {
+
+    class Jour_ferie {
+        +id: BigInt
+        +nom: String
+        +date_debut: Date
+        +date_fin: Date
+        +is_formateur: boolean
+        +is_adminstrateur: boolean
+    }
+
+    class Annee_juridique {
+        +id: BigInt
+        +annee: String
+    }
+}
+
     Personnel "1..*" <-- "0..*" Conge 
     Conge "0..*" <-- "1..1" Motif
