@@ -145,34 +145,37 @@ class CongesRepository extends BaseRepository
 
 
     public function filterByDate($etablissement = null, string $date_debut = null, string $date_fin = null, int $year = null, $personnel_id = null)
-{
-    if ($etablissement !== null) {
-        return Conge::whereHas('personnels', function ($query) use ($personnel_id, $year, $etablissement) {
-            $query->where('etablissement_id', $etablissement->id);
-            if ($personnel_id !== null) {
-                $query->where('personnel_id', $personnel_id);
-            }
-            if ($year) {
-                $query->where(function ($query) use ($year) {
-                    $query->where('date_debut', 'LIKE', "%{$year}%")
-                        ->orWhere('date_fin', 'LIKE', "%{$year}%");
+    {
+        if ($etablissement !== null) {
+            return Conge::whereHas('personnels', function ($query) use ($personnel_id, $year, $etablissement) {
+                $query->whereHas('etablissement', function ($query) use ($etablissement) {
+                    $query->where('nom', $etablissement);
                 });
-            }
-        })->get();
-    } else {
-        return $this->model
-            ->where(function ($query) use ($date_debut, $date_fin, $year) {
-                if ($date_debut && $date_fin) {
-                    $query->whereBetween('date_debut', [$date_debut, $date_fin])
-                        ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
-                } elseif ($year) {
-                    $query->whereYear('date_debut', $year)
-                        ->orWhereYear('date_fin', $year);
+                if ($personnel_id !== null) {
+                    $query->where('personnel_id', $personnel_id);
                 }
-            })
-            ->get();
+                if ($year) {
+                    $query->where(function ($query) use ($year) {
+                        $query->where('date_debut', 'LIKE', "%{$year}%")
+                            ->orWhere('date_fin', 'LIKE', "%{$year}%");
+                    });
+                }
+            })->get();
+        } else {
+            return $this->model
+                ->where(function ($query) use ($date_debut, $date_fin, $year) {
+                    if ($date_debut && $date_fin) {
+                        $query->whereBetween('date_debut', [$date_debut, $date_fin])
+                            ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+                    } elseif ($year) {
+                        $query->whereYear('date_debut', $year)
+                            ->orWhereYear('date_fin', $year);
+                    }
+                })
+                ->get();
+        }
     }
-}
+    
 
 
 
@@ -191,7 +194,7 @@ class CongesRepository extends BaseRepository
         if ($perPage == 0) {
             $perPage = $this->paginationLimit;
         }
-    
+
         return $this->model
             ->whereHas('personnels.etablissement', function ($query) use ($etablissement) {
                 if ($etablissement !== null) {
@@ -202,7 +205,7 @@ class CongesRepository extends BaseRepository
                 if ($personnel_id !== null) {
                     $query->where('personnel_id', $personnel_id);
                 }
-    
+
                 if ($searchableData !== null) {
                     $query->whereHas('personnels', function ($q) use ($searchableData) {
                         $q->where('nom', 'like', '%' . $searchableData . '%')
@@ -212,14 +215,14 @@ class CongesRepository extends BaseRepository
                         ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
                         ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
                 }
-    
+
                 if ($date_debut !== null && $date_fin !== null) {
                     $query->whereBetween('date_debut', [$date_debut, $date_fin]);
                 }
             })
             ->paginate($perPage);
     }
-    
+
 
     /**
      * Get all Conges for a given Personnel ID with optional search
