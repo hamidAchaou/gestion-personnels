@@ -6,9 +6,9 @@ import "admin-lte/dist/js/adminlte";
 import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle';
 import 'admin-lte/dist/js/adminlte';
 import './app.recherche';
-import './absences';
 import './pkg_conges/filterByDate';
 import './pkg_conges/filterByPersonnel';
+import './absences';
 
 // Importation de CKEditor
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
