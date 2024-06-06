@@ -8,13 +8,36 @@
 @import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
 @import 'admin-lte/plugins/summernote/summernote-bs4.min.css';
 @import 'select2/dist/css/select2.min.css';
-
 /* font awesome */
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 @import './pkg_Absences/absence.css';
+
+/* pkg_OrderDesMissions */
+@import url("./pkg_OrderDesMissions/missions.css");
+@import url("./pkg_OrderDesMissions/multiStepForm.css");
+
 
 * {
     font-family: "Nunito", sans-serif;
     scroll-behavior: smooth;
     box-sizing: border-box;
+}
+
+/* Pagination */
+
+.active .page-link {
+    background-color: #138496 !important;
+    color: #ffffff !important;
+    border: 1px solid #138496 !important;
+}
+
+.page-link {
+    color: #000000 !important;
+
+}
+
+/* Logo attestation */
+.logoOfppt {
+    height: 130px;
+    width: auto;
 }

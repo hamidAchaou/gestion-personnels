@@ -15,7 +15,7 @@ use App\Models\pkg_Parametres\Avancement;
 use App\Models\pkg_Parametres\Specialite;
 use App\Models\pkg_Parametres\Etablissement;
 // use models of packages
-use App\Models\pkg_OrderDesMission\Mission;
+use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_Absences\Absence;
 use App\Models\pkg_Conges\Conge;
 
@@ -92,7 +92,16 @@ class User extends Authenticatable
 
     public function missions()
     {
-        return $this->belongsToMany(Mission::class, 'mission_personnel', 'user_id', 'mission_id')->withTimestamps();
+        return $this->belongsToMany(Mission::class, 'mission_personnels', 'user_id', 'mission_id')->withTimestamps();
+    }
+
+
+
+
+    //
+    public function getFullNameAttribute()
+    {
+        return $this->nom . " " . $this->prenom; // Get a human-readable difference
     }
 
 }
