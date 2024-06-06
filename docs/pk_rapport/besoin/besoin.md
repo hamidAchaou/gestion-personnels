@@ -21,8 +21,7 @@ La première partie du cahier de charge est un document élaboré lors du cadrag
 
 ![Cahier  des charges](/gestion-personnels/pk_rapport/besoin/images/Cahier-des-charges.jpg){:width="60%"}*figure : Cahier  des charges*
 
-Créer une application web mobile qui propose des films aux visiteurs.
-
+Créer une application web qui gère les ressources humaines de manière efficace et centralisée
 
 <!-- new slide -->
 
