@@ -22,24 +22,31 @@ $(document).ready(function () {
         window.history.replaceState({ path: url }, "", url + hash);
     }
 
-    function filterByDate(page, personnel_id) {
+    function filterByDate(page, personnel_id, conge_id) {
+        var url = window.location.href;
+        var requestUrl;
+    
+        if (url.includes("conges/create")) {
+            requestUrl = "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
+            console.log(requestUrl);
+        } else if (url.includes("/edit")) {
+            requestUrl = "/conges/" + conge_id + "?page=" + page + "&personnel_id=" + personnel_id;
+            console.log(requestUrl);
+        }
+    
         $.ajax({
-            url:
-                "/conges/create?page=" + page + "&personnel_id=" + personnel_id,
+            url: requestUrl,
             success: function (data) {
                 var newData = $(data);
-                // console.log(newData.find("tbody").html());
-                var tbodyLastYear = newData.find('#CongesLastYear').html();
-                var tbodyFirstYear = newData.find('#CongesFirstYear').html();
-                console.log(tbodyLastYear);
-                console.log(tbodyFirstYear);
-                // console.log(newData.find('#CongesLastYear'));
+                var titleJoursRestantsLastYear = newData.find('#titleJoursRestantsLastYear').html();
+                var titleJoursRestantsFirstYear = newData.find('#titleJoursRestantsFirstYear').html();
+                console.log(titleJoursRestantsLastYear);
+                console.log(titleJoursRestantsFirstYear);
                 $("#CongesLastYear").html(newData.find('#CongesLastYear').html());
                 $("#CongesFirstYear").html(newData.find('#CongesFirstYear').html());
-
-
-                // $("tbody").html(newData.find("tbody").html());
-                // $("#card-footer").html(newData.find("#card-footer").html());
+                $("#titleJoursRestantsFirstYear").html(newData.find('#titleJoursRestantsFirstYear').html());
+                $("#titleJoursRestantsLastYear").html(newData.find('#titleJoursRestantsLastYear').html());
+    
                 var paginationHtml = newData.find(".pagination").html();
                 if (paginationHtml) {
                     $(".pagination").html(paginationHtml);
@@ -51,6 +58,7 @@ $(document).ready(function () {
                 console.log("Error: " + xhr.status + " " + xhr.statusText);
             },
         });
+    
         if (page !== null && personnel_id !== null) {
             updateURLParameter("page", page);
             updateURLParameter("personnel_id", personnel_id);
@@ -62,15 +70,17 @@ $(document).ready(function () {
             );
         }
     }
+    
 
     console.log(557);
     // Event listener for filter button
     $("body").on("change", "#personnel_id", function () {
         var page = 1;
         var personnel_id = $("#personnel_id").val();
+        var conge_id = $("#conge_id").val();
 
         console.log(personnel_id);
-        filterByDate(page, personnel_id);
+        filterByDate(page, personnel_id, conge_id);
     });
 });
 

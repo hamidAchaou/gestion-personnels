@@ -6,6 +6,7 @@
         @endif
 
         <div class="card-body">
+            <input type="hidden" name="conge_id" value="{{isset($conge) ? $conge->id : '' }}">
             <!-- Personnel -->
             <div class="form-group">
                 <label for="exampleInputPersonnel">Personnel: <span class="text-danger">*</span></label>
