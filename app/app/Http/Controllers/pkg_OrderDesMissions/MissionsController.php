@@ -77,4 +77,12 @@ class MissionsController extends Controller
         return view('pkg_OrderDesMissions.update', compact('id'));
     }
 
+    public function destroy(Mission $mission)
+    {
+        $mission->delete();
+        return redirect()->back()->with('success', __('messages.delete_success'));
+
+
+    }
+
 }

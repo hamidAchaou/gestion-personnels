@@ -22,13 +22,17 @@
                         <a href="{{ route('missions.moreDetails', $item) }}" class='btn btn-default btn-sm'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('missions.edit', $item->id) }}"
-                            class="btn btn-sm btn-default">
+                        <a href="{{ route('missions.edit', $item->id) }}" class="btn btn-sm btn-default">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <button type="button" class="btn btn-sm btn-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
+                        <form action="{{ route('missions.destroy', $item) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

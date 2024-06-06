@@ -218,8 +218,7 @@ class MultiStepFomr extends Component
             ]);
         }
 
-        session()->flash('message', 'Mission created successfully.');
-        return redirect()->route('missions.index');
+        return redirect()->route('missions.index')->with('success', 'Mission created successfully.');
         // dd($MissionData);
     }
 
@@ -267,8 +266,8 @@ class MultiStepFomr extends Component
             ]);
         }
 
-        session()->flash('message', 'Mission updated successfully.');
-        return redirect()->route('missions.index');
+
+        return redirect()->route('missions.index')->with('success', 'Mission updated successfully.');
 
     }
 
