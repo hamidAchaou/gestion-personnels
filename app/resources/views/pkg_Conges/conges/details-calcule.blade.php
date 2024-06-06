@@ -2,7 +2,7 @@
     <!-- Année 1 -->
     <div class="card collapsed-card">
         <div class="card-header border-0">
-            <h3 class="card-title">
+            <h3 class="card-title" id="titleJoursRestantsLastYear">
                 <i class="fa-solid fa-calendar-days"></i> {{ $lastYear }} <span class="{{ $joursRestantsLastYear < 0 ? 'text-danger' : '' }}">(jours restant = {{ $joursRestantsLastYear }})</span>
             </h3>
             <div class="card-tools">
@@ -48,7 +48,7 @@
     <!-- Année 2 -->
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title">
+            <h3 class="card-title" id="titleJoursRestantsFirstYear">
                 <i class="fa-solid fa-calendar-days"></i> {{ $firstYear }} <span class="{{ $joursRestantsFirstYear < 0 ? 'text-danger' : '' }}">(jours restant = {{ $joursRestantsFirstYear }})</span>
             </h3>
             <div class="card-tools">
