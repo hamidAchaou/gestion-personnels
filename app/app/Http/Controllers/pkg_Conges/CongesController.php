@@ -55,22 +55,67 @@ class CongesController extends Controller
     }
 
     // Method to show the create conge form
-    public function create()
+    public function create(Request $request)
     {
         // First year
         $firstYear = now()->format('Y');
         // Last year
         $lastYear = now()->subYear()->format('Y');
-    
-        $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear);
-        $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear);
-    
+        // Two years ago
+        $twoYearsAgo = now()->subYears(2)->format('Y');
+        // dd($firstYear);
         $personnels = $this->personnels->all();
+        // motif
         $motifs = Motif::all();
-    
-        return view('pkg_Conges.conges.create', compact('personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear'));
+        $nombreJoursCongesFirstYear = 0;
+        $nombreJoursCongesLastYear = 0;
+        $nombreJoursCongestwoYearsAgo = 0;
+
+        if ($request->ajax()) {
+            $personnel_id = $request->personnel_id;
+            $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
+            $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+
+            foreach ($CongesFirstYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesFirstYear += $conge->nombre_jours;
+            }
+
+            foreach ($CongesLastYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesLastYear += $conge->nombre_jours;
+            }
+
+            // Calculate sum of jours_restants
+            $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
+            $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
+
+
+            return view('pkg_Conges.conges.details-calcule', compact('personnels', 'motifs', 'CongesLastYear', 'CongesFirstYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'))->render();
+        } else {
+            $personnel_id = $personnels->first()->id;
+            $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
+            $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+
+            foreach ($CongesFirstYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesFirstYear += $conge->nombre_jours;
+            }
+
+            foreach ($CongesLastYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesLastYear += $conge->nombre_jours;
+            }
+
+            // Calculate sum of jours_restants
+            $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
+            $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
+
+            return view('pkg_Conges.conges.create', compact('personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'));
+        }
     }
-    
+
+
 
     // Method to store a new conge
     public function store(CreateCongeRequest $createCongeRequest)
@@ -96,33 +141,81 @@ class CongesController extends Controller
         if ($request->has('searchValue')) {
             $searchValue = $request->get('searchValue');
             $personnel_id = $id;
-    
+
             // Fetch filtered or searched data
             $personnel = $this->personnels->find($id);
             $conges = $this->congesRepository->getCongesByPersonnelId($searchValue, $personnel_id);
-    
+
             // Return the filtered data view
             return view('pkg_Conges.conges.show', compact('personnel', 'conges'))->render();
         }
-    
+
         // Fetch personnel and related conges data
         $personnel = $this->personnels->find($id);
         $conges = $personnel->conges()->paginate(4);
-    
+
         // Return the view with personnel and conges data
         return view('pkg_Conges.conges.show', compact('personnel', 'conges'));
     }
-    
-    
+
+
 
 
     // Method to show the edit conge form
-    public function edit(string $id)
+    public function edit(Request $request, int $id)
     {
+        // First year
+        $firstYear = now()->format('Y');
+        // Last year
+        $lastYear = now()->subYear()->format('Y');
         $conge = $this->congesRepository->find($id);
         $personnels = $this->personnels->all();
         $motifs = Motif::all();
-        return view('pkg_Conges.conges.edit', compact('conge', 'personnels', 'motifs'));
+        $nombreJoursCongesFirstYear = 0;
+        $nombreJoursCongesLastYear = 0;
+        $nombreJoursCongestwoYearsAgo = 0;
+
+        if ($request->ajax()) {
+            $personnel_id = $request->personnel_id;
+            $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
+            $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+
+            foreach ($CongesFirstYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesFirstYear += $conge->nombre_jours;
+            }
+
+            foreach ($CongesLastYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesLastYear += $conge->nombre_jours;
+            }
+
+            // Calculate sum of jours_restants
+            $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
+            $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
+
+            return view('pkg_Conges.conges.details-calcule', compact('personnels', 'motifs', 'CongesLastYear', 'CongesFirstYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'))->render();
+        } else {
+            $personnel_id = $id;
+            $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
+            $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+
+            foreach ($CongesFirstYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesFirstYear += $conge->nombre_jours;
+            }
+
+            foreach ($CongesLastYear as $conge) {
+                $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+                $nombreJoursCongesLastYear += $conge->nombre_jours;
+            }
+
+            // Calculate sum of jours_restants
+            $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
+            $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
+
+            return view('pkg_Conges.conges.edit', compact('conge', 'personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'));
+        }
     }
 
     // Method to update an existing conge

@@ -3,9 +3,11 @@
 namespace App\Repositories\pkg_Conges;
 
 use App\Exceptions\pkg_conges\CongeAlreadyExistException;
+use App\Models\pkg_Absences\JourFerie;
 use App\Models\pkg_Conges\Conge;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class CongesRepository extends BaseRepository
@@ -96,26 +98,6 @@ class CongesRepository extends BaseRepository
         return $conge->delete();
     }
 
-    // public function searchData($searchableData, $perPage = 0)
-    // {
-    //     if ($perPage == 0) {
-    //         $perPage = $this->paginationLimit;
-    //     }
-
-    //     return $this->model
-    //         ->where(function ($query) use ($searchableData) {
-    //             $query->whereHas('personnels', function ($q) use ($searchableData) {
-    //                 $q->where('nom', 'like', '%' . $searchableData . '%')
-    //                     ->orWhere('prenom', 'like', '%' . $searchableData . '%')
-    //                     ->orWhere('matricule', 'like', '%' . $searchableData . '%');
-    //             })
-    //             ->orWhere('date_debut', 'like', '%' . $searchableData . '%')
-    //             ->orWhere('date_fin', 'like', '%' . $searchableData . '%');
-    //         })
-    //         ->paginate($perPage);
-    // }
-
-
     /**
      * Filter Conges by date or year.
      *
@@ -124,20 +106,33 @@ class CongesRepository extends BaseRepository
      * @param int|null $year Year for filtering conges.
      * @return \Illuminate\Database\Eloquent\Collection Collection of filtered conges.
      */
-    public function filterByDate(string $date_debut = null, string $date_fin = null, int $year = null)
+    public function filterByDate(string $date_debut = null, string $date_fin = null, int $year = null, $personnel_id = null)
     {
-        return $this->model
-            ->where(function ($query) use ($date_debut, $date_fin, $year) {
-                if ($date_debut && $date_fin) {
-                    $query->whereBetween('date_debut', [$date_debut, $date_fin])
-                        ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
-                } elseif ($year) {
-                    $query->whereYear('date_debut', $year)
-                        ->orWhereYear('date_fin', $year);
+        if ($personnel_id !== null) {
+            return Conge::whereHas('personnels', function ($query) use ($personnel_id, $year) {
+                $query->where('personnel_id', $personnel_id);
+                if ($year) {
+                    $query->where(function ($query) use ($year) {
+                        $query->where('date_debut', 'LIKE', "%{$year}%")
+                            ->orWhere('date_fin', 'LIKE', "%{$year}%");
+                    });
                 }
-            })
-            ->get();
+            })->get();
+        } else {
+            return $this->model
+                ->where(function ($query) use ($date_debut, $date_fin, $year) {
+                    if ($date_debut && $date_fin) {
+                        $query->whereBetween('date_debut', [$date_debut, $date_fin])
+                            ->orWhereBetween('date_fin', [$date_debut, $date_fin]);
+                    } elseif ($year) {
+                        $query->whereYear('date_debut', $year)
+                            ->orWhereYear('date_fin', $year);
+                    }
+                })
+                ->get();
+        }
     }
+
 
 
     /**
@@ -203,5 +198,50 @@ class CongesRepository extends BaseRepository
         }
 
         return $query->paginate(6);
+    }
+
+
+    // Accessor for the number of days excluding public holidays
+    public function getNombreJoursAttribute($dateDebut, $dateFin)
+    {
+        $dateDebut = Carbon::parse($dateDebut);
+        $dateFin = Carbon::parse($dateFin);
+
+        // Get all jour feries within the conge date range
+        $jourFeries = JourFerie::where(function ($query) use ($dateDebut, $dateFin) {
+            $query->whereBetween('date_debut', [$dateDebut, $dateFin])
+                ->orWhereBetween('date_fin', [$dateDebut, $dateFin])
+                ->orWhere(function ($query) use ($dateDebut, $dateFin) {
+                    $query->where('date_debut', '<=', $dateDebut)
+                        ->where('date_fin', '>=', $dateFin);
+                });
+        })->get();
+
+        $totalDays = $dateFin->diffInDays($dateDebut) + 1;
+        $joursFeriesDays = 0;
+
+        foreach ($jourFeries as $jourFerie) {
+            $jourDebut = Carbon::parse($jourFerie->date_debut);
+            $jourFin = Carbon::parse($jourFerie->date_fin);
+
+            // Calculate overlap days between conge and jour ferie
+            if ($jourDebut->between($dateDebut, $dateFin) && $jourFin->between($dateDebut, $dateFin)) {
+                $joursFeriesDays += $jourFin->diffInDays($jourDebut) + 1;
+            } elseif ($jourDebut->between($dateDebut, $dateFin)) {
+                $joursFeriesDays += $dateFin->diffInDays($jourDebut) + 1;
+            } elseif ($jourFin->between($dateDebut, $dateFin)) {
+                $joursFeriesDays += $jourFin->diffInDays($dateDebut) + 1;
+            } elseif ($dateDebut->between($jourDebut, $jourFin) && $dateFin->between($jourDebut, $jourFin)) {
+                $joursFeriesDays += $dateFin->diffInDays($dateDebut) + 1;
+            }
+        }
+
+        return $totalDays - $joursFeriesDays;
+    }
+
+    public function calculateJoursRestants($nombreJoursCongesFirstYear = 0, $joursRestantsLastYear = 0)
+    {
+        $jours_restants = ((22 + $joursRestantsLastYear) - $nombreJoursCongesFirstYear);
+        return $jours_restants;
     }
 }
