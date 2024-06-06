@@ -54,3 +54,4 @@ namespace pkg_Absences {
 
     Personnel "1..*" <-- "0..*" Conge 
     Conge "0..*" <-- "1..1" Motif
+    Jour_ferie "*" --> "1" Annee_juridique 
