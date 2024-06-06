@@ -21,9 +21,17 @@
                     <td class="text-center">{{ $jourFerie->date_debut }}</td>
                     <td class="text-center">{{ $jourFerie->date_fin }}</td>
                     <td class="text-center">
-                        <a href="" class='btn btn-default btn-sm'>
-                            <i class="far fa-eye"></i>
-                        </a>
+                        <a href="{{ route('jourFerie.edit', $jourFerie) }}" class="btn btn-sm btn-default"><i
+                                class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="{{ route('jourFerie.destroy', $jourFerie) }}" method="POST"
+                            style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce jour férié ?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @empty
@@ -38,7 +46,7 @@
 
 <div class="row justify-content-between p-2">
     <div class="col-6 align-self-end d-flex">
-        <form action="" method="post" enctype="multipart/form-data" id="importForm">
+        <form action="{{ route('jourFerie.import') }}" method="post" enctype="multipart/form-data" id="importForm">
             @csrf
             <label for="upload" class="btn btn-default btn-sm mb-0 font-weight-normal">
                 <i class="fa-solid fa-file-arrow-down"></i>
@@ -47,7 +55,7 @@
             <input type="file" id="upload" name="file" style="display:none;" onchange="submitForm()" />
         </form>
 
-        <a href="" class="btn  btn-default btn-sm mt-0 mx-2">
+        <a href="{{ route('jourFerie.export') }}" class="btn  btn-default btn-sm mt-0 mx-2">
             <i class="fa-solid fa-file-export"></i>
             {{ __('app.export') }}</a>
     </div>
