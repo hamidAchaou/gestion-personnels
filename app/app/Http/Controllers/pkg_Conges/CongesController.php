@@ -38,12 +38,12 @@ class CongesController extends Controller
             $conges = $this->congesRepository->searchData($etablissement, $searchValue, $startDate, $endDate);
 
             // Return the filtered data view
-            return view('pkg_Conges.conges.index', compact('conges'))->render();
+            return view('pkg_Conges.conges.index', compact('conges', 'etablissement'))->render();
         }
 
         // Fetch paginated data for initial page load
         $conges = $this->congesRepository->paginate($etablissement, $perPage = 6);
-        return view('pkg_Conges.conges.index', compact('conges'));
+        return view('pkg_Conges.conges.index', compact('conges', 'etablissement'));
     }
 
     // Method to show the decision page for a specific personnel
@@ -91,7 +91,7 @@ class CongesController extends Controller
             $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
             $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
 
-            return view('pkg_Conges.conges.details-calcule', compact('personnels', 'motifs', 'CongesLastYear', 'CongesFirstYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'))->render();
+            return view('pkg_Conges.conges.details-calcule', compact('etablissement', 'personnels', 'motifs', 'CongesLastYear', 'CongesFirstYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'))->render();
         } else {
             if ($personnels->isNotEmpty()) {
                 $personnel_id = $personnels->first()->id;
@@ -120,7 +120,7 @@ class CongesController extends Controller
                 $joursRestantsFirstYear = 0;
             }
 
-            return view('pkg_Conges.conges.create', compact('personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'));
+            return view('pkg_Conges.conges.create', compact('etablissement', 'personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'));
         }
     }
 
@@ -172,14 +172,14 @@ class CongesController extends Controller
 
 
     // Method to show the edit conge form
-    public function edit(Request $request, int $id)
+    public function edit($etablissement, Request $request, int $id)
     {
         // First year
         $firstYear = now()->format('Y');
         // Last year
         $lastYear = now()->subYear()->format('Y');
         $conge = $this->congesRepository->find($id);
-        $personnels = $this->personnels->all();
+        $personnels = $this->personnels->PersonnelsOneEtablissement($etablissement);
         $motifs = Motif::all();
         $nombreJoursCongesFirstYear = 0;
         $nombreJoursCongesLastYear = 0;
@@ -187,8 +187,8 @@ class CongesController extends Controller
 
         if ($request->ajax()) {
             $personnel_id = $request->personnel_id;
-            $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
-            $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+            $CongesFirstYear = $this->congesRepository->filterByDate($etablissement, null, null, $firstYear, $personnel_id);
+            $CongesLastYear = $this->congesRepository->filterByDate($etablissement, null, null, $lastYear, $personnel_id);
 
             foreach ($CongesFirstYear as $conge) {
                 $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
@@ -204,11 +204,11 @@ class CongesController extends Controller
             $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
             $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
 
-            return view('pkg_Conges.conges.details-calcule', compact('personnels', 'motifs', 'CongesLastYear', 'CongesFirstYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'))->render();
+            return view('pkg_Conges.conges.details-calcule', compact('etablissement', 'personnels', 'motifs', 'CongesLastYear', 'CongesFirstYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'))->render();
         } else {
             $personnel_id = $id;
-            $CongesFirstYear = $this->congesRepository->filterByDate(null, null, $firstYear, $personnel_id);
-            $CongesLastYear = $this->congesRepository->filterByDate(null, null, $lastYear, $personnel_id);
+            $CongesFirstYear = $this->congesRepository->filterByDate($etablissement, null, null, $firstYear, $personnel_id);
+            $CongesLastYear = $this->congesRepository->filterByDate($etablissement, null, null, $lastYear, $personnel_id);
 
             foreach ($CongesFirstYear as $conge) {
                 $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
@@ -224,7 +224,7 @@ class CongesController extends Controller
             $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
             $joursRestantsFirstYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
 
-            return view('pkg_Conges.conges.edit', compact('conge', 'personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'));
+            return view('pkg_Conges.conges.edit', compact('etablissement', 'conge', 'personnels', 'motifs', 'CongesFirstYear', 'CongesLastYear', 'firstYear', 'lastYear', 'joursRestantsLastYear', 'joursRestantsFirstYear'));
         }
     }
 

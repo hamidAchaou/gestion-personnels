@@ -7,6 +7,7 @@
 
         <div class="card-body">
             <input type="hidden" name="conge_id" value="{{isset($conge) ? $conge->id : '' }}">
+            <input type="hidden" value="{{$etablissement}}" id="inpEtablissement">
             <!-- Personnel -->
             <div class="form-group">
                 <label for="exampleInputPersonnel">Personnel: <span class="text-danger">*</span></label>
@@ -81,20 +82,3 @@
         </div>
     </form>
 </div>
-
-
-<script>
-    // $(document).ready(function() {
-    //     // Initialize Select2
-    //     $('.js-example-basic-single').select2();
-
-    //     // Attach change event listener to the select dropdown
-    //     $('#exampleInputPersonnel').on('change', function() {
-    //         // Get the selected value
-    //         var selectedPersonnel = $(this).val();
-            
-    //         // Log the selected value to the console
-    //         console.log('Selected Personnel:', selectedPersonnel);
-    //     });
-    // });
-</script>

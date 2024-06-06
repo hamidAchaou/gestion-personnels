@@ -42,6 +42,7 @@
                         <div class="card-header col-md-12">
                             <div class="d-flex justify-content-between">
                                 <div class="col-md-5 row">
+                                    <input type="hidden" value="{{$etablissement}}" id="inpEtablissement">
                                     <div class="input-group input-group-sm">
                                         <div class="input-group-prepend">
                                             <button type="submit" class="btn btn-default">
