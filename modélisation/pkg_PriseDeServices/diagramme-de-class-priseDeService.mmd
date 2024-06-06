@@ -1,0 +1,64 @@
+classDiagram
+    direction TB
+
+namespace pkg_PriseDesServices {
+    class Personnel {
+        +id: BigInt
+        +matricule: String
+        +prenom: String
+        +nom: String
+        +email: String
+        +password: String
+        +nom_arabe: String
+        +prenom_arabe: String
+        +cin: String
+        +date_naissance: Date
+        +telephone: String
+        +adresse: String
+        +images: String
+    }
+
+    class Etablissement {
+        +id: int
+        +nom: String
+        +description: String
+    }
+
+    class Grade {
+        +id: int
+        +nom: String
+        +echell_debut: int
+        +echell_fin: int
+    }
+
+    class Fonction {
+        +id: int
+        +nom: String
+        +description: String
+    }
+
+    class Avancement {
+        +id: int
+        +date_debut: Date
+        +date_fin: Date
+        +echell: int
+    }
+
+    class Specialite {
+        +id: int
+        +nom: String
+        +description: String
+    }
+
+    class Villes {
+        +id: int
+        +nom: String
+    }
+}
+
+Personnel "1" -- "0..*" Etablissement: works_at
+Personnel "1" -- "0..*" Grade: holds
+Personnel "1" -- "0..*" Fonction: has
+Personnel "1" -- "0..*" Avancement: advances
+Personnel "1" -- "0..*" Specialite: specializes_in
+Personnel "1" -- "0..*" Villes: lives_in
