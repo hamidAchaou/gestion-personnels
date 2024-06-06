@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pkg_Absences\JourFerieController;
 
 
-Route::prefix('jourFerie')->middleware(['auth'])->group(function () {
+Route::prefix('{etablissement}/jourFerie')->middleware(['auth'])->group(function () {
 
     Route::get('/export', [JourFerieController::class, 'export'])->name('jourFerie.export');
     Route::post('/import', [JourFerieController::class, 'import'])->name('jourFerie.import');

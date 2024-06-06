@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\pkg_Parametres\Etablissement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
