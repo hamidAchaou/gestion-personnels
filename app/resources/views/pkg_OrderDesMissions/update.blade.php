@@ -16,11 +16,11 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="nav-icon fas fa-table"></i>
-                                Ajouter une mission
+                                Update une mission
                             </h3>
                         </div>
                         <!-- Obtenir le formulaire -->
-                        @livewire('multi-step-fomr', ['dataToEdit' => 'create'])
+                        @livewire('multi-step-fomr', ['dataToEdit' => 'update', 'ID' => $id])
                     </div>
                 </div>
             </div>

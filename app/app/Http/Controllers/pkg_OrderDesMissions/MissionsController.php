@@ -69,40 +69,12 @@ class MissionsController extends Controller
 
     public function create()
     {
-        $dataToEdit = null;
-        $personnels = User::all();
-        $moyensTransport = MoyensTransport::all();
-        return view('pkg_OrderDesMissions.create', compact('dataToEdit', 'personnels', 'moyensTransport'));
+        return view('pkg_OrderDesMissions.create');
     }
 
-
-    public function store(MissionRequest $request)
+    public function edit(string $id)
     {
-        // dd($request);
-        $validatedData = $request->validated();
-        // dd($validatedData);
-        $mission = Mission::create($validatedData);
-
-        foreach ($request->users as $userId) {
-            MissionPersonnel::create([
-                'user_id' => $userId,
-                'mission_id' => $mission->id,
-            ]);
-        }
-
-        foreach ($request->moyens_transports as $moyensTransportId) {
-            Transports::create([
-                'moyens_transports_id' => $moyensTransportId,
-                'mission_id' => $mission->id,
-                'user' => '1',
-                'transport_utiliser' => $moyensTransportId,
-                'marque' => $request->marque,
-                'puissance_fiscal' => $request->puissance_fiscal,
-                'numiro_plaque' => $request->numiro_plaque,
-            ]);
-        }
-
-        return redirect()->route('missions.index')->with('success', 'Mission created successfully.');
+        return view('pkg_OrderDesMissions.update', compact('id'));
     }
 
 }

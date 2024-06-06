@@ -22,7 +22,8 @@
                         <a href="{{ route('missions.moreDetails', $item) }}" class='btn btn-default btn-sm'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('missions.edit', $item) }}" class="btn btn-sm btn-default">
+                        <a href="{{ route('missions.edit', $item->id) }}"
+                            class="btn btn-sm btn-default">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                         <button type="button" class="btn btn-sm btn-danger">

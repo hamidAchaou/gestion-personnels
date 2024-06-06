@@ -1,1 +1,1 @@
-@livewire('multi-step-fomr')
+@livewire('multi-step-fomr', ['dataToEdit' => 'create'])
