@@ -7,7 +7,7 @@
 
 
 <li class="nav-item has-treeview">
-    <a class="nav-link {{ Request::is('absence*') || Request::is('jourFerie*') ? 'active' : '' }}">
+    <a class="nav-link {{ Request::is('*absence*') || Request::is('*jourFerie*') ? 'active' : '' }}">
         <i class="fa-regular fa-calendar-minus mr-2"></i>
         <p>
             {{ __('Layouts/Menu.absences') }}
@@ -15,9 +15,8 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-
         <li class="nav-item">
-            <a href="{{ route('absence.index') }}" class="nav-link {{ Request::is('absence*') ? 'active' : '' }}">
+            <a href="{{ route('absence.index') }}" class="nav-link {{ Request::is('*absence*') ? 'active' : '' }}">
                 <i class="fa-regular fa-calendar-minus mr-2"></i>
                 <p>{{ __('Layouts/Menu.absences') }}</p>
             </a>
@@ -25,11 +24,14 @@
 
         <!-- Role -->
         <li class="nav-item">
-            <a href="{{ route('jourFerie.index') }}" class="nav-link {{ Request::is('jourFerie*') ? 'active' : '' }}">
+            <a href="{{ route('jourFerie.index') }}" class="nav-link {{ Request::is('*jourFerie*') ? 'active' : '' }}">
                 <i class="far fa-user-circle nav-icon"></i>
                 <p>Jour férié</p>
             </a>
         </li>
 
+
     </ul>
 </li>
+
+

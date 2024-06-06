@@ -10,9 +10,10 @@
             <select name="personnel" class="form-control personnel" id="personnel">
                 <option value="" selected disabled>--Veuillez choisir un personnel--</option>
                 @foreach ($personnels as $personnel)
-                <option value="{{ $personnel->id }}" {{ $absence->personnel->id === $personnel->id ? 'selected' : '' }}>
-                    {{ $personnel->nom }} {{ $personnel->prenom }}
-                </option>
+                    <option value="{{ $personnel->id }}"
+                        {{ isset($absence) && $absence->personnel->id === $personnel->id ? 'selected' : '' }}>
+                        {{ $personnel->nom }} {{ $personnel->prenom }}
+                    </option>
                 @endforeach
             </select>
             @error('personnel')
@@ -26,9 +27,9 @@
             <select name="motif" class="form-control" id="exampleInputProject">
                 <option value="" selected disabled>--Veuillez choisir un motif--</option>
                 @foreach ($motifs as $motif)
-                <option value="{{$motif->id}}" {{ $absence->motif->id === $motif->id ? 'selected' : '' }}>
-                    {{$motif->nom}}
-                </option>
+                    <option value="{{ $motif->id }}" {{ isset($absence) && $absence->motif->id === $motif->id ? 'selected' : '' }}>
+                        {{ $motif->nom }}
+                    </option>
                 @endforeach
             </select>
             @error('motif')
@@ -39,7 +40,7 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Date de début</label>
             <input name="date_debut" type="date" class="form-control" id="exampleInputPassword1"
-                placeholder="Date de début" required value="{{ $absence ? $absence->date_debut : old('date_debut') }}">
+                placeholder="Date de début" required value="{{ isset($absence) && $absence ? $absence->date_debut : old('date_debut') }}">
             @error('date_debut')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -48,8 +49,8 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Date de fin</label>
             <input name="date_fin" type="date" class="form-control" id="exampleInputPassword1"
-                placeholder="Date de début" required value="{{ $absence ? $absence->date_fin : old('date_fin') }}">
-                @error('date_fin')
+                placeholder="Date de début" required value="{{ isset($absence) && $absence ? $absence->date_fin : old('date_fin') }}">
+            @error('date_fin')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -58,7 +59,7 @@
         <div class="form-group">
             <label for="Remarques">Remarques</label>
             <textarea name="remarques" class="form-control" rows="7" id="Remarques" placeholder="Remarques">
-                {{ $absence ? $absence->remarques : old('remarques') }}
+                {{ isset($absence) && $absence ? $absence->remarques : old('remarques') }}
             </textarea>
         </div>
 

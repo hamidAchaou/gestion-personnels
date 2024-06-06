@@ -24,23 +24,23 @@ class AbsenceController extends AppBaseController
         $this->absenceRepository = $absenceRepository;
     }
 
-    public function index(Request $request)
+    public function index(string $etablissement, Request $request)
     {
         $motifs = Motif::all();
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '' && $searchValue !== 'undefined') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
-                $absences = $this->absenceRepository->search($searchQuery);
+                $absences = $this->absenceRepository->search($etablissement, $searchQuery);
                 return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
             }
         }
 
-        $absences = $this->absenceRepository->getAbsencesWithRelations(2);
+        $absences = $this->absenceRepository->getAbsencesWithRelations($etablissement, 2);
         return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
     }
 
-    public function filterByMotif(Request $request)
+    public function filterByMotif(string $etablissement, Request $request)
     {
         $motifNom = $request->input('motif');
         $motifs = Motif::all();
@@ -61,12 +61,15 @@ class AbsenceController extends AppBaseController
         return view('pkg_Absences.index', compact('absences', 'motifs'))->render();
     }
 
-    public function create()
+    public function create(string $etablissement)
     {
+        $etablissement_id =  $this->absenceRepository->getEtablissementId($etablissement);
         $motifs = Motif::all();
         $personnels = User::whereDoesntHave('roles', function ($query) {
             $query->whereIn('name', [User::ADMIN, User::RESPONSABLE]);
-        })->get();
+        })
+        ->where('etablissement_id', $etablissement_id)
+        ->get();
         return view('pkg_Absences.create', compact('motifs', 'personnels'));
     }
 
@@ -105,7 +108,7 @@ class AbsenceController extends AppBaseController
         // }
     }
 
-    public function show(string $matricule)
+    public function show(string $etablissement, string $matricule)
     {
         $absencesPersonnel = $this->absenceRepository->getAbsencesPersonnel($matricule, 2);
         $etablissment_id = $absencesPersonnel[0]->personnel->etablissement_id;
@@ -113,7 +116,7 @@ class AbsenceController extends AppBaseController
         return view('pkg_Absences.show', compact('absencesPersonnel', 'etablissment'));
     }
 
-    public function edit(Absence $absence)
+    public function edit(string $etablissement, Absence $absence)
     {
         $motifs = Motif::all();
         $personnels = User::whereDoesntHave('roles', function ($query) {
@@ -127,7 +130,7 @@ class AbsenceController extends AppBaseController
         return view('pkg_Absences.edit', compact('absence', 'motifs', 'personnels'));
     }
 
-    public function update(Request $request, Absence $absence)
+    public function update(Request $request,string $etablissement, Absence $absence)
     {
         $rules = [
             'date_debut' => 'required|date|before_or_equal:date_fin',
@@ -154,7 +157,7 @@ class AbsenceController extends AppBaseController
             ->with('success', __('pkg_Absences/absence.singular') . ' ' . __('app.updateSucées'));
     }
 
-    public function destroy(string $id)
+    public function destroy(string $etablissement, string $id)
     {
         $this->absenceRepository->destroy($id);
         return redirect()
@@ -196,19 +199,7 @@ class AbsenceController extends AppBaseController
         return view('pkg_Absences.document-absenteisme', compact('motifs'));
     }
 
-
-    // public function filterAndPrint(Request $request)
-    // {
-    //     if ($request->has('date_debut') && $request->has('date_fin') && $request->has('motifs')) {
-    //         $date_debut = $request->input('date_debut');
-    //         $date_fin = $request->input('date_fin');
-    //         $motifs = $request->input('motifs');
-    //         $absences = $this->absenceRepository->filterForDocument($date_debut, $date_fin, $motifs);
-    //         return view('pkg_Absences.imprimer', compact('absences'));
-    //     }
-    // }
-
-    public function filterAndPrint(Request $request)
+    public function filterAndPrint(string $etablissement, Request $request)
     {
         // Validate the incoming request data
         $validatedData = $request->validate([
@@ -225,11 +216,11 @@ class AbsenceController extends AppBaseController
 
         try {
             // Filter absences based on validated inputs
-            $absences = $this->absenceRepository->filterForDocument($date_debut, $date_fin, $motifs);
+            $absences = $this->absenceRepository->filterForDocument($etablissement, $date_debut, $date_fin, $motifs);
 
             // Check if absences are found
             if ($absences->isEmpty()) {
-                return redirect()->route('absence.index')->with('error', 'No absences found for the selected criteria.');
+                return redirect()->route('absence.index')->with('error', 'Aucune absence trouvée pour les critères sélectionnés.');
             }
 
             // Return the view to print
@@ -239,8 +230,6 @@ class AbsenceController extends AppBaseController
             return redirect()->route('absence.index')->with('error', 'An error occurred while processing the request.');
         }
     }
-
-
 
 
 }
