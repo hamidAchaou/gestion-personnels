@@ -11,6 +11,6 @@ order: 643
 
 <!-- note -->
 
-Conception et développement d'une application web de gestion des personnels, offrant des fonctionnalités avancées telles que la gestion des des absences.
+Conception et développement d'une application web de gestion des personnels, offrant des fonctionnalités avancées telles que la gestion des absences.
 
 <!-- new slide -->
