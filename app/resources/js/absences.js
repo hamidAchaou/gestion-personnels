@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
             checkbox.checked = selectAllCheckbox.checked;
         });
     });
-
     motifCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
             if (!checkbox.checked) {
@@ -83,5 +82,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 selectAllCheckbox.checked = true;
             }
         });
+    });
+
+
+});
+
+
+const JourferieSelectAllCheckbox = document.getElementById("Jourferie-select-all");
+const jourFerieCheckboxes = document.querySelectorAll(".jourFerie-checkbox");
+
+JourferieSelectAllCheckbox.addEventListener("change", function () {
+    jourFerieCheckboxes.forEach(function (checkbox) {
+        checkbox.checked = JourferieSelectAllCheckbox.checked;
+    });
+});
+jourFerieCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener("change", function () {
+        if (!checkbox.checked) {
+            JourferieSelectAllCheckbox.checked = false;
+        } else if (
+            Array.from(motifCheckboxes).every((chk) => chk.checked)
+        ) {
+            JourferieSelectAllCheckbox.checked = true;
+        }
     });
 });

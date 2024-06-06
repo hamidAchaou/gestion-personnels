@@ -25,8 +25,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">
-                        <a href="" class="btn btn-info">
-                            <i class="fas fa-plus"></i> Ajouter une absence
+                        <a href="{{route('jourFerie.create')}}" class="btn btn-info">
+                            <i class="fas fa-plus"></i> Ajouter une jour férié
                         </a>
                     </div>
                 </div>
@@ -41,7 +41,26 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header col-md-12">
-                            <div class="row justify-content-end">
+                            <div class="row justify-content-between">
+                                <div class="row col-6">
+                                    <!-- filter by motif -->
+                                    <div class="input-group-sm input-group col-md-5">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-filter "></i>
+                                            </button>
+                                        </div>
+                                        <select class="form-select form-control" id="filterSelectMotif"
+                                            aria-label="Filter Select" name="motif">
+                                            <option value="" selected disabled>--Année juridique--</option>
+                                            @foreach ($anneeJuridiques as $anneeJuridique)
+                                                <option value="{{ $anneeJuridique->id }}">
+                                                    {{ $anneeJuridique->annee }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-4">
                                     <div class="d-flex justify-content-end">
                                         <div class="p-0">
