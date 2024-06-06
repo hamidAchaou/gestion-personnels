@@ -22,14 +22,16 @@ $(document).ready(function () {
         window.history.replaceState({ path: url }, "", url + hash);
     }
 
-    function filterByDate(page, personnel_id) {
+    function filterByDate(page, personnel_id, conge_id) {
         var url = window.location.href;
         var requestUrl;
     
         if (url.includes("conges/create")) {
             requestUrl = "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
+            console.log(requestUrl);
         } else if (url.includes("/edit")) {
-            requestUrl = "/conges/" + personnel_id + "?page=" + page + "&personnel_id=" + personnel_id;
+            requestUrl = "/conges/" + conge_id + "?page=" + page + "&personnel_id=" + personnel_id;
+            console.log(requestUrl);
         }
     
         $.ajax({
@@ -73,9 +75,10 @@ $(document).ready(function () {
     $("body").on("change", "#personnel_id", function () {
         var page = 1;
         var personnel_id = $("#personnel_id").val();
+        var conge_id = $("#conge_id").val();
 
         console.log(personnel_id);
-        filterByDate(page, personnel_id);
+        filterByDate(page, personnel_id, conge_id);
     });
 });
 
