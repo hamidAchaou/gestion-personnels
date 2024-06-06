@@ -53,7 +53,8 @@
         <a href="{{ route('absence.export') }}" class="btn  btn-default btn-sm mt-0 mx-2">
             <i class="fa-solid fa-file-export"></i>
             {{ __('app.export') }}</a>
-        <a href="./document-absenteisme.php" type="button" class="btn btn-default bg-purple btn-sm mt-0">
+        <a href="{{ route('absence.document_absenteisme') }}" type="button"
+            class="btn btn-default bg-purple btn-sm mt-0">
             <i class="fa-solid fa-print"></i>
             IMPRIMER</a>
     </div>
