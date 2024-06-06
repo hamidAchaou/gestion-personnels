@@ -26,7 +26,7 @@ class CongesController extends Controller
     }
 
     // Index method to display the list of congés
-    public function index(Request $request)
+    public function index(string $etablissement, Request $request)
     {
         // Handle AJAX requests for searching and filtering
         if ($request->ajax()) {
@@ -35,14 +35,14 @@ class CongesController extends Controller
             $endDate = $request->get('endDate');
 
             // Fetch filtered or searched data
-            $conges = $this->congesRepository->searchData($searchValue, $startDate, $endDate);
+            $conges = $this->congesRepository->searchData($etablissement,$searchValue, $startDate, $endDate);
 
             // Return the filtered data view
             return view('pkg_Conges.conges.index', compact('conges'))->render();
         }
 
         // Fetch paginated data for initial page load
-        $conges = $this->congesRepository->paginate($perPage = 6);
+        $conges = $this->congesRepository->paginate($etablissement, $perPage = 6);
         return view('pkg_Conges.conges.index', compact('conges'));
     }
 
