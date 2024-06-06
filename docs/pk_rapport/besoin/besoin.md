@@ -2,16 +2,12 @@
 layout: default
 presentation: true
 chapitre: true
-package : pkg_rapport
+package: pkg_rapport
 order: 200
 ---
 
-# Besoin 
-{:class="sectionHeader"}
+# Context de projet
 
-<!-- note -->
-
-## Context de projet
 {:class="sectionHeader"}
 
 <!-- note -->
@@ -21,7 +17,16 @@ La première partie du cahier de charge est un document élaboré lors du cadrag
 
 <!-- new slide -->
 
-## Objectifs de formation 
+## Cahier  des charges
+
+![Cahier  des charges](/gestion-personnels/pk_rapport/besoin/images/Cahier-des-charges.jpg){:width="60%"}*figure : Cahier  des charges*
+
+Créer une application web mobile qui propose des films aux visiteurs.
+
+
+<!-- new slide -->
+
+## Objectifs de formation
 
 Le principal objectif de ce projet est de créer une application web qui utilise le framework Laravel pour la gestion des congés. La version web de l'application sera développée à l'aide de ce framework, qui suit l'architecture MVC (Modèle-Vue-Contrôleur) afin d'organiser le code et de faciliter la gestion des différentes parties de l'application.
 
