@@ -50,12 +50,17 @@ Le 05/03/2024
 ## Ce qu’il fait :
 
 - J'utilise Microsoft Word pour remplir et imprimer les attestations de travail
-<<<<<<< HEAD
-=======
 
 <!-- new slide -->
 ## Définir de problème 
 ![empathie chef de formation](/gestion-personnels/pkg_PriseDeServices/images/problem.jpg){:width="63%"}
 <!-- note -->
 perdre beaucoup de temps à récupérer les données de chaque employé et à chercher des fichiers mal organisés.
->>>>>>> 193-pkg_prisedeservices__gestion-personnels-efm-maquettage-q2-définir_le_problème
+
+
+<!-- new slide -->
+## Ideation
+![empathie chef de formation](/gestion-personnels/empathie-chef-de-formation/images/ideation.jpg){:width="73%"}
+<!-- note -->
+Réaliser une application web pour gérer les employés et imprimer les fichiers nécessaires avec une récupération automatique des données.
+
