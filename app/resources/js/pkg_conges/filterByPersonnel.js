@@ -38,12 +38,14 @@ $(document).ready(function () {
             url: requestUrl,
             success: function (data) {
                 var newData = $(data);
-                var tbodyLastYear = newData.find('#CongesLastYear').html();
-                var tbodyFirstYear = newData.find('#CongesFirstYear').html();
-                console.log(tbodyLastYear);
-                console.log(tbodyFirstYear);
+                var titleJoursRestantsLastYear = newData.find('#titleJoursRestantsLastYear').html();
+                var titleJoursRestantsFirstYear = newData.find('#titleJoursRestantsFirstYear').html();
+                console.log(titleJoursRestantsLastYear);
+                console.log(titleJoursRestantsFirstYear);
                 $("#CongesLastYear").html(newData.find('#CongesLastYear').html());
                 $("#CongesFirstYear").html(newData.find('#CongesFirstYear').html());
+                $("#titleJoursRestantsFirstYear").html(newData.find('#titleJoursRestantsFirstYear').html());
+                $("#titleJoursRestantsLastYear").html(newData.find('#titleJoursRestantsLastYear').html());
     
                 var paginationHtml = newData.find(".pagination").html();
                 if (paginationHtml) {
