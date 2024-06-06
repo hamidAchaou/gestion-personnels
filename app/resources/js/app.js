@@ -7,7 +7,7 @@ import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle';
 import 'admin-lte/dist/js/adminlte';
 import './app.recherche';
 import './pkg_conges/filterByDate';
-import './pkg_conges/filterByDateDetails';
+import './pkg_conges/filterByPersonnel';
 
 // Importation de CKEditor
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
