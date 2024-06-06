@@ -9,7 +9,7 @@ order: 103
 
 # Introduction
 
-![Introduction](./images/introduction.png){:width="700px"}*figure: Introduction*
+![Introduction](./images/introduction.png){:width="700px"}*figure 1: Introduction*
 
 <!-- note -->
 
