@@ -47,7 +47,7 @@ class CongesController extends Controller
     }
 
     // Method to show the decision page for a specific personnel
-    public function decision($id)
+    public function decision(string $etablissement, $id)
     {
         $personnel = $this->personnels->find($id);
         $currentDate = now()->format('d/m/Y');
@@ -128,7 +128,7 @@ class CongesController extends Controller
 
 
     // Method to store a new conge
-    public function store(CreateCongeRequest $createCongeRequest)
+    public function store(string $etablissement, CreateCongeRequest $createCongeRequest)
     {
         $validatedData = $createCongeRequest->validated();
         try {
@@ -145,7 +145,7 @@ class CongesController extends Controller
     }
 
     // Method to show a specific conge details
-    public function show(Request $request, string $id)
+    public function show(string $etablissement, Request $request, string $id)
     {
         // Handle AJAX requests for searching and filtering
         if ($request->has('searchValue')) {
@@ -229,7 +229,7 @@ class CongesController extends Controller
     }
 
     // Method to update an existing conge
-    public function update(UpdateCongeRequest $updateCongeRequest, string $id)
+    public function update(string $etablissement, UpdateCongeRequest $updateCongeRequest, string $id)
     {
         $validatedData = $updateCongeRequest->validated();
         $conge = $this->congesRepository->update($id, $validatedData);
@@ -237,7 +237,7 @@ class CongesController extends Controller
     }
 
     // Method to delete a conge
-    public function destroy(Request $request, $id)
+    public function destroy(string $etablissement, Request $request, $id)
     {
         $inpUserId = $request->inpUserId;
         $this->congesRepository->destroy($id);
@@ -245,7 +245,7 @@ class CongesController extends Controller
     }
 
     // Method to export conges data to an Excel file
-    public function export(Request $request)
+    public function export(string $etablissement, Request $request)
     {
         $date_debut = $request->input('date_debut');
         $date_fin = $request->input('date_fin');
