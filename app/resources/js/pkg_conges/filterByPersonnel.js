@@ -29,7 +29,7 @@ $(document).ready(function () {
         if (url.includes("conges/create")) {
             requestUrl = "/" + etablissement + "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
         } else if (url.includes("/edit")) {
-            requestUrl = "/" + etablissement + "/conges/" + conge_id + "?page=" + page + "&personnel_id=" + personnel_id;
+            requestUrl = "/" + etablissement + "/conges/" + conge_id + "/edit?page=" + page + "&personnel_id=" + personnel_id;
         }
     
         $.ajax({
@@ -73,8 +73,9 @@ $(document).ready(function () {
         var personnel_id = $("#personnel_id").val();
         var conge_id = $("#conge_id").val();
         var etablissement = $("#inpEtablissement").val();
+        console.log(conge_id);
 
-        console.log(personnel_id);
+        // console.log(personnel_id);
         filterPersonnelId(etablissement, page, personnel_id, conge_id);
     });
 });
