@@ -162,9 +162,10 @@
                         <legend>{{ $this->getUserNameById($user) }}</legend>
                         <div class="row" id="stepThree">
                             <div class="form-group col-lg-6 col-12">
-                                <label for="Personnel">Moyens de transport <span class="text-danger">*</span></label>
+                                <label for="moyens_transports_{{ $user }}">Moyens de transport <span
+                                        class="text-danger">*</span></label>
                                 <select class="form-control" wire:model="moyens_transports.{{ $user }}"
-                                    id="">
+                                    id="moyens_transports_{{ $user }}">
                                     <option value="not_empth">Choisissez le moyen de transport</option>
                                     @foreach ($moyensTransportsValues as $item)
                                         <option value="{{ $item->id }}">{{ $item->nom }}</option>
@@ -175,27 +176,34 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="marque">Marque <span class="text-danger">*</span></label>
+                            <div class="form-group col-lg-6 col-12" wire:key="marque_{{ $user }}"
+                                wire:ignore.self>
+                                <label for="marque_{{ $user }}">Marque <span
+                                        class="text-danger">*</span></label>
                                 <input wire:model="marque.{{ $user }}" type="text" class="form-control"
-                                    id="marque" placeholder="Entrez le missions">
+                                    id="marque_{{ $user }}" placeholder="Entrez le missions">
                                 @error('marque.' . $user)
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="numiro_plaque">Numiro plaque <span class="text-danger">*</span></label>
+                            <div class="form-group col-lg-6 col-12" wire:key="numiro_plaque_{{ $user }}"
+                                wire:ignore.self>
+                                <label for="numiro_plaque_{{ $user }}">Numiro plaque <span
+                                        class="text-danger">*</span></label>
                                 <input wire:model="numiro_plaque.{{ $user }}" type="text"
-                                    class="form-control" id="numiro_plaque" placeholder="Entrez le missions">
+                                    class="form-control" id="numiro_plaque_{{ $user }}"
+                                    placeholder="Entrez le missions">
                                 @error('numiro_plaque.' . $user)
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="puissance_fiscal">Puissance fiscal <span
+                            <div class="form-group col-lg-6 col-12" wire:key="puissance_fiscal_{{ $user }}"
+                                wire:ignore.self>
+                                <label for="puissance_fiscal_{{ $user }}">Puissance fiscal <span
                                         class="text-danger">*</span></label>
                                 <input wire:model="puissance_fiscal.{{ $user }}" type="text"
-                                    class="form-control" id="puissance_fiscal" placeholder="Entrez le missions">
+                                    class="form-control" id="puissance_fiscal_{{ $user }}"
+                                    placeholder="Entrez le missions">
                                 @error('puissance_fiscal.' . $user)
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -227,10 +235,41 @@
 
     </div>
 </form>
+
+
 <script>
-    // Multi-select boxes
-    $(document).ready(function() {
-        alert('aaaa')
-        $('.js-example-basic-multiple').select2();
+    document.addEventListener('livewire:load', function() {
+        Livewire.hook('afterDomUpdate', () => {
+            Livewire.emit('updateInputs');
+        });
+    });
+
+    Livewire.on('updateInputs', () => {
+        @foreach ($users as $user)
+            let selectValue_{{ $user }} = document.getElementById(
+                'moyens_transports_{{ $user }}').value;
+            let marqueInput_{{ $user }} = document.getElementById('marque_{{ $user }}');
+            let numiroPlaqueInput_{{ $user }} = document.getElementById(
+                'numiro_plaque_{{ $user }}');
+            let puissanceFiscalInput_{{ $user }} = document.getElementById(
+                'puissance_fiscal_{{ $user }}');
+
+            if (selectValue_{{ $user }} === '1') {
+                alert('1')
+                marqueInput_{{ $user }}.style.display = 'none';
+                numiroPlaqueInput_{{ $user }}.style.display = 'none';
+                puissanceFiscalInput_{{ $user }}.style.display = 'none';
+            } else if (selectValue_{{ $user }} === '2') {
+                alert('2')
+                marqueInput_{{ $user }}.style.display = 'block';
+                numiroPlaqueInput_{{ $user }}.style.display = 'none';
+                puissanceFiscalInput_{{ $user }}.style.display = 'block';
+            } else {
+                alert('6')
+                marqueInput_{{ $user }}.style.display = 'block';
+                numiroPlaqueInput_{{ $user }}.style.display = 'block';
+                puissanceFiscalInput_{{ $user }}.style.display = 'block';
+            }
+        @endforeach
     });
 </script>
