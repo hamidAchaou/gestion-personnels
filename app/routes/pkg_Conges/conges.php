@@ -14,6 +14,6 @@ Route::prefix('{etablissement}/conges')->middleware(['auth'])->group(function ()
     Route::delete('/{conge}', [CongesController::class, 'destroy'])->name('conges.destroy');
 
     Route::get('/{conge}/decision', [CongesController::class, 'decision'])->name('conges.decision');
-    Route::get('/export', [CongesController::class, 'export'])->name('conges.export');
-    Route::post('/import', [CongesController::class, 'import'])->name('conges.import');
+    Route::get('/CongesBetweenDate/export', [CongesController::class, 'export'])->name('conges.export');
+    Route::post('/CongesBetweenDate/import', [CongesController::class, 'import'])->name('conges.import');
 });

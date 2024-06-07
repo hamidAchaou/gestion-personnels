@@ -42,20 +42,18 @@ class CongesRepository extends BaseRepository
         if ($perPage == 0) {
             $perPage = $this->paginationLimit;
         }
-
+    
+        $query = $this->model->with(['motif', 'personnels'])->orderBy('created_at', 'desc');
+    
         if ($etablissement !== null) {
-            return $this->model
-                ->with(['motif', 'personnels'])
-                ->whereHas('personnels.etablissement', function ($query) use ($etablissement) {
-                    $query->where('nom', $etablissement);
-                })
-                ->paginate($perPage, $columns);
-        } else {
-            return $this->model
-                ->with(['motif', 'personnels'])
-                ->paginate($perPage, $columns);
+            $query->whereHas('personnels.etablissement', function ($query) use ($etablissement) {
+                $query->where('nom', $etablissement);
+            });
         }
+    
+        return $query->paginate($perPage, $columns);
     }
+    
 
 
     public function create(array $data)
