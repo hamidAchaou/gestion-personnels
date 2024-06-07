@@ -8,6 +8,7 @@ import 'admin-lte/dist/js/adminlte';
 import './app.recherche';
 import './pkg_conges/filterByDate';
 import './pkg_conges/filterByPersonnel';
+import './pkg_conges/conges';
 import './absences';
 
 // Importation de CKEditor

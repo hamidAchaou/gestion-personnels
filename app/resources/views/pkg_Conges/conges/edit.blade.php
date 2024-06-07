@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Modifier Congés')
+
 @section('content')
     <section class="content">
         <div class="container-fluid">

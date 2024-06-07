@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Décision des Conges')
+
 @section('content')
 <div class="content-header">
     <div class="container-fluid">
@@ -189,10 +191,4 @@
             }
         } */
     </style>
-    <!-- Inclure le script -->
-    <script>
-        document.getElementById("printButton").addEventListener("click", function() {
-            window.print();
-        });
-    </script>
 @endsection
