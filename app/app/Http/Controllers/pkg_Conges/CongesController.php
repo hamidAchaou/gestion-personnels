@@ -25,6 +25,8 @@ class CongesController extends Controller
         $this->personnels = $personnelRepository;
     }
 
+
+    
     public function index(string $etablissement, Request $request)
     {
         if ($request->ajax()) {
