@@ -47,7 +47,6 @@ class PersonnelFactory extends Factory
             'ETPAffectation_id' => Etablissement::factory()->create()->id,
             'specialite_id' => Specialite::factory()->create()->id,
             'etablissement_id' => Etablissement::factory()->create()->id,
-            'avancement_id' => Avancement::factory()->create()->id,
         ];
     }
 

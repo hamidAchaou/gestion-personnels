@@ -30,6 +30,7 @@ class AvancementSeeder extends Seeder
                     "date_debut" => $data['0'],
                     "date_fin" => $data['1'],
                     "echell" => $data['2'],
+                    "personnel_id" => $data['3'],
                 ]);
             }
             $firstline = false;

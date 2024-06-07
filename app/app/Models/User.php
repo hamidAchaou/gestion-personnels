@@ -49,8 +49,7 @@ class User extends Authenticatable
         'ETPAffectation_id',
         'grade_id',
         'specialite_id',
-        'etablissement_id',
-        'avancement_id',
+        'etablissement_id'
     ];
 
     protected $casts = [
@@ -75,10 +74,6 @@ class User extends Authenticatable
     public function etp_Affectation()
     {
         return $this->belongsTo(Etablissement::class, 'ETPAffectation_id');
-    }
-    public function avancement()
-    {
-        return $this->belongsTo(Avancement::class, 'avancement_id');
     }
     public function absences()
     {
