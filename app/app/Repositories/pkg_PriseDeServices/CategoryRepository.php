@@ -1,10 +1,12 @@
-<?php 
+<?php
 
 namespace App\Repositories\pkg_PriseDeServices;
 
 use App\Repositories\BaseRepository;
 use App\Models\pkg_Parametres\Avancement;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Exceptions\pkg_PriseDeServices\CategoryAlreadyExistException;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepository extends BaseRepository
 {
@@ -14,13 +16,40 @@ class CategoryRepository extends BaseRepository
         'echell'
     ];
 
-    public function getFieldsSearchable():array{
-       return $this->fieldSearchable;
+    public function getFieldsSearchable(): array
+    {
+        return $this->fieldSearchable;
     }
-    public function __construct(Avancement $avancement){
+    public function __construct(Avancement $avancement)
+    {
         $this->model = $avancement;
     }
-    public function create(array $data){
+
+     /**
+     * Override paginate method to include personnel name concatenation.
+     *
+     * @param array|string $search
+     * @param int $perPage
+     * @param array $columns
+     * @return LengthAwarePaginator
+     */
+    public function paginate($search = [], $perPage = 0, array $columns = ['*']): LengthAwarePaginator
+    {
+        if ($perPage == 0) {
+            $perPage = $this->paginationLimit;
+        }
+
+        $query = $this->allQuery($search);
+
+        // Join with the users table to get the personnel name
+        $query->join('users', 'users.id', '=', 'avancements.personnel_id')
+              ->select('avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"));
+
+        return $query->paginate($perPage, $columns);
+    }
+
+    public function create(array $data)
+    {
         $personne_id = $data['personnel_id'];
         $echell = $data['echell'];
         $existCategory = Avancement::where([
@@ -34,7 +63,7 @@ class CategoryRepository extends BaseRepository
         }
 
     }
- /**
+    /**
      * Recherche les categories correspondants aux critères spécifiés.
      *
      * @param mixed $searchableData Données de recherche.
