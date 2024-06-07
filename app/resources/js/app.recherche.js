@@ -87,6 +87,7 @@ $(document).ready(function () {
     // Import
     $(document).on("change", "#upload", function () {
         $("#importForm").submit();
+        console.log('here');
     })
 
     // Activation des dropdowns Bootstrap

@@ -3,6 +3,7 @@
 namespace Tests\Feature\pkg_PriseDeServices;
 
 use App\Models\pkg_Parametres\Avancement;
+use App\Models\pkg_PriseDeServices\Personnel;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Repositories\pkg_PriseDeServices\CategoryRepository;
 use Tests\TestCase;
@@ -18,7 +19,7 @@ class CategoryTest extends TestCase
     {
         parent::setUp();
         $this->categoryRepository = new CategoryRepository(new Avancement);
-        $this->user = Avancement::factory()->create();
+        $this->user = Personnel::factory()->create();
     }
 
     public function test_get_paginated_categories()
