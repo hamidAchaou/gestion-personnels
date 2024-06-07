@@ -45,7 +45,7 @@ class CategoryRepository extends BaseRepository
     {
         return $this->model->where(function ($query) use ($searchableData) {
             $query->where('echell', 'like', '%' . $searchableData . '%')
-                ->orWhere('prenom', 'like', '%' . $searchableData . '%');
+                ->orWhere('personnel_id', 'like', '%' . $searchableData . '%');
         })->paginate($perPage);
     }
 

@@ -35,9 +35,9 @@ class CategoryTest extends TestCase
     {
         $this->actingAs($this->user);
         $categoryData = [
-            'echell' => 1,
-            'date_debut' => 2023-02-21,
-            'date_fin' => 2024-02-21,
+            'echell' => 100,
+            'date_debut' => '2023-01-01',
+            'date_fin' => '2023-01-01',
             'personnel_id' => 1,
             
         ];
@@ -53,7 +53,7 @@ class CategoryTest extends TestCase
 
         $category = Avancement::factory()->create();
         $categoryData = [
-            'echell' => 'test',
+            'echell' => 1,
             'date_debut' => 2023-02-21,
             'date_fin' => 2024-02-21,
             'personnel_id' => 1,
@@ -63,7 +63,7 @@ class CategoryTest extends TestCase
             $category = $this->categoryRepository->create($categoryData);
             $this->fail('Expected personnelException was not thrown');
         } catch (CategoryAlreadyExistException $e) {
-            $this->assertEquals(__('Le personnel existe déjà'), $e->getMessage());
+            $this->assertEquals(__('La categorie existe déjà'), $e->getMessage());
         } catch (\Exception $e) {
             $this->fail('Unexpected exception was thrown: ' . $e->getMessage());
         }
@@ -76,12 +76,12 @@ class CategoryTest extends TestCase
         $category = Avancement::factory()->create();
         $categoryData = [
             'echell' => 1,
-            'date_debut' => 'Rachid',
-            'date_fin' => 2024-02-21,
+            'date_debut' => '2024-02-23',
+            'date_fin' => '2024-02-21',
             'personnel_id' => 1,
         ];
         $this->categoryRepository->update($category->id, $categoryData);
-        $this->assertDatabaseHas('users', $categoryData);
+        $this->assertDatabaseHas('avancements', $categoryData);
     }
 
 
@@ -98,13 +98,13 @@ class CategoryTest extends TestCase
     {
         $this->actingAs($this->user);
         $categoryData = [
-            'echell' => 'test',
-            'date_debut' => 2023-02-21,
-            'date_fin' => 2024-02-21,
+            'echell' => 52,
+            'date_debut' => '2022-02-21',
+            'date_fin' => '2025-02-21',
             'personnel_id' => 1,
         ];
         $this->categoryRepository->create($categoryData);
-        $searchValue = 'test';
+        $searchValue = 52;
         $searchResults = $this->categoryRepository->searchData($searchValue);
         $this->assertTrue($searchResults->contains('echell', $searchValue));
     }
