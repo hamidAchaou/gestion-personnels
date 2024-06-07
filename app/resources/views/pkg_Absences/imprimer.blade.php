@@ -62,12 +62,58 @@
             margin-left: 70%;
         }
 
+
+
+
+        page {
+            background: white;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+        }
+
+        page[size="A4"] {
+            width: 21cm;
+            height: 29.7cm;
+            padding: 20px
+        }
+
+        page[size="A4"][layout="landscape"] {
+            width: 29.7cm;
+            height: 21cm;
+        }
+
+        page[size="A3"] {
+            width: 29.7cm;
+            height: 42cm;
+        }
+
+        page[size="A3"][layout="landscape"] {
+            width: 42cm;
+            height: 29.7cm;
+        }
+
+        page[size="A5"] {
+            width: 14.8cm;
+            height: 21cm;
+        }
+
+        page[size="A5"][layout="landscape"] {
+            width: 21cm;
+            height: 14.8cm;
+        }
+
         @media print {
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f9f9f9;
                 margin: 0;
                 padding: 20px;
+            }
+            page {
+                background: white;
+                margin: 0;
+                box-shadow: 0;
             }
 
             .document-absenteisme {
@@ -118,54 +164,58 @@
                 margin-left: 70%;
             }
         }
+
     </style>
 </head>
 
 <body>
+    <page size="A4">
 
-    <div class="document-absenteisme">
-        <table>
-            <caption>maquette d'absentéisme</caption>
-        </table>
-        <div class="absenteisme-date-container">
-            @php
-                use Carbon\Carbon;
-                $formattedDate = strtolower(Carbon::now()->locale('fr_FR')->isoFormat('MMM-YY'));
-            @endphp
-            <span class="absenteisme-date">{{ $formattedDate }}</span>
+        <div class="document-absenteisme">
+            <table>
+                <caption>maquette d'absentéisme</caption>
+            </table>
+            <div class="absenteisme-date-container">
+                @php
+                    use Carbon\Carbon;
+                    $formattedDate = strtolower(Carbon::now()->locale('fr_FR')->isoFormat('MMM-YY'));
+                @endphp
+                <span class="absenteisme-date">{{ $formattedDate }}</span>
+            </div>
+            <table style="font-size: 12px;">
+                <thead>
+                    <tr>
+                        <th>Matricule</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Motif</th>
+                        <th>Date début</th>
+                        <th>Date fin</th>
+                        <th>Durée absence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($absences as $absence)
+                        <tr>
+                            <td>{{ $absence->personnel->matricule }}</td>
+                            <td>{{ $absence->personnel->nom }}</td>
+                            <td>{{ $absence->personnel->prenom }}</td>
+                            <td>{{ $absence->motif->nom }}</td>
+                            <td>{{ $absence->date_debut }}</td>
+                            <td>{{ $absence->date_fin }}</td>
+                            <td>{{ App\Helpers\pkg_Absences\AbsenceHelper::calculateAbsenceDurationForPersonnel($absence) }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7">Aucune absence ñ'a</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Matricule</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Motif</th>
-                    <th>Date début</th>
-                    <th>Date fin</th>
-                    <th>Durée absence</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($absences as $absence)
-                    <tr>
-                        <td>{{ $absence->personnel->matricule }}</td>
-                        <td>{{ $absence->personnel->nom }}</td>
-                        <td>{{ $absence->personnel->prenom }}</td>
-                        <td>{{ $absence->motif->nom }}</td>
-                        <td>{{ $absence->date_debut }}</td>
-                        <td>{{ $absence->date_fin }}</td>
-                        <td>{{ App\Helpers\pkg_Absences\AbsenceHelper::calculateAbsenceDurationForPersonnel($absence) }}
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="7">Aucune absence ñ'a</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+
+    </page>
     <script>
         window.onload = function() {
             window.print();
