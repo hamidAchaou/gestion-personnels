@@ -18,7 +18,7 @@
                     <td>{{ $personnel->nom }} {{ $personnel->prenom }}</td>
                     <td class="text-center">{{ $conge->date_debut }}</td>
                     <td class="text-center">{{ $conge->date_fin }}</td>
-                    <td class="text-center">{{ $conge->jours_restants }}</td>
+                    <td class="text-center">{{ $conge->joursRestants }}</td>
                     <td class="text-center">
                         <a href="{{ route('conges.decision', ['conge' => $personnel->id]) }}" class='btn btn-default btn-sm'>
                             <i class="fa-regular fa-file"></i>
