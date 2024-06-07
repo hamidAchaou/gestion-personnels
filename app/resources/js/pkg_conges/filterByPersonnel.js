@@ -28,20 +28,15 @@ $(document).ready(function () {
     
         if (url.includes("conges/create")) {
             requestUrl = "/" + etablissement + "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
-            console.log(requestUrl);
         } else if (url.includes("/edit")) {
             requestUrl = "/" + etablissement + "/conges/" + conge_id + "?page=" + page + "&personnel_id=" + personnel_id;
-            console.log(requestUrl);
         }
     
         $.ajax({
             url: requestUrl,
             success: function (data) {
                 var newData = $(data);
-                var titleJoursRestantsLastYear = newData.find('#titleJoursRestantsLastYear').html();
-                var titleJoursRestantsFirstYear = newData.find('#titleJoursRestantsFirstYear').html();
-                console.log(titleJoursRestantsLastYear);
-                console.log(titleJoursRestantsFirstYear);
+
                 $("#CongesLastYear").html(newData.find('#CongesLastYear').html());
                 $("#CongesFirstYear").html(newData.find('#CongesFirstYear').html());
                 $("#titleJoursRestantsFirstYear").html(newData.find('#titleJoursRestantsFirstYear').html());
