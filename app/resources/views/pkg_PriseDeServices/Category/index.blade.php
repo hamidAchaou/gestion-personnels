@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">
-                        <a href="{{route('personnels.create')}}" class="btn btn-info">
+                        <a href="{{ route('categories.create') }}" class="btn btn-info">
                             {{ __('app.add') }} {{ __('pkg_PriseDeServices/categories.singular') }}
                         </a>
                     </div>
@@ -29,17 +29,44 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header col-md-12">
-                            <div class=" p-0">
-                                <div class="input-group input-group-sm float-sm-right col-md-3 p-0">
-                                    <input type="text" name="table_search" id="table_search"
-                                        class="form-control float-right" placeholder="Recherche">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                            <div class="d-flex justify-content-between">
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-filter "></i>
+                                            </button>
+                                        </div>
+                                        <select class="form-select form-control" id="filterSelectProjrctValue"
+                                            aria-label="Filter Select">
+                                            <option value="Echell">Echell</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                        </select>
+
                                     </div>
                                 </div>
 
+                                <div class=" p-0">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="table_search" class="form-control"
+                                            placeholder="Recherche">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         @include('pkg_PriseDeServices.Category.table')
@@ -56,7 +83,7 @@
     $(document).ready(function() {
         function fetchData(page, searchValue) {
             $.ajax({
-                url: '/personnels/?page=' + page + '&searchValue=' + searchValue,
+                url: '/categories/?page=' + page + '&searchValue=' + searchValue,
                 success: function(data) {
                     var newData = $(data);
 

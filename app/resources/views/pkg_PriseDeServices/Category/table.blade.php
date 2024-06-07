@@ -4,8 +4,7 @@
             <tr>
                 <th>{{ __('app.name') }}</th>
                 <th>{{ __('app.echell') }}</th>
-                <th>{{ __('app.dateDebut') }}</th>
-                <th>{{ __('app.dateFin') }}</th>
+                <th>{{ __('app.grade') }}</th>
                 <th class="text-center">{{ __('app.action') }}</th>
             </tr>
         </thead>
@@ -14,8 +13,7 @@
                 <tr>
                     <td>{{ $category->personnel_name }}</td>
                     <td>{{ $category->echell }}</td>
-                    <td>{{ $category->date_debut }}</td>
-                    <td>{{ $category->date_fin }}</td>
+                    <td>{{ $category->grade_name }}</td>
 
                     <td class="text-center">
                         @can('show-AvancementController')
@@ -23,18 +21,6 @@
                                 <i class="far fa-eye"></i>
                             </a>
                         @endcan
-                        <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-default">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <form action="{{ route('categories.destroy', $category) }}" method="POST"
-                            style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce categorie ?')">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </form>
                     </td>
                 </tr>
             @endforeach

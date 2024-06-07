@@ -23,9 +23,9 @@ class CategoryRequest extends FormRequest
     {
         return [
             'date_debut' => 'required|string|max:255',
-            'date_fin' => 'required|string|max:255',
+            'date_fin' => 'string|max:255',
             'echell' => 'required|numeric',
-            'personnel_id' => 'required|exists:personnels,id'
+            'personnel_id' => 'required|exists:users,id'
         ];
     }
 

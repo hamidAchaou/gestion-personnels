@@ -25,7 +25,7 @@ class CategoryRepository extends BaseRepository
         $this->model = $avancement;
     }
 
-     /**
+    /**
      * Override paginate method to include personnel name concatenation.
      *
      * @param array|string $search
@@ -43,7 +43,8 @@ class CategoryRepository extends BaseRepository
 
         // Join with the users table to get the personnel name
         $query->join('users', 'users.id', '=', 'avancements.personnel_id')
-              ->select('avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"));
+            ->join('grades', 'grades.id', '=', 'users.grade_id')
+            ->select('avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"), 'grades.nom as grade_name');
 
         return $query->paginate($perPage, $columns);
     }
@@ -51,12 +52,16 @@ class CategoryRepository extends BaseRepository
     public function create(array $data)
     {
         $personne_id = $data['personnel_id'];
+        $personnelEchellExsit = Avancement::where('personnel_id', $data['personnel_id'])->latest()->first();
         $echell = $data['echell'];
         $existCategory = Avancement::where([
             ['personnel_id', '=', $personne_id],
             ['echell', '=', $echell]
         ])->exists();
-        if ($existCategory) {
+
+        if ($personnelEchellExsit && !$existCategory) {
+            $this->update($personnelEchellExsit->id, ['date_fin' => now()]);
+        } if ($existCategory) {
             throw CategoryAlreadyExistException::createCategory();
         } else {
             return parent::create($data);

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\pkg_PriseDeServices;
 
+use App\Exceptions\pkg_PriseDeServices\CategoryAlreadyExistException;
 use App\Http\Controllers\AppBaseController;
+use App\Models\pkg_Parametres\Grade;
+use App\Models\pkg_PriseDeServices\Personnel;
 use App\Repositories\pkg_PriseDeServices\CategoryRepository;
 use Illuminate\Http\Request;
+use App\Http\Requests\pkg_PriseDeServices\CategoryRequest;
 
 class AvancementController extends AppBaseController
 {
@@ -28,5 +32,32 @@ class AvancementController extends AppBaseController
             }
         }
         return view('pkg_PriseDeServices.Category.index', compact('categoriesData'));
+    }
+    public function create(Request $request)
+    {
+        if ($request->ajax()) {
+            $echell = $request->input('echell');
+
+            $data = Grade::where('echell_debut', '<=', $echell)
+            ->where('echell_fin', '>=', $echell)
+            ->get();
+            return response()->json($data);
+        }
+        $dataToEdit = null;
+        $grades = Grade::all();
+        $personnels = Personnel::all();
+        return view("pkg_PriseDeServices.Category.create", compact('dataToEdit', 'grades', 'personnels'));
+    }
+    public function store(CategoryRequest $request)
+    {
+        try {
+            $validatedData = $request->validated();
+            $this->categoryRepository->create($validatedData);
+            return redirect()->route('categories.index')->with('success', 'La categorie a été ajouté avec succès.');
+        } catch (CategoryAlreadyExistException $e) {
+            return back()->withInput()->withErrors(['category_exists' => 'La categorie existe déjà.']);
+        } catch (\Exception $e) {
+            return abort(500);
+        }
     }
 }

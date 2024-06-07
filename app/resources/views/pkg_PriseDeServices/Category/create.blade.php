@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="content-header">
-        @if ($errors->has('personnel_exists'))
+        @if ($errors->has('category_exists'))
             <div class="alert alert-danger">
-                {{ $errors->first('personnel_exists') }}
+                {{ $errors->first('category_exists') }}
             </div>
         @else
             @if ($errors->has('unexpected_error'))
@@ -22,11 +22,11 @@
                     <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">
-                                {{ __('app.add') }}  {{ __('pkg_PriseDeServices/personnels.singular') }}
+                                {{ __('app.add') }}  {{ __('pkg_PriseDeServices/categories.singular') }}
                             </h3>
                         </div>
                         <!-- Obtenir le formulaire -->
-                        @include('pkg_PriseDeServices.Personnel.fields')
+                        @include('pkg_PriseDeServices.Category.fields')
                     </div>
                 </div>
             </div>
