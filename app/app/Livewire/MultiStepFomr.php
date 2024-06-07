@@ -172,18 +172,52 @@ class MultiStepFomr extends Component
         }
     }
 
+    // val
+    public function validationStapThree()
+    {
+        //? validation
+        $this->resetErrorBag();
+        if ($this->currentStep == 3) {
+            $validationRules = [];
+            $customAttributes = [];
+
+            foreach ($this->users as $user) {
+                $validationRules['moyens_transports.' . $user] = [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        if ($value === 'not_empth') {
+                            $fail('Un élément doit être sélectionné');
+                        }
+                    }
+                ];
+                if (isset($this->moyens_transports[$user]) && $this->moyens_transports[$user] == '1') {
+                    $validationRules['marque.' . $user] = 'nullable|max:100';
+                    $validationRules['puissance_fiscal.' . $user] = 'nullable|max:100';
+                    $validationRules['numiro_plaque.' . $user] = 'nullable|max:100';
+                } elseif (isset($this->moyens_transports[$user]) && $this->moyens_transports[$user] == '2') {
+                    $validationRules['marque.' . $user] = 'required|max:100';
+                    $validationRules['puissance_fiscal.' . $user] = 'nullable|max:100';
+                    $validationRules['numiro_plaque.' . $user] = 'required|max:100';
+                } else {
+                    $validationRules['marque.' . $user] = 'required|max:100';
+                    $validationRules['puissance_fiscal.' . $user] = 'required|max:100';
+                    $validationRules['numiro_plaque.' . $user] = 'required|max:100';
+                }
+                // Customize attribute names for error messages
+                $customAttributes['moyens_transports.' . $user] = 'moyens transports';
+                $customAttributes['marque.' . $user] = 'marque';
+                $customAttributes['puissance_fiscal.' . $user] = 'puissance fiscale';
+                $customAttributes['numiro_plaque.' . $user] = 'numéro de plaque';
+            }
+
+            $this->validate($validationRules, [], $customAttributes);
+        }
+    }
     // Store or update the mission
     public function store()
     {
-        // $this->resetErrorBag();
-        // if ($this->currentStep == 3) {
-        //     $this->validate([
-        //         'moyens_transports.*' => 'required',
-        //         'marque.*' => 'required|max:100',
-        //         'puissance_fiscal.*' => 'required|max:100',
-        //         'numiro_plaque.*' => 'required|max:100',
-        //     ]);
-        // }
+        $this->validationStapThree();
+
         $this->resetErrorBag();
         $MissionData = [
             'numero_mission' => $this->numero_mission,
@@ -229,7 +263,7 @@ class MultiStepFomr extends Component
 
     public function update()
     {
-        $this->resetErrorBag();
+        $this->validationStapThree();
         $mission = Mission::find($this->ID);
         $MissionData = [
             'numero_mission' => $this->numero_mission,

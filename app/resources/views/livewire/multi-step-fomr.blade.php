@@ -165,6 +165,7 @@
                                 <label for="Personnel">Moyens de transport <span class="text-danger">*</span></label>
                                 <select class="form-control" wire:model="moyens_transports.{{ $user }}"
                                     id="">
+                                    <option value="not_empth">Choisissez le moyen de transport</option>
                                     @foreach ($moyensTransportsValues as $item)
                                         <option value="{{ $item->id }}">{{ $item->nom }}</option>
                                     @endforeach
@@ -183,6 +184,14 @@
                                 @enderror
                             </div>
                             <div class="form-group col-lg-6 col-12">
+                                <label for="numiro_plaque">Numiro plaque <span class="text-danger">*</span></label>
+                                <input wire:model="numiro_plaque.{{ $user }}" type="text"
+                                    class="form-control" id="numiro_plaque" placeholder="Entrez le missions">
+                                @error('numiro_plaque.' . $user)
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-6 col-12">
                                 <label for="puissance_fiscal">Puissance fiscal <span
                                         class="text-danger">*</span></label>
                                 <input wire:model="puissance_fiscal.{{ $user }}" type="text"
@@ -191,14 +200,7 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group col-lg-6 col-12">
-                                <label for="numiro_plaque">Numiro plaque <span class="text-danger">*</span></label>
-                                <input wire:model="numiro_plaque.{{ $user }}" type="text"
-                                    class="form-control" id="numiro_plaque" placeholder="Entrez le missions">
-                                @error('numiro_plaque.' . $user)
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+
                         </div>
                     </fieldset>
                 @endforeach
