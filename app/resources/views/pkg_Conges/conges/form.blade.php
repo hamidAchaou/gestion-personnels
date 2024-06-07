@@ -67,11 +67,11 @@
             </div>
 
             <!-- Nombre des jours -->
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="nobreJours">Nombre des jours reaston:</label>
-                <input type="number" name="nobreJours" class="form-control" id="nobreJours"
-                    value="{{ old('nobreJours', isset($conge) ? $conge->nobreJours : '3') }}" readonly>
-            </div>
+                <input type="number" name="nobreJours" id="nobreJours" class="form-control {{ $joursRestantsFirstYear < 0 ? 'bg-danger' : '' }}" id="nobreJours"
+                value="{{ old('nobreJours', $joursRestantsFirstYear) }}" readonly>
+            </div> --}}
         </div>
 
         <div class="card-footer w-100 d-flex justify-content-end">
