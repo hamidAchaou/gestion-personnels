@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Ajouter Congés')
+
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -54,13 +56,4 @@
                 </div>
             </div>
     </section>
-    <script>
-        // JavaScript
-        function moreDetails() {
-            // Remove 'active' class from the "Form" button
-            document.getElementById('custom-tabs-one-form-tab').classList.remove('active');
-            // Add 'active' class to the "Details de calcule" button
-            document.getElementById('custom-tabs-one-moreDetails-tab').classList.add('active');
-        };
-    </script>
 @endsection
