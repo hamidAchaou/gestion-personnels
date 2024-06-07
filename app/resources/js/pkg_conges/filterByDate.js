@@ -1,5 +1,6 @@
 import "https://code.jquery.com/jquery-3.6.0.min.js";
 
+console.log("HOIOIDJJSOPOJPOPPOPOPOOJPOPOOJJPOPOOO");
 $(document).ready(function () {
     // Fonction pour mettre à jour un paramètre dans l'URL
     function updateURLParameter(param, paramVal) {
@@ -56,9 +57,9 @@ $(document).ready(function () {
     //     }
     // }
 
-    function filterByDate(page, startDate, endDate) {
+    function filterByDate(etablissement, page, startDate, endDate) {
         $.ajax({
-            url: '/conges?page=' + page + '&startDate=' + startDate + '&endDate=' + endDate,
+            url: '/' + etablissement + '/conges/?page=' + page + '&startDate=' + startDate + '&endDate=' + endDate,
             success: function (data) {
                 var newData = $(data);
                 console.log(newData.find("tbody").html());
@@ -94,9 +95,10 @@ $(document).ready(function () {
         var page = 1;
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
+        var etablissement = $("#inpEtablissement").val();
 
         console.log(endDate);
-        console.log(startDate);
-        filterByDate(page, startDate, endDate);
+        console.log(etablissement);
+        filterByDate(etablissement, page, startDate, endDate);
     });
 });

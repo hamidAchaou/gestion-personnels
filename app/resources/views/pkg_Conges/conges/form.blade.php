@@ -6,20 +6,24 @@
         @endif
 
         <div class="card-body">
-            <input type="hidden" name="conge_id" value="{{isset($conge) ? $conge->id : '' }}">
+            <input type="hidden" id="conge_id" value="{{isset($conge) ? $conge->id : '' }}">
+            <input type="hidden" value="{{$etablissement}}" id="inpEtablissement">
             <!-- Personnel -->
             <div class="form-group">
                 <label for="exampleInputPersonnel">Personnel: <span class="text-danger">*</span></label>
                 <select name="personnel_id" class="form-control js-example-basic-single" id="personnel_id">
-                    @foreach ($personnels as $personnel)
+                    @forelse ($personnels as $personnel)
                         @php
                             $selected = old('personnel_id', isset($conge) ? $conge->personnels->contains($personnel->id) : '') == $personnel->id ? 'selected' : '';
                         @endphp
                         <option value="{{ $personnel->id }}" {{ $selected }}>
                             {{ $personnel->nom }} {{ $personnel->prenom }}
                         </option>
-                    @endforeach
+                    @empty
+                        <option value="">No personnels available</option>
+                    @endforelse
                 </select>
+                
                 @error('personnel_id')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -63,11 +67,11 @@
             </div>
 
             <!-- Nombre des jours -->
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="nobreJours">Nombre des jours reaston:</label>
-                <input type="number" name="nobreJours" class="form-control" id="nobreJours"
-                    value="{{ old('nobreJours', isset($conge) ? $conge->nobreJours : '3') }}" readonly>
-            </div>
+                <input type="number" name="nobreJours" id="nobreJours" class="form-control {{ $joursRestantsFirstYear < 0 ? 'bg-danger' : '' }}" id="nobreJours"
+                value="{{ old('nobreJours', $joursRestantsFirstYear) }}" readonly>
+            </div> --}}
         </div>
 
         <div class="card-footer w-100 d-flex justify-content-end">
@@ -78,20 +82,3 @@
         </div>
     </form>
 </div>
-
-
-<script>
-    // $(document).ready(function() {
-    //     // Initialize Select2
-    //     $('.js-example-basic-single').select2();
-
-    //     // Attach change event listener to the select dropdown
-    //     $('#exampleInputPersonnel').on('change', function() {
-    //         // Get the selected value
-    //         var selectedPersonnel = $(this).val();
-            
-    //         // Log the selected value to the console
-    //         console.log('Selected Personnel:', selectedPersonnel);
-    //     });
-    // });
-</script>

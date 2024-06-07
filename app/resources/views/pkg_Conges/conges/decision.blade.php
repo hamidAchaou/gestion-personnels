@@ -1,20 +1,25 @@
 @extends('layouts.app')
 @section('content')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h2>Decision de {{$personnel->nom}} {{$personnel->prenom}}</h2>
-                </div>
-                <div class="col-sm-6">
-                    <div class="float-sm-right">
-                        <button id="printButton" class="btn bg-purple"><i class="fa-solid fa-print"></i> Imprimer</button>
-                    </div>
-
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6 d-flex align-items-center">
+                <a href="{{ url()->previous() }}" class="btn btn-default mr-2">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h2 class="mb-0">Decision de {{$personnel->nom}} {{$personnel->prenom}}</h2>
+            </div>
+            <div class="col-sm-6">
+                <div class="float-sm-right">
+                    <button id="printButton" class="btn bg-purple">
+                        <i class="fa-solid fa-print"></i> Imprimer
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <section class="content px-4 mx-4 card">
         <div class="decesion-head-top">
             <div class="d-flex justify-content-center">

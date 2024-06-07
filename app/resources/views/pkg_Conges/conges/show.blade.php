@@ -1,20 +1,20 @@
 @extends('layouts.app')
+@section('title', 'Historique des congés')
 
 @section('content')
-    <section class="content-header">
+    <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>List des congés</h1>
-                </div>
-                <div class="col-sm-6">
-                    <a href="{{ url()->previous() }}" class="btn btn-default float-right">
-                        <i class="fas fa-arrow-left"></i> Retour
+                <div class="col-sm-6 d-flex align-items-center">
+                    <a href="{{ url()->previous() }}" class="btn btn-default mr-2">
+                        <i class="fas fa-arrow-left"></i>
                     </a>
+                    <h2 class="mb-0">Historique des congés</h2>
                 </div>
+
             </div>
         </div>
-    </section>
+    </div>
 
     <section class="content">
         <div class="container-fluid">
@@ -40,7 +40,7 @@
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img class="profile-personnel-img img-fluid img-circle"
-                                    src="{{ ($personnel->images == null) ? asset('storage/' . $personnel->images) :asset('images/man.png')  }}"
+                                    src="{{ $personnel->images == null ? asset('storage/' . $personnel->images) : asset('images/man.png') }}"
                                     width="130px" height="130px" alt="Profile picture of personnel">
                             </div>
 
@@ -54,9 +54,9 @@
                                     <b>Etablissement</b> <a
                                         class="float-right text-purple">{{ $personnel->etablissement->nom }}</a>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item ">
                                     <b>Jours restants</b> <a
-                                        class="float-right text-purple">{{ $personnel->jours_restants }}</a>
+                                        class="float-right {{ $joursRestants < 0 ? 'text-danger' : 'text-purple' }}">{{ $joursRestants }}</a>
                                 </li>
                             </ul>
                             {{-- <a href="{{ route('personnels.show', ['personnel' => $personnel->id]) }}"
@@ -72,26 +72,7 @@
                     <div class="card card-purple card-outline" style="min-height: 401px;">
                         <!-- Filter and Search Bar -->
                         <div class="card-header">
-                            <div class="row justify-content-between">
-                                <!-- Filter Dropdown -->
-                                <div class="col-md-4">
-                                    {{-- <form method="GET" action="{{ route('conges.index') }}"> --}}
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-append">
-                                            <div class="btn btn-default">
-                                                <i class="fas fa-filter"></i>
-                                            </div>
-                                        </div>
-                                        <select class="form-select form-control" name="year">
-                                            <option value="" selected>Sélectionner une année</option>
-                                            @foreach (range(date('Y'), date('Y') - 5) as $year)
-                                                <option value="{{ $year }}">{{ $year }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    </form>
-                                </div>
-
+                            <div class="row justify-content-end">
                                 <!-- Search Bar -->
                                 <div class="col-md-4">
                                     <form method="GET" action="{{ route('conges.index') }}">

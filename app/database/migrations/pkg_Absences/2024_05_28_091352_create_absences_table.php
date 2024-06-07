@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date_debut');
             $table->date('date_fin');
-            $table->text('remarques');
+            $table->text('remarques')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('motif_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

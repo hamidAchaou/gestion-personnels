@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\pkg_Parametres\Etablissement;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,9 +22,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadMigrationsFrom($this->getMigrationPaths());
-        
+
         // Bootstrap any application services.
         Paginator::useBootstrap();
+
+        view()->composer('layouts.app', function ($view) {
+            $etablissements = Etablissement::all();
+            $view->with('etablissements', $etablissements);
+        });
     }
 
     /**

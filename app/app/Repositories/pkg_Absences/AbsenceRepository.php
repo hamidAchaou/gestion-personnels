@@ -12,6 +12,7 @@ use App\Repositories\BaseRepository;
 use App\Models\pkg_Absences\JourFerie;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\pkg_Absences\AnneeJuridique;
+use App\Models\pkg_Parametres\Etablissement;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -45,46 +46,27 @@ class AbsenceRepository extends BaseRepository
         parent::__construct(new Absence());
     }
 
-    /**
-     * Filtre les absences par le nom du motif.
-     *
-     * @param string $motifNom Le nom du motif pour filtrer les absences.
-     * @return Collection La collection des absences filtrées par le motif.
-     */
-    public function filterByMotif(string $motifNom): Collection
+    public function filterByMotif(string $motifNom, $perPage = 2)
     {
-        try {
-            return $this->model
-                ->whereHas('motif', function (Builder $query) use ($motifNom) {
-                    $query->where('nom', 'LIKE', '%' . $motifNom . '%');
-                })
-                ->get();
-        } catch (\Exception $e) {
-            throw new \RuntimeException('Error filtering by motif: ' . $e->getMessage(), 0, $e);
-        }
+        return $this->model
+            ->with(['personnel', 'motif'])
+            ->whereHas('motif', function (Builder $query) use ($motifNom) {
+                $query->where('nom', 'LIKE', '%' . $motifNom . '%');
+            })
+            ->paginate($perPage);
     }
 
-    /**
-     * Filtre les absences par une plage de dates.
-     *
-     * @param string $startDate Date de début au format 'Y-m-d'.
-     * @param string $endDate Date de fin au format 'Y-m-d'.
-     * @return Collection La collection des absences filtrées par la plage de dates.
-     */
-    public function filterByDateRange(string $startDate, string $endDate): Collection
+    public function filterByDateRange(string $startDate, string $endDate, $perPage = 2)
     {
-        try {
-            // Convert the date strings to Carbon instances for comparison
-            $start = Carbon::parse($startDate);
-            $end = Carbon::parse($endDate);
+        // Convert the date strings to Carbon instances for comparison
+        $start = Carbon::parse($startDate);
+        $end = Carbon::parse($endDate);
 
-            return $this->model
-                ->whereBetween('date_debut', [$start, $end])
-                ->orWhereBetween('date_fin', [$start, $end])
-                ->get();
-        } catch (\Exception $e) {
-            throw new \RuntimeException('Error filtering by date range: ' . $e->getMessage(), 0, $e);
-        }
+        return $this->model
+            ->with(['personnel', 'motif'])
+            ->whereBetween('date_debut', [$start, $end])
+            ->orWhereBetween('date_fin', [$start, $end])
+            ->paginate($perPage);
     }
 
     public function create(array $data)
@@ -110,28 +92,101 @@ class AbsenceRepository extends BaseRepository
         return parent::create($data);
     }
 
-    
-
-    public function getAbsencesWithRelations($perPage = 4)
+    public function getAbsencesWithRelations(string $etablissement, $perPage = 4)
     {
-        return $this->model->with('personnel')->with('motif')->paginate($perPage);
+        // Get the etablissement_id based on the provided etablissement name
+        $etablissement_id = $this->getEtablissementId($etablissement);
+
+        // Subquery to get the IDs of the last absences for each personnel
+        $subquery = $this->model
+            ->selectRaw('MAX(id) as max_id')
+            ->groupBy('user_id')
+            ->whereHas('personnel', function ($query) use ($etablissement_id) {
+                $query->where('etablissement_id', $etablissement_id);
+            });
+
+        // Main query to fetch the absences with relations using the subquery
+        return $this->model
+            ->whereIn('id', function ($query) use ($subquery) {
+                $query->fromSub($subquery, 'subquery');
+            })
+            ->with(['personnel', 'motif'])
+            ->whereHas('personnel', function ($query) use ($etablissement_id) {
+                $query->where('etablissement_id', $etablissement_id);
+            })
+            ->paginate($perPage);
     }
 
-
-    public function searchData($search = null, $perPage = 4): LengthAwarePaginator
+    public function exportAbsenceWithRelations()
     {
-        $query = $this->model->with('personnel')->with('motif');
+        return $this->model->with('personnel', 'motif')->get();
+    }
 
-        // If search criteria is provided, apply it to the query
-        if ($search !== null) {
-            $query->where(function ($q) use ($search) {
-                $q->where('nom', 'like', "%$search%");
-            });
-        }
+    public function getAbsencesPersonnel($matricule, $perPage = 4)
+    {
+        return $this->model
+            ->whereHas('personnel', function ($query) use ($matricule) {
+                $query->where('matricule', $matricule);
+            })
+            ->with('personnel', 'motif')
+            ->paginate($perPage);
+    }
+
+    public function filterForDocument(string $etablissement, string $startDate, string $endDate, array $motifs)
+    {
+        // Get the etablissement_id based on the provided etablissement name
+        $etablissement_id = $this->getEtablissementId($etablissement);
+
+        // Parse the input dates using Carbon
+        $start = Carbon::parse($startDate);
+        $end = Carbon::parse($endDate);
+
+        // Main query to fetch the filtered absences
+        return $this->model
+            ->with(['personnel', 'motif'])
+            ->whereHas('personnel', function ($query) use ($etablissement_id) {
+                $query->where('etablissement_id', $etablissement_id);
+            })
+            ->where(function ($query) use ($start, $end) {
+                // Check if either date_debut or date_fin falls within the provided date range
+                $query->whereBetween('date_debut', [$start, $end])->orWhereBetween('date_fin', [$start, $end]);
+            })
+            ->whereIn('motif_id', $motifs)
+            ->get();
+    }
+
+    /**
+     * Recherche les projets correspondants aux critères spécifiés.
+     *
+     * @param mixed $searchableData Données de recherche.
+     * @param int $perPage Nombre d'éléments par page.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function search(string $etablissement, string $searchableData, int $perPage = 4)
+    {
+        // Get the etablissement_id based on the provided etablissement name
+        $etablissement_id = $this->getEtablissementId($etablissement);
+
+        // Subquery to get the IDs of the last absences for each personnel
+        $subquery = $this->model->selectRaw('MAX(id) as max_id')->groupBy('user_id');
+
+        // Main query to fetch the absences with relations using the subquery and applying search
+        $query = $this->model
+            ->whereIn('id', function ($query) use ($subquery) {
+                $query->fromSub($subquery, 'subquery');
+            })
+            ->whereHas('personnel', function ($q) use ($etablissement_id, $searchableData) {
+                $q->where('etablissement_id', $etablissement_id)->where(function ($query) use ($searchableData) {
+                    $query->where('nom', 'like', "%$searchableData%")->orWhere('prenom', 'like', "%$searchableData%");
+                });
+            })
+            ->with(['personnel', 'motif']);
 
         return $query->paginate($perPage);
-        // return $this->model->where(function ($query) use ($searchableData) {
-        //     $query->where('nom', 'like', '%' . $searchableData . '%');
-        // })->paginate($perPage);
+    }
+
+    public function getEtablissementId(string $etablissement)
+    {
+        return Etablissement::where('nom', $etablissement)->pluck('id')->first();
     }
 }

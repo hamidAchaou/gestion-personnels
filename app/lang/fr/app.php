@@ -19,8 +19,6 @@ return [
     'addSucées' => 'a été ajouté avec succès.',
     'updateSucées' => 'a été mis à jour avec succès.',
     'deleteSucées' => 'a été supprimé avec succès.',
-    'certificate' => 'Certificate',
-    'school' => 'Etapplissement',
-    'phoneNumber' => 'Numèro téléphone',
-    'matricule' => 'Matricule',
+    'ExportSucées' => 'a été exporté avec succès.',
+    'ImportSucées' => 'ont été importées avec succès.',
 ];

@@ -22,26 +22,21 @@ $(document).ready(function () {
         window.history.replaceState({ path: url }, "", url + hash);
     }
 
-    function filterByDate(page, personnel_id, conge_id) {
+    function filterPersonnelId(etablissement, page, personnel_id, conge_id) {
         var url = window.location.href;
         var requestUrl;
     
         if (url.includes("conges/create")) {
-            requestUrl = "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
-            console.log(requestUrl);
+            requestUrl = "/" + etablissement + "/conges/create?page=" + page + "&personnel_id=" + personnel_id;
         } else if (url.includes("/edit")) {
-            requestUrl = "/conges/" + conge_id + "?page=" + page + "&personnel_id=" + personnel_id;
-            console.log(requestUrl);
+            requestUrl = "/" + etablissement + "/conges/" + conge_id + "/edit?page=" + page + "&personnel_id=" + personnel_id;
         }
     
         $.ajax({
             url: requestUrl,
             success: function (data) {
                 var newData = $(data);
-                var titleJoursRestantsLastYear = newData.find('#titleJoursRestantsLastYear').html();
-                var titleJoursRestantsFirstYear = newData.find('#titleJoursRestantsFirstYear').html();
-                console.log(titleJoursRestantsLastYear);
-                console.log(titleJoursRestantsFirstYear);
+
                 $("#CongesLastYear").html(newData.find('#CongesLastYear').html());
                 $("#CongesFirstYear").html(newData.find('#CongesFirstYear').html());
                 $("#titleJoursRestantsFirstYear").html(newData.find('#titleJoursRestantsFirstYear').html());
@@ -72,15 +67,16 @@ $(document).ready(function () {
     }
     
 
-    console.log(557);
     // Event listener for filter button
     $("body").on("change", "#personnel_id", function () {
         var page = 1;
         var personnel_id = $("#personnel_id").val();
         var conge_id = $("#conge_id").val();
+        var etablissement = $("#inpEtablissement").val();
+        console.log(conge_id);
 
-        console.log(personnel_id);
-        filterByDate(page, personnel_id, conge_id);
+        // console.log(personnel_id);
+        filterPersonnelId(etablissement, page, personnel_id, conge_id);
     });
 });
 

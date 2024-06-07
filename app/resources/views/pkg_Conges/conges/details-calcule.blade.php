@@ -35,7 +35,7 @@
                         <td></td>
                         <td class="text-center">{{ $CongesLastYear->sum('nombre_jours') }}</td>
                     </tr>
-                    <tr class="{{ $joursRestantsLastYear < 0 ? 'bg-danger' : '' }}">
+                    <tr class="{{ $joursRestantsLastYear < 0 ? 'bg-danger' : 'bg-success' }}">
                         <td>Jours restants</td>
                         <td></td>
                         <td class="text-center">{{ $joursRestantsLastYear }}</td>
@@ -81,7 +81,7 @@
                         <td></td>
                         <td class="text-center">{{ $CongesFirstYear->sum('nombre_jours') }}</td>
                     </tr>
-                    <tr class="{{ $joursRestantsFirstYear < 0 ? 'text-danger' : '' }}">
+                    <tr class="{{ $joursRestantsFirstYear < 0 ? 'bg-danger' : 'bg-success' }}">
                         <td>Jours restants</td>
                         <td></td>
                         <td class="text-center">{{ $joursRestantsFirstYear }}</td>

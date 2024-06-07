@@ -21,5 +21,9 @@ class PersonnelsCongesSeeder extends Seeder
         Personnel::find(1)->conges()->attach(8);
         Personnel::find(2)->conges()->attach(9);
         Personnel::find(3)->conges()->attach(10);
+        Personnel::find(4)->conges()->attach(11);
+        Personnel::find(3)->conges()->attach(12);
+        Personnel::find(4)->conges()->attach(13);
+        Personnel::find(1)->conges()->attach(14);
     }
 }

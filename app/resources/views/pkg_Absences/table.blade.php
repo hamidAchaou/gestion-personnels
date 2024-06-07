@@ -23,7 +23,8 @@
                         {{ App\Helpers\pkg_Absences\AbsenceHelper::calculateAbsenceDurationForPersonnel($absence) }}
                     </td>
                     <td class="text-center">
-                        <a href="./show.php" class='btn btn-default btn-sm'>
+                        <a href="{{ route('absence.show', $absence->personnel->matricule) }}"
+                            class='btn btn-default btn-sm'>
                             <i class="far fa-eye"></i>
                         </a>
                     </td>
@@ -39,15 +40,21 @@
 
 
 <div class="row justify-content-between p-2">
-    <div class="col-6 align-self-end">
-        <button type="button" class="btn btn-default btn-sm">
-            <i class="fa-solid fa-file-arrow-down"></i>
-            IMPORTER</button>
-        <button type="button" data-toggle="modal" data-target="#exampleModalCenter"
-            class="btn  btn-default btn-sm mt-0 mx-2">
+    <div class="col-6 align-self-end d-flex">
+        <form action="{{ route('absence.import') }}" method="post" enctype="multipart/form-data" id="importForm">
+            @csrf
+            <label for="upload" class="btn btn-default btn-sm mb-0 font-weight-normal">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                {{ __('app.import') }}
+            </label>
+            <input type="file" id="upload" name="file" style="display:none;" onchange="submitForm()" />
+        </form>
+
+        <a href="{{ route('absence.export') }}" class="btn  btn-default btn-sm mt-0 mx-2">
             <i class="fa-solid fa-file-export"></i>
-            EXPORTER</button>
-        <a href="./document-absenteisme.php" type="button" class="btn btn-default bg-purple btn-sm mt-0">
+            {{ __('app.export') }}</a>
+        <a href="{{ route('absence.document_absenteisme') }}" type="button"
+            class="btn btn-default bg-purple btn-sm mt-0">
             <i class="fa-solid fa-print"></i>
             IMPRIMER</a>
     </div>

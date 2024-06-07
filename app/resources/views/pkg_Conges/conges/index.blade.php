@@ -40,31 +40,32 @@
                     @endif
                     <div class="card">
                         <div class="card-header col-md-12">
-                            <div class="d-flex justify-content-between">
-                                <div class="col-md-5 row">
-                                    <div class="input-group input-group-sm">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="col-md-4 d-flex">
+                                    <input type="hidden" value="{{$etablissement}}" id="inpEtablissement">
+                                    <div class="input-group input-group-sm mr-2">
                                         <div class="input-group-prepend">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <label for="startDate" class="sr-only">Date debut</label>
                                         <input type="date" class="form-control" id="startDate" aria-label="Start Date">
-                                        <label for="" class="px-2 d-flex align-items-center">au</label>
-                                        <label for="endDate" class="sr-only">Date fin</label>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">au</span>
+                                        </div>
                                         <input type="date" class="form-control" id="endDate" aria-label="End Date">
-                                        <button type="submit" id="filter_button" class="btn btn-default">
-                                            filter
-                                        </button>
+                                        <div class="input-group-append">
+                                            <button type="submit" id="filter_button" class="btn btn-default">
+                                                Filter
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-
-
-                                <div class=" p-0">
-                                    <div class="input-group input-group-sm">
+                        
+                                <div class="col-md-3 p-0 d-flex">
+                                    <div class="input-group input-group-sm ml-auto">
                                         <input type="hidden" name="page" id="page" value="1">
-                                        <input type="text" name="table_search" id="table_search" class="form-control"
-                                            placeholder="Recherche">
+                                        <input type="text" name="table_search" id="table_search" class="form-control" placeholder="Recherche">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -74,6 +75,7 @@
                                 </div>
                             </div>
                         </div>
+                        
 
                         <div class="card-body table-responsive p-0">
                             @include('pkg_Conges.conges.table')
