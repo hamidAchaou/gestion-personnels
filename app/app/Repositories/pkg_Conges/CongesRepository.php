@@ -247,7 +247,7 @@ class CongesRepository extends BaseRepository
             });
         }
 
-        return $query->paginate(6);
+        return $query->paginate($perPage);
     }
 
 
