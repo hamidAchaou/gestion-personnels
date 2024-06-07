@@ -1,11 +1,12 @@
 @extends('layouts.app')
+@section('title', 'Historique des congés')
 
 @section('content')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>List des congés</h1>
+                    <h1>Historique des congés</h1>
                 </div>
                 <div class="col-sm-6">
                     <a href="{{ url()->previous() }}" class="btn btn-default float-right">
@@ -54,9 +55,9 @@
                                     <b>Etablissement</b> <a
                                         class="float-right text-purple">{{ $personnel->etablissement->nom }}</a>
                                 </li>
-                                <li class="list-group-item">
+                                <li class="list-group-item ">
                                     <b>Jours restants</b> <a
-                                        class="float-right text-purple">{{ $personnel->jours_restants }}</a>
+                                        class="float-right {{ ($joursRestants < 0 ) ? 'text-danger' : 'text-purple' }}">{{ $joursRestants }}</a>
                                 </li>
                             </ul>
                             {{-- <a href="{{ route('personnels.show', ['personnel' => $personnel->id]) }}"

@@ -147,17 +147,42 @@ class CongesController extends Controller
     // Method to show a specific conge details
     public function show(string $etablissement, Request $request, string $id)
     {
+        $personnel_id = $id;
+        // First year
+        $firstYear = now()->format('Y');
+        // Last year
+        $lastYear = now()->subYear()->format('Y');
+        // Two years ago
+        $twoYearsAgo = now()->subYears(2)->format('Y');
+        $nombreJoursCongesFirstYear = 0;
+        $nombreJoursCongesLastYear = 0;
+        $nombreJoursCongestwoYearsAgo = 0;
+        $CongesFirstYear = $this->congesRepository->filterByDate($etablissement, null, null, $firstYear, $personnel_id);
+        $CongesLastYear = $this->congesRepository->filterByDate($etablissement, null, null, $lastYear, $personnel_id);
+
+        foreach ($CongesFirstYear as $conge) {
+            $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+            $nombreJoursCongesFirstYear += $conge->nombre_jours;
+        }
+
+        foreach ($CongesLastYear as $conge) {
+            $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+            $nombreJoursCongesLastYear += $conge->nombre_jours;
+        }
+
+        // Calculate sum of jours_restants
+        $joursRestantsLastYear = $this->congesRepository->calculateJoursRestants($nombreJoursCongesLastYear);
+        $joursRestants = $this->congesRepository->calculateJoursRestants($nombreJoursCongesFirstYear, $joursRestantsLastYear);
         // Handle AJAX requests for searching and filtering
         if ($request->has('searchValue')) {
             $searchValue = $request->get('searchValue');
-            $personnel_id = $id;
 
             // Fetch filtered or searched data
             $personnel = $this->personnels->find($id);
             $conges = $this->congesRepository->getCongesByPersonnelId($searchValue, $personnel_id);
 
             // Return the filtered data view
-            return view('pkg_Conges.conges.show', compact('personnel', 'conges'))->render();
+            return view('pkg_Conges.conges.show', compact('personnel', 'conges', 'joursRestants'))->render();
         }
 
         // Fetch personnel and related conges data
@@ -165,7 +190,7 @@ class CongesController extends Controller
         $conges = $personnel->conges()->paginate(4);
 
         // Return the view with personnel and conges data
-        return view('pkg_Conges.conges.show', compact('personnel', 'conges'));
+        return view('pkg_Conges.conges.show', compact('personnel', 'conges', 'joursRestants'));
     }
 
 
