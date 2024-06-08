@@ -12,6 +12,7 @@ use App\Models\pkg_Parametres\Grade;
 use App\Models\pkg_Parametres\Specialite;
 use App\Models\pkg_Parametres\Ville;
 use App\Models\pkg_PriseDeServices\Personnel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\pkg_PriseDeServices\PersonnelRequest;
 use App\Repositories\pkg_PriseDeServices\PersonnelRepository;
@@ -31,15 +32,17 @@ class PersonnelController extends AppBaseController
     public function index(Request $request)
     {
         $personnelsData = $this->personnelRepository->paginate();
+        $user = User::where('nom' , 'admin')->first();
+        $userId = $user->id;
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
                 $personnelsData = $this->personnelRepository->searchData($searchQuery);
-                return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData'))->render();
+                return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'))->render();
             }
         }
-        return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData'));
+        return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'));
     }
     public function create()
     {
@@ -85,6 +88,39 @@ class PersonnelController extends AppBaseController
 
         return view('pkg_PriseDeServices.Personnel.edit', compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements'));
     }
+    public function update(int $id, Request $request)
+    {
+        $data = $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'nom_arab' => 'required|string|max:255',
+            'prenom_arab' => 'required|string|max:255',
+            'cin' => 'required|string|max:255',
+            'date_naissance' => 'required|date',
+            'telephone' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id . '|max:255',
+            'address' => 'required|string|max:255',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ville_id' => 'required|numeric|max:255',
+            'etablissement_id' => 'required|numeric|max:255',
+            'ETPAffectation_id' => 'required|numeric',
+            'specialite_id' => 'required|numeric|max:255',
+            'fonction_id' => 'required|numeric|max:255',
+            'matricule' => 'required|numeric'
+        ]);
+
+        // Handle image upload if present
+        if ($request->hasFile('images')) {
+            $image = $request->file('images');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['images'] = $imageName;
+        }
+
+        $personnelsData = $this->personnelRepository->update($id, $data);
+
+        return redirect()->route('personnels.index')->with('success', 'Le personnel a été modifié avec succès.');
+    }
     public function show(int $id)
     {
         $fetchedData = $this->personnelRepository->find($id);
@@ -122,7 +158,7 @@ class PersonnelController extends AppBaseController
             $gradeData = Grade::where('echell_debut', '<=', $avancement->echell)
                 ->where('echell_fin', '>=', $avancement->echell)
                 ->first();
-            
+
         } else {
             $gradeData = null;
         }
