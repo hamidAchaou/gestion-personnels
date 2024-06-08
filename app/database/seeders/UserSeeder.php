@@ -45,9 +45,8 @@ class UserSeeder extends Seeder
                     'grade_id' => $data[15],
                     'specialite_id' => $data[16],
                     'etablissement_id' => $data[17],
-                    'avancement_id' => $data[18],
-                    'created_at' => $data[19],
-                    'updated_at' => $data[20],
+                    'created_at' => $data[18],
+                    'updated_at' => $data[19],
                 ]);
             }
             $firstline = false;

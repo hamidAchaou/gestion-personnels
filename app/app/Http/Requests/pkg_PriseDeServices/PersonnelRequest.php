@@ -37,8 +37,7 @@ class PersonnelRequest extends FormRequest
             'ETPAffectation_id' => 'required|numeric',
             'specialite_id' => 'required|numeric|max:255',
             'fonction_id' => 'required|numeric|max:255',
-            'matricule' => 'required|numeric',
-            'avancement_id' => 'required|numeric'
+            'matricule' => 'required|numeric'
         ];
     }
 
