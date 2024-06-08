@@ -17,6 +17,7 @@ class AvancementFactory extends Factory
             'date_debut' => $this->faker->date(),
             'date_fin' => $this->faker->date(),
             'echell' => $this->faker->unique()->randomNumber(8),
+            'personnel_id' => $this->faker->unique()->randomNumber(8),
         ];
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->integer('echell');
+            $table->unsignedBigInteger('personnel_id');
             $table->timestamps();
         });
     }
