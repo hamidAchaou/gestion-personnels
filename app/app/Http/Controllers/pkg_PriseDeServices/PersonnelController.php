@@ -29,7 +29,7 @@ class PersonnelController extends AppBaseController
     {
         $this->personnelRepository = $personnelRepository;
     }
-    public function index(Request $request)
+    public function index($etablissement ,Request $request)
     {
         $personnelsData = $this->personnelRepository->paginate();
         $user = User::where('nom' , 'admin')->first();
@@ -38,7 +38,7 @@ class PersonnelController extends AppBaseController
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
-                $personnelsData = $this->personnelRepository->searchData($searchQuery);
+                $personnelsData = $this->personnelRepository->searchData($etablissement, $searchQuery);
                 return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'))->render();
             }
         }
