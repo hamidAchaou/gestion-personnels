@@ -102,5 +102,14 @@ class UserSeeder extends Seeder
             $firstline = false;
         }
         fclose($csvFile);
+        $adminUser = User::where("email", "admin@solicode.co")->first();
+        if ($adminUser) {
+            $adminUser->assignRole(User::ADMIN);
+        }
+
+        $responsableUser = User::where("email", "responsable@solicode.co")->first();
+        if ($responsableUser) {
+            $responsableUser->assignRole(User::RESPONSABLE);
+        }
     }
 }
