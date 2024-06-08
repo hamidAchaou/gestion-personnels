@@ -21,6 +21,10 @@ return [
     'deleteSucées' => 'a été supprimé avec succès.',
     'ExportSucées' => 'a été exporté avec succès.',
     'ImportSucées' => 'ont été importées avec succès.',
+    'certificate' => 'Certificate',
+    'school' => 'Etapplissement',
+    'phoneNumber' => 'Numèro téléphone',
+    'matricule' => 'Matricule',
     'dateDebut' => 'Date début',
     'dateFin' => 'Date de fin',
     'echell' => 'Echell'

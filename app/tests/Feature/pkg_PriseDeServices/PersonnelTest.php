@@ -49,8 +49,7 @@ class PersonnelTest extends TestCase
             'fonction_id' => 1,
             'ETPAffectation_id' => 1,
             'specialite_id' => 1,
-            'etablissement_id' => 1, 
-            'avancement_id' => 1 
+            'etablissement_id' => 1
         ];
         
 
@@ -79,8 +78,7 @@ class PersonnelTest extends TestCase
             'fonction_id' => 1,
             'ETPAffectation_id' => 1,
             'specialite_id' => 1,
-            'etablissement_id' => 1, 
-            'avancement_id' => 1 
+            'etablissement_id' => 1
         ];
 
         try {
@@ -114,8 +112,7 @@ class PersonnelTest extends TestCase
             'fonction_id' => 1,
             'ETPAffectation_id' => 1,
             'specialite_id' => 1,
-            'etablissement_id' => 1, 
-            'avancement_id' => 1 
+            'etablissement_id' => 1
         ];
         $this->personnelRepository->update($personnel->id, $personnelData);
         $this->assertDatabaseHas('users', $personnelData);
@@ -150,8 +147,7 @@ class PersonnelTest extends TestCase
             'fonction_id' => 1,
             'ETPAffectation_id' => 1,
             'specialite_id' => 1,
-            'etablissement_id' => 1, 
-            'avancement_id' => 1 
+            'etablissement_id' => 1
         ];
         $this->personnelRepository->create($personnelData);
         $searchValue = 'test';

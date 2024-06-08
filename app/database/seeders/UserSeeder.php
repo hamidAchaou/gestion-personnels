@@ -76,34 +76,34 @@ class UserSeeder extends Seeder
         //             "guard_name" => $data['1'],
         //         ]);
 
-        //         if ($roleAdmin) {
-        //             // If the role exists, update its permissions
-        //             $roleAdmin->givePermissionTo($data['0']);
-        //         } else {
-        //             // If the role doesn't exist, create it and give permissions
-        //             $roleAdmin = Role::create([
-        //                 'name' => $adminRole,
-        //                 'guard_name' => 'web',
-        //             ]);
-        //             $roleAdmin->givePermissionTo($data['0']);
-        //         }
-        //         // Only give specific permissions to the 'responsable' role
-        //         if (in_array($data['0'], ['index-PersonnelController', 'show-PersonnelController', 'export-PersonnelController'])) {
-        //             if ($roleResponsable) {
-        //                 $roleResponsable->givePermissionTo($data['0']);
-        //             } else {
-        //                 $roleResponsable = Role::create([
-        //                     'name' => $responsableRole,
-        //                     'guard_name' => 'web',
-        //                 ]);
-        //                 $roleResponsable->givePermissionTo($data['0']);
-        //             }
-        //         }
+                if ($roleAdmin) {
+                    // If the role exists, update its permissions
+                    $roleAdmin->givePermissionTo($data['0']);
+                } else {
+                    // If the role doesn't exist, create it and give permissions
+                    $roleAdmin = Role::create([
+                        'name' => $adminRole,
+                        'guard_name' => 'web',
+                    ]);
+                    $roleAdmin->givePermissionTo($data['0']);
+                }
+                // Only give specific permissions to the 'responsable' role
+                if (in_array($data['0'], ['index-PersonnelController', 'show-PersonnelController', 'export-PersonnelController'])) {
+                    if ($roleResponsable) {
+                        $roleResponsable->givePermissionTo($data['0']);
+                    } else {
+                        $roleResponsable = Role::create([
+                            'name' => $responsableRole,
+                            'guard_name' => 'web',
+                        ]);
+                        $roleResponsable->givePermissionTo($data['0']);
+                    }
+                }
 
-        //     }
-        //     $firstline = false;
-        // }
-        // fclose($csvFile);
+            }
+            $firstline = false;
+        }
+        fclose($csvFile);
         $adminUser = User::where("email", "admin@solicode.co")->first();
         if ($adminUser) {
             $adminUser->assignRole(User::ADMIN);
@@ -113,6 +113,5 @@ class UserSeeder extends Seeder
         if ($responsableUser) {
             $responsableUser->assignRole(User::RESPONSABLE);
         }
-
     }
 }
