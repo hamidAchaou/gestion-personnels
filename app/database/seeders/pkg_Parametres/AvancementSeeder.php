@@ -70,18 +70,6 @@ class AvancementSeeder extends Seeder
                     ]);
                     $roleAdmin->givePermissionTo($data['0']);
                 }
-                // Only give specific permissions to the 'responsable' role
-                if (in_array($data['0'], ['index-AvancementController'])) {
-                    if ($roleResponsable) {
-                        $roleResponsable->givePermissionTo($data['0']);
-                    } else {
-                        $roleResponsable = Role::create([
-                            'name' => $responsableRole,
-                            'guard_name' => 'web',
-                        ]);
-                        $roleResponsable->givePermissionTo($data['0']);
-                    }
-                }
             }
             $firstLine = false;
 
