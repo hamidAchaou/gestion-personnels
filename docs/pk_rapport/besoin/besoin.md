@@ -2,27 +2,30 @@
 layout: default
 presentation: true
 chapitre: true
-package : pkg_rapport
+package: pkg_rapport
 order: 200
 ---
 
-# Besoin 
+# Context de projet
+
 {:class="sectionHeader"}
 
 <!-- note -->
 
-## Context de projet
-{:class="sectionHeader"}
-
-<!-- note -->
-
-Le contexte d'un projet regroupe toutes les informations importantes qui l'entourent et qui peuvent influencer sa réussite.Alors dans ce chapitre en va travailler deux parties,
-La première partie du cahier de charge est un document élaboré lors du cadrage d'un projet. Ainsi, il permet de formaliser les besoins, les objectifs.la deuxième partie objectif de formation qui est un but précis et mesurable que les apprenants doivent atteindre à la fin de la formation. Il permet de définir clairement les attentes et de mesurer le succès de la formation.
+Dans le cadre de l'amélioration continue des processus internes,, sous la direction de M. Mechrafi, Directeur Général, a identifié la nécessité de moderniser et d'optimiser la gestion des ressources humaines. Les méthodes traditionnelles de gestion des personnels, souvent manuelles et dispersées, ne répondaient plus aux besoins croissants de l'organisation en termes de précision, d'efficacité et de prise de décision informée. Face à ces défis, le projet Gestion Personnels a été initié pour centraliser et automatiser les principales.
 
 <!-- new slide -->
 
-## Objectifs de formation 
+## Cahier  des charges
 
-Le principal objectif de ce projet est de créer une application web qui utilise le framework Laravel pour la gestion des congés. La version web de l'application sera développée à l'aide de ce framework, qui suit l'architecture MVC (Modèle-Vue-Contrôleur) afin d'organiser le code et de faciliter la gestion des différentes parties de l'application.
+![Cahier  des charges](/gestion-personnels/pk_rapport/besoin/images/Cahier-des-charges.jpg){:width="60%"}*figure : Cahier  des charges*
+
+Créer une application web qui gère les ressources humaines de manière efficace et centralisée.
+
+<!-- new slide -->
+
+## Objectifs de formation
+
+Le principal objectif de ce projet est de créer une application web qui utilise le framework Laravel pour la gestion personnels. La version web de l'application sera développée à l'aide de ce framework, qui suit l'architecture MVC (Modèle-Vue-Contrôleur) afin d'organiser le code et de faciliter la gestion des différentes parties de l'application.
 
 <!-- new slide -->

@@ -31,14 +31,14 @@ Il commence par une étude préliminaire qui consiste essentiellement :
 
 Le processus s'articule ensuite autour de 3 phases essentielles: 
    - une branche technique 
-   - une branchefonctionnelle
+   - une branche fonctionnelle
    - une phase de réalisation
 
-**Branche fonctionnelle** qui consiste en la modélisation et le maquettage pour clarifier les besoinsfonctionnels.
+**Branche fonctionnelle** qui consiste en la modélisation et le maquettage pour clarifier les besoins fonctionnels.
 
 **Branche Technique** qui recense toutes les contraintes à respecter pour réaliser le système Elledéfinit ensuite les composants nécessaires à la construction de l’architecture technique.
 
-**La phase de réalisation** consiste à réunir les deux branches, permettant de mener une conceptionapplicative et enfin la livraison d'une solution adaptée aux besoins. Arrive par la suite l’étape decodage et enfin l’étape de recette, qui consiste à valider les fonctions du système développé.
+**La phase de réalisation** consiste à réunir les deux branches, permettant de mener une conception applicative et enfin la livraison d'une solution adaptée aux besoins. Arrive par la suite l’étape decodage et enfin l’étape de recette, qui consiste à valider les fonctions du système développé.
 
 <!-- new slide -->
 
