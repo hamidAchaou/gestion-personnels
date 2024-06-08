@@ -1,0 +1,9 @@
+name,guard_name
+index-JourFerieController,web
+create-JourFerieController,web
+store-JourFerieController,web
+edit-JourFerieController,web
+update-JourFerieController,web
+destroy-JourFerieController,web
+export-JourFerieController,web
+import-JourFerieController,web
