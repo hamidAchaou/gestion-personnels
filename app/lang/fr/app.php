@@ -21,4 +21,7 @@ return [
     'deleteSucées' => 'a été supprimé avec succès.',
     'ExportSucées' => 'a été exporté avec succès.',
     'ImportSucées' => 'ont été importées avec succès.',
+    'dateDebut' => 'Date début',
+    'dateFin' => 'Date de fin',
+    'echell' => 'Echell'
 ];

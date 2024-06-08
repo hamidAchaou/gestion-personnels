@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\pkg_Parametres\Etablissement;
+use App\Models\pkg_PriseDeServices\Personnel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,15 +21,16 @@ class HomeController extends Controller
 
     public function redirectToEtablissement()
     {
-        $etablissement = Etablissement::pluck('nom')->first();
+        $user = Auth::user();
+        $roles = $user->getRoleNames();
 
-        // Check if an establishment was found
-        if ($etablissement) {
-            return redirect()->route('etablissement.app', ['etablissement' => $etablissement]);
+        if ($roles !== 'admin') {
+            $etablissement = Auth::user()->etablissement->nom;
+        } else {
+            $etablissement = Etablissement::pluck('nom')->first();
         }
 
-        // Handle the case where no establishment is found
-        return redirect()->route('some.other.route'); // replace 'some.other.route' with a valid route
+        return redirect()->route('etablissement.app', ['etablissement' => $etablissement]);
     }
     /**
      * Show the application dashboard.
@@ -37,7 +40,6 @@ class HomeController extends Controller
     public function index($etablissement)
     {
         $etablissement = Etablissement::where('nom', $etablissement)->firstOrFail();
-
         return view('home', compact('etablissement'));
     }
 }

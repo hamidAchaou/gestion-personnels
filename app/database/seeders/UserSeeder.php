@@ -2,18 +2,19 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
 
 class UserSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
 
@@ -46,9 +47,8 @@ class UserSeeder extends Seeder
                     'grade_id' => $data[15],
                     'specialite_id' => $data[16],
                     'etablissement_id' => $data[17],
-                    'avancement_id' => $data[18],
-                    'created_at' => $data[19],
-                    'updated_at' => $data[20],
+                    'created_at' => $data[18],
+                    'updated_at' => $data[19],
                 ]);
             }
             $firstline = false;
@@ -104,5 +104,15 @@ class UserSeeder extends Seeder
         //     $firstline = false;
         // }
         // fclose($csvFile);
+        $adminUser = User::where("email", "admin@solicode.co")->first();
+        if ($adminUser) {
+            $adminUser->assignRole(User::ADMIN);
+        }
+
+        $responsableUser = User::where("email", "responsable@solicode.co")->first();
+        if ($responsableUser) {
+            $responsableUser->assignRole(User::RESPONSABLE);
+        }
+
     }
 }

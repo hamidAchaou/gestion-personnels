@@ -31,7 +31,6 @@ return new class extends Migration
             $table->unsignedBigInteger('grade_id')->nullable();
             $table->unsignedBigInteger('specialite_id')->nullable();
             $table->unsignedBigInteger('etablissement_id')->nullable();
-            $table->unsignedBigInteger('avancement_id')->nullable();
             $table->timestamps();
         });
     }
