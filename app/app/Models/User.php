@@ -14,7 +14,6 @@ use App\Models\pkg_Parametres\Fonction;
 use App\Models\pkg_Parametres\Avancement;
 use App\Models\pkg_Parametres\Specialite;
 use App\Models\pkg_Parametres\Etablissement;
-use App\Models\pkg_Parametres\Grade;
 // use models of packages
 use App\Models\pkg_OrderDesMission\Mission;
 use App\Models\pkg_Absences\Absence;
@@ -75,9 +74,6 @@ class User extends Authenticatable
     public function etp_Affectation()
     {
         return $this->belongsTo(Etablissement::class, 'ETPAffectation_id');
-    }
-    public function grade(){
-        return $this->belongsTo(Grade::class,'grade_id');
     }
     public function absences()
     {
