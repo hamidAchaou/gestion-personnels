@@ -2,7 +2,7 @@
 use App\Http\Controllers\pkg_Conges\CongesController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('{etablissement}/conges')->middleware(['auth'])->group(function () {    
+Route::prefix('{etablissement}/conges')->middleware(['auth', 'authorize.etablissement'])->group(function () {    
     // Routes for managing Conges
     Route::get('/', [CongesController::class, 'index'])->name('conges.index');
     Route::get('/create', [CongesController::class, 'create'])->name('conges.create');
