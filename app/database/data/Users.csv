@@ -1,3 +1,6 @@
 prenom,nom,email,password,nom_arab,prenom_arab,cin,date_naissance,telephone,address,images,matricule,ville_id,fonction_id,ETPAffectation_id,grade_id,specialite_id,etablissement_id,created_at,updated_at
 admin,admin,admin@solicode.co,admin,مسؤل,مسؤل,KB009988,1970-01-01,0606060606,Tanger branes,madani.jpg,1000,1,1,1,1,1,2,2023-01-01 00:00:00,2023-01-01 00:00:00
-responsable,responsable,responsable@solicode.co,responsable,به,موثوق ,KB12313,1980-01-01,0606060606,Tanger branes,mohammed.jpg,1040,1,1,1,1,1,3,2023-01-01 00:00:00,2023-01-01 00:00:00
+responsable,solicode,responsable@solicode.co,solicode,به,موثوق ,KB12313,1980-01-01,0606060606,Tanger branes,mohammed.jpg,1040,1,1,1,1,1,3,2023-01-01 00:00:00,2023-01-01 00:00:00
+responsable,istantic,responsable@istantic.co,istantic,به,موثوق ,KB12315,1984-01-01,0606060607,Tanger gznaya,mohammed.jpg,1042,1,3,2,3,2,2,2023-01-01 00:00:00,2023-01-01 00:00:00
+responsable,istaibnmarhal,responsable@istaibnmarhal.co,istaibnmarhal,به,موثوق ,KB12316,1986-01-04,0606060608,Tanger COMPLEX HASSANI,mohammed.jpg,1053,1,4,3,5,4,3,2023-01-01 00:00:00,2023-01-01 00:00:00
+responsable,cnmh,responsable@cnmh.co,cnmh,به,موثوق ,KB12319,1990-05-06,0606060610,Tanger branes,mohammed.jpg,1059,1,3,4,4,6,4,2023-01-01 00:00:00,2023-01-01 00:00:00
