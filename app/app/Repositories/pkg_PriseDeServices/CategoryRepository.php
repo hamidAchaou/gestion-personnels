@@ -43,8 +43,10 @@ class CategoryRepository extends BaseRepository
 
         // Join with the users table to get the personnel name
         $query->join('users', 'users.id', '=', 'avancements.personnel_id')
-            ->join('grades', 'grades.id', '=', 'users.grade_id')
-            ->select('avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"), 'grades.nom as grade_name');
+            ->join('grades', function ($join) {
+                $join->on('grades.echell_debut', '<=', 'avancements.echell')
+                    ->where('grades.echell_fin', '>=', 'avancements.echell');
+            })->select('avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"), 'grades.nom as grade_name');
 
         return $query->paginate($perPage, $columns);
     }
@@ -61,7 +63,8 @@ class CategoryRepository extends BaseRepository
 
         if ($personnelEchellExsit && !$existCategory) {
             $this->update($personnelEchellExsit->id, ['date_fin' => now()]);
-        } if ($existCategory) {
+        }
+        if ($existCategory) {
             throw CategoryAlreadyExistException::createCategory();
         } else {
             return parent::create($data);
