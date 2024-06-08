@@ -45,9 +45,17 @@ class CongesController extends Controller
 
     public function decision(string $etablissement, $id)
     {
-        $personnel = $this->personnels->find($id);
+        $conge = $this->congesRepository->find($id);
+        $conge->load('motif', 'personnels');
+
+        $conge->nombre_jours = $this->congesRepository->getNombreJoursAttribute($conge->date_debut, $conge->date_fin);
+
+        // foreach($conge->personnels as $item) {
+        //     dd($item->matricule);
+        // }
+
         $currentDate = Carbon::now()->format('d/m/Y');
-        return view('pkg_Conges.conges.decision', compact('personnel', 'currentDate'));
+        return view('pkg_Conges.conges.decision', compact('conge', 'currentDate', 'etablissement'));
     }
 
     public function create(string $etablissement, Request $request)
@@ -64,6 +72,7 @@ class CongesController extends Controller
 
         if ($request->ajax()) {
             $personnel_id = $request->personnel_id;
+            
             $CongesFirstYear = $this->congesRepository->filterByDate($etablissement, null, null, $firstYear, $personnel_id);
             $CongesLastYear = $this->congesRepository->filterByDate($etablissement, null, null, $lastYear, $personnel_id);
 
