@@ -40,12 +40,10 @@ class PersonnelsSeeder extends Seeder
                     'ville_id' => $data[12],
                     'fonction_id' => $data[13],
                     'ETPAffectation_id' => $data[14],
-                    'grade_id' => $data[15],
-                    'specialite_id' => $data[16],
-                    'etablissement_id' => $data[17],
-                    'avancement_id' => $data[18],
-                    'created_at' => $data[19],
-                    'updated_at' => $data[20],
+                    'specialite_id' => $data[15],
+                    'etablissement_id' => $data[16],
+                    'created_at' => $data[17],
+                    'updated_at' => $data[18],
                 ]);
             }
             $firstline = false;
