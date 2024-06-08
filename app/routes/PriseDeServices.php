@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pkg_PriseDeServices\PersonnelController;
 
 // Grouping routes that require authentication
-Route::middleware(['auth'])->group(function () {
+Route::prefix('{etablissement}')->middleware(['auth'])->group(function () {
         Route::get('/personnels', [PersonnelController::class, 'index'])->name('personnels.index');
         Route::get('/personnels/create', [PersonnelController::class, 'create'])->name('personnels.create');
         Route::post('/personnels/store', [PersonnelController::class, 'store'])->name('personnels.store');
