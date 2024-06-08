@@ -43,6 +43,10 @@ class AvancementSeeder extends Seeder
         // ==========================================================
         $csvFile = fopen(base_path("database/data/pkg_Parametres/avancements/AvancementsPermissions.csv"), "r");
         $firstLine = true;
+        $adminRole = User::ADMIN;
+        $responsableRole = User::RESPONSABLE;
+        $roleAdmin = Role::where('name', $adminRole)->first();
+        $roleResponsable = Role::where('name', $responsableRole)->first();
 
         while (($data = fgetcsv($csvFile)) !== false) {
             if (!$firstLine) {
@@ -54,11 +58,38 @@ class AvancementSeeder extends Seeder
                     "name" => $permissionName,
                     "guard_name" => $permissionGuardName,
                 ]);
+
+                if ($roleAdmin) {
+                    // If the role exists, update its permissions
+                    $roleAdmin->givePermissionTo($data['0']);
+                } else {
+                    // If the role doesn't exist, create it and give permissions
+                    $roleAdmin = Role::create([
+                        'name' => $adminRole,
+                        'guard_name' => 'web',
+                    ]);
+                    $roleAdmin->givePermissionTo($data['0']);
+                }
+                // Only give specific permissions to the 'responsable' role
+                if (in_array($data['0'], ['index-AvancementController'])) {
+                    if ($roleResponsable) {
+                        $roleResponsable->givePermissionTo($data['0']);
+                    } else {
+                        $roleResponsable = Role::create([
+                            'name' => $responsableRole,
+                            'guard_name' => 'web',
+                        ]);
+                        $roleResponsable->givePermissionTo($data['0']);
+                    }
+                }
             }
             $firstLine = false;
+
+
+           
         }
 
         fclose($csvFile);
-        
+
     }
 }
