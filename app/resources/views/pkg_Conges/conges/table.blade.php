@@ -5,7 +5,7 @@
             <th>Personnel</th>
             <th class="text-center">Date début</th>
             <th class="text-center">Date fin</th>
-            <th class="text-center">Jours restants</th>
+            <th class="text-center">Motif</th>
             <th class="text-center">Décision</th>
             <th class="text-center">État</th>
         </tr>
@@ -18,7 +18,7 @@
                     <td>{{ $personnel->nom }} {{ $personnel->prenom }}</td>
                     <td class="text-center">{{ $conge->date_debut }}</td>
                     <td class="text-center">{{ $conge->date_fin }}</td>
-                    <td class="text-center">{{ $conge->joursRestants }}</td>
+                    <td class="text-center">{{ $conge->motif->nom }}</td>
                     <td class="text-center">
                         <a href="{{ route('conges.decision', ['conge' => $conge->id]) }}"
                             class='btn btn-default btn-sm'>

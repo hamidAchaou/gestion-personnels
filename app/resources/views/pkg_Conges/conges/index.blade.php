@@ -102,7 +102,7 @@
                                 <label for="date_fin" class="form-label">Date de Fin :</label>
                                 <input type="date" class="form-control" id="date_fin" name="date_fin">
                             </div>
-                            <button type="submit" class="btn btn-secondary d-flex justify-content-end">Exporter</button>
+                            <button type="submit" class="btn btn-secondary d-flex justify-content-end" data-bs-dismiss="modal" aria-label="Close">Exporter</button>
                         </form>
                     </div>
                 </div>
