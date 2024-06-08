@@ -33,9 +33,7 @@ class MissionsController extends Controller
 
     public function index(Request $request)
     {
-        // Fetch all missions with their related users and moyensTransport
         $missions = $this->MissionsRepository->paginate();
-        // ::with('users', 'moyensTransport')
         return view('pkg_OrderDesMissions.index', compact('missions'));
 
     }
@@ -43,8 +41,6 @@ class MissionsController extends Controller
 
     public function show(User $mission)
     {
-        // Eager load the related data
-        // $missions = $this->MissionsRepository->paginate();
         $missions = $mission->missions()->paginate(5);
         return view('pkg_OrderDesMissions.show', compact('mission', 'missions'));
     }

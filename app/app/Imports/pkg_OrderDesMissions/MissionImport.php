@@ -83,7 +83,4 @@ class MissionImport implements ToModel, WithHeadingRow
             throw $e;
         }
     }
-
-    // Implement the validate() method to validate row data (as shown in your original code)
-    // ...
 }

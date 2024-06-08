@@ -10,7 +10,8 @@ class MissionsRepositories extends BaseRepository
 {
     protected $paginationLimit = 5;
     protected $fieldsSearchable = [
-        // 'nom',
+        'date_depart',
+        'date_return',
     ];
 
     /**
@@ -60,7 +61,7 @@ class MissionsRepositories extends BaseRepository
      */
     public function searchData($searchableData, $perPage = 5)
     {
-        return $this->model->where(function ($query) use ($searchableData) {
+        return $this->model->where(['users', 'moyensTransport'])->where(function ($query) use ($searchableData) {
             $query->where('nom', 'like', '%' . $searchableData . '%')
                 ->orWhere('description', 'like', '%' . $searchableData . '%');
         })->paginate($perPage);
