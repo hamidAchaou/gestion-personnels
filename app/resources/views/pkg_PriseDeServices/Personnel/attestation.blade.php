@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="py-5 px-4"></div>git ad
+                        <div class="py-5 px-4"></div>
                         <!-- footer -->
                         <section class="col-12 mt-3 footer">
                             <div class="mt-3" style="border-top: 2px solid black;">
