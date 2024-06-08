@@ -24,7 +24,7 @@
                         <td>{{ $employee->etablissement->nom }}</td>
                     @endif
 
-                    <td class="text-center"><a href="./attestation.php" class='btn btn-default btn-sm'><i
+                    <td class="text-center"><a href="{{ route('personnels.attestation' , $employee) }}" class='btn btn-default btn-sm'><i
                                 class="fa-regular fa-file"></i></a></td>
 
                     <td class="text-center">

@@ -1,11 +1,11 @@
-import 'bootstrap';
+import "bootstrap";
 // Import jQuery
-import 'jquery/dist/jquery';
+import "jquery/dist/jquery";
 // Import AdminLTE
 import "admin-lte/dist/js/adminlte";
-import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle';
-import 'admin-lte/dist/js/adminlte';
-import './app.recherche';
+import "admin-lte/plugins/bootstrap/js/bootstrap.bundle";
+import "admin-lte/dist/js/adminlte";
+import "./app.recherche";
 
 // Importation de CKEditor
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -45,10 +45,16 @@ $(document).ready(function () {
         }
         window.history.replaceState({ path: url }, "", url + hash);
     }
-
-})
+});
 
 // select2
-$(document).ready(function() {
-    $('.select2').select2();
+$(document).ready(function () {
+    $(".select2").select2();
 });
+
+var printBtn = document.getElementById("printButton");
+if (printBtn) {
+    printBtn.addEventListener("click", function () {
+        window.print();
+    });
+}

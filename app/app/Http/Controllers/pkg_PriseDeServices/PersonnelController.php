@@ -115,4 +115,8 @@ class PersonnelController extends AppBaseController
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));
     }
+    public function attestation($id){
+        $personnelsData = $this->personnelRepository->find($id);
+        return view('pkg_PriseDeServices.Personnel.attestation', compact('personnelsData'));
+    }
 }
