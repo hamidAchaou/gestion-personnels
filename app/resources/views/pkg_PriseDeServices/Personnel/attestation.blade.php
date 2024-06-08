@@ -63,14 +63,14 @@
                                     <p>Date de recrutement</p>
                                     <p>Affectation</p>
                                 </div>
-                                <div class="ml-5">
-                                    <p>: {{ $personnelsData->nom . ' ' . $personnelsData->prenom }}</p>
-                                    <p>: {{ $personnelsData->matricule }}</p>
+                                <div>
+                                    <p class="ml-5">: {{ $personnelsData->nom . ' ' . $personnelsData->prenom }}</p>
+                                    <p class="ml-5">: {{ $personnelsData->matricule }}</p>
                                     <p>.</p>
-                                    <p>: {{ $personnelsData->fonction->nom }}</p>
-                                    <p>: {{ $personnelsData->grade->nom }}</p>
-                                    <p>: 24/02/2020</p>
-                                    <p>: CFPT1 Tanger/Centre Solidaire Digital Tanger</p>
+                                    <p class="ml-5">: {{ $personnelsData->fonction->nom }}</p>
+                                    <p class="ml-5">: {{ $personnelsData->grade->nom }}</p>
+                                    <p class="ml-5">: {{$personnelsData->created_at->format('Y/m/d')}}</p>
+                                    <p class="ml-5">: CFPT1 Tanger / {{$personnelsData->etablissement->nom}}</p>
                                 </div>
                             </div>
                             <div class="col-sm-12 mt-4">
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="py-5 px-4"></div>
+                        <div class="py-5 px-4"></div>git ad
                         <!-- footer -->
                         <section class="col-12 mt-3 footer">
                             <div class="mt-3" style="border-top: 2px solid black;">
