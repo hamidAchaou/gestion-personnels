@@ -42,11 +42,10 @@ class UserSeeder extends Seeder
                     'ville_id' => $data[12],
                     'fonction_id' => $data[13],
                     'ETPAffectation_id' => $data[14],
-                    'grade_id' => $data[15],
-                    'specialite_id' => $data[16],
-                    'etablissement_id' => $data[17],
-                    'created_at' => $data[18],
-                    'updated_at' => $data[19],
+                    'specialite_id' => $data[15],
+                    'etablissement_id' => $data[16],
+                    'created_at' => $data[17],
+                    'updated_at' => $data[18],
                 ]);
             }
             $firstline = false;
@@ -102,5 +101,14 @@ class UserSeeder extends Seeder
             $firstline = false;
         }
         fclose($csvFile);
+        $adminUser = User::where("email", "admin@solicode.co")->first();
+        if ($adminUser) {
+            $adminUser->assignRole(User::ADMIN);
+        }
+
+        $responsableUser = User::where("email", "responsable@solicode.co")->first();
+        if ($responsableUser) {
+            $responsableUser->assignRole(User::RESPONSABLE);
+        }
     }
 }
