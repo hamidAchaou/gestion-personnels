@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/personnels/{id}/edit', [PersonnelController::class, 'edit'])->name('personnels.edit');
         Route::put('/personnels/{id}/update', [PersonnelController::class, 'update'])->name('personnels.update');
         Route::delete('/personnels/{id}/destroy', [PersonnelController::class, 'destroy'])->name('personnels.destroy');
+        Route::get('/personnels/attestation/{id}',[PersonnelController::class, 'attestation'])->name('personnels.attestation');
 
         Route::get('/personnel/export', [PersonnelController::class, 'export'])->name('personnels.export');
         Route::post('/personnels/import', [PersonnelController::class, 'import'])->name('personnels.import');

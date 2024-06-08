@@ -32,8 +32,7 @@ class PersonnelRepository extends BaseRepository
         'ETPAffectation_id',
         'grade_id',
         'specialite_id',
-        'etablissement_id',
-        'avancement_id',
+        'etablissement_id'
     ];
 
     /**
