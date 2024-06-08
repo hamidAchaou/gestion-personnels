@@ -4,6 +4,7 @@ namespace App\Repositories\Pkg_OrderDesMissions;
 
 use App\Repositories\BaseRepository;
 use App\Models\pkg_OrderDesMissions\Mission;
+use App\Models\pkg_Parametres\Etablissement;
 use App\Exceptions\Pkg_OrderDesMissions\MissionAlreadyExistException;
 
 class MissionsRepositories extends BaseRepository
@@ -59,11 +60,38 @@ class MissionsRepositories extends BaseRepository
      * @param int $perPage Nombre d'éléments par page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function searchData($searchableData, $perPage = 5)
+    public function search1($searchableData)
     {
+        if (empty($searchableData)) {
+            dd($searchableData);
+        }
         return $this->model->where(['users', 'moyensTransport'])->where(function ($query) use ($searchableData) {
             $query->where('nom', 'like', '%' . $searchableData . '%')
                 ->orWhere('description', 'like', '%' . $searchableData . '%');
-        })->paginate($perPage);
+        })->paginate($this->paginationLimit);
     }
+    public function search(string $searchableData)
+    {
+        $query = $this->model
+            ->where('numero_mission', 'like', "%$searchableData%")
+            ->orWhere('type_de_mission', 'like', "%$searchableData%")
+            ->orWhere('lieu', 'like', "%$searchableData%")
+            ->orWhere('numero_ordre_mission', 'like', "%$searchableData%")
+            ->orWhereHas('users', function ($q) use ($searchableData) {
+                $q->where('nom', 'like', "%$searchableData%")
+                    ->orWhere('prenom', 'like', "%$searchableData%")
+                    ->orWhere('matricule', 'like', "%$searchableData%");
+            })
+            ->with(['users', 'moyensTransport']);
+
+        return $query->paginate($this->paginationLimit);
+    }
+
+
+
+    public function getEtablissementId(string $etablissement)
+    {
+        return Etablissement::where('nom', $etablissement)->pluck('id')->first();
+    }
+
 }

@@ -52,14 +52,15 @@
                                                     <i class="fas fa-filter "></i>
                                                 </button>
                                             </div>
-                                            <select class="form-control select-moyens-de-transport">
-                                                <option value="missions-actuelles" class="missions-actuelles">Missions
+                                            <select id="table_filter" name="table_filter"
+                                                class="form-control select-moyens-de-transport">
+                                                <option value="missions_actuelles" class="missions-actuelles">Missions
                                                     actuelles
                                                 </option>
-                                                <option value="missions-precedentes" class="missions-precedentes">Missions
+                                                <option value="missions_precedentes" class="missions-precedentes">Missions
                                                     précédentes
                                                 </option>
-                                                <option value="prochaines-missions" class="prochaines-missions">Prochaines
+                                                <option value="prochaines_missions" class="prochaines-missions">Prochaines
                                                     missions
                                                 </option>
                                             </select>
@@ -72,7 +73,7 @@
 
                                     <div class=" p-0">
                                         <div class="input-group input-group-sm">
-                                            <input type="text" name="table_search" class="form-control"
+                                            <input type="text" name="table_search" id="table_search" class="form-control"
                                                 placeholder="Recherche">
                                             <div class="input-group-append">
                                                 <button type="submit" class="btn btn-default">

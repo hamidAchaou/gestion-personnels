@@ -4,11 +4,11 @@
             <tr>
                 <th>Matricule</th>
                 <th>Personnel</th>
+                <th>Numero de mission</th>
                 <th>Nom de mission</th>
                 <th>Lieu</th>
                 <th>Durée</th>
-                <th>Date de départ
-                </th>
+
                 <th>Attestation</th>
                 <th class="text-center">État</th>
             </tr>
@@ -36,10 +36,10 @@
                         </ol>
                     </td>
 
+                    <td>{{ $mission->numero_mission }}</td>
                     <td>{{ $mission->type_de_mission }}</td>
                     <td>{{ $mission->lieu }}</td>
                     <td>{{ $mission->duration }}</td>
-                    <td>{{ $mission->date_depart }}</td>
                     <td class="text-center">
                         <ol>
                             @foreach ($mission->users as $user)
@@ -56,6 +56,18 @@
                         <a href="{{ route('missions.moreDetails', $mission) }}" class='btn btn-default btn-sm'>
                             <i class="far fa-eye"></i>
                         </a>
+                        <a href="{{ route('missions.edit', $mission->id) }}" class="btn btn-sm btn-default">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <form action="{{ route('missions.destroy', $mission) }}" method="POST"
+                            style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

@@ -33,6 +33,15 @@ class MissionsController extends Controller
 
     public function index(Request $request)
     {
+        // searchAndFilter
+        if ($request->ajax()) {
+            $searchValue = $request->get('searchValue');
+            if ($searchValue !== '' && $searchValue !== 'undefined') {
+                $searchQuery = str_replace(' ', '%', $searchValue);
+                $missions = $this->MissionsRepository->search($searchQuery);
+                return view('pkg_OrderDesMissions.index', compact('missions'))->render();
+            }
+        }
         $missions = $this->MissionsRepository->paginate();
         return view('pkg_OrderDesMissions.index', compact('missions'));
 
