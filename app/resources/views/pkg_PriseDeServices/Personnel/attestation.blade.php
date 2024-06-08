@@ -25,9 +25,13 @@
         </div>
         <style>
             @media print {
-                .main-footer, .content-header .container-fluid .row.mb-2, .alert.alert-success {
+
+                .main-footer,
+                .content-header .container-fluid .row.mb-2,
+                .alert.alert-success {
                     display: none !important;
                 }
+
                 .card {
                     page-break-inside: avoid;
                 }
@@ -59,7 +63,10 @@
                                     <p>Matricule</p>
                                     <p>Est employé(e) au sein de nos services</p>
                                     <p>En qualité de</p>
-                                    <p>Grade</p>
+                                    @if ($grade)
+                                        <p>Grade</p>
+                                    @endif
+
                                     <p>Date de recrutement</p>
                                     <p>Affectation</p>
                                 </div>
@@ -68,13 +75,16 @@
                                     <p class="ml-5">: {{ $personnelsData->matricule }}</p>
                                     <p>.</p>
                                     <p class="ml-5">: {{ $personnelsData->fonction->nom }}</p>
-                                    <p class="ml-5">: {{ $personnelsData->grade->nom }}</p>
-                                    <p class="ml-5">: {{$personnelsData->created_at->format('Y/m/d')}}</p>
-                                    <p class="ml-5">: CFPT1 Tanger / {{$personnelsData->etablissement->nom}}</p>
+                                    @if ($grade)
+                                        <p class="ml-5">: {{ $grade }}</p>
+                                    @endif
+                                    <p class="ml-5">: {{ $personnelsData->created_at->format('Y/m/d') }}</p>
+                                    <p class="ml-5">: CFPT1 Tanger / {{ $personnelsData->etablissement->nom }}</p>
                                 </div>
                             </div>
                             <div class="col-sm-12 mt-4">
-                                <p>La présente attestation est délivrée à l'intéressé(e) pour servir et valoir ce que de droit.</p>
+                                <p>La présente attestation est délivrée à l'intéressé(e) pour servir et valoir ce que de
+                                    droit.</p>
                             </div>
                             <div class="col-sm-12 d-flex justify-content-end mt-4 mb-2">
                                 <div>
@@ -116,7 +126,8 @@
                                     </div>
                                     <div class="col">
                                         <ul>
-                                            <li class="text-capitalize">Centre National Mohamed 6 des handicapés Tanger Souani Tanger</li>
+                                            <li class="text-capitalize">Centre National Mohamed 6 des handicapés Tanger
+                                                Souani Tanger</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -130,11 +141,11 @@
 @endsection
 
 @section('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("printButton").addEventListener("click", function() {
-            window.print();
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("printButton").addEventListener("click", function() {
+                window.print();
+            });
         });
-    });
-</script>
+    </script>
 @endsection

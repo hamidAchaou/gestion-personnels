@@ -227,22 +227,6 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group pt-3 col-lg-6" data-select2-id="29">
-                        <label>Avancement : <span class="text-danger">*</span></label>
-                        <select name="avancement_id" class="form-control select2" style="width: 100%;"
-                            data-select2-id="1" tabindex="-1" aria-hidden="true" required>
-                            <option value="">Sélectionner avancement</option>
-                            @foreach ($avancements as $avancement)
-                                <option value="{{ $avancement->id }}"
-                                    {{ $dataToEdit && $dataToEdit->avancement->id == $avancement->id ? 'selected' : '' }}>
-                                    {{ $avancement->echell }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('avancement_id')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
                 </div>
             </fieldset>
 
