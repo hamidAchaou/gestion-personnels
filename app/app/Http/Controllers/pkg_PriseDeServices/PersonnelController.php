@@ -44,7 +44,7 @@ class PersonnelController extends AppBaseController
         }
         return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'));
     }
-    public function create()
+    public function create($etablissement)
     {
         $dataToEdit = null;
         $villes = Ville::all();
@@ -55,7 +55,7 @@ class PersonnelController extends AppBaseController
         $grades = Grade::all();
         return view("pkg_PriseDeServices.Personnel.create", compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements', 'grades'));
     }
-    public function store(PersonnelRequest $request)
+    public function store($etablissement ,PersonnelRequest $request)
     {
         try {
             $validatedData = $request->validated();
@@ -77,7 +77,7 @@ class PersonnelController extends AppBaseController
         }
     }
 
-    public function edit(string $id)
+    public function edit($etablissement ,string $id)
     {
         $dataToEdit = $this->personnelRepository->find($id);
         $villes = Ville::all();
@@ -88,7 +88,7 @@ class PersonnelController extends AppBaseController
 
         return view('pkg_PriseDeServices.Personnel.edit', compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements'));
     }
-    public function update(int $id, Request $request)
+    public function update($etablissement ,int $id, Request $request)
     {
         $data = $request->validate([
             'nom' => 'required|string|max:255',
@@ -121,18 +121,18 @@ class PersonnelController extends AppBaseController
 
         return redirect()->route('personnels.index')->with('success', 'Le personnel a été modifié avec succès.');
     }
-    public function show(int $id)
+    public function show($etablissement ,int $id)
     {
         $fetchedData = $this->personnelRepository->find($id);
         return view('pkg_PriseDeServices.Personnel.show', compact('fetchedData'));
     }
-    public function export()
+    public function export($etablissement )
     {
         $personnels = $this->personnelRepository->all();
 
         return Excel::download(new PersonnelExport($personnels), 'personnels_export.xlsx');
     }
-    public function import(Request $request)
+    public function import($etablissement ,Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
@@ -145,12 +145,12 @@ class PersonnelController extends AppBaseController
         }
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.addSucées'));
     }
-    public function destroy(int $id)
+    public function destroy($etablissement ,int $id)
     {
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));
     }
-    public function attestation($id)
+    public function attestation($etablissement ,$id)
     {
         $personnelsData = $this->personnelRepository->find($id);
         $avancement = Avancement::where('personnel_id', $id)->latest()->first();
