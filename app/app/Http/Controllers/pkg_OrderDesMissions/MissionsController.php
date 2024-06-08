@@ -6,8 +6,11 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_OrderDesMissions\Transports;
+use App\Exports\pkg_OrderDesMissions\MissionExport;
+use App\Imports\pkg_OrderDesMissions\MissionImport;
 use App\Models\pkg_OrderDesMissions\MoyensTransport;
 use App\Models\pkg_OrderDesMissions\MissionPersonnel;
 use App\Http\Requests\pkg_OrderDesMissions\MissionRequest;
@@ -81,8 +84,79 @@ class MissionsController extends Controller
     {
         $mission->delete();
         return redirect()->back()->with('success', __('messages.delete_success'));
+    }
 
+    // EXPORT
+    public function export(Request $request)
+    {
+        $presentDate = Carbon::now()->toDateString();
+        $missions = Mission::with(['users', 'moyensTransport']);
 
+        if (empty($request->all())) {
+            return redirect()->back()->with('warning', 'Veuillez sélectionner au moins une option.');
+        }
+
+        $missionActuel = $request->has('mission_actuel');
+        $missionPrecedente = $request->has('mission_precedente');
+        $prochainesMissions = $request->has('prochaines_missions');
+
+        // Check if exactly three parameters are passed in the request
+        if (count($request->all()) == 3) {
+            $allMissions = $missions->get(); // Use get() to execute the query and retrieve the results
+            // dd($allMissions);
+        }
+
+        // Check if exactly two parameters are passed in the request
+        if (count($request->all()) == 2) {
+            if ($missionActuel && $missionPrecedente) {
+                $allMissions = $missions->where('date_depart', '<=', $presentDate)->get();
+            } elseif ($missionActuel && $prochainesMissions) {
+                $allMissions = $missions->where('date_return', '>=', $presentDate)->get();
+            } elseif ($missionPrecedente && $prochainesMissions) {
+                $allMissions = $missions->where(function ($query) use ($presentDate) {
+                    $query->where('date_depart', '<', $presentDate)
+                        ->where('date_return', '<=', $presentDate);
+                })->orWhere('date_depart', '>=', $presentDate)
+                    ->get(); // Use get() to execute the query and retrieve the results
+            }
+        }
+
+        // Check if only one parameter is passed in the request
+        if (count($request->all()) == 1) {
+            if ($missionActuel) {
+                $allMissions = $missions->where('date_depart', '<=', $presentDate)
+                    ->where('date_return', '>=', $presentDate)
+                    ->get();
+            } elseif ($missionPrecedente) {
+                $allMissions = $missions->where('date_return', '<', $presentDate)
+                    ->get();
+            } elseif ($prochainesMissions) {
+                $allMissions = $missions->where('date_depart', '>', $presentDate)
+                    ->get();
+            }
+        }
+
+        if ($allMissions->isEmpty()) {
+            return redirect()->back()->with('warning', "Aucune missions n'a été trouvée appartenant à cette catégorie");
+        }
+
+        return Excel::download(new MissionExport($allMissions), 'missions_export.xlsx');
+
+    }
+
+    // IMPORT
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        try {
+            Excel::import(new MissionImport, $request->file('file'));
+        } catch (\InvalidArgumentException $e) {
+            return redirect()->route('missions.index')->withError('Le symbole de séparation est introuvable. Pas assez de données disponibles pour satisfaire au format.');
+        }
+        return redirect()->route('missions.index')->with('success', 'chdidid' . ' ' . __('app.addSucées'));
     }
 
 }
