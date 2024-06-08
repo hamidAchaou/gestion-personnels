@@ -23,4 +23,8 @@ return [
     'school' => 'Etapplissement',
     'phoneNumber' => 'Numèro téléphone',
     'matricule' => 'Matricule',
+    'dateDebut' => 'Date début',
+    'dateFin' => 'Date de fin',
+    'echell' => 'Echell',
+    'grade' => 'Grade'
 ];
