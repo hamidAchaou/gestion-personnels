@@ -37,7 +37,6 @@ class PersonnelImport implements ToModel, WithHeadingRow
                 'matricule' => $row["matricule"],
                 'ville_id' => $row["ville_id"],
                 'fonction_id' => $row["fonction_id"],
-                'grade_id' => $row["grade_id"],
                 'specialite_id' => $row["specialite_id"],
                 'etablissement_id' => $row["etablissement_id"],
                 'avancement_id' => $row["avancement_id"],
