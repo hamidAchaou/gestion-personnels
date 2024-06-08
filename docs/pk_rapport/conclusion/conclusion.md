@@ -3,7 +3,7 @@ layout: default
 presentation: true
 chapitre: true
 package : pkg_rapport
-order: 1000
+order: 900
 ---
 
 # Conclusion
@@ -12,7 +12,7 @@ order: 1000
 *Figure: Conclusion*
 
 <!-- note -->
- 
+
 En conclusion, mon projet de formation a été réalisé de manière individuelle et a été axé sur le développement d'une application web mobile répondant à un besoin concret. L'objectif était de créer une plateforme permettant aux utilisateurs de rechercher et de sélectionner des films adaptés aux familles et aux enfants. Pour atteindre cet objectif, j'ai utilisé des technologies modernes telles que Laravel et Kotlin, tout en adoptant des approches de travail agiles et centrées sur l'utilisateur telles que 2tup, design thinking et scrum.
 
 Le projet a été une occasion précieuse pour développer vos compétences en matière de développement d'applications web et mobile, et pour appliquer concrètement les connaissances acquises pendant ma formation.Grâce à une gestion efficace du projet, en utilisant un diagramme de Gantt et une méthodologie de travail agile, j'ai pu respecter les délais fixés tout en mettant l'accent sur les fonctionnalités essentielles. Cela m'a permis de développer une compréhension approfondie de la planification et de l'organisation des tâches, ainsi que de maintenir une progression constante tout au long du projet.

@@ -18,4 +18,7 @@ return [
     'addSucées' => 'a été ajouté avec succès.',
     'updateSucées' => 'a été mis à jour avec succès.',
     'deleteSucées' => 'a été supprimé avec succès.',
+    'dateDebut' => 'Date début',
+    'dateFin' => 'Date de fin',
+    'echell' => 'Echell'
 ];
