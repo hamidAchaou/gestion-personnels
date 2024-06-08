@@ -104,19 +104,29 @@ class PersonnelController extends AppBaseController
 
         try {
             Excel::import(new PersonnelImport, $request->file('file'));
-        } 
-        catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             return redirect()->route('personnels.index')->withError('Le symbole de séparation est introuvable. Pas assez de données disponibles pour satisfaire au format.');
         }
-        return redirect()->route('personnels.index')->with('success',__('pkg_PriseDeServices/personnels.singular').' '.__('app.addSucées'));
+        return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.addSucées'));
     }
     public function destroy(int $id)
     {
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));
     }
-    public function attestation($id){
+    public function attestation($id)
+    {
         $personnelsData = $this->personnelRepository->find($id);
-        return view('pkg_PriseDeServices.Personnel.attestation', compact('personnelsData'));
+        $avancement = Avancement::where('personnel_id', $id)->latest()->first();
+        if ($avancement) {
+            $gradeData = Grade::where('echell_debut', '<=', $avancement->echell)
+                ->where('echell_fin', '>=', $avancement->echell)
+                ->first();
+            
+        } else {
+            $gradeData = null;
+        }
+        $grade = $gradeData->nom;
+        return view('pkg_PriseDeServices.Personnel.attestation', compact('personnelsData', 'grade'));
     }
 }
