@@ -75,10 +75,13 @@ class MissionsRepositories extends BaseRepository
                 ->with(['users', 'moyensTransport'])
                 ->where('date_return', '<', $presentDate)
                 ->paginate($this->paginationLimit);
-        } else {
+        } elseif ($missionType == "prochaines_missions") {
             return $this->model
                 ->with(['users', 'moyensTransport'])
                 ->where('date_depart', '>', $presentDate)
+                ->paginate($this->paginationLimit);
+        } else {
+            return $this->model
                 ->paginate($this->paginationLimit);
         }
     }

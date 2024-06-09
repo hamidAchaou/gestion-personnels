@@ -14,6 +14,11 @@
             </tr>
         </thead>
         <tbody>
+
+            @if (count($missions) == 0)
+                <img width="100%" src="{{ asset('./images/pkg_OrderDesMissions/resultNotFound.png') }}" alt="">
+            @endif
+
             @foreach ($missions as $mission)
                 <tr>
 

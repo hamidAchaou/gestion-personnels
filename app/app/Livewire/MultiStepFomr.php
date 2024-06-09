@@ -162,14 +162,16 @@ class MultiStepFomr extends Component
             $this->validate([
                 'lieu' => 'required|max:100',
                 'data_ordre_mission' => 'required|date',
-                'date_debut' => 'required|date', // |before:date_fin
-                'date_fin' => 'required|date', // |after:date_debut
+                'date_debut' => 'required|date|before:date_fin', // |before:date_fin
+                'date_fin' => 'required|date|after:date_debut', // |after:date_debut
                 'date_depart' => 'required|date',
                 'heure_de_depart' => 'required',
-                'date_return' => 'required|date',  //|after:date_depart
+                'date_return' => 'required|date|after:date_depart',  //|after:date_depart
                 'heure_de_return' => 'required',
             ]);
         }
+
+
     }
 
     // val

@@ -196,13 +196,12 @@
                                         class="text-danger">*</span></label>
                                 <select disabled class="form-control">
                                     @foreach ($moyensTransportsValues as $item)
-                                        @if ($moyens_transports[$user] == $item->id)
+                                        @if (isset($moyens_transports[$user]) && $moyens_transports[$user] == $item->id)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->nom }}
                                             </option>
                                         @endif
                                     @endforeach
-
                                 </select>
                                 @error('moyens_transports.' . $user)
                                     <div class="text-danger">{{ $message }}</div>

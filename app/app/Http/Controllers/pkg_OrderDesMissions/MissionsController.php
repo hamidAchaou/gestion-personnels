@@ -50,9 +50,9 @@ class MissionsController extends Controller
     public function filterByTypeMission(Request $request)
     {
         $missionType = $request->input('mission'); // Correct parameter name
-        $absences = $this->MissionsRepository->filterByTypeMission($missionType);
+        $missions = $this->MissionsRepository->filterByTypeMission($missionType);
 
-        return view('pkg_OrderDesMissions.index', compact('missionType'));
+        return view('pkg_OrderDesMissions.index', compact('missions'));
     }
 
 

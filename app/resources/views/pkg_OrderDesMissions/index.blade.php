@@ -54,6 +54,9 @@
                                             </div>
                                             <select id="filterSelectByTypeMissions" name="filterSelectByTypeMissions"
                                                 class="form-control select-moyens-de-transport">
+                                                <option value="choisissez" class="Choisissez">
+                                                    Choisissez un type des missions
+                                                </option>
                                                 <option value="missions_actuelles" class="missions-actuelles">Missions
                                                     actuelles
                                                 </option>
