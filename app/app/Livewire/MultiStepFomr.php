@@ -169,8 +169,15 @@ class MultiStepFomr extends Component
                 'date_return' => 'required|date|after:date_depart',  //|after:date_depart
                 'heure_de_return' => 'required',
             ]);
-        }
+        } elseif ($this->currentStep == 3) {
 
+            // ! sss
+            foreach ($this->users as $user) {
+                if (!isset($this->moyens_transports[$user])) {
+                    $this->moyens_transports[$user] = '1';
+                }
+            }
+        }
 
     }
 
