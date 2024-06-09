@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Liste des ordre des missions</h1>
+                    <h1>{{ __('app.list') }} {{ __('pkg_OrderDesMissions/mission.plural') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">

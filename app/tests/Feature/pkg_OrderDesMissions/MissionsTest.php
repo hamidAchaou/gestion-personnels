@@ -1,74 +1,124 @@
 <?php
 
-namespace Tests\Feature\pkg_competences;
+namespace Tests\Feature\pkg_OrderDesMissions;
 
 use Tests\TestCase;
+use App\Models\User;
 use App\Models\pkg_OrderDesMissions\Mission;
 use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\pkg_OrderDesMissions\Transports;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Repositories\Pkg_OrderDesMissions\MissionsRepositories;
 
 class MissionsTest extends TestCase
 {
     use DatabaseTransactions;
+    /**
+     * Le référentiel de missions utilisé pour les tests.
+     *
+     * @var MissionsRepositories
+     */
+    protected $missionsRepositories;
 
-    protected $model;
+    /**
+     * L'utilisateur utilisé pour les tests.
+     *
+     * @var User
+     */
+    protected $user;
+    protected $transports;
 
+    /**
+     * Met en place les préconditions pour chaque test.
+     */
     protected function setUp(): void
     {
         parent::setUp();
-        $this->model = new Mission;
+        $this->missionsRepositories = new MissionsRepositories();
+        // $this->user = User::factory()->create();
+        // $this->transports = Transports::factory()->create();
     }
 
-    public function test_paginate_technologies(): void
+    public function test_paginate_missions()
     {
-        $technologies = $this->model->paginate(2);
-        $this->assertNotNull($technologies);
-        $this->assertNotEmpty($technologies);
+        $mission = [
+            'numero_mission' => '99651',
+            'nature' => 'nature 1',
+            'lieu' => 'tanger',
+            'type_de_mission' => "Voyage d'affaires",
+            'numero_ordre_mission' => '124442',
+            'data_ordre_mission' => '2024-05-01',
+            'date_debut' => '2024-05-02',
+            'date_fin' => '2024-05-10',
+            'date_depart' => '2024-05-03',
+            'heure_de_depart' => '10:00:00',
+            'date_return' => '2024-05-11',
+            'heure_de_return' => '10:00:00',
+        ];
+        $this->missionsRepositories->create($mission);
+        $this->assertDatabaseHas('missions', $mission);
+        $missions = $this->missionsRepositories->paginate();
+        $this->assertNotNull($missions);
     }
 
-    public function test_create_technologies(): void
+    /**
+     * Teste la création d'un mission.
+     */
+    public function test_create_mission()
     {
         $data = [
-            'nom' => 'html',
-            'description' => 'est le langage de balisage standard',
-            'categorie_technologies_id' => 1,
-            'competence_id' => 1,
+            'numero_mission' => '212121',
+            'nature' => 'nature 1',
+            'lieu' => 'tanger',
+            'type_de_mission' => "Voyage d'affaires",
+            'numero_ordre_mission' => '124442',
+            'data_ordre_mission' => '2024-05-01',
+            'date_debut' => '2024-05-02',
+            'date_fin' => '2024-05-10',
+            'date_depart' => '2024-05-03',
+            'heure_de_depart' => '10:00:00',
+            'date_return' => '2024-05-11',
+            'heure_de_return' => '10:00:00',
         ];
-
-        $this->model->create($data);
-        $this->assertDatabaseHas('technologies', ['nom' => $data['nom']]);
+        $mision = $this->missionsRepositories->create($data);
+        $this->assertEquals($data['numero_mission'], $mision->numero_mission);
+        $this->assertDatabaseHas('missions', $data);
     }
 
-
-    public function test_update_technologies(): void
+    /**
+     * Teste la mise à jour d'un mission.
+     */
+    public function test_update_mission()
     {
-        $existingTechnologies = $this->model->create([
-            'nom' => 'html',
-            'description' => 'est le langage de balisage standard',
-            'categorie_technologies_id' => 1,
-            'competence_id' => 1,
-        ]);
-
-        $newName = 'css';
-        $existingTechnologies->update(['nom' => $newName]);
-
-        $this->assertEquals($newName, $existingTechnologies->nom);
-        $this->assertDatabaseHas('technologies', ['nom' => $newName]);
-
+        $mission = Mission::factory()->create();
+        $data = [
+            'numero_mission' => '99651',
+            'nature' => 'nature 1',
+            'lieu' => 'tanger',
+            'type_de_mission' => "Voyage d'affaires",
+            'numero_ordre_mission' => '124442',
+            'data_ordre_mission' => '2024-05-01',
+            'date_debut' => '2024-05-02',
+            'date_fin' => '2024-05-10',
+            'date_depart' => '2024-05-03',
+            'heure_de_depart' => '10:00:00',
+            'date_return' => '2024-05-11',
+            'heure_de_return' => '10:00:00',
+        ];
+        $this->missionsRepositories->update($mission->id, $data);
+        $this->assertDatabaseHas('missions', $data);
     }
 
-    public function test_delete_technologies(): void
+    /**
+     * Teste la suppression d'un mission.
+     */
+    public function test_delete_mission()
     {
-        $existingTechnologies = $this->model->create([
-            'nom' => 'html',
-            'description' => 'est le langage de balisage standard',
-            'categorie_technologies_id' => 1,
-            'competence_id' => 1,
-        ]);
-
-        $existingTechnologies->delete();
-
-        $this->assertDatabaseMissing('technologies', ['id' => $existingTechnologies->id]);
+        $mission = Mission::factory()->create();
+        $this->missionsRepositories->destroy($mission->id);
+        $this->assertDatabaseMissing('missions', ['id' => $mission->id]);
     }
+
+
 }
