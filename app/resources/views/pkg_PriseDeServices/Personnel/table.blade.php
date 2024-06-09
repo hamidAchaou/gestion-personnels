@@ -14,6 +14,13 @@
         </thead>
         <tbody>
             @foreach ($personnelsData as $employee)
+                @if (Auth::user()->hasRole('admin') && Auth::user()->id == $employee->id)
+                    @continue
+                @endif
+                @if (Auth::user()->hasRole('responsable') && Auth::user()->id == $employee->id || $employee->id == $userId)
+                    @continue
+                @endif
+
                 <tr>
                     <td>{{ $employee->matricule }}</td>
                     <td>{{ $employee->nom }}</td>
@@ -24,8 +31,11 @@
                         <td>{{ $employee->etablissement->nom }}</td>
                     @endif
 
-                    <td class="text-center"><a href="{{ route('personnels.attestation' , $employee) }}" class='btn btn-default btn-sm'><i
-                                class="fa-regular fa-file"></i></a></td>
+                    <td class="text-center">
+                        <a href="{{ route('personnels.attestation', $employee) }}" class='btn btn-default btn-sm'>
+                            <i class="fa-regular fa-file"></i>
+                        </a>
+                    </td>
 
                     <td class="text-center">
                         @can('show-PersonnelController')
@@ -72,7 +82,6 @@
                     {{ __('app.export') }}</a>
             </form>
         @endcan
-
     </div>
     <div class="">
         <ul class="pagination  m-0 float-right">

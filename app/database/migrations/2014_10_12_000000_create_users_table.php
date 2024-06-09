@@ -28,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('ville_id')->nullable();
             $table->unsignedBigInteger('fonction_id')->nullable();
             $table->unsignedBigInteger('ETPAffectation_id')->nullable();
-            $table->unsignedBigInteger('grade_id')->nullable();
             $table->unsignedBigInteger('specialite_id')->nullable();
             $table->unsignedBigInteger('etablissement_id')->nullable();
             $table->timestamps();
