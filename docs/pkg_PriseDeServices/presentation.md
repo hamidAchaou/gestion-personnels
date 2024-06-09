@@ -6,4 +6,4 @@ order: 1
 ---
 
 {% assign package_name = "pkg_PriseDeServices" %}
-{% include presentation_par_package.md %}
+{% include rapport_par_package.md %}

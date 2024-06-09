@@ -27,5 +27,6 @@ return [
     'matricule' => 'Matricule',
     'dateDebut' => 'Date début',
     'dateFin' => 'Date de fin',
-    'echell' => 'Echell'
+    'echell' => 'Echell',
+    'grade' => 'Grade'
 ];
