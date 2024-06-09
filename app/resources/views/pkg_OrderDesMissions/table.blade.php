@@ -4,13 +4,12 @@
             <tr>
                 <th>Matricule</th>
                 <th>Personnel</th>
-                <th>Numero de mission</th>
-                <th>Nom de mission</th>
-                <th>Lieu</th>
-                <th>Durée</th>
-
-                <th>Attestation</th>
-                <th class="text-center">État</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.numero_mission') }}</th>
+                <th>{{ __('app.name') }} de {{ __('pkg_OrderDesMissions/mission.singular') }}</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.lieu') }}</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.duration') }}</th>
+                <th>{{ __('app.certificate') }}</th>
+                <th class="text-center">{{ __('app.action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -93,7 +92,8 @@
         </form>
         <button type="button" data-target="#modal-sm" data-toggle="modal" class="btn  btn-default btn-sm mt-0 mx-2">
             <i class="fa-solid fa-file-export"></i>
-            EXPORTER</button>
+            {{ __('app.export') }}
+        </button>
     </div>
     <div>
         <ul class="pagination  m-0 float-right">

@@ -29,7 +29,7 @@
                     <div class="float-sm-right">
                         <a href="{{ route('missions.create') }}" class="btn btn-info">
                             <i class="fas fa-plus"></i>
-                            {{ __('app.add') }} missions
+                            {{ __('app.add') }} {{ __('pkg_OrderDesMissions/mission.singular') }}
                         </a>
                     </div>
                 </div>
@@ -57,14 +57,14 @@
                                                 <option value="choisissez" class="Choisissez">
                                                     Choisissez un type des missions
                                                 </option>
-                                                <option value="missions_actuelles" class="missions-actuelles">Missions
-                                                    actuelles
+                                                <option value="missions_actuelles" class="missions-actuelles">
+                                                    {{ __('pkg_OrderDesMissions/mission.current_missions') }}
                                                 </option>
-                                                <option value="missions_precedentes" class="missions-precedentes">Missions
-                                                    précédentes
+                                                <option value="missions_precedentes" class="missions-precedentes">
+                                                    {{ __('pkg_OrderDesMissions/mission.previous_missions') }}
                                                 </option>
-                                                <option value="prochaines_missions" class="prochaines-missions">Prochaines
-                                                    missions
+                                                <option value="prochaines_missions" class="prochaines-missions">
+                                                    {{ __('pkg_OrderDesMissions/mission.next_missions') }}
                                                 </option>
                                             </select>
                                         </div>

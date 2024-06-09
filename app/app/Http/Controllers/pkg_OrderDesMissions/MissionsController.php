@@ -46,7 +46,7 @@ class MissionsController extends Controller
 
     }
 
-    // ! filter By Type Mission
+    // filter By Type Mission
     public function filterByTypeMission(Request $request)
     {
         $missionType = $request->input('mission'); // Correct parameter name
@@ -57,8 +57,16 @@ class MissionsController extends Controller
 
 
 
-    public function show(User $mission)
+    public function show(Request $request, User $mission)
     {
+        if ($request->ajax()) {
+            $searchValue = $request->get('searchValue');
+            if ($searchValue !== '' && $searchValue !== 'undefined') {
+                $searchQuery = str_replace(' ', '%', $searchValue);
+                $missions = $this->MissionsRepository->search($searchQuery);
+                return view('pkg_OrderDesMissions.show', compact('mission', 'missions'))->render();
+            }
+        }
         $missions = $mission->missions()->paginate(5);
         return view('pkg_OrderDesMissions.show', compact('mission', 'missions'));
     }

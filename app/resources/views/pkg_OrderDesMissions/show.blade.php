@@ -11,12 +11,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Historique des missions</h1>
+                    <h1>Historique {{ __('pkg_OrderDesMissions/mission.plural') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <a href="{{ route('missions.index') }}" class="btn btn-default float-right"><i
                             class="fas fa-arrow-left"></i>
-                        Retoure</a>
+                        {{ __('app.back') }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -58,28 +59,13 @@
                                 <div class="col-12">
                                     <div class="card card-purple card-outline">
                                         <div class="card-header col-md-12">
-                                            <div class="row justify-content-between">
-                                                <div class="col-6">
-                                                    <div class="d-flex justify-content-start">
-                                                        <div class=" p-0">
-                                                            <div class="input-group input-group-sm">
-                                                                <div class="input-group-append">
-                                                                    <button type="submit" class="btn btn-default">
-                                                                        <i class="fa-solid fa-calendar"></i>
-                                                                    </button>
-                                                                </div>
-                                                                <input type="text" name="daterange"
-                                                                    value="07/03/2024 - 12/03/2024" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="row justify-content-end">
                                                 <div class="col-4">
                                                     <div class="d-flex justify-content-end">
 
                                                         <div class=" p-0">
                                                             <div class="input-group input-group-sm">
-                                                                <input type="text" name="table_search"
+                                                                <input type="text" name="table_search" id="table_search"
                                                                     class="form-control" placeholder="Recherche">
                                                                 <div class="input-group-append">
                                                                     <button type="submit" class="btn btn-default">

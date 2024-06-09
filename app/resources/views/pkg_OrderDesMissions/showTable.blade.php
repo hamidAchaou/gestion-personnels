@@ -2,22 +2,22 @@
     <table class="table table-striped text-nowrap">
         <thead>
             <tr>
-                <th>N<sup>o</sup> mission</th>
-                <th>Type de mission</th>
-                <th>Lieu</th>
-                <th class="">Durée</th>
-                <th class="">Date de départ</th>
-                <th class="text-center">Actions</th>
+                <th>N<sup>o</sup> {{ __('pkg_OrderDesMissions/mission.singular') }}</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.numero_mission') }}</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.type_de_mission') }}</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.lieu') }}</th>
+                <th>{{ __('pkg_OrderDesMissions/mission.duration') }}</th>
+                <th class="text-center">{{ __('app.action') }}</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($missions as $item)
                 <tr>
                     <td>{{ $item->numero_mission }}</td>
+                    <td>{{ $item->numero_mission }}</td>
                     <td>{{ $item->type_de_mission }}</td>
                     <td>{{ $item->lieu }}</td>
                     <td>{{ $item->duration }}</td>
-                    <td>{{ $item->date_depart }}</td>
                     <td class="text-center">
                         <a href="{{ route('missions.moreDetails', $item) }}" class='btn btn-default btn-sm'>
                             <i class="far fa-eye"></i>
@@ -40,15 +40,8 @@
     </table>
 </div>
 
-<div class="row justify-content-between p-2">
-    <div class="col-6 align-self-end">
-        <button type="button" class="btn btn-default btn-sm">
-            <i class="fa-solid fa-file-arrow-down"></i>
-            IMPORTER</button>
-        <button type="button" class="btn btn-default btn-sm ">
-            <i class="fa-solid fa-file-export"></i>
-            EXPORTER</button>
-    </div>
+<div class="row justify-content-end p-2">
+
     <div class="col-6">
         <ul class="pagination m-0 float-right">
             {{ $missions->links() }}

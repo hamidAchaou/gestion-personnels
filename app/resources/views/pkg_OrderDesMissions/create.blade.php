@@ -6,7 +6,8 @@
             <div class="col-sm-6 ">
                 <a href="http://127.0.0.1:8000/OrderDesMissions/missions" class="btn btn-default float-right"><i
                         class="fas fa-arrow-left"></i>
-                    Retoure</a>
+                    {{ __('app.back') }}
+                </a>
             </div>
         </div>
         <div class="container-fluid">
@@ -16,7 +17,7 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="nav-icon fas fa-table"></i>
-                                Ajouter une mission
+                                {{ __('app.add') }} une {{ __('pkg_OrderDesMissions/mission.singular') }}
                             </h3>
                         </div>
                         <!-- Obtenir le formulaire -->

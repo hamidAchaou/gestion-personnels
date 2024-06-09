@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'singular' => 'ordre de mission',
+    'singular' => 'mission',
     'plural' => 'ordre des missions',
     'numero_mission' => 'Numero de mission',
     'nature' => 'Nature',
@@ -16,4 +16,7 @@ return [
     'date_return' => 'Date return',
     'heure_de_return' => 'Heure de return',
     'duration' => 'Durée',
+    'current_missions' => 'Missions actuelles',
+    'previous_missions' => 'Missions actuelles',
+    'next_missions' => 'Prochaines missions',
 ];
