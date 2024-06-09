@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pkg_Parametres\Etablissement;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\pkg_Parametres\Etablissement;
 
 class HomeController extends Controller
 {
@@ -24,8 +26,14 @@ class HomeController extends Controller
      */
     public function index($etablissement)
     {
+        $user = Auth::user();
+        $roles = $user->getRoleNames();
         $etablissement = Etablissement::where('nom', $etablissement)->firstOrFail();
-
+        if (!$roles->contains(User::ADMIN)) {
+            if ($user->etablissement_id !== $etablissement->id) {
+                return abort(403);
+            }
+        }
         return view('home', compact('etablissement'));
     }
 }

@@ -26,24 +26,26 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa-solid fa-school"></i>
-                        <span class="m-2">{{ request()->segment(1) }}</span>
-                        <i class="fa-solid fa-sort-down ml-2"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-                        <span class="dropdown-item dropdown-header">Les établissements</span>
-                        @foreach ($etablissements as $etablissement)
+                @can('admin')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa-solid fa-school"></i>
+                            <span class="m-2">{{ request()->segment(1) }}</span>
+                            <i class="fa-solid fa-sort-down ml-2"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                            <span class="dropdown-item dropdown-header">Les établissements</span>
+                            @foreach ($etablissements as $etablissement)
+                                <div class="dropdown-divider"></div>
+                                <a href="{{ route('etablissement.app', ['etablissement' => $etablissement->nom]) }}"
+                                    class="dropdown-item">
+                                    <span>{{ $etablissement->nom }}</span>
+                                </a>
+                            @endforeach
                             <div class="dropdown-divider"></div>
-                            <a href="{{ route('etablissement.app', ['etablissement' => $etablissement->nom]) }}" class="dropdown-item">
-                                <span>{{ $etablissement->nom }}</span>
-                            </a>
-                        @endforeach
-                        <div class="dropdown-divider"></div>
-                    </div>
-
-                </li>
+                        </div>
+                    </li>
+                @endcan
 
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -87,7 +89,8 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Droits d'auteur © 2024-2025 <a href="#" class="text-info">Prototype</a>.</strong> Tous droits
+            <strong>Droits d'auteur © 2024-2025 <a href="#" class="text-info">Gestion personnels</a>.</strong> Tous
+            droits
             réservés.
         </footer>
     </div>

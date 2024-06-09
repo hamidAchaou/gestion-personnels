@@ -49,7 +49,6 @@ class JourFerieSeerder extends Seeder
         // ==========================================================
 
         $AdminRole = Role::where('name', User::ADMIN)->first();
-        $ResponsableRole = Role::where('name', User::RESPONSABLE)->first();
         $csvFile = fopen(base_path("database/data/pkg_Absences/JourFeriesPermissions.csv"), "r");
         $firstLine = true;
         $permissions = [];
@@ -75,7 +74,5 @@ class JourFerieSeerder extends Seeder
         // Assign the permissions from the file to the admin
         $AdminRole->givePermissionTo($permissions);
 
-        // Assign the permissions from the file to the member
-        $ResponsableRole->givePermissionTo($permissions);
     }
 }

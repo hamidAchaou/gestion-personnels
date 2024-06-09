@@ -4,7 +4,7 @@ use App\Http\Controllers\pkg_Absences\AbsenceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('{etablissement}/absence')->middleware(['auth'])->group(function () {
+Route::prefix('{etablissement}/absence')->middleware(['auth', 'authorize.etablissement'])->group(function () {
     // Route::resource('/', AbsenceController::class);
     Route::get('/export', [AbsenceController::class, 'export'])->name('absence.export');
     Route::post('/import', [AbsenceController::class, 'import'])->name('absence.import');
