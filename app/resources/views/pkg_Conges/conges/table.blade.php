@@ -14,6 +14,9 @@
         @forelse ($conges as $conge)
             <tr>
                 @foreach ($conge->personnels as $personnel)
+                    @if ($personnel->hasRole('admin'))
+                        @continue
+                    @endif
                     <td>{{ $personnel->matricule }}</td>
                     <td>{{ $personnel->nom }} {{ $personnel->prenom }}</td>
                     <td class="text-center">{{ $conge->date_debut }}</td>
