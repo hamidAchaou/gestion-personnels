@@ -45,7 +45,7 @@ class MultiStepFomr extends Component
 
 
     // Multi-step form controls
-    public $totalSteps = 3;
+    public $totalSteps = 4;
     public $currentStep = 1;
 
     // Loaded data from database
@@ -177,7 +177,7 @@ class MultiStepFomr extends Component
     {
         //? validation
         $this->resetErrorBag();
-        if ($this->currentStep == 3) {
+        if ($this->currentStep == 4) {
             $validationRules = [];
             $customAttributes = [];
 

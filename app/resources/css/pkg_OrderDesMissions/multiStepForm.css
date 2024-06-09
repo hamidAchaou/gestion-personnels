@@ -15,7 +15,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     position: relative;
 }
 
@@ -55,6 +55,8 @@ body {
 .progress-title {
     font-size: 14px;
     color: #333;
+    width: 10rem;
+    text-align: center;
 }
 
 /* .progress-step.active .progress-circle,
