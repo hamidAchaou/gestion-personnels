@@ -264,4 +264,34 @@ class CongesRepository extends BaseRepository
         $jours_restants = ((22 + $joursRestantsLastYear) - $nombreJoursCongesFirstYear);
         return $jours_restants;
     }
+
+    /**
+     * Get congés based on the current date.
+     *
+     * @param string $etablissement Name of the establishment.
+     * @param array $search Array of search parameters.
+     * @param int $perPage Number of results per page.
+     * @param array $columns Columns to retrieve.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator Paginated list of congés.
+     */
+    public function getCongesForCurrentDate($etablissement = "", $search = [], $perPage = 0, array $columns = ['*'])
+    {
+        if ($perPage == 0) {
+            $perPage = $this->paginationLimit;
+        }
+        
+        $currentDate = Carbon::now();
+        
+        $query = $this->model
+            ->where('date_debut', '<=', $currentDate)
+            ->where('date_fin', '>=', $currentDate);
+
+        if ($etablissement !== null) {
+            $query->whereHas('personnels.etablissement', function ($query) use ($etablissement) {
+                $query->where('nom', $etablissement);
+            });
+        }
+    
+        return $query->paginate($perPage, $columns);
+    }
 }
