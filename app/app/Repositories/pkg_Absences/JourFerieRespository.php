@@ -61,12 +61,35 @@ class JourFerieRespository extends BaseRepository
         return $this->model->with('anneeJuridique')->paginate($perPage);
     }
 
-    public function exportJourFerieWithRelations(){
+    public function exportJourFerieWithRelations()
+    {
         return $this->model->with('anneeJuridique')->get();
     }
 
-    public function filterByAnneeJuridique($perPage){
+    public function filterByAnneeJuridique($perPage)
+    {
         // return $this->model->with('anneeJuridique')->paginate($perPage);
+    }
+
+    /**
+     * Recherche les projets correspondants aux critères spécifiés.
+     *
+     * @param mixed $searchableData Données de recherche.
+     * @param int $perPage Nombre d'éléments par page.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function search(string $searchableData, int $perPage = 4)
+    {
+        // Get the etablissement_id based on the provided etablissement name
+
+        // Subquery to get the IDs of the last absences for each personnel
+
+        // Main query to fetch the absences with relations using the subquery and applying search
+        $query = $this->model
+            ->where('nom', $searchableData)
+            ->with('anneeJuridique');
+
+        return $query->paginate($perPage);
     }
 
 }
