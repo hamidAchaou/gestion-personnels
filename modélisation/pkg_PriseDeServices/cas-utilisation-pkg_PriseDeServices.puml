@@ -1,20 +1,32 @@
-@startuml uses_cases_pkg_GestionPriseDeService
+@startuml  
+
 left to right direction
 
-actor Directeur as directeur
-actor ResponsableFormation as responsableFormation
+together {
+  actor Directeur as directeur
+  actor ResponsableFormation as responsableFormation
+}
 
-package Gestion_PriseDeService {
+package "pkg_PriseDeServices" {
 
+  directeur -- (Naviguer par établissement)
   directeur -- (Gestion personnel)
-  (Gestion personnel) <.. (imprimer attestation de travail) : extend
-
-  responsableFormation -- (Consultez personnel)
-  (Consultez personnel) <.. (imprimer attestation de travail) : extend
-
   directeur -- (Gestion categories)
-  responsableFormation -- (Consultez categories) 
-
+  
+  (Gestion personnel) <.. (Ajouter des personnels) : extend
+  (Gestion personnel) <.. (Modifier des personnels) : extend
+  (Gestion personnel) <.. (Consulter des personnels) : extend
+  (Gestion personnel) <.. (Exporter personnels) : extend
+  (Gestion personnel) <.. (Importer des personnels) : extend
+  (Gestion personnel) <.. (imprimer attestation de travail) : extend
+  (Gestion categories) <.. (Ajouter des categories) : extend
+  (Gestion categories) <.. (Modifier des categories) : extend
+  (Gestion categories) <.. (Consulter des categories) : extend
+  (Gestion categories) <.. (Exporter categories) : extend
+  (Gestion categories) <.. (Importer categories) : extend
+  
+  responsableFormation -- (Consulter des personnels)
+  responsableFormation -- (imprimer attestation de travail)
 }
 
 @enduml
