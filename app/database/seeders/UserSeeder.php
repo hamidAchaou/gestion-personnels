@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
@@ -47,6 +48,7 @@ class UserSeeder extends Seeder
                 ]);
             }
             $firstline = false; // Move this line inside the loop
+            $firstline = false; // Move this line inside the loop
         }
 
         fclose($csvFile);
@@ -61,7 +63,17 @@ class UserSeeder extends Seeder
 
         // Schema::disableForeignKeyConstraints();
         // Schema::enableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
+        // Schema::enableForeignKeyConstraints();
 
+        // $csvFile = fopen(base_path("database/data/pkg_PriseDeServices/personnels/PersonnelsPermissions.csv"), "r");
+        // $firstline = true;
+        // while (($data = fgetcsv($csvFile)) !== FALSE) {
+        //     if (!$firstline) {
+        //         Permission::create([
+        //             "name" => $data['0'],
+        //             "guard_name" => $data['1'],
+        //         ]);
         // $csvFile = fopen(base_path("database/data/pkg_PriseDeServices/personnels/PersonnelsPermissions.csv"), "r");
         // $firstline = true;
         // while (($data = fgetcsv($csvFile)) !== FALSE) {

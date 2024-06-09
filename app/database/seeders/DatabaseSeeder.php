@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PersonnelSeeder::class);
         $this->call(CongesSeeder::class);
         $this->call(pkg_Absences::class);
+        $this->call(CongesSeeder::class);
+        $this->call(pkg_Absences::class);
     }
 }

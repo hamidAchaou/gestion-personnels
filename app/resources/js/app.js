@@ -30,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error(error);
         });
+        ClassicEditor
+        .create(document.querySelector('#Remarques'))
+        .catch(error => {
+            console.error(error);
+        });
 });
 
 $(document).ready(function () {
@@ -57,13 +62,6 @@ $(document).ready(function () {
 })
 
 // select2
-$(document).ready(function () {
-    $(".select2").select2();
+$(document).ready(function() {
+    $('.select2').select2();
 });
-
-var printBtn = document.getElementById("printButton");
-if (printBtn) {
-    printBtn.addEventListener("click", function () {
-        window.print();
-    });
-}
