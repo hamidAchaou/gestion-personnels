@@ -27,7 +27,7 @@ class MissionsRepositories extends BaseRepository
     }
 
     /**
-     * Constructeur de la classe TechnologieRepository.
+     * Constructeur de la classe MissionRepository.
      */
     public function __construct()
     {
@@ -35,11 +35,11 @@ class MissionsRepositories extends BaseRepository
     }
 
     /**
-     * Crée un nouveau Technologie.
+     * Crée un nouveau Mission.
      *
-     * @param array $data Données du Technologie à créer.
+     * @param array $data Données du Mission à créer.
      * @return mixed
-     * @throws MissionAlreadyExistException Si le Technologie existe déjà.
+     * @throws MissionAlreadyExistException Si le Mission existe déjà.
      */
     public function create(array $data)
     {
@@ -55,7 +55,7 @@ class MissionsRepositories extends BaseRepository
     }
 
     /**
-     * Recherche les Technologies correspondants aux critères spécifiés.
+     * Recherche les Missions correspondants aux critères spécifiés.
      *
      * @param mixed $searchableData Données de recherche.
      * @param int $perPage Nombre d'éléments par page.
@@ -64,11 +64,6 @@ class MissionsRepositories extends BaseRepository
     public function filterByTypeMission(string $missionType)
     {
         $presentDate = Carbon::now()->toDateString();
-        /*
-        missions_actuelles
-        missions_precedentes
-        prochaines_missions
-        */
         if ($missionType == "missions_actuelles") {
             return $this->model
                 ->with(['users', 'moyensTransport'])
@@ -83,7 +78,7 @@ class MissionsRepositories extends BaseRepository
         } else {
             return $this->model
                 ->with(['users', 'moyensTransport'])
-                ->wherewhere('date_depart', '>', $presentDate)
+                ->where('date_depart', '>', $presentDate)
                 ->paginate($this->paginationLimit);
         }
     }

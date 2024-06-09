@@ -11,23 +11,22 @@ use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_OrderDesMissions\Transports;
 use App\Exports\pkg_OrderDesMissions\MissionExport;
 use App\Imports\pkg_OrderDesMissions\MissionImport;
-use App\Models\pkg_OrderDesMissions\MoyensTransport;
-use App\Models\pkg_OrderDesMissions\MissionPersonnel;
-use App\Http\Requests\pkg_OrderDesMissions\MissionRequest;
 use App\Repositories\Pkg_OrderDesMissions\MissionsRepositories;
+use App\Repositories\Pkg_OrderDesMissions\TransportsRepositories;
+use App\Repositories\Pkg_OrderDesMissions\MoyensTransportRepositories;
 
 
 class MissionsController extends Controller
 {
     protected $MissionsRepository;
-    protected $MoyensTransport;
-    protected $Transports;
+    protected $MoyensTransportRepositories;
+    protected $TransportsRepositories;
     protected $Users;
-    public function __construct(MissionsRepositories $missionsRepository, MoyensTransport $moyensTransport, Transports $transports, User $user)
+    public function __construct(MissionsRepositories $missionsRepository, MoyensTransportRepositories $moyensTransportRepositories, TransportsRepositories $transportsRepositories, User $user)
     {
         $this->MissionsRepository = $missionsRepository;
-        $this->MoyensTransport = $moyensTransport;
-        $this->Transports = $transports;
+        $this->MoyensTransportRepositories = $moyensTransportRepositories;
+        $this->TransportsRepositories = $transportsRepositories;
         $this->Users = $user;
     }
 
@@ -47,13 +46,15 @@ class MissionsController extends Controller
 
     }
 
+    // ! filter By Type Mission
     public function filterByTypeMission(Request $request)
     {
-        $missionType = $request->get('filterSelectByTypeMissions');
+        $missionType = $request->input('mission'); // Correct parameter name
         $absences = $this->MissionsRepository->filterByTypeMission($missionType);
 
         return view('pkg_OrderDesMissions.index', compact('missionType'));
     }
+
 
 
     public function show(User $mission)
@@ -68,7 +69,8 @@ class MissionsController extends Controller
         // Eager load the related data
         $mission->load(['users', 'moyensTransport']);
         //
-        $transports = Transports::where('mission_id', $mission->id)->get();
+        // $transports = Transports::where('mission_id', $mission->id)->get();
+        $transports = $this->TransportsRepositories->getTransportByMissionId($mission->id);
         // Now you can access the transports data
         return view('pkg_OrderDesMissions.moreDetails', compact('mission', 'transports'));
     }
@@ -76,7 +78,7 @@ class MissionsController extends Controller
     public function certificate(Mission $mission, User $user)
     {
         $presentDate = Carbon::now()->toDateString();
-        $transports = Transports::where('mission_id', $mission->id)->where('user', $user->id)->get();
+        $transports = $this->TransportsRepositories->getTransportByMissionId($mission->id)->where('user', $user->id);
         // dd($transports);
         return view('pkg_OrderDesMissions.attestation', compact('mission', 'user', 'presentDate', 'transports'));
     }
@@ -88,10 +90,22 @@ class MissionsController extends Controller
         return view('pkg_OrderDesMissions.create');
     }
 
+    /**
+     * Renvoie les champs de recherche disponibles.
+     * methode store in this path app/Livewire/MultiStepFomr.php
+     * used package Livewire
+     */
+
     public function edit(string $id)
     {
         return view('pkg_OrderDesMissions.update', compact('id'));
     }
+
+    /**
+     * Renvoie les champs de recherche disponibles.
+     * methode update in this path app/Livewire/MultiStepFomr.php
+     * used package Livewire
+     */
 
     public function destroy(Mission $mission)
     {
