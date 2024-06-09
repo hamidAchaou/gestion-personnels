@@ -52,7 +52,7 @@
                                                     <i class="fas fa-filter "></i>
                                                 </button>
                                             </div>
-                                            <select id="table_filter" name="table_filter"
+                                            <select id="filterSelectByTypeMissions" name="filterSelectByTypeMissions"
                                                 class="form-control select-moyens-de-transport">
                                                 <option value="missions_actuelles" class="missions-actuelles">Missions
                                                     actuelles

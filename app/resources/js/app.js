@@ -8,6 +8,7 @@ import 'admin-lte/dist/js/adminlte';
 import './app.recherche';
 import './pkg_conges/filterByDate';
 import './pkg_conges/filterByDatePgeCreate';
+import './pkg_OrderDesMissions/filterByTypeMissions';
 
 // Importation de CKEditor
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";

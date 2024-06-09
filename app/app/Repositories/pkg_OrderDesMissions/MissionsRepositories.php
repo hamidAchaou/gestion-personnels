@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Pkg_OrderDesMissions;
 
+use Carbon\Carbon;
 use App\Repositories\BaseRepository;
 use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_Parametres\Etablissement;
@@ -60,16 +61,34 @@ class MissionsRepositories extends BaseRepository
      * @param int $perPage Nombre d'éléments par page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function search1($searchableData)
+    public function filterByTypeMission(string $missionType)
     {
-        if (empty($searchableData)) {
-            dd($searchableData);
+        $presentDate = Carbon::now()->toDateString();
+        /*
+        missions_actuelles
+        missions_precedentes
+        prochaines_missions
+        */
+        if ($missionType == "missions_actuelles") {
+            return $this->model
+                ->with(['users', 'moyensTransport'])
+                ->where('date_depart', '<=', $presentDate)
+                ->where('date_return', '>=', $presentDate)
+                ->paginate($this->paginationLimit);
+        } elseif ($missionType == "missions_precedentes") {
+            return $this->model
+                ->with(['users', 'moyensTransport'])
+                ->where('date_return', '<', $presentDate)
+                ->paginate($this->paginationLimit);
+        } else {
+            return $this->model
+                ->with(['users', 'moyensTransport'])
+                ->wherewhere('date_depart', '>', $presentDate)
+                ->paginate($this->paginationLimit);
         }
-        return $this->model->where(['users', 'moyensTransport'])->where(function ($query) use ($searchableData) {
-            $query->where('nom', 'like', '%' . $searchableData . '%')
-                ->orWhere('description', 'like', '%' . $searchableData . '%');
-        })->paginate($this->paginationLimit);
     }
+
+
     public function search(string $searchableData)
     {
         $query = $this->model

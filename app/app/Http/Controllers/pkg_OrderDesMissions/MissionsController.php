@@ -47,6 +47,15 @@ class MissionsController extends Controller
 
     }
 
+    public function filterByTypeMission(Request $request)
+    {
+        dd('aaa');
+        $missionType = $request->input('filterSelectByTypeMissions');
+        $absences = $this->MissionsRepository->filterByTypeMission($missionType);
+
+        return view('pkg_OrderDesMissions.table', compact('missionType'));
+    }
+
 
     public function show(User $mission)
     {
