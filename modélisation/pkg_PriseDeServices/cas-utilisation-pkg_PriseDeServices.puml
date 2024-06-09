@@ -13,7 +13,7 @@ package Gestion_PriseDeService {
   (Consultez personnel) <.. (imprimer attestation de travail) : extend
 
   directeur -- (Gestion categories)
-  responsableFormation -- (Consultez categories)
+  responsableFormation -- (Consultez categories) 
 
 }
 

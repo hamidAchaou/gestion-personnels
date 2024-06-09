@@ -4,11 +4,15 @@ chapitre: true
 package: pkg_PriseDeServices
 order: 220
 ---
+<!-- note -->
+
+# IV.  Branche fonctionnelle 
+Dans cette phase de capture des besoins fonctionnels de la méthode 2TUP, en utilisant le processus de développement tels que la carte d'empathie et la définition du problème, ainsi que des techniques d'idéation pour identifier les besoins  des utilisateurs finaux. De plus, l'utilisation d'UML, comme les diagrammes de cas d'utilisation, peut être utilisée pour clarifier et structurer ces besoins déterminés.
 
 <!-- new slide -->
-# Empathie de directeur
+## Empathie de directeur
 
-![empathie directeur](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-directeur.svg){:width="23%"}
+![empathie directeur](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-directeur.svg){:width="23%"}*figure: empathie directeur* 
 
 <!-- note -->
 ## Persona
@@ -30,9 +34,9 @@ Le 05/03/2024
 - J'utilise Microsoft Word pour remplir et imprimer les attestations de travail
 
 <!-- new slide -->
-# Empathie de chef de formation
+## Empathie de chef de formation
 
-![empathie responsable de formation](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-responsable.svg){:width="23%"}
+![empathie responsable de formation](/gestion-personnels/diagrammes/pkg_PriseDeServices/empathy-responsable.svg){:width="23%"}*figure: Responsable de formation*
 
 <!-- note -->
 ## Persona
@@ -57,10 +61,8 @@ Le 05/03/2024
 <!-- note -->
 perdre beaucoup de temps à récupérer les données de chaque employé et à chercher des fichiers mal organisés.
 
-
 <!-- new slide -->
 ## Ideation
-![empathie chef de formation](/gestion-personnels/empathie-chef-de-formation/images/ideation.jpg){:width="73%"}
+![Ideation](/gestion-personnels/pkg_PriseDeServices/images/ideation.jpg){:width="73%"}
 <!-- note -->
 Réaliser une application web pour gérer les employés et imprimer les fichiers nécessaires avec une récupération automatique des données.
-

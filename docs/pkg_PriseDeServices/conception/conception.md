@@ -25,6 +25,12 @@ Dans le processus de conception d'une interface utilisateur, il est important de
 
 ### Personnels
 
+#### Authentification
+
+![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/auth.png){:width="80%"}
+*figure: Authentification*
+
+
 #### Accueil
 
 ![Maquettage de page Accuelle](/gestion-personnels/pkg_PriseDeServices/conception/images/personnelIndex.png){:width="80%"}

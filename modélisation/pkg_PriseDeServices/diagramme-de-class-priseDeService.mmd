@@ -56,9 +56,8 @@ namespace pkg_PriseDesServices {
     }
 }
 
-Personnel "1" -- "0..*" Etablissement: works_at
-Personnel "1" -- "0..*" Grade: holds
-Personnel "1" -- "0..*" Fonction: has
-Personnel "1" -- "0..*" Avancement: advances
-Personnel "1" -- "0..*" Specialite: specializes_in
-Personnel "1" -- "0..*" Villes: lives_in
+Personnel "0..*" -- "1" Etablissement: works_at
+Personnel "0..*" -- "1" Fonction: has
+Personnel "0..*" -- "1" Avancement: advances
+Personnel "0..*" -- "1" Specialite: specializes_in
+Personnel "0..*" -- "1" Villes: lives_in
