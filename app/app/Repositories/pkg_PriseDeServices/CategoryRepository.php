@@ -35,43 +35,49 @@ class CategoryRepository extends BaseRepository
      * @return LengthAwarePaginator
      */
     public function paginate($etablissement = "", $search = [], $perPage = 0, array $columns = ['*']): LengthAwarePaginator
-    {
-        if ($perPage == 0) {
-            $perPage = $this->paginationLimit;
-        }
-        $avancementsQuery = $this->allQuery($search)
-            ->join('users', 'users.id', '=', 'avancements.personnel_id')
-            ->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
-            ->select('avancements.*')
-            ->distinct();
-    
-        if (!empty($etablissement)) {
-            $avancementsQuery->where('etablissements.nom', '=', $etablissement);
-        }
-    
-        $avancements = $avancementsQuery->paginate($perPage, $columns);
-    
-        $avancements->getCollection()->transform(function ($avancement) {
-            $grade = DB::table('grades')
-                ->where('grades.echell_debut', '<=', $avancement->echell)
-                ->where('grades.echell_fin', '>=', $avancement->echell)
-                ->first();
-    
-            $personnel = DB::table('users')
-                ->where('users.id', '=', $avancement->personnel_id)
-                ->select(DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"))
-                ->first();
-    
-            $avancement->grade_name = $grade->nom ?? null;
-            $avancement->personnel_name = $personnel->personnel_name ?? null;
-    
-            return $avancement;
-        });
-    
-        return $avancements;
+{
+    if ($perPage == 0) {
+        $perPage = $this->paginationLimit;
     }
-    
 
+    $latestAvancementsSubquery = DB::table('avancements')
+        ->select('avancements.*')
+        ->whereIn('avancements.id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                ->from('avancements')
+                ->groupBy('personnel_id');
+        });
+
+    $query = $this->allQuery($search)
+        ->joinSub($latestAvancementsSubquery, 'latest_avancements', function ($join) {
+            $join->on('latest_avancements.personnel_id', '=', 'avancements.personnel_id');
+        })
+        ->join('users', 'users.id', '=', 'latest_avancements.personnel_id')
+        ->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
+        ->select('latest_avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"), 'etablissements.nom as etablissement_name')
+        ->distinct();
+
+    if (!empty($etablissement)) {
+        $query->where('etablissements.nom', '=', $etablissement);
+    }
+
+    $avancements = $query->paginate($perPage, $columns);
+
+    $avancements->getCollection()->transform(function ($avancement) {
+        $grade = DB::table('grades')
+            ->where('grades.echell_debut', '<=', $avancement->echell)
+            ->where('grades.echell_fin', '>=', $avancement->echell)
+            ->first();
+
+        $avancement->grade_name = $grade->nom ?? null;
+
+        return $avancement;
+    });
+
+    return $avancements;
+}
+
+    
 
     public function create(array $data)
     {

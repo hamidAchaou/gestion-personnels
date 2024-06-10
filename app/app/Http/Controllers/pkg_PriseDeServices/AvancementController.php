@@ -68,5 +68,10 @@ class AvancementController extends AppBaseController
         // dd($fetchedData);
         return view('pkg_PriseDeServices.Category.show', compact('fetchedData','personnelData'));
     }
+    public function destroy($etablissement, int $id){
+        $avancement = $this->categoryRepository->destroy($id);
+        return redirect()->route('categories.index')->with('success', __('pkg_PriseDeServices/categories.singular') . ' ' . __('app.deleteSucées'));
+    
+    }
     
 }

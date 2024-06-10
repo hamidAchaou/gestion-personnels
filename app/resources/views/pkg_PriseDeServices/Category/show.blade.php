@@ -39,14 +39,14 @@
                                             <h6 class="float-right text-purple">{{$personnelData->etablissement->nom}}</h6>
                                         </li>
                                     </ul>
-                                    <div class="row pt-1">
-                                        <a href="{{-- route('conge.show') --}}" class="btn btn-default btn-block col-md-4 mt-2">
+                                    <div class="row pt-1 justify-content-between">
+                                        <a href="{{-- route('conge.show') --}}" class="btn btn-default btn-block col-md-3 mt-2">
                                             <i class="fa-solid fa-bars-staggered mr-2"></i>
                                         </a>
-                                        <a href="{{-- route('absences.show') --}}" class="btn btn-default btn-block col-md-4 mt-2">
+                                        <a href="{{-- route('absences.show') --}}" class="btn btn-default btn-block col-md-3 mt-2">
                                             <i class="fa-regular fa-calendar-minus mr-2"></i>
                                         </a>
-                                        <a href="{{-- route('missions.show') --}}" class="btn btn-default btn-block col-md-4 mt-2">
+                                        <a href="{{-- route('missions.show') --}}" class="btn btn-default btn-block col-md-3 mt-2">
                                             <i class="fa-solid fa-business-time mr-2"></i>
                                         </a>
                                     </div>
