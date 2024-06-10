@@ -21,35 +21,37 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="card card-purple card-outline">
-                            <div class="card-body box-profile">
-                                <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/man.png') }}"
-                                        alt="Photo de profil">
+                                <div class="card-body box-profile">
+
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="{{ asset('images/man.png') }}" alt="Photo de profil">
+                                    </div>
+                                    <h3 class="profile-username text-center"></h3>
+                                    <p class="text-muted text-center">{{$personnelData->fonction->nom}}</p>
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Matricule</b>
+                                            <h6 class="float-right text-purple">{{$personnelData->matricule}}</h6>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Établissement</b>
+                                            <h6 class="float-right text-purple">{{$personnelData->etablissement->nom}}</h6>
+                                        </li>
+                                    </ul>
+                                    <div class="row pt-1 justify-content-between">
+                                        <a href="{{-- route('conge.show') --}}" class="btn btn-default btn-block col-md-3 mt-2">
+                                            <i class="fa-solid fa-bars-staggered mr-2"></i>
+                                        </a>
+                                        <a href="{{-- route('absences.show') --}}" class="btn btn-default btn-block col-md-3 mt-2">
+                                            <i class="fa-regular fa-calendar-minus mr-2"></i>
+                                        </a>
+                                        <a href="{{-- route('missions.show') --}}" class="btn btn-default btn-block col-md-3 mt-2">
+                                            <i class="fa-solid fa-business-time mr-2"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <h3 class="profile-username text-center"></h3>
-                                <p class="text-muted text-center">Formateur</p>
-                                <ul class="list-group list-group-unbordered">
-                                    <li class="list-group-item">
-                                        <b>Matricule</b>
-                                        <h6 class="float-right text-purple">13324</h6>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Établissement</b>
-                                        <h6 class="float-right text-purple">Solicode</h6>
-                                    </li>
-                                </ul>
-                                <div class="row pt-1">
-                                    <a href="{{-- route('conge.show') --}}" class="btn btn-default btn-block col-md-4 mt-2">
-                                        <i class="fa-solid fa-bars-staggered mr-2"></i>
-                                    </a>
-                                    <a href="{{-- route('absences.show') --}}" class="btn btn-default btn-block col-md-4 mt-2">
-                                        <i class="fa-regular fa-calendar-minus mr-2"></i>
-                                    </a>
-                                    <a href="{{-- route('missions.show') --}}" class="btn btn-default btn-block col-md-4 mt-2">
-                                        <i class="fa-solid fa-business-time mr-2"></i>
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
@@ -69,14 +71,14 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($fetchedData as $data)
-                                            <tr>
+                                                <tr>
                                                     <td>{{ $data->echell }}</td>
                                                     <td>{{ $data->date_debut }} / {{ $data->date_fin }}</td>
-                                                    <td>{{ $data->grade }}</td>
+                                                    <td>{{ $data->grade_name }}</td>
 
                                                     <td class="text-center">
-                                                        <form action="{{ route('categories.destroy', $data->id) }}" method="POST"
-                                                            style="display: inline;">
+                                                        <form action="{{ route('categories.destroy', $data->id) }}"
+                                                            method="POST" style="display: inline;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger"
@@ -85,8 +87,8 @@
                                                             </button>
                                                         </form>
                                                     </td>
-                                                    </tr>
-                                                @endforeach
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
