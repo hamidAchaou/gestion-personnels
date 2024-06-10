@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\AppBaseController;
 use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_OrderDesMissions\Transports;
 use App\Exports\pkg_OrderDesMissions\MissionExport;
@@ -16,7 +17,7 @@ use App\Repositories\Pkg_OrderDesMissions\TransportsRepositories;
 use App\Repositories\Pkg_OrderDesMissions\MoyensTransportRepositories;
 
 
-class MissionsController extends Controller
+class MissionsController extends AppBaseController
 {
     protected $MissionsRepository;
     protected $MoyensTransportRepositories;

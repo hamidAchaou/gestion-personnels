@@ -45,33 +45,41 @@
                     <td>{{ $mission->lieu }}</td>
                     <td>{{ $mission->duration }}</td>
                     <td class="text-center">
-                        <ol>
-                            @foreach ($mission->users as $user)
-                                <li class="my-1">
-                                    <a href="{{ route('missions.certificate', [$mission->id, $user->id]) }}"
-                                        class="btn btn-default btn-sm">
-                                        <i class="fa-regular fa-file"></i>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ol>
+                        @can('certificate-MissionsController')
+                            <ol>
+                                @foreach ($mission->users as $user)
+                                    <li class="my-1">
+                                        <a href="{{ route('missions.certificate', [$mission->id, $user->id]) }}"
+                                            class="btn btn-default btn-sm">
+                                            <i class="fa-regular fa-file"></i>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        @endcan
                     </td>
                     <td class="text-center">
-                        <a href="{{ route('missions.moreDetails', $mission) }}" class='btn btn-default btn-sm'>
-                            <i class="far fa-eye"></i>
-                        </a>
-                        <a href="{{ route('missions.edit', $mission->id) }}" class="btn btn-sm btn-default">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <form action="{{ route('missions.destroy', $mission) }}" method="POST"
-                            style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+                        @can('show-MissionsController')
+                            <a href="{{ route('missions.moreDetails', $mission) }}" class='btn btn-default btn-sm'>
+                                <i class="far fa-eye"></i>
+                            </a>
+                        @endcan
+                        @can('edit-MissionsController')
+                            <a href="{{ route('missions.edit', $mission->id) }}" class="btn btn-sm btn-default">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        @endcan
+                        @can('destroy-MissionsController')
+                            <form action="{{ route('missions.destroy', $mission) }}" method="POST"
+                                style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -81,19 +89,23 @@
 
 <div class="d-md-flex justify-content-between align-items-center p-2">
     <div class="d-flex align-items-center mb-2 ml-2 mt-2">
-        <form action="{{ route('missions.import') }}" method="post" class="mt-2" enctype="multipart/form-data"
-            id="importForm">
-            @csrf
-            <label for="upload" class="btn btn-default btn-sm font-weight-normal">
-                <i class="fas fa-file-download"></i>
-                {{ __('app.import') }}
-            </label>
-            <input type="file" id="upload" name="file" style="display:none;" />
-        </form>
-        <button type="button" data-target="#modal-sm" data-toggle="modal" class="btn  btn-default btn-sm mt-0 mx-2">
-            <i class="fa-solid fa-file-export"></i>
-            {{ __('app.export') }}
-        </button>
+        @can('import-MissionsController')
+            <form action="{{ route('missions.import') }}" method="post" class="mt-2" enctype="multipart/form-data"
+                id="importForm">
+                @csrf
+                <label for="upload" class="btn btn-default btn-sm font-weight-normal">
+                    <i class="fas fa-file-download"></i>
+                    {{ __('app.import') }}
+                </label>
+                <input type="file" id="upload" name="file" style="display:none;" />
+            </form>
+        @endcan
+        @can('export-MissionsController')
+            <button type="button" data-target="#modal-sm" data-toggle="modal" class="btn  btn-default btn-sm mt-0 mx-2">
+                <i class="fa-solid fa-file-export"></i>
+                {{ __('app.export') }}
+            </button>
+        @endcan
     </div>
     <div>
         <ul class="pagination  m-0 float-right">

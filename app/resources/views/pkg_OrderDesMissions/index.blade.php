@@ -26,12 +26,14 @@
                     <h1>{{ __('app.list') }} {{ __('pkg_OrderDesMissions/mission.plural') }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <div class="float-sm-right">
-                        <a href="{{ route('missions.create') }}" class="btn btn-info">
-                            <i class="fas fa-plus"></i>
-                            {{ __('app.add') }} {{ __('pkg_OrderDesMissions/mission.singular') }}
-                        </a>
-                    </div>
+                    @can('create-MissionsController')
+                        <div class="float-sm-right">
+                            <a href="{{ route('missions.create') }}" class="btn btn-info">
+                                <i class="fas fa-plus"></i>
+                                {{ __('app.add') }} {{ __('pkg_OrderDesMissions/mission.singular') }}
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
 

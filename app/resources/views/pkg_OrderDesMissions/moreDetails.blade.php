@@ -41,10 +41,12 @@
                                                     <td>{{ $user->nom }}</td>
                                                     <td>{{ $user->avancement->echell }}</td>
                                                     <td class="text-center">
-                                                        <a href="{{ route('missions.show', $user->id) }}"
-                                                            class='btn btn-default btn-sm'>
-                                                            <i class="far fa-eye"></i>
-                                                        </a>
+                                                        @can('show-MissionsController')
+                                                            <a href="{{ route('missions.show', $user->id) }}"
+                                                                class='btn btn-default btn-sm'>
+                                                                <i class="far fa-eye"></i>
+                                                            </a>
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -59,10 +61,9 @@
                                     <legend>Les Informations de mission</legend>
                                     <!-- Numéro de mission -->
                                     <div class="col-sm-12">
-                                        <label
-                                            for="Numéro-de-mission">
+                                        <label for="Numéro-de-mission">
                                             {{ __('pkg_OrderDesMissions/mission.numero_mission') }} :
-                                            </label>
+                                        </label>
                                         <p>{{ $mission->numero_mission }}</p>
                                     </div>
                                     <!-- Nature -->
@@ -77,7 +78,8 @@
                                         <p>{{ $mission->type_de_mission }}</p>
                                     </div>
                                     <div class="col-sm-12">
-                                        <label for="Nature">{{ __('pkg_OrderDesMissions/mission.numero_ordre_mission') }}:</label>
+                                        <label
+                                            for="Nature">{{ __('pkg_OrderDesMissions/mission.numero_ordre_mission') }}:</label>
                                         <p>{{ $mission->numero_ordre_mission }}</p>
                                     </div>
                                 </fieldset>

@@ -19,20 +19,26 @@
                     <td>{{ $item->lieu }}</td>
                     <td>{{ $item->duration }}</td>
                     <td class="text-center">
-                        <a href="{{ route('missions.moreDetails', $item) }}" class='btn btn-default btn-sm'>
-                            <i class="far fa-eye"></i>
-                        </a>
-                        <a href="{{ route('missions.edit', $item->id) }}" class="btn btn-sm btn-default">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </a>
-                        <form action="{{ route('missions.destroy', $item) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+                        @can('show-MissionsController')
+                            <a href="{{ route('missions.moreDetails', $item) }}" class='btn btn-default btn-sm'>
+                                <i class="far fa-eye"></i>
+                            </a>
+                        @endcan
+                        @can('edit-MissionsController')
+                            <a href="{{ route('missions.edit', $item->id) }}" class="btn btn-sm btn-default">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        @endcan
+                        @can('destroy-MissionsController')
+                            <form action="{{ route('missions.destroy', $item) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
