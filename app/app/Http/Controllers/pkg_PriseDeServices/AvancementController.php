@@ -62,9 +62,11 @@ class AvancementController extends AppBaseController
         }
     }
     public function show($etablissement, $id){
-        $fetchedData = $this->categoryRepository->find($id);
+        $fetchedData1 = $this->categoryRepository->find($id);
+        $personnelData =  $fetchedData1['personnelData'];
+        $fetchedData =  $fetchedData1['records'];
         // dd($fetchedData);
-        return view('pkg_PriseDeServices.Category.show', compact('fetchedData'));
+        return view('pkg_PriseDeServices.Category.show', compact('fetchedData','personnelData'));
     }
     
 }

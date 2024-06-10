@@ -2,6 +2,7 @@
 
 namespace App\Repositories\pkg_PriseDeServices;
 
+use App\Models\pkg_PriseDeServices\Personnel;
 use App\Repositories\BaseRepository;
 use App\Models\pkg_Parametres\Avancement;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -38,23 +39,38 @@ class CategoryRepository extends BaseRepository
         if ($perPage == 0) {
             $perPage = $this->paginationLimit;
         }
-
-        $query = $this->allQuery($search);
-
-        $query->join('users', 'users.id', '=', 'avancements.personnel_id')
-            ->join('grades', function ($join) {
-                $join->on('grades.echell_debut', '<=', 'avancements.echell')
-                    ->where('grades.echell_fin', '>=', 'avancements.echell');
-            })
+        $avancementsQuery = $this->allQuery($search)
+            ->join('users', 'users.id', '=', 'avancements.personnel_id')
             ->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
-            ->select('avancements.*', DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"), 'grades.nom as grade_name');
-
+            ->select('avancements.*')
+            ->distinct();
+    
         if (!empty($etablissement)) {
-            $query->where('etablissements.nom', '=', $etablissement);
+            $avancementsQuery->where('etablissements.nom', '=', $etablissement);
         }
-
-        return $query->paginate($perPage, $columns);
+    
+        $avancements = $avancementsQuery->paginate($perPage, $columns);
+    
+        $avancements->getCollection()->transform(function ($avancement) {
+            $grade = DB::table('grades')
+                ->where('grades.echell_debut', '<=', $avancement->echell)
+                ->where('grades.echell_fin', '>=', $avancement->echell)
+                ->first();
+    
+            $personnel = DB::table('users')
+                ->where('users.id', '=', $avancement->personnel_id)
+                ->select(DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"))
+                ->first();
+    
+            $avancement->grade_name = $grade->nom ?? null;
+            $avancement->personnel_name = $personnel->personnel_name ?? null;
+    
+            return $avancement;
+        });
+    
+        return $avancements;
     }
+    
 
 
     public function create(array $data)
@@ -122,39 +138,44 @@ class CategoryRepository extends BaseRepository
     {
         $user = $this->model->find($id);
         $userId = $user->personnel_id;
+        $personnelData = Personnel::where('id', $userId)->first();
 
         $records = DB::table('gestion_personnels.avancements')
             ->join('gestion_personnels.users', 'gestion_personnels.users.id', '=', 'gestion_personnels.avancements.personnel_id')
-            ->join('gestion_personnels.grades', function ($join) {
-                $join->on('gestion_personnels.grades.echell_debut', '<=', 'gestion_personnels.avancements.echell')
-                    ->where('gestion_personnels.grades.echell_fin', '>=', 'gestion_personnels.avancements.echell');
-            })
+            ->join('gestion_personnels.etablissements', 'gestion_personnels.users.etablissement_id', '=', 'gestion_personnels.etablissements.id')
             ->select(
-                'gestion_personnels.avancements.*',
-                DB::raw("CONCAT(gestion_personnels.users.nom, ' ', gestion_personnels.users.prenom) as personnel_name"),
+                'gestion_personnels.avancements.id',
+                'gestion_personnels.avancements.date_debut',
+                'gestion_personnels.avancements.date_fin',
+                'gestion_personnels.avancements.echell',
+                'gestion_personnels.avancements.personnel_id',
                 'gestion_personnels.users.matricule',
-                'gestion_personnels.grades.nom as grade' // Corrected syntax for selecting the 'grades.nom' column
+                'gestion_personnels.etablissements.nom as etablissement_name',
+                DB::raw("CONCAT(gestion_personnels.users.nom, ' ', gestion_personnels.users.prenom) as personnel_name")
             )
             ->where('gestion_personnels.avancements.personnel_id', $userId)
+            ->distinct() 
             ->get();
 
         if ($records->isEmpty()) {
-            // Handle the case where no records are found
             abort(404, 'No records found for the specified user in the given establishment');
         }
 
-        // dd($records);
-        if ($records->isEmpty()) {
-            // Handle the case where no records are found
-            abort(404, 'No records found for the specified user in the given establishment');
-        }
+        $records->each(function ($record) {
+            $grade = DB::table('gestion_personnels.grades')
+                ->where('echell_debut', '<=', $record->echell)
+                ->where('echell_fin', '>=', $record->echell)
+                ->select('nom as grade_name')
+                ->first();
 
-        return $records;
+            $record->grade_name = $grade ? $grade->grade_name : null;
+        });
+
+        return [
+            'personnelData' => $personnelData,
+            'records' => $records,
+        ];
     }
-
-
-
-
 
 
 }
