@@ -81,9 +81,9 @@ class MissionsSeeder extends Seeder
                 $permissionGuardName = $data[1];
 
                 // Skip the line with 'imprimer-MissionController'
-                // if ($permissionName === 'imprimer-MissionController') {
-                //     continue;
-                // }
+                if ($permissionName === 'certificate-MissionsController') {
+                    continue;
+                }
 
                 // Find or create the permission
                 $permission = Permission::firstOrCreate([
