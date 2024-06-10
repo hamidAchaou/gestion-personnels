@@ -12,11 +12,11 @@
     </thead>
     <tbody id="conjeTable">
         @forelse ($conges as $conge)
-            <tr>
-                @foreach ($conge->personnels as $personnel)
-                    @if ($personnel->hasRole('admin'))
-                        @continue
-                    @endif
+            @foreach ($conge->personnels as $personnel)
+                @if ($personnel->hasRole('admin'))
+                    @continue
+                @endif
+                <tr>
                     <td>{{ $personnel->matricule }}</td>
                     <td>{{ $personnel->nom }} {{ $personnel->prenom }}</td>
                     <td class="text-center">{{ $conge->date_debut }}</td>
@@ -34,8 +34,8 @@
                             <i class="far fa-eye"></i>
                         </a>
                     </td>
-                @endforeach
-            </tr>
+                </tr>
+            @endforeach
         @empty
             <tr>
                 <td colspan="7" class="text-center">Aucun congé trouvé.</td>
