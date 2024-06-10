@@ -150,19 +150,20 @@ class PersonnelController extends AppBaseController
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));
     }
-    public function attestation($id)
+    public function attestation($etablissement,$id)
     {
         $personnelsData = $this->personnelRepository->find($id);
         $avancement = Avancement::where('personnel_id', $id)->latest()->first();
+        $grade = null;
         if ($avancement) {
             $gradeData = Grade::where('echell_debut', '<=', $avancement->echell)
                 ->where('echell_fin', '>=', $avancement->echell)
                 ->first();
+                $grade = $gradeData->nom;
 
         } else {
             $gradeData = null;
         }
-        $grade = $gradeData->nom;
         return view('pkg_PriseDeServices.Personnel.attestation', compact('personnelsData', 'grade'));
     }
 }

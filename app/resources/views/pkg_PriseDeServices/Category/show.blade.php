@@ -23,23 +23,19 @@
                         <div class="card card-purple card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"  src="{{ asset('images/' . $fetchedData->images)}}"
+                                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/man.png') }}"
                                         alt="Photo de profil">
                                 </div>
-                                <h3 class="profile-username text-center">{{ $fetchedData->name }}</h3>
-                                <p class="text-muted text-center">{{ $fetchedData->role }}</p>
+                                <h3 class="profile-username text-center"></h3>
+                                <p class="text-muted text-center">Formateur</p>
                                 <ul class="list-group list-group-unbordered">
                                     <li class="list-group-item">
+                                        <b>Matricule</b>
+                                        <h6 class="float-right text-purple">13324</h6>
+                                    </li>
+                                    <li class="list-group-item">
                                         <b>Établissement</b>
-                                        <h6 class="float-right text-purple">{{ $fetchedData->etablissement->nom }}</h6>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Fonction</b>
-                                        <h6 class="float-right text-purple">{{ $fetchedData->specialite->nom }}</h6>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Type :</b>
-                                        <h6 class="float-right text-purple">{{ $fetchedData->fonction->nom-- }}</h6>
+                                        <h6 class="float-right text-purple">Solicode</h6>
                                     </li>
                                 </ul>
                                 <div class="row pt-1">
@@ -59,114 +55,50 @@
 
                     <div class="col-md-9">
                         <div class="card card-purple card-outline">
-                            <div class="card-header p-2">
-                                <ul class="nav nav-pills info-personnel">
-                                    <style>
-                                        .info-personnel .active {
-                                            background-color: #6f42c1 !important;
-                                            border-color: #17a2b8 !important;
-                                        }
-                                    </style>
-                                    <li class="nav-item"><a class="nav-link active" href="#personnelles"
-                                            data-toggle="tab">Personnelles</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#professionnelles"
-                                            data-toggle="tab">Professionnelles</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#contact" data-toggle="tab">Contact</a>
-                                    </li>
-                                </ul>
-                            </div>
+
                             <div class="card-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="personnelles">
-                                        <div class="col-lg-12 d-flex px-0">
-                                            <!-- Nom (français) -->
-                                            <div class="form-group col-lg-6">
-                                                <label for="nom" class="form-label">Nom :</label>
-                                                <p id="nom">{{ $fetchedData->nom }}</p>
-                                            </div>
-                                            <!-- Nom (arabe) -->
-                                            <div class="form-group col-lg-6">
-                                                <label for="nomArab" class="form-label text-start d-flex flex-row-reverse">
-                                                    : النسب </label>
-                                                <p id="nomArab" class="text-end d-flex flex-row-reverse">
-                                                    {{ $fetchedData->nom_arab }}</p>
-                                            </div>
-                                        </div>
+                                    <table class="table table-striped text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Echell</th>
+                                                <th>Périod</th>
+                                                <th>Grade</th>
+                                                <th class="text-center">{{ __('app.action') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach ($fetchedData as $data)
+                                                   <td>{{ $data->echell }}</td>
+                                                <td>{{ $data->date_debut }} / {{$data->date_fin}}</td>
+                                                <td>Exécution</td>
 
-                                        <div class="col-lg-12 d-flex px-0">
-                                            <!-- Prénom (français) -->
-                                            <div class="form-group col-lg-6">
-                                                <label for="prenom" class="form-label">Prénom :</label>
-                                                <p id="prenom">{{ $fetchedData->prenom }}</p>
-                                            </div>
-                                            <!-- Prénom (arabe) -->
-                                            <div class="form-group col-lg-6">
-                                                <label for="prenomArab"
-                                                    class="form-label text-start d-flex flex-row-reverse"> : الاسم </label>
-                                                <p id="prenomArab" class="text-end d-flex flex-row-reverse">
-                                                    {{ $fetchedData->prenom_arab }}</p>
-                                            </div>
-                                        </div>
+                                                <td class="text-center">
+                                                    @can('show-AvancementController')
+                                                        <a href="{{ route('categories.show', $data) }}"
+                                                            class="btn btn-default btn-sm">
+                                                            <i class="far fa-eye"></i>
+                                                        </a>
+                                                    @endcan
+                                                </td>
+                                                <td class="text-center">
+                                                    <form action="{{ route('categories.destroy', $data) }}"
+                                                        method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?')">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>  
+                                                @endforeach
+                                               
 
-                                        <div class="col-sm-12">
-                                            <label for="cin">CIN :</label>
-                                            <p id="cin">{{ $fetchedData->cin }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="dob">Date de naissance :</label>
-                                            <p id="dob">{{ $fetchedData->date_naissance }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane" id="contact">
-                                        <div class="col-sm-12">
-                                            <label for="phone">Numéro de téléphone :</label>
-                                            <p id="phone">{{ $fetchedData->telephone }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="email">Email :</label>
-                                            <p id="email">{{ $fetchedData->email }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="address">Adresse :</label>
-                                            <p id="address">{{ $fetchedData->address }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="city">Ville :</label>
-                                            <p id="city">{{ $fetchedData->ville->nom }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-pane" id="professionnelles">
-                                        <div class="col-sm-12">
-                                            <label for="matricule">Matricule :</label>
-                                            <p id="matricule">{{ $fetchedData->matricule }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="affectation">Affectation :</label>
-                                            <p id="affectation">{{ $fetchedData->etp_Affectation->nom }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="afp_travail">AFP de Travail :</label>
-                                            <p id="afp_travail">{{ $fetchedData->etablissement->nom }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="fonction">Fonction :</label>
-                                            <p id="fonction">{{ $fetchedData->specialite->nom }}</p>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <label for="type">Type :</label>
-                                            <p id="type">{{ $fetchedData->fonction->nom }}</p>
-                                        </div>
-                                    </div>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

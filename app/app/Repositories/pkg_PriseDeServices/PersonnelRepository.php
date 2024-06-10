@@ -68,7 +68,7 @@ class PersonnelRepository extends BaseRepository
      * @param int $perPage Nombre d'éléments par page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function searchData($etablissement = null, $searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0, $personnel_id = null)
+    public function searchData($etablissement = null, $searchableData = null, $date_debut = null, $date_fin = null, $perPage = 2, $personnel_id = null)
 {
     return $this->model->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
         ->where('etablissements.nom', '=', $etablissement)
@@ -87,7 +87,7 @@ class PersonnelRepository extends BaseRepository
      * @param int $perPage Nombre d'éléments par page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function paginate($etablissement = "", $search = [], $perPage = 0, array $columns = ['*']): LengthAwarePaginator
+    public function paginate($etablissement = "", $search = [], $perPage = 2, array $columns = ['*']): LengthAwarePaginator
 {
     $query = $this->model->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
         ->where('etablissements.nom', '=', $etablissement) 

@@ -118,5 +118,33 @@ class CategoryRepository extends BaseRepository
 
         return $query->paginate($perPage);
     }
+    public function find(int $id, array $columns = ['*'])
+    {
+        $user = $this->model->find($id);
+        $userId = $user->id;
+        $records = $this->model->join('users', 'users.id', '=', 'avancements.personnel_id')
+            ->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
+            ->select(
+                'avancements.*',
+                DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"),
+                'users.matricule',
+                'etablissements.nom as etablissement_name',
+                'avancements.personnel_id'
+            )
+            ->where('avancements.personnel_id', '=', $userId)  // Use the user ID directly
+            ->get();
+                dd($userId);
+        // if ($records->isEmpty()) {
+        //     // Handle the case where no records are found
+        //     abort(404, 'No records found for the specified user in the given establishment');
+        // }
+
+        return $records;
+    }
+
+
+
+
+
 
 }
