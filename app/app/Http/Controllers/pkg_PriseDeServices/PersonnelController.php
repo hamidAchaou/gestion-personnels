@@ -29,16 +29,16 @@ class PersonnelController extends AppBaseController
     {
         $this->personnelRepository = $personnelRepository;
     }
-    public function index(Request $request)
+    public function index(string $etablissement, Request $request)
     {
-        $personnelsData = $this->personnelRepository->paginate();
+        $personnelsData = $this->personnelRepository->paginate($etablissement , 4);
         $user = User::where('nom' , 'admin')->first();
         $userId = $user->id;
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
-                $personnelsData = $this->personnelRepository->searchData($searchQuery);
+                $personnelsData = $this->personnelRepository->searchData($etablissement, $searchQuery);
                 return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'))->render();
             }
         }
@@ -55,7 +55,7 @@ class PersonnelController extends AppBaseController
         $grades = Grade::all();
         return view("pkg_PriseDeServices.Personnel.create", compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements', 'grades'));
     }
-    public function store(PersonnelRequest $request)
+    public function store(string $etablissement, PersonnelRequest $request)
     {
         try {
             $validatedData = $request->validated();
@@ -77,7 +77,7 @@ class PersonnelController extends AppBaseController
         }
     }
 
-    public function edit(string $id)
+    public function edit(string $etablissement, string $id)
     {
         $dataToEdit = $this->personnelRepository->find($id);
         $villes = Ville::all();
@@ -88,7 +88,7 @@ class PersonnelController extends AppBaseController
 
         return view('pkg_PriseDeServices.Personnel.edit', compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements'));
     }
-    public function update(int $id, Request $request)
+    public function update(string $etablissement, int $id, Request $request)
     {
         $data = $request->validate([
             'nom' => 'required|string|max:255',
@@ -121,7 +121,7 @@ class PersonnelController extends AppBaseController
 
         return redirect()->route('personnels.index')->with('success', 'Le personnel a été modifié avec succès.');
     }
-    public function show(int $id)
+    public function show(string $etablissement, int $id)
     {
         $fetchedData = $this->personnelRepository->find($id);
         return view('pkg_PriseDeServices.Personnel.show', compact('fetchedData'));
@@ -145,7 +145,7 @@ class PersonnelController extends AppBaseController
         }
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.addSucées'));
     }
-    public function destroy(int $id)
+    public function destroy(string $etablissement, int $id)
     {
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));

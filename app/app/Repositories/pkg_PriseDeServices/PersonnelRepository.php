@@ -5,6 +5,7 @@ namespace App\Repositories\pkg_PriseDeServices;
 use App\Models\pkg_PriseDeServices\Personnel;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Exceptions\pkg_PriseDeServices\PersonnelAlreadyExistException;
 
 class PersonnelRepository extends BaseRepository
@@ -67,20 +68,31 @@ class PersonnelRepository extends BaseRepository
      * @param int $perPage Nombre d'éléments par page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function searchData($searchableData, $perPage = 4)
-    {
-        return $this->model->where(function ($query) use ($searchableData) {
-            $query->where('nom', 'like', '%' . $searchableData . '%')
-                ->orWhere('prenom', 'like', '%' . $searchableData . '%');
-        })->paginate($perPage);
-    }
-    // public function paginate($perPage = 6)
-    // {
-    //     $query = $this->model->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-    //         ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-    //         ->where('roles.name', '!=', 'admin')
-    //         ->select('users.*');
+    public function searchData($etablissement = null, $searchableData = null, $date_debut = null, $date_fin = null, $perPage = 0, $personnel_id = null)
+{
+    return $this->model->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
+        ->where('etablissements.nom', '=', $etablissement)
+        ->where(function ($query) use ($searchableData) {
+            $query->where('users.nom', 'like', '%' . $searchableData . '%')
+                ->orWhere('users.prenom', 'like', '%' . $searchableData . '%');
+        })
+        ->select('users.*') 
+        ->paginate($perPage);
+}
 
-    //     return $query->paginate($perPage);
-    // }
+     /**
+     * Recherche les projets correspondants aux critères spécifiés.
+     *
+     * @param mixed $searchableData Données de recherche.
+     * @param int $perPage Nombre d'éléments par page.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function paginate($etablissement = "", $search = [], $perPage = 0, array $columns = ['*']): LengthAwarePaginator
+{
+    $query = $this->model->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
+        ->where('etablissements.nom', '=', $etablissement) 
+        ->select('users.*');
+
+    return $query->paginate($perPage);
+}
 }
