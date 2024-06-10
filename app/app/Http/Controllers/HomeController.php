@@ -21,19 +21,19 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function redirectToEtablissement()
-    {
-        $user = Auth::user();
-        $roles = $user->getRoleNames();
+    // public function redirectToEtablissement()
+    // {
+    //     $user = Auth::user();
+    //     $roles = $user->getRoleNames();
 
-        if ($roles !== 'admin') {
-            $etablissement = Auth::user()->etablissement->nom;
-        } else {
-            $etablissement = Etablissement::pluck('nom')->first();
-        }
+    //     if ($roles !== 'admin') {
+    //         $etablissement = Auth::user()->etablissement->nom;
+    //     } else {
+    //         $etablissement = Etablissement::pluck('nom')->first();
+    //     }
 
-        return redirect()->route('etablissement.app', ['etablissement' => $etablissement]);
-    }
+    //     return redirect()->route('etablissement.app', ['etablissement' => $etablissement]);
+    // }
     /**
      * Show the application dashboard.
      *

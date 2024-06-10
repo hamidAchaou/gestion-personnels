@@ -48,7 +48,7 @@
 
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ $congesActual }}</h3>
+                            <h3>13</h3>
                             <p>Congé actuel</p>
                         </div>
                         <div class="icon">
