@@ -66,13 +66,13 @@ class JourFerieController extends AppBaseController
             ->with('success', 'Jour férié' . ' ' . __('app.addSucées'));
     }
 
-    public function edit(JourFerie $jourFerie)
+    public function edit(string $etablissement, JourFerie $jourFerie)
     {
         $anneeJuridiques = AnneeJuridique::all();
         return view('pkg_Absences.Jour_ferie.edit', compact('jourFerie', 'anneeJuridiques'));
     }
 
-    public function update(Request $request, JourFerie $jourFerie)
+    public function update(string $etablissement, Request $request, JourFerie $jourFerie)
     {
 
         $validatedData = $request->validate([
@@ -92,17 +92,18 @@ class JourFerieController extends AppBaseController
         $this->jourFerieRespository->update($jourFerie->id, $validatedData);
 
         return redirect()
-        ->route('jourFerie.index')
-        ->with('success', 'Jour férié' . ' ' . __('app.updateSucées'));
+            ->route('jourFerie.index')
+            ->with('success', 'Jour férié' . ' ' . __('app.updateSucées'));
     }
 
-    public function destroy(JourFerie $jourFerie){
+    public function destroy(string $etablissement, JourFerie $jourFerie)
+    {
 
         $this->jourFerieRespository->destroy($jourFerie->id);
 
         return redirect()
-        ->route('jourFerie.index')
-        ->with('success', 'Jour férié' . ' ' . __('app.deleteSucées'));
+            ->route('jourFerie.index')
+            ->with('success', 'Jour férié' . ' ' . __('app.deleteSucées'));
     }
 
     public function export()

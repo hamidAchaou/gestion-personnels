@@ -5,6 +5,7 @@ namespace App\Http\Controllers\pkg_Absences;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Models\pkg_Absences\Absence;
 use App\Models\pkg_Parametres\Motif;
 use Maatwebsite\Excel\Facades\Excel;
@@ -26,6 +27,7 @@ class AbsenceController extends AppBaseController
 
     public function index(string $etablissement, Request $request)
     {
+
         $motifs = Motif::all();
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
@@ -63,13 +65,13 @@ class AbsenceController extends AppBaseController
 
     public function create(string $etablissement)
     {
-        $etablissement_id =  $this->absenceRepository->getEtablissementId($etablissement);
+        $etablissement_id = $this->absenceRepository->getEtablissementId($etablissement);
         $motifs = Motif::all();
         $personnels = User::whereDoesntHave('roles', function ($query) {
             $query->whereIn('name', [User::ADMIN, User::RESPONSABLE]);
         })
-        ->where('etablissement_id', $etablissement_id)
-        ->get();
+            ->where('etablissement_id', $etablissement_id)
+            ->get();
         return view('pkg_Absences.create', compact('motifs', 'personnels'));
     }
 
@@ -130,7 +132,7 @@ class AbsenceController extends AppBaseController
         return view('pkg_Absences.edit', compact('absence', 'motifs', 'personnels'));
     }
 
-    public function update(Request $request,string $etablissement, Absence $absence)
+    public function update(Request $request, string $etablissement, Absence $absence)
     {
         $rules = [
             'date_debut' => 'required|date|before_or_equal:date_fin',

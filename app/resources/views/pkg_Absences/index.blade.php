@@ -23,16 +23,18 @@
                         @php
                             use App\helpers\TranslationHelper;
                             $lang = Config::get('app.locale');
-                            $translatedName = TranslationHelper::getTitle(__('pkg_Absences/absence.singular'), $lang);
+                            $translatedName = TranslationHelper::getTitle(__('pkg_Absences/absence.plural'), $lang);
                             echo $translatedName;
                         @endphp
                     </h1>
                 </div>
                 <div class="col-sm-6">
                     <div class="float-sm-right">
-                        <a href="{{ route('absence.create') }}" class="btn btn-info">
-                            <i class="fas fa-plus"></i> Ajouter une absence
-                        </a>
+                        @can('create-AbsenceController')
+                            <a href="{{ route('absence.create') }}" class="btn btn-info">
+                                <i class="fas fa-plus"></i> Ajouter une absence
+                            </a>
+                        @endcan
                     </div>
                 </div>
             </div>

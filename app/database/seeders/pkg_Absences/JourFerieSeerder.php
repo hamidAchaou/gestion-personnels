@@ -2,10 +2,13 @@
 
 namespace Database\Seeders\pkg_Absences;
 
-use App\Models\pkg_Absences\JourFerie;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use App\Models\pkg_Absences\JourFerie;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class JourFerieSeerder extends Seeder
 {
@@ -38,5 +41,38 @@ class JourFerieSeerder extends Seeder
         }
 
         fclose($csvFile);
+
+
+
+        // ==========================================================
+        // =========== Add Seeder Permission Assign Role ============
+        // ==========================================================
+
+        $AdminRole = Role::where('name', User::ADMIN)->first();
+        $csvFile = fopen(base_path("database/data/pkg_Absences/JourFeriesPermissions.csv"), "r");
+        $firstLine = true;
+        $permissions = [];
+
+        while (($data = fgetcsv($csvFile)) !== false) {
+            if (!$firstLine) {
+                $permissionName = $data[0];
+                $permissionGuardName = $data[1];
+
+                // Find or create the permission and add it to the array
+                $permission = Permission::firstOrCreate([
+                    "name" => $permissionName,
+                    "guard_name" => $permissionGuardName,
+                ]);
+
+                $permissions[] = $permission;
+            }
+            $firstLine = false;
+        }
+
+        fclose($csvFile);
+
+        // Assign the permissions from the file to the admin
+        $AdminRole->givePermissionTo($permissions);
+
     }
 }

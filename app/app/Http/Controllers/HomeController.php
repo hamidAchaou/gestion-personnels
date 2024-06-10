@@ -7,6 +7,7 @@ use App\Models\pkg_PriseDeServices\Personnel;
 use App\Repositories\pkg_Conges\CongesRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -40,9 +41,20 @@ class HomeController extends Controller
      */
     public function index(CongesRepository $congesRepository, $etablissement)
     {
-        $conges = $congesRepository->getCongesForCurrentDate($etablissement);
-        $congesActual = $conges->total();
+
+        // $conges = $congesRepository->getCongesForCurrentDate($etablissement);
+        // $congesActual = $conges->total();
+        // $etablissement = Etablissement::where('nom', $etablissement)->firstOrFail();
+        // return view('home', compact('etablissement', 'congesActual'));
+        
+        $user = Auth::user();
+        $roles = $user->getRoleNames();
         $etablissement = Etablissement::where('nom', $etablissement)->firstOrFail();
-        return view('home', compact('etablissement', 'congesActual'));
+        if (!$roles->contains(User::ADMIN)) {
+            if ($user->etablissement_id !== $etablissement->id) {
+                return abort(403);
+            }
+        }
+        return view('home', compact('etablissement'));
     }
 }

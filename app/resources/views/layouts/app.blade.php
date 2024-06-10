@@ -88,7 +88,8 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 1.0.0
             </div>
-            <strong>Droits d'auteur © 2024-2025 <a href="#" class="text-info">Prototype</a>.</strong> Tous droits
+            <strong>Droits d'auteur © 2024-2025 <a href="#" class="text-info">Gestion personnels</a>.</strong> Tous
+            droits
             réservés.
         </footer>
     </div>

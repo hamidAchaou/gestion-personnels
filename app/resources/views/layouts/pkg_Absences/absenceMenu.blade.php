@@ -21,17 +21,17 @@
                 <p>{{ __('Layouts/Menu.absences') }}</p>
             </a>
         </li>
-
-        <!-- Role -->
-        <li class="nav-item">
-            <a href="{{ route('jourFerie.index') }}" class="nav-link {{ Request::is('*jourFerie*') ? 'active' : '' }}">
-                <i class="far fa-user-circle nav-icon"></i>
-                <p>Jour férié</p>
-            </a>
-        </li>
+        @can('index-JourFerieController')
+            <!-- Role -->
+            <li class="nav-item">
+                <a href="{{ route('jourFerie.index') }}" class="nav-link {{ Request::is('*jourFerie*') ? 'active' : '' }}">
+                    {{-- <i class="far fa-user-circle nav-icon"></i> --}}
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <p>Jour férié</p>
+                </a>
+            </li>
+        @endcan
 
 
     </ul>
 </li>
-
-
