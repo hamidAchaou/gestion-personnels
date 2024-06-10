@@ -37,7 +37,6 @@ class PersonnelExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             'ETPAffectation_id',
             'specialite_id',
             'etablissement_id',
-            'avancement_id',
         ];
     }
 
@@ -61,7 +60,6 @@ class PersonnelExport implements FromCollection, WithHeadings, ShouldAutoSize, W
                 'ETPAffectation_id' => $personnel->ETPAffectation_id,
                 'specialite_id' => $personnel->specialite_id,
                 'etablissement_id' => $personnel->etablissement_id,
-                'avancement_id' => $personnel->avancement_id,
             ];
         });
     }

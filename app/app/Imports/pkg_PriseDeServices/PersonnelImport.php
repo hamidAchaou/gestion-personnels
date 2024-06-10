@@ -22,7 +22,7 @@ class PersonnelImport implements ToModel, WithHeadingRow
             return null;
         }
 
-        try {
+        // try {
             return new Personnel([
                 'nom' => $row["nom"],
                 'prenom' => $row["prenom"],
@@ -39,14 +39,13 @@ class PersonnelImport implements ToModel, WithHeadingRow
                 'fonction_id' => $row["fonction_id"],
                 'specialite_id' => $row["specialite_id"],
                 'etablissement_id' => $row["etablissement_id"],
-                'avancement_id' => $row["avancement_id"],
             ]);
-        } catch (ValidationException $e) {
-            return null; 
-        } catch (\Exception $e) {
+        // } catch (ValidationException $e) {
+        //     return null; 
+        // } catch (\Exception $e) {
             
-            return null; 
-        }
+        //     return null; 
+        // }
     }
 
     private function personnelExists(array $row): bool

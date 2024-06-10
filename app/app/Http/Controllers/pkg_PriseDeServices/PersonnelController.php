@@ -138,11 +138,11 @@ class PersonnelController extends AppBaseController
             'file' => 'required|mimes:xlsx,xls,csv',
         ]);
 
-        try {
+        // try {
             Excel::import(new PersonnelImport, $request->file('file'));
-        } catch (\InvalidArgumentException $e) {
-            return redirect()->route('personnels.index')->withError('Le symbole de séparation est introuvable. Pas assez de données disponibles pour satisfaire au format.');
-        }
+        // } catch (\InvalidArgumentException $e) {
+        //     return redirect()->route('personnels.index')->withError('Le symbole de séparation est introuvable. Pas assez de données disponibles pour satisfaire au format.');
+        // }
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.addSucées'));
     }
     public function destroy(string $etablissement, int $id)
