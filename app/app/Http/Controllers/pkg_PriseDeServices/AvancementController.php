@@ -19,15 +19,16 @@ class AvancementController extends AppBaseController
     {
         $this->categoryRepository = $categoryRepository;
     }
-    public function index(Request $request)
+    public function index(string $etablissement, Request $request)
     {
-        $categoriesData = $this->categoryRepository->paginate();
+      
+        $categoriesData = $this->categoryRepository->paginate($etablissement );
         // dd($categoriesData);
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
-                $categoriesData = $this->categoryRepository->searchData($searchQuery);
+                $categoriesData = $this->categoryRepository->searchData($etablissement, $searchQuery );
                 return view('pkg_PriseDeServices.Category.index', compact('categoriesData'))->render();
             }
         }
@@ -48,7 +49,7 @@ class AvancementController extends AppBaseController
         $personnels = Personnel::all();
         return view("pkg_PriseDeServices.Category.create", compact('dataToEdit', 'grades', 'personnels'));
     }
-    public function store(CategoryRequest $request)
+    public function store(string $etablissement, CategoryRequest $request)
     {
         try {
             $validatedData = $request->validated();
@@ -60,4 +61,10 @@ class AvancementController extends AppBaseController
             return abort(500);
         }
     }
+    public function show($etablissement, $id){
+        $fetchedData = $this->categoryRepository->find($id);
+        // dd($fetchedData);
+        return view('pkg_PriseDeServices.Category.show', compact('fetchedData'));
+    }
+    
 }

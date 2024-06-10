@@ -10,7 +10,7 @@
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{ __('pkg_PriseDeServices/User/message.editPersonnel') }}
+                            <h3 class="card-title">{{ __('app.edit') }}
                                 {{ $dataToEdit->nom }}</h3>
                         </div>
                         <!-- Obtenir le formulaire -->

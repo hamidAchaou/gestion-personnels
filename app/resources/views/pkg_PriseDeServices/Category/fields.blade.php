@@ -92,10 +92,12 @@
 <script>
     $(document).ready(function() {
         $('#echell').on('change', function() {
+            var urlPath =  window.location.href;
+            console.log(urlPath);
             var selectedEchell = $(this).val();
             if (selectedEchell) {
                 $.ajax({
-                    url: '/categories/create', // Replace with the URL of your controller method
+                    url: urlPath, 
                     type: 'GET',
                     data: {
                         echell: selectedEchell

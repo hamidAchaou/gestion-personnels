@@ -29,9 +29,9 @@ class PersonnelController extends AppBaseController
     {
         $this->personnelRepository = $personnelRepository;
     }
-    public function index($etablissement ,Request $request)
+    public function index(string $etablissement, Request $request)
     {
-        $personnelsData = $this->personnelRepository->paginate();
+        $personnelsData = $this->personnelRepository->paginate($etablissement , 4);
         $user = User::where('nom' , 'admin')->first();
         $userId = $user->id;
         if ($request->ajax()) {
@@ -55,7 +55,7 @@ class PersonnelController extends AppBaseController
         $grades = Grade::all();
         return view("pkg_PriseDeServices.Personnel.create", compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements', 'grades'));
     }
-    public function store($etablissement ,PersonnelRequest $request)
+    public function store(string $etablissement, PersonnelRequest $request)
     {
         try {
             $validatedData = $request->validated();
@@ -77,7 +77,7 @@ class PersonnelController extends AppBaseController
         }
     }
 
-    public function edit($etablissement ,string $id)
+    public function edit(string $etablissement, string $id)
     {
         $dataToEdit = $this->personnelRepository->find($id);
         $villes = Ville::all();
@@ -88,7 +88,7 @@ class PersonnelController extends AppBaseController
 
         return view('pkg_PriseDeServices.Personnel.edit', compact('dataToEdit', 'villes', 'etablissements', 'specialites', 'fonctions', 'avancements'));
     }
-    public function update($etablissement ,int $id, Request $request)
+    public function update(string $etablissement, int $id, Request $request)
     {
         $data = $request->validate([
             'nom' => 'required|string|max:255',
@@ -121,7 +121,7 @@ class PersonnelController extends AppBaseController
 
         return redirect()->route('personnels.index')->with('success', 'Le personnel a été modifié avec succès.');
     }
-    public function show($etablissement ,int $id)
+    public function show(string $etablissement, int $id)
     {
         $fetchedData = $this->personnelRepository->find($id);
         return view('pkg_PriseDeServices.Personnel.show', compact('fetchedData'));
@@ -145,24 +145,25 @@ class PersonnelController extends AppBaseController
         }
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.addSucées'));
     }
-    public function destroy($etablissement ,int $id)
+    public function destroy(string $etablissement, int $id)
     {
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));
     }
-    public function attestation($etablissement ,$id)
+    public function attestation($etablissement,$id)
     {
         $personnelsData = $this->personnelRepository->find($id);
         $avancement = Avancement::where('personnel_id', $id)->latest()->first();
+        $grade = null;
         if ($avancement) {
             $gradeData = Grade::where('echell_debut', '<=', $avancement->echell)
                 ->where('echell_fin', '>=', $avancement->echell)
                 ->first();
+                $grade = $gradeData->nom;
 
         } else {
             $gradeData = null;
         }
-        $grade = $gradeData->nom;
         return view('pkg_PriseDeServices.Personnel.attestation', compact('personnelsData', 'grade'));
     }
 }
