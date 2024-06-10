@@ -1,5 +1,3 @@
-import "https://code.jquery.com/jquery-3.6.0.min.js";
-
 console.log("HOIOIDJJSOPOJPOPPOPOPOOJPOPOOJJPOPOOO");
 $(document).ready(function () {
     // Fonction pour mettre à jour un paramètre dans l'URL

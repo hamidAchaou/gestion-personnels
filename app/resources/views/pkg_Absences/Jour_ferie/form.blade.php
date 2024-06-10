@@ -10,7 +10,7 @@
             <select name="annee_juridique_id" class="form-control personnel" id="anneeJuridique">
                 <option value="" selected disabled>--Veuillez choisir un année juridique--</option>
                 @foreach ($anneeJuridiques as $anneeJuridique)
-                    <option value="{{ $anneeJuridique->id }}"  {{ $jourFerie->annee_juridique_id === $anneeJuridique->id ? 'selected' : '' }}>
+                    <option value="{{ $anneeJuridique->id }}"  {{ isset($jourFerie) && $jourFerie->annee_juridique_id === $anneeJuridique->id ? 'selected' : '' }}>
                         {{ $anneeJuridique->annee }}
                     </option>
                 @endforeach
@@ -43,7 +43,7 @@
         <div class="form-group">
             <label for="nom">Nom</label>
             <input name="nom" type="text" class="form-control" id="nom" placeholder="nom jour férié"
-                required value="{{ $jourFerie ? $jourFerie->nom : old('nom') }}">
+                required value="{{ isset($jourFerie) &&  $jourFerie ? $jourFerie->nom : old('nom') }}">
             @error('nom')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -52,7 +52,7 @@
         <div class="form-group">
             <label for="date_debut">Date de début</label>
             <input name="date_debut" type="date" class="form-control" id="date_debut" placeholder="Date de début"
-                required value="{{ $jourFerie ? $jourFerie->date_debut : old('date_debut') }}">
+                required value="{{ isset($jourFerie) &&  $jourFerie ? $jourFerie->date_debut : old('date_debut') }}">
             @error('date_debut')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -61,7 +61,7 @@
         <div class="form-group">
             <label for="date_fin">Date de fin</label>
             <input name="date_fin" type="date" class="form-control" id="date_fin" placeholder="Date de début"
-                required value="{{ $jourFerie ? $jourFerie->date_fin : old('date_fin') }}">
+                required value="{{ isset($jourFerie) &&  $jourFerie ? $jourFerie->date_fin : old('date_fin') }}">
             @error('date_fin')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
