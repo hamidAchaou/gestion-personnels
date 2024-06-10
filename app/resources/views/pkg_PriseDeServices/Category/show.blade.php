@@ -68,35 +68,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($fetchedData as $data)
                                             <tr>
-                                                @foreach ($fetchedData as $data)
-                                                   <td>{{ $data->echell }}</td>
-                                                <td>{{ $data->date_debut }} / {{$data->date_fin}}</td>
-                                                <td>Exécution</td>
+                                                    <td>{{ $data->echell }}</td>
+                                                    <td>{{ $data->date_debut }} / {{ $data->date_fin }}</td>
+                                                    <td>{{ $data->grade }}</td>
 
-                                                <td class="text-center">
-                                                    @can('show-AvancementController')
-                                                        <a href="{{ route('categories.show', $data) }}"
-                                                            class="btn btn-default btn-sm">
-                                                            <i class="far fa-eye"></i>
-                                                        </a>
-                                                    @endcan
-                                                </td>
-                                                <td class="text-center">
-                                                    <form action="{{ route('categories.destroy', $data) }}"
-                                                        method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?')">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>  
+                                                    <td class="text-center">
+                                                        <form action="{{ route('categories.destroy', $data->id) }}" method="POST"
+                                                            style="display: inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel ?')">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    </tr>
                                                 @endforeach
-                                               
-
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

@@ -121,23 +121,33 @@ class CategoryRepository extends BaseRepository
     public function find(int $id, array $columns = ['*'])
     {
         $user = $this->model->find($id);
-        $userId = $user->id;
-        $records = $this->model->join('users', 'users.id', '=', 'avancements.personnel_id')
-            ->join('etablissements', 'users.etablissement_id', '=', 'etablissements.id')
+        $userId = $user->personnel_id;
+
+        $records = DB::table('gestion_personnels.avancements')
+            ->join('gestion_personnels.users', 'gestion_personnels.users.id', '=', 'gestion_personnels.avancements.personnel_id')
+            ->join('gestion_personnels.grades', function ($join) {
+                $join->on('gestion_personnels.grades.echell_debut', '<=', 'gestion_personnels.avancements.echell')
+                    ->where('gestion_personnels.grades.echell_fin', '>=', 'gestion_personnels.avancements.echell');
+            })
             ->select(
-                'avancements.*',
-                DB::raw("CONCAT(users.nom, ' ', users.prenom) as personnel_name"),
-                'users.matricule',
-                'etablissements.nom as etablissement_name',
-                'avancements.personnel_id'
+                'gestion_personnels.avancements.*',
+                DB::raw("CONCAT(gestion_personnels.users.nom, ' ', gestion_personnels.users.prenom) as personnel_name"),
+                'gestion_personnels.users.matricule',
+                'gestion_personnels.grades.nom as grade' // Corrected syntax for selecting the 'grades.nom' column
             )
-            ->where('avancements.personnel_id', '=', $userId)  // Use the user ID directly
+            ->where('gestion_personnels.avancements.personnel_id', $userId)
             ->get();
-                dd($userId);
-        // if ($records->isEmpty()) {
-        //     // Handle the case where no records are found
-        //     abort(404, 'No records found for the specified user in the given establishment');
-        // }
+
+        if ($records->isEmpty()) {
+            // Handle the case where no records are found
+            abort(404, 'No records found for the specified user in the given establishment');
+        }
+
+        // dd($records);
+        if ($records->isEmpty()) {
+            // Handle the case where no records are found
+            abort(404, 'No records found for the specified user in the given establishment');
+        }
 
         return $records;
     }
