@@ -1,0 +1,57 @@
+.page-item.active .page-link {
+    background-color: #138496 !important;
+    border-color: #138496 !important;
+    color: #fff !important;
+}
+
+.page-link {
+    color: #138496 !important;
+}
+
+.document-absenteisme {
+    width: 100%;
+}
+
+.document-absenteisme table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.document-absenteisme thead {
+    background-color: #b3b325;
+    color: #fff;
+}
+
+.document-absenteisme th,
+.document-absenteisme td {
+    padding: 12px 15px;
+    border: 1px solid #000;
+    text-align: left;
+}
+
+.document-absenteisme th {
+    background-color: #eeee24;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.document-absenteisme caption {
+    font-size: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.absenteisme-date-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.absenteisme-date {
+    width: 70%;
+    font-weight: normal;
+    margin-left: 70%;
+}

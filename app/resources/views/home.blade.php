@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', "Gestion personnels")
 
 @section('content')
     <div class="content-header">
@@ -47,13 +48,13 @@
 
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>6</h3>
+                            <h3>13</h3>
                             <p>Congé actuel</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="/view/conge/index.php" class="small-box-footer">Plus d'informations <i
+                        <a href="{{ route('conges.index')}}" class="small-box-footer">Plus d'informations <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

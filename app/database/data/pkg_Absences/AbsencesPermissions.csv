@@ -1,0 +1,14 @@
+name,guard_name
+index-AbsenceController,web
+filterByMotif-AbsenceController,web
+filterByDate-AbsenceController,web
+show-AbsenceController,web
+create-AbsenceController,web
+store-AbsenceController,web
+edit-AbsenceController,web
+update-AbsenceController,web
+destroy-AbsenceController,web
+export-AbsenceController,web
+import-AbsenceController,web
+document_absenteisme-AbsenceController,web
+filterAndPrint-AbsenceController,web

@@ -3,13 +3,15 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\GestionParametres\GradeSeeder;
-use Database\Seeders\GestionParametres\MotifSeeder;
-use Database\Seeders\GestionParametres\VilleSeeder;
-use Database\Seeders\GestionParametres\FonctionSeeder;
-use Database\Seeders\GestionParametres\AvancementSeeder;
-use Database\Seeders\GestionParametres\SpecialiteSeeder;
-use Database\Seeders\GestionParametres\EtablissementSeeder;
+use Database\Seeders\pkg_Parametres\{
+    GradeSeeder,
+    MotifSeeder,
+    VilleSeeder,
+    FonctionSeeder,
+    AvancementSeeder,
+    SpecialiteSeeder,
+    EtablissementSeeder,
+};
 
 class ParametresSeeder extends Seeder
 {

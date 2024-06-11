@@ -70,9 +70,10 @@ hr {
 
 @media print {
 
-	#menu_rapports{
+	#menu_rapports {
 		display: none;
 	}
+
 	#presentation-icon,
 	hr {
 		display: none;
@@ -86,7 +87,7 @@ hr {
 		width: initial;
 		min-height: initial;
 		box-shadow: initial;
-		background: white;
+		background: #fff;
 		page-break-after: auto;
 	}
 }
@@ -111,7 +112,8 @@ img {
 /* Nom de figure d'image */
 /* Par conception : le titre de figure est l'élément em situé aprés l'image */
 /* Il s'applique aussi sur un bloc de code  */
-img+em, pre+p>em  {
+img+em,
+pre+p>em {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -221,7 +223,8 @@ h5 {
 	/* Change text color on hover */
 }
 
-#menu_rapports{
+
+#menu_rapports {
 	text-align: center;
 	margin: 5px;
 }

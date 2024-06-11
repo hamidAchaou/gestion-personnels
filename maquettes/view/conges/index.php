@@ -57,8 +57,6 @@
                                                     <input type="date" class="form-control" id="endDate" aria-label="End Date">
                                                 </div>
                                             </div>
-
-
                                             <div class=" p-0">
                                                 <div class="input-group input-group-sm">
                                                     <input type="text" name="table_search" class="form-control" placeholder="Recherche">
