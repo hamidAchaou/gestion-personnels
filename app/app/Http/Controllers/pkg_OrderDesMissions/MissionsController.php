@@ -116,14 +116,14 @@ class MissionsController extends AppBaseController
      * used package Livewire
      */
 
-    public function destroy(string $etablissement, Mission $mission)
+    public function destroy(Mission $mission)
     {
         $mission->delete();
         return redirect()->back()->with('success', __('messages.delete_success'));
     }
 
     // EXPORT
-    public function export(string $etablissement, Request $request)
+    public function export(Request $request)
     {
         $presentDate = Carbon::now()->toDateString();
         $missions = Mission::with(['users', 'moyensTransport']);
