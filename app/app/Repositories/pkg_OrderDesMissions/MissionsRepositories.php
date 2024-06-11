@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Repositories\BaseRepository;
 use App\Models\pkg_OrderDesMissions\Mission;
 use App\Models\pkg_Parametres\Etablissement;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Exceptions\Pkg_OrderDesMissions\MissionAlreadyExistException;
 
 class MissionsRepositories extends BaseRepository
@@ -32,6 +33,20 @@ class MissionsRepositories extends BaseRepository
     public function __construct()
     {
         parent::__construct(new Mission());
+    }
+
+
+    public function getMissions($etablissement): LengthAwarePaginator
+    {
+        $query = $this->model->with(['moyensTransport', 'users'])->orderBy('data_ordre_mission', 'desc');
+
+        if ($etablissement !== null) {
+            $query->whereHas('users.etablissement', function ($query) use ($etablissement) {
+                $query->where('nom', $etablissement);
+            });
+        }
+
+        return $query->paginate($this->paginationLimit);
     }
 
     /**
@@ -61,27 +76,31 @@ class MissionsRepositories extends BaseRepository
      * @param int $perPage Nombre d'éléments par page.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function filterByTypeMission(string $missionType)
+    public function filterByTypeMission($etablissement, string $missionType)
     {
         $presentDate = Carbon::now()->toDateString();
+        $query = $this->model->with(['moyensTransport', 'users'])->orderBy('data_ordre_mission', 'desc');
+        $query->whereHas('users.etablissement', function ($query) use ($etablissement) {
+            $query->where('nom', $etablissement);
+        });
         if ($missionType == "missions_actuelles") {
-            return $this->model
+            return $query
                 ->with(['users', 'moyensTransport'])
                 ->where('date_depart', '<=', $presentDate)
                 ->where('date_return', '>=', $presentDate)
                 ->paginate($this->paginationLimit);
         } elseif ($missionType == "missions_precedentes") {
-            return $this->model
+            return $query
                 ->with(['users', 'moyensTransport'])
                 ->where('date_return', '<', $presentDate)
                 ->paginate($this->paginationLimit);
         } elseif ($missionType == "prochaines_missions") {
-            return $this->model
+            return $query
                 ->with(['users', 'moyensTransport'])
                 ->where('date_depart', '>', $presentDate)
                 ->paginate($this->paginationLimit);
         } else {
-            return $this->model
+            return $query
                 ->paginate($this->paginationLimit);
         }
     }

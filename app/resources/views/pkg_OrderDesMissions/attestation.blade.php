@@ -64,7 +64,8 @@
                                     </div>
                                     <div class="col-12 border border-dark">
                                         <p>Catégorie :
-                                            <span class="font-weight-bold">{{ $user->avancement->echell }}</span>
+                                            20
+                                            {{-- <span class="font-weight-bold">{{ $user->avancement->echell }}</span> --}}
                                         </p>
                                     </div>
                                     <div class="col-12 border border-dark">

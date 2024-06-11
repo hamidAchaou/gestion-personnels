@@ -39,7 +39,10 @@
                                                 <tr>
                                                     <td>{{ $user->matricule }}</td>
                                                     <td>{{ $user->nom }}</td>
-                                                    <td>{{ $user->avancement->echell }}</td>
+
+                                                    <td>20</td>
+                                                    {{-- <td>{{ $user->avancement->echell }}</td> --}}
+
                                                     <td class="text-center">
                                                         @can('show-MissionsController')
                                                             <a href="{{ route('missions.show', $user->id) }}"

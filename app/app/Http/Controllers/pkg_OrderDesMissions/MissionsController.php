@@ -31,7 +31,7 @@ class MissionsController extends AppBaseController
         $this->Users = $user;
     }
 
-    public function index(Request $request)
+    public function index(string $etablissement, Request $request)
     {
         // searchAndFilter
         if ($request->ajax()) {
@@ -42,23 +42,23 @@ class MissionsController extends AppBaseController
                 return view('pkg_OrderDesMissions.index', compact('missions'))->render();
             }
         }
-        $missions = $this->MissionsRepository->paginate();
+        $missions = $this->MissionsRepository->getMissions($etablissement);
         return view('pkg_OrderDesMissions.index', compact('missions'));
 
     }
 
     // filter By Type Mission
-    public function filterByTypeMission(Request $request)
+    public function filterByTypeMission(string $etablissement, Request $request)
     {
         $missionType = $request->input('mission'); // Correct parameter name
-        $missions = $this->MissionsRepository->filterByTypeMission($missionType);
+        $missions = $this->MissionsRepository->filterByTypeMission($etablissement, $missionType);
 
         return view('pkg_OrderDesMissions.index', compact('missions'));
     }
 
 
 
-    public function show(Request $request, User $mission)
+    public function show(string $etablissement, Request $request, User $mission)
     {
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
@@ -73,7 +73,7 @@ class MissionsController extends AppBaseController
     }
 
 
-    public function moreDetails(Mission $mission)
+    public function moreDetails(string $etablissement, Mission $mission)
     {
         // Eager load the related data
         $mission->load(['users', 'moyensTransport']);
@@ -84,7 +84,7 @@ class MissionsController extends AppBaseController
         return view('pkg_OrderDesMissions.moreDetails', compact('mission', 'transports'));
     }
 
-    public function certificate(Mission $mission, User $user)
+    public function certificate(string $etablissement, Mission $mission, User $user)
     {
         $presentDate = Carbon::now()->toDateString();
         $transports = $this->TransportsRepositories->getTransportByMissionId($mission->id)->where('user', $user->id);
@@ -94,7 +94,7 @@ class MissionsController extends AppBaseController
 
 
 
-    public function create()
+    public function create(string $etablissement)
     {
         return view('pkg_OrderDesMissions.create');
     }
@@ -116,14 +116,14 @@ class MissionsController extends AppBaseController
      * used package Livewire
      */
 
-    public function destroy(Mission $mission)
+    public function destroy(string $etablissement, Mission $mission)
     {
         $mission->delete();
         return redirect()->back()->with('success', __('messages.delete_success'));
     }
 
     // EXPORT
-    public function export(Request $request)
+    public function export(string $etablissement, Request $request)
     {
         $presentDate = Carbon::now()->toDateString();
         $missions = Mission::with(['users', 'moyensTransport']);

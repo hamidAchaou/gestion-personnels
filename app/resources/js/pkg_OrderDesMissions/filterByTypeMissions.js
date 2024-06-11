@@ -1,6 +1,4 @@
-
-import "https://code.jquery.com/jquery-3.6.0.min.js";
-
+console.log('sasasa')
 $(document).ready(function () {
     $("#filterSelectByTypeMissions").change(function () {
         var neededUrl = window.location.pathname;
