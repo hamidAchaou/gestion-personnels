@@ -23,7 +23,7 @@
                         <div class="card card-purple card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"  src="{{ asset('images/' . $fetchedData->images)}}"
+                                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/man.png') }}"
                                         alt="Photo de profil">
                                 </div>
                                 <h3 class="profile-username text-center">{{ $fetchedData->name }}</h3>
