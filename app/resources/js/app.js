@@ -9,7 +9,8 @@ import 'admin-lte/dist/js/adminlte';
 import './app.recherche';
 import './absences';
 import './pkg_conges/filterByDate';
-import './pkg_conges/filterByDatePgeCreate';
+import './pkg_conges/filterByPersonnel';
+import './pkg_conges/conges';
 import './pkg_OrderDesMissions/filterByTypeMissions';
 
 // Importation de CKEditor
@@ -26,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 "There was a problem initializing the editor.",
                 error
             );
+        });
+    ClassicEditor
+        .create(document.querySelector('#Remarques'))
+        .catch(error => {
+            console.error(error);
         });
     ClassicEditor
         .create(document.querySelector('#Remarques'))
@@ -61,6 +67,7 @@ $(document).ready(function () {
 // select2
 $(document).ready(function () {
     $('.select2').select2();
+
 });
 
 // Attestation

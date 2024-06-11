@@ -31,18 +31,19 @@ class PersonnelController extends AppBaseController
     }
     public function index(string $etablissement, Request $request)
     {
-        $personnelsData = $this->personnelRepository->paginate($etablissement , 4);
-        $user = User::where('nom' , 'admin')->first();
+        $personnelsData = $this->personnelRepository->paginate($etablissement, 4);
+        $user = User::where('nom', 'admin')->first();
         $userId = $user->id;
         if ($request->ajax()) {
             $searchValue = $request->get('searchValue');
             if ($searchValue !== '') {
                 $searchQuery = str_replace(' ', '%', $searchValue);
                 $personnelsData = $this->personnelRepository->searchData($etablissement, $searchQuery);
-                return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'))->render();
-            }
-        }
-        return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData','userId'));
+                return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData', 'userId'))->render();
+                }
+                }
+            // dd($personnelsData);
+        return view('pkg_PriseDeServices.Personnel.index', compact('personnelsData', 'userId'));
     }
     public function create($etablissement)
     {
@@ -126,20 +127,20 @@ class PersonnelController extends AppBaseController
         $fetchedData = $this->personnelRepository->find($id);
         return view('pkg_PriseDeServices.Personnel.show', compact('fetchedData'));
     }
-    public function export($etablissement )
+    public function export($etablissement)
     {
         $personnels = $this->personnelRepository->all();
 
         return Excel::download(new PersonnelExport($personnels), 'personnels_export.xlsx');
     }
-    public function import($etablissement ,Request $request)
+    public function import($etablissement, Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
         ]);
 
         // try {
-            Excel::import(new PersonnelImport, $request->file('file'));
+        Excel::import(new PersonnelImport, $request->file('file'));
         // } catch (\InvalidArgumentException $e) {
         //     return redirect()->route('personnels.index')->withError('Le symbole de séparation est introuvable. Pas assez de données disponibles pour satisfaire au format.');
         // }
@@ -150,7 +151,7 @@ class PersonnelController extends AppBaseController
         $personnel = $this->personnelRepository->destroy($id);
         return redirect()->route('personnels.index')->with('success', __('pkg_PriseDeServices/personnels.singular') . ' ' . __('app.deleteSucées'));
     }
-    public function attestation($etablissement,$id)
+    public function attestation($etablissement, $id)
     {
         $personnelsData = $this->personnelRepository->find($id);
         $avancement = Avancement::where('personnel_id', $id)->latest()->first();
@@ -159,7 +160,7 @@ class PersonnelController extends AppBaseController
             $gradeData = Grade::where('echell_debut', '<=', $avancement->echell)
                 ->where('echell_fin', '>=', $avancement->echell)
                 ->first();
-                $grade = $gradeData->nom;
+            $grade = $gradeData->nom;
 
         } else {
             $gradeData = null;
