@@ -13,6 +13,9 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
@@ -145,4 +148,3 @@ class UserSeeder extends Seeder
         }
     }
 }
-

@@ -16,6 +16,7 @@ class AppBaseController extends Controller
             $changeName = str_replace(['Controller', '@'], ['', '-'], $controller);
         }
         $permissions = $action . '-' . $changeName . 'Controller';
+        // dd($permissions);
         $this->authorize($permissions);
         return parent::callAction($method, $parameters);
     }
